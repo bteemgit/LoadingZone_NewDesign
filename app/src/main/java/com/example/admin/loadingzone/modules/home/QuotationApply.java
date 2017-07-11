@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class QuotationApply extends BaseActivity {
     EditText editTextQuotDescrption;
     @NonNull
     @BindView(R.id.relative_submit)
-    RelativeLayout submitQutation;
+    LinearLayout submitQutation;
     String JobId;
     String qutation_id, quotationAmount, quotationDescription;
 
