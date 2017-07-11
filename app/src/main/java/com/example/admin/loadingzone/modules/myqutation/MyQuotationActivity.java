@@ -40,6 +40,9 @@ public class MyQuotationActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.my_qutation);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         tabLayout.setupWithViewPager(viewPager);
         intalizeFragment();
         setupViewPager(viewPager);
@@ -80,6 +83,12 @@ public class MyQuotationActivity extends BaseActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

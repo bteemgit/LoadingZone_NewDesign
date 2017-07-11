@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -102,6 +103,13 @@ public class QutationDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qutation_details);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Quotation Details");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         ButterKnife.bind(this);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         btnStartjob.setVisibility(View.GONE);
@@ -166,7 +174,12 @@ public class QutationDetailsActivity extends BaseActivity {
 
 
     }
-
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     @OnClick(R.id.linearDelete)
     public void deleteQutation() {
         if (qutation_id!=null&&job_id!=null)
