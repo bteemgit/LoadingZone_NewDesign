@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:elevation="10dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+             >
+                <include layout="@layout/headerview_posted_details" />
+
+
+                <LinearLayout
+                    android:id="@+id/profileData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="50dp"
+                    android:padding="5dp">
+
+
+                    <TextView
+                        android:id="@+id/customTextView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/side_nav_bar"
+                        android:gravity="start|center"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:text="Qutation Info"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:baselineAligned="false"
+                        android:gravity="right"
+                        android:paddingLeft="15dp">
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/customTextView6"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Qutation Status"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView34"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Qutation Amount"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView534"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Currency"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Date"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView234"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Description"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textQutationStatus"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textQutationAmount"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:hint="Material Weight"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textQutationCurrency"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:hint="Budget"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textQutationDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_gravity="clip_vertical"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:hint="Date"
+                                android:inputType="textCapSentences"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textQutationDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:inputType="textCapSentences"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="bottom"
+        android:background="#ffffff"
+        android:elevation="10dp"
+       android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearDelete"
+            android:orientation="horizontal"
+            android:elevation="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Delete"
+                android:gravity="center"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="100dp"
+            android:id="@+id/view"
+            android:background="#d9d8d8"
+            android:layout_toRightOf="@+id/linearDelete"
+            android:layout_toEndOf="@+id/linearDelete">
+
+        </View>
+        <LinearLayout
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linerUpdate"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/view"
+            android:layout_toEndOf="@+id/view"
+            android:layout_marginLeft="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Update"
+                android:gravity="center"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

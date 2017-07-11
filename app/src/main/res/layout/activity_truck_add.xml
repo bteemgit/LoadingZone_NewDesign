@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.admin.loadingzone.view.RevealBackgroundView
+        android:id="@+id/vRevealBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                </android.support.v7.widget.Toolbar>
+
+                <LinearLayout
+                    android:id="@+id/img_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/toolbar"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal"
+                    app:layout_collapseMode="parallax"
+                    app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+
+                    <LinearLayout
+                        android:id="@+id/vUserStats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center|start"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/ivTruckMaker"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:paddingLeft="8dp"
+                                    android:src="@drawable/ic_truck_white" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textTruckMaker"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Trucks"
+                                android:paddingLeft="12dp"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center|center_horizontal"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/ivTruckModel"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_gravity="center"
+                                    android:paddingLeft="8dp"
+                                    android:src="@drawable/ic_modelwhite" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textTruckModel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Model"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/ivTruckType"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_gravity="center"
+                                    android:paddingLeft="8dp"
+                                    android:src="@drawable/ic_type_white" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textTruckType"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Type"
+                                android:gravity="center"
+                                android:paddingLeft="17dp"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center|end"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/ivTruckYear"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:paddingLeft="8dp"
+                                    android:src="@drawable/ic_calender_white" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textTruckYear"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Year"
+                                android:gravity="center"
+                                android:paddingLeft="40dp"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp">
+
+
+
+                <EditText
+                    android:id="@+id/editTruckCustomName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Custom Name"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/editTruckInsurance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editTruckCustomName"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Insuarance End Date"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/editTruckAvgSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editTruckInsurance"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Average Speed"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/editTruckWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editTruckAvgSpeed"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Weight"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/editTruckHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editTruckWeight"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Height"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/editTruckLength"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editTruckHeight"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:focusable="true"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Length"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/editTruckWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/editTruckLength"
+                    android:layout_marginBottom="35dp"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Width"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabTruckAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        app:layout_anchorGravity="bottom"
+        app:srcCompat="@drawable/ic_truck_add"
+        tools:ignore="VectorDrawableCompat" />
+
+
+</RelativeLayout>

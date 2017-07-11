@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_nav_profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_myqutation"
+            android:icon="@drawable/ic_jobpost"
+            android:title="My Qutations" />
+        <item
+            android:id="@+id/nav_myjob"
+            android:icon="@drawable/ic_completedjobs"
+            android:title="My Jobs" />
+    </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_changepassword"
+                android:icon="@drawable/ic_changepassword"
+                android:title="Change Password" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_changepassword"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

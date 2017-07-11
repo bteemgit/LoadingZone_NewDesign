@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardTruck"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:elevation="6dp"
+        app:cardCornerRadius="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgTruckCustomName"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="100dp"
+                android:src="@drawable/ic_truck_type" />
+
+            <TextView
+                android:id="@+id/textCustomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/imgTruckCustomName"
+                android:layout_toRightOf="@+id/imgTruckCustomName"
+                android:text=" (Kl-CB-4190)"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/imgTruckCustomName"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorPrimary">
+
+            </View>
+
+            <RelativeLayout
+                android:id="@+id/relative_insurance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view">
+
+                <ImageView
+                    android:id="@+id/imgTruckInsDate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_truck_date" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@+id/imgTruckInsDate"
+                    android:layout_toRightOf="@+id/imgTruckInsDate"
+                    android:text="Insurance"
+
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/textInsuranceDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgTruckInsDate"
+                    android:layout_toEndOf="@+id/imgTruckInsDate"
+                    android:layout_toRightOf="@+id/imgTruckInsDate"
+                    android:text="24/17/1017"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/relative_avg_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view"
+                android:layout_marginLeft="80dp"
+                android:layout_toEndOf="@+id/relative_insurance"
+                android:layout_toRightOf="@+id/relative_insurance">
+
+                <ImageView
+                    android:id="@+id/imgTruckAvdspeed"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_truck_speedometer" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@+id/imgTruckAvdspeed"
+                    android:layout_toRightOf="@+id/imgTruckAvdspeed"
+
+                    android:text="Average Speeed"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/textAverageSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgTruckAvdspeed"
+                    android:layout_toEndOf="@+id/imgTruckAvdspeed"
+                    android:layout_toRightOf="@+id/imgTruckAvdspeed"
+                    android:text="240 Km/hr"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/relative_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_avg_speed"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:id="@+id/imgTruckWeight"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_truck_weight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@+id/imgTruckWeight"
+                    android:layout_toRightOf="@+id/imgTruckWeight"
+                    android:text="Weight"
+                    android:textColor="#808080"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/textTruckWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgTruckWeight"
+                    android:layout_toEndOf="@+id/imgTruckWeight"
+                    android:layout_toRightOf="@+id/imgTruckWeight"
+                    android:text="240 kg"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_dimension"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_avg_speed"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@+id/relative_weight"
+                android:layout_toRightOf="@+id/relative_weight">
+
+                <ImageView
+                    android:id="@+id/imgTruckDimension"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_truck_dimensions" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@+id/imgTruckDimension"
+                    android:layout_toRightOf="@+id/imgTruckDimension"
+                    android:text="Dimensions"
+                    android:textColor="#808080"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/textTruckDimension"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgTruckDimension"
+                    android:layout_toEndOf="@+id/imgTruckDimension"
+                    android:layout_toRightOf="@+id/imgTruckDimension"
+                    android:text="3*78*12"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cardTruck"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:elevation="6dp"
+        app:cardCornerRadius="6dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:text=" Driver Details"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/ivTruckEdit"
+                android:visibility="visible"
+                android:layout_toEndOf="@+id/text"
+                android:layout_toRightOf="@+id/text"
+                android:paddingTop="5dp"
+                android:src="@drawable/ic_edit"
+                android:layout_marginLeft="50dp"/>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorPrimary">
+
+            </View>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textAddNewDriver"
+                android:text="Driver is not Assigned ,Click here add driver"
+                android:layout_below="@id/view1"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_marginLeft="40dp"
+                android:paddingTop="60dp"
+                android:paddingLeft="30dp"
+                android:layout_centerHorizontal="true"/>
+
+            <RelativeLayout
+                android:id="@+id/reltive_existingDriver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@id/view1">
+
+
+                <ImageView
+                    android:id="@+id/ivDriverProfilePhoto"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/textDriverName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toEndOf="@+id/ivDriverProfilePhoto"
+                    android:layout_toRightOf="@+id/ivDriverProfilePhoto"
+                    android:text="Swarooplal"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textDriverEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textDriverName"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/ivDriverProfilePhoto"
+                    android:layout_toRightOf="@+id/ivDriverProfilePhoto"
+                    android:text="Swarooplal@gmail.com"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textDriverPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textDriverEmail"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/ivDriverProfilePhoto"
+                    android:layout_toRightOf="@+id/ivDriverProfilePhoto"
+                    android:text="9895875554"
+                    android:textSize="15sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#ffffff"
+                    android:elevation="10dp"
+                    android:gravity="bottom">
+
+                    <LinearLayout
+                        android:id="@+id/linearDelete"
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:elevation="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="70dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/ic_truck_message" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/view4"
+                        android:layout_width="2dp"
+                        android:layout_height="100dp"
+                        android:layout_toEndOf="@+id/linearDelete"
+                        android:layout_toRightOf="@+id/linearDelete"
+                        android:background="#d9d8d8">
+
+                    </View>
+
+                    <LinearLayout
+                        android:id="@+id/linerUpdate"
+                        android:layout_width="210dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toEndOf="@+id/view4"
+                        android:layout_toRightOf="@+id/view4">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="70dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/ic_truck_call" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

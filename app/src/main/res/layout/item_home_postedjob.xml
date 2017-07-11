@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom=".5dp"
+    android:layout_marginTop=".5dp"
+
+    android:elevation="4dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/imageViewCustomPic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/textCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/imageViewCustomPic"
+            android:layout_toRightOf="@+id/imageViewCustomPic"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Swarooplal"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textCustomerName"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageViewCustomPic"
+            android:layout_toRightOf="@+id/imageViewCustomPic"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textLocationFrom"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_arrows" />
+
+            <TextView
+                android:id="@+id/textLocationTo"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="10sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/liner_trucktype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="200dp"
+                android:gravity="start"
+                android:paddingLeft="90dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="1dp"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                android:text="Truck Type" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                android:text=":"/>
+            <TextView
+                android:id="@+id/textTruckType"
+                android:layout_width="190dp"
+                android:gravity="start"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:text=":TruckType"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_truckDimension"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_below="@+id/liner_trucktype"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="200dp"
+                android:paddingLeft="90dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="1dp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimary"
+                android:text="Truck Dimension"
+                android:textSize="12sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/textTruckDimension"
+                android:layout_width="190dp"
+                android:gravity="start"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:textSize="12sp"
+                android:text=":TruckType" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_truckDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_truckDimension"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="200dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="1dp"
+                android:gravity="start"
+                android:textSize="12sp"
+                android:paddingLeft="90dp"
+                android:text="Loading Date"
+                android:textColor="@color/colorPrimary" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/textTruckDate"
+                android:layout_width="190dp"
+                android:gravity="start"
+                android:textSize="12sp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:text=":TruckType" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_truckBudget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_truckDate"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="200dp"
+                android:paddingLeft="90dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="1dp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="start"
+                android:textSize="12sp"
+                android:text="Budget" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/textTruckBudget"
+                android:layout_width="190dp"
+                android:gravity="start"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:textSize="12sp"
+                android:text=":TruckType" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
