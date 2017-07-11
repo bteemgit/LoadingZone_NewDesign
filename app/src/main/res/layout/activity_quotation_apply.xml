@@ -61,6 +61,26 @@
 
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/edit_quotDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/squareview"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Quotation Description"
+            android:inputType="textMultiLine"
+            android:maxLength="2000"
+            android:minHeight="250dp"
+            android:minLines="5"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="@color/primaryTextColor"
+            android:textSize="16dp" />
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:padding="10dip"
@@ -84,25 +104,6 @@
         </LinearLayout>
 
 
-        <EditText
-            android:id="@+id/edit_quotDes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/squareview"
-            android:ems="10"
-            android:layout_margin="10dp"
-            android:gravity="top"
-            android:hint="Quotation Descrption"
-            android:inputType="textMultiLine"
-            android:maxLength="2000"
-            android:minHeight="250dp"
-            android:minLines="5"
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:textColorHint="@color/primaryTextColor"
-            android:textSize="16dp" />
     </LinearLayout>
 
 

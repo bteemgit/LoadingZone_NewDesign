@@ -124,7 +124,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         setContentView(R.layout.activity_posted_job_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("  Home Detail");
+        getSupportActionBar().setTitle("Job Detail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
