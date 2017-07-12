@@ -70,7 +70,7 @@ public class DriverEditActivity extends BaseActivity {
     RelativeLayout relativeLayoutRoot;
     @NonNull
     @BindView(R.id.relative_submit)
-    RelativeLayout relativeLayoutSubmit;
+    LinearLayout relativeLayoutSubmit;
     @NonNull
     @BindView(R.id.linerUpdate)
     LinearLayout linerUpdate;

@@ -112,7 +112,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
     ImageView ivTruckEdit;
     @NonNull
     @BindView(R.id.reltive_existingDriver)
-    RelativeLayout reltive_existingDriver;
+    LinearLayout reltive_existingDriver;
     ApiInterface apiService;
     String provider_vehicle_id, driver, truckId;
     List<DriverList> Listvechicle = new ArrayList<>();

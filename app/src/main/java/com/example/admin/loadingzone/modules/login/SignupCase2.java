@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.admin.loadingzone.R;
@@ -42,7 +43,7 @@ public class SignupCase2 extends Fragment {
     @BindView(R.id.buttonSignUp)
     Button buttonSignUp;
     @BindView(R.id.root)
-    RelativeLayout relativeLayoutRoot;
+    LinearLayout relativeLayoutRoot;
     private ApiInterface apiService;
     @Override
     public void onCreate(Bundle savedInstanceState) {

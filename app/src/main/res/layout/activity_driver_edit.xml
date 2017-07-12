@@ -28,12 +28,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@+id/app_bar"
-        android:background="@drawable/side_nav_bar"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="vertical"
         android:elevation="12dp">
 
         <ImageView
@@ -42,9 +44,7 @@
             android:layout_height="@dimen/user_profile_avatar_size"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp" />
+            android:layout_centerVertical="true" />
         <Button
             android:id="@+id/btnEditProfilePic"
             android:layout_width="100dp"
@@ -62,94 +62,138 @@
             android:id="@+id/btnEditProfilePicUpload"
             android:layout_width="100dp"
             android:layout_height="24dp"
-            android:layout_marginRight="77dp"
             android:background="@drawable/btn_profile_bg"
             android:text="Upload Image"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="12sp"
             android:visibility="gone"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="77dp" />
+            android:layout_alignParentEnd="true" />
 
-    </RelativeLayout>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="250dp"
+    android:paddingLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:orientation="vertical">
+    <EditText
+
+        android:id="@+id/editDriverName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="20dp"
+        android:drawableTint="@color/colorAccent"
+        android:fontFamily="Open-Sans-condensed"
+        android:hint="Driver Name"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/secondaryTextColor"
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/editDriverEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_marginTop="26dp"
-        android:focusable="false"
-        android:drawableLeft="@drawable/ic_username"
-        android:drawablePadding="30dp"
-        android:drawableStart="@drawable/ic_username"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="20dp"
         android:drawableTint="@color/colorAccent"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="Email"
-        android:inputType="text"
+        android:fontFamily="Open-Sans-condensed"
+        android:hint="Driver Email"
+        android:inputType="textEmailAddress"
         android:textColor="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="20dp" />
-
-    <EditText
-        android:id="@+id/editDriverName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editDriverEmail"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_username"
-        android:drawablePadding="30dp"
-        android:drawableStart="@drawable/ic_username"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="Name"
-        android:inputType="text"
-        android:textColor="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="20dp" />
+        android:textColorHint="@color/secondaryTextColor"
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/editDriverLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editDriverName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
-        android:drawableLeft="@drawable/ic_username"
-        android:drawablePadding="30dp"
-        android:drawableStart="@drawable/ic_username"
+        android:drawablePadding="20dp"
         android:drawableTint="@color/colorAccent"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="Place,State"
-        android:inputType="text"
+        android:fontFamily="Open-Sans-condensed"
+        android:hint="Driver Location"
+        android:inputType="textEmailAddress"
         android:textColor="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="20dp" />
+        android:textColorHint="@color/secondaryTextColor"
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/editDriverMobile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editDriverLocation"
-        android:layout_marginTop="11dp"
-        android:drawableLeft="@drawable/ic_username"
-        android:drawablePadding="30dp"
-        android:drawableStart="@drawable/ic_username"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="20dp"
         android:drawableTint="@color/colorAccent"
-        android:fontFamily="sans-serif-condensed"
-        android:hint="Mobile"
-        android:inputType="text"
+        android:fontFamily="Open-Sans-condensed"
+        android:hint="Driver Phone"
+        android:inputType="textEmailAddress"
         android:textColor="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="20dp" />
+        android:textColorHint="@color/secondaryTextColor"
+        android:textSize="13sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/relative_submit"
+        android:gravity="bottom"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:id="@+id/linearDelete"
+            android:background="@drawable/login_bg_curvedshape_black">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/linerUpdate"
+            android:gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp">
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:background="@drawable/login_bg_curvedshape"
+                android:text="Update"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabDriverAddDetails"
@@ -178,53 +222,6 @@
         <!--app:srcCompat="@drawable/ic_edit"-->
         <!--tools:ignore="VectorDrawableCompat" />-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/relative_submit"
-        android:gravity="bottom"
-        android:visibility="gone"
-        android:background="#ffffff"
-        android:elevation="10dp"
-        android:layout_alignParentBottom="true">
 
-        <LinearLayout
-            android:layout_width="170dp"
-            android:layout_height="match_parent"
-            android:id="@+id/linearDelete"
-            android:orientation="horizontal"
-            android:elevation="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Delete"
-                android:gravity="center"
-                android:textSize="20sp"/>
-        </LinearLayout>
-        <View
-            android:layout_width="2dp"
-            android:layout_height="100dp"
-            android:id="@+id/view"
-            android:background="#d9d8d8"
-            android:layout_toRightOf="@+id/linearDelete"
-            android:layout_toEndOf="@+id/linearDelete">
 
-        </View>
-        <LinearLayout
-            android:layout_width="210dp"
-            android:layout_height="match_parent"
-            android:id="@+id/linerUpdate"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/view"
-            android:layout_toEndOf="@+id/view"
-            android:layout_marginLeft="5dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Update"
-                android:gravity="center"
-                android:textSize="20sp"/>
-        </LinearLayout>
-
-    </RelativeLayout>
 </RelativeLayout>

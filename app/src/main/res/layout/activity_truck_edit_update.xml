@@ -42,13 +42,17 @@
 
                 </android.support.v7.widget.Toolbar>
 
+
+
+
+
+
                 <LinearLayout
                     android:id="@+id/img_profile"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_below="@+id/toolbar"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginTop="14dp"
                     android:orientation="horizontal"
                     app:layout_collapseMode="parallax"
                     app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
@@ -65,51 +69,51 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="center|start"
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/circile">
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
                                 <ImageView
                                     android:id="@+id/ivTruckMaker"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_bottom_movtruck" />
+                                    android:src="@drawable/ic_truck_white" />
                             </LinearLayout>
 
                             <TextView
                                 android:id="@+id/textTruckMaker"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Trucks"
+                                android:paddingLeft="12dp"
                                 android:textColor="#ffffff"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"  />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="center|center_horizontal"
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/circile">
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
                                 <ImageView
                                     android:id="@+id/ivTruckModel"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginRight="10dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_bottom_movtruck" />
+                                    android:src="@drawable/ic_modelwhite" />
                             </LinearLayout>
 
                             <TextView
@@ -118,7 +122,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Model"
                                 android:textColor="#ffffff"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"  />
                         </LinearLayout>
 
                         <LinearLayout
@@ -129,24 +133,26 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/circile">
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
                                 <ImageView
                                     android:id="@+id/ivTruckType"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="10dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_bottom_movtruck" />
+                                    android:src="@drawable/ic_type_white" />
                             </LinearLayout>
 
                             <TextView
                                 android:id="@+id/textTruckType"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Type"
+                                android:gravity="center"
+                                android:paddingLeft="17dp"
                                 android:textColor="#ffffff"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -155,30 +161,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="center|end"
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/circile">
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
                                 <ImageView
                                     android:id="@+id/ivTruckYear"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_bottom_movtruck" />
+                                    android:src="@drawable/ic_calender_white" />
                             </LinearLayout>
 
                             <TextView
                                 android:id="@+id/textTruckYear"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Year"
+                                android:gravity="center"
+                                android:paddingLeft="40dp"
                                 android:textColor="#ffffff"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"  />
                         </LinearLayout>
                     </LinearLayout>
 

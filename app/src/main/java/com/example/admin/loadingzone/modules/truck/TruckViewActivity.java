@@ -92,6 +92,12 @@ public class TruckViewActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void setUpListeners() {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
