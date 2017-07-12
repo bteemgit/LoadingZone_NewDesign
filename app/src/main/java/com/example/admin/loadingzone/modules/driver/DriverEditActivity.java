@@ -121,7 +121,7 @@ public class DriverEditActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.manage_driver);
+        getSupportActionBar().setTitle("Manage Driver");
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         checker = new PermissionsChecker(this);
         // :-fetching the details from userprofile activity

@@ -31,6 +31,6 @@
     <string name="string_upload_fail">Server error ,Please try after Some time</string>
     <string name="truck_title">Trucks</string>
     <string name="truck_add_title">Truck Add</string>
-    <string name="manage_driver">ManageDriver</string>
+    <string name="driver">Drivers</string>
     <string name="my_qutation">My Quotation</string>
 </resources>

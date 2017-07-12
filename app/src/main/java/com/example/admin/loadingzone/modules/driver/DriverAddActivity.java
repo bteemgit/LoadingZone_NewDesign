@@ -115,7 +115,7 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.manage_driver);
+        getSupportActionBar().setTitle("Add Driver");
         setupRevealBackground(savedInstanceState);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         checker = new PermissionsChecker(this);

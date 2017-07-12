@@ -73,7 +73,7 @@ public class DriverViewActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.manage_driver);
+        getSupportActionBar().setTitle(R.string.driver);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         refreshLayout.setRefreshing(false);
         setUpListeners();
