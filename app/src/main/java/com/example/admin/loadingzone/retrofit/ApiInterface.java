@@ -112,7 +112,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("driver/avatar")
-    Call<Meta> UploadDriverprofilePic(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Part MultipartBody.Part file);
+    Call<UserProfileResponse> UploadDriverprofilePic(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Part MultipartBody.Part file);
 
     @GET("driver")
     Call<TruckDriverViewResponse> driverList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token);

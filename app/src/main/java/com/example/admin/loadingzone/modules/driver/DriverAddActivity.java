@@ -295,7 +295,7 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("profile_pic", file.getName(), requestFile);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<UserProfileResponse> resultCall = apiService.UploadprofilePicProvider(GloablMethods.API_HEADER + acess_token, body);
+        Call<UserProfileResponse> resultCall = apiService.UploadDriverprofilePic(GloablMethods.API_HEADER + acess_token, body);
         // finally, execute the request
         resultCall.enqueue(new Callback<UserProfileResponse>() {
             @Override
