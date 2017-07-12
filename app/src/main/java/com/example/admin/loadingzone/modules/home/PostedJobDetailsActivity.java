@@ -38,6 +38,8 @@ import butterknife.OnClick;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 
+import static com.example.admin.loadingzone.R.id.ivUserProfilePhoto;
+
 public class PostedJobDetailsActivity extends AppCompatActivity implements SheetLayout.OnFabAnimationEndListener {
     @NonNull
     @BindView(R.id.textCustomerName)
@@ -107,7 +109,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
     FloatingActionButton fabQuotationApply;
     @NonNull
     @BindView(R.id.ivCustomerProfilePhoto)
-    ImageView ivCustomerProfilePhoto;
+    ImageView imageViewCustomPic;
     @NonNull
     @BindView(R.id.vUserStats)
     LinearLayout linerUserstaus;
@@ -183,12 +185,13 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         textViewPaymentMode.setText(PaymentMode);
         textViewCurrency.setText(Currency);
         Picasso.with(PostedJobDetailsActivity.this)
-                .load(new File("http://dev.bteem.com/loading-zone/common/uploads/images/default/user_profile_pic.png"))
+                .load(profilepic)
                 .placeholder(R.drawable.img_circle_placeholder)
-                .resize(70, 70)
+                .resize(88, 88)
                 .centerCrop()
                 .transform(new CircleTransformation())
-                .into(ivCustomerProfilePhoto);
+                .into(imageViewCustomPic);
+
 
         // fab click & animation
         mSheetLayout.setFab(fabQuotationApply);
