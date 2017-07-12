@@ -1,5 +1,6 @@
 package com.example.admin.loadingzone.global;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,29 +8,50 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.admin.loadingzone.R;
 
 import java.util.regex.Pattern;
 
+import butterknife.BindView;
+
 public class BaseActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
+    public Dialog dialog;
+    public EditText et_subject;
+    public EditText et_message;
+    private BaseActivity context;
+    public Button btnSentMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setContentView(R.layout.activity_base);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         progressDialog = new ProgressDialog(BaseActivity.this);
 
 
     }
+    public void messageDilog() {
+        context=this;
+        dialog=new Dialog(context);
+        dialog.setContentView(R.layout.activity_base);
+        dialog.setCancelable(true);
+        et_subject=(EditText)dialog.findViewById(R.id.edit_message_subject);
+        et_message=(EditText)dialog.findViewById(R.id.edit_message);
+        btnSentMessage=(Button)dialog.findViewById(R.id.sentBtnMessage) ;
+        dialog.show();
+    }
+
     public static boolean isConnectingToInternet(Context _context) {
         ConnectivityManager connectivity = (ConnectivityManager) _context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);

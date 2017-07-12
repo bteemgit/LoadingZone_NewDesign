@@ -1,26 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.admin.loadingzone.global.BaseActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <EditText
+        android:id="@+id/edit_message_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@drawable/job_round"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Enter message subject"
+        android:inputType="textMultiLine"
+        android:maxLength="2000"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="@color/primaryTextColor"
+        android:textSize="16dp"
+        android:layout_marginTop="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <Button
+        android:id="@+id/sentBtnMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:maxWidth="300dp"
+        android:minWidth="250dp"
+        android:padding="10dp"
+        android:text="Send"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 
-    </android.support.design.widget.AppBarLayout>
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/job_round"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Enter message here...."
+        android:inputType="textMultiLine"
+        android:maxLength="2000"
+        android:minHeight="150dp"
+        android:minLines="3"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="@color/primaryTextColor"
+        android:textSize="16dp"
+        android:layout_below="@+id/edit_message_subject"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <include layout="@layout/content_base" />
 
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
