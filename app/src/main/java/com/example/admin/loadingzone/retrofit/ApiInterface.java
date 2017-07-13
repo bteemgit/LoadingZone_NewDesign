@@ -7,6 +7,7 @@ import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
 import com.example.admin.loadingzone.retrofit.model.MakerResponse;
 import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
+import com.example.admin.loadingzone.retrofit.model.MessageDetailsResponse;
 import com.example.admin.loadingzone.retrofit.model.MessageListResponse;
 import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.ModelResponse;
@@ -14,6 +15,7 @@ import com.example.admin.loadingzone.retrofit.model.PendingJobResponse;
 import com.example.admin.loadingzone.retrofit.model.PendingQutationResponse;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
 import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
+import com.example.admin.loadingzone.retrofit.model.ReplyMessageResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
@@ -175,5 +177,13 @@ public interface ApiInterface {
 
     @GET("message")
     Call<MessageListResponse> MessageList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
+    @GET("message/{message_thread_id}")
+    Call<MessageDetailsResponse> MessageListDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("message_thread_id") String message_thread_id);
+    @FormUrlEncoded
+    @POST("message")
+    Call<ReplyMessageResponse> ReplyMessage(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("message") String message, @Field("message_thread_id") String message_thread_id);
+
+
 
 }
