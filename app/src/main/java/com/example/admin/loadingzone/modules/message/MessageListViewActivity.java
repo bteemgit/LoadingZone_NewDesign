@@ -247,10 +247,8 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
                     // deleteMessages();
                     if (messageListAdapter != null)  {
                         ArrayList<String> selectedMessageThreadId = selectedMessageThreadId();
-// please call the message delete api calll from here by passing selectedmessagethreadId
-                       // delete(selectedMessageThreadId);
 
-
+                        // call for deletig the selected list
                         finish();
                         mode.finish();
                         return true;
@@ -271,7 +269,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
                     @Override
                     public void run() {
                         messageListAdapter.resetAnimationIndex();
-                        // mAdapter.notifyDataSetChanged();
+
                     }
                 });
             }
