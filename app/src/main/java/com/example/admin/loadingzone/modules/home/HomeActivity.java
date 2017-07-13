@@ -92,7 +92,7 @@ public class HomeActivity extends BaseActivity
     RelativeLayout relativeLayoutRoot;
 
 
-
+   //dfgfdhfgh
     @BindView(R.id.id_linear_myquotation)
     LinearLayout linear_myquotation;
     @BindView(R.id.id_linearmyJob)
