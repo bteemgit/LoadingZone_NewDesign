@@ -38,6 +38,7 @@ import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SessionManager;
 import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
 import com.example.admin.loadingzone.modules.login.LoginActivity;
+import com.example.admin.loadingzone.modules.message.MessageListViewActivity;
 import com.example.admin.loadingzone.modules.myjob.MyJobtabViewActivity;
 import com.example.admin.loadingzone.modules.myqutation.MyQuotationActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
@@ -316,6 +317,11 @@ public class HomeActivity extends BaseActivity
                     Intent intent1 = new Intent(HomeActivity.this, MyQuotationActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent1);
+                    break;
+                case R.id.mChat:
+                    Intent intent2= new Intent(HomeActivity.this, MessageListViewActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent2);
                     break;
 
             }

@@ -50,7 +50,9 @@
         <activity android:name=".modules.myjob.MyJobtabViewActivity" />
         <activity android:name=".modules.truck.TruckEditUpdateActivity" />
         <activity android:name=".modules.myjob.StartJobActivity" />
-        <activity android:name=".modules.myjob.SelectActvieTruckActivity"></activity>
+        <activity android:name=".modules.myjob.SelectActvieTruckActivity" />
+        <activity android:name=".modules.message.MessageListViewActivity" />
+        <activity android:name=".modules.message.MessageDetailListActivity"></activity>
     </application>
 
 </manifest>

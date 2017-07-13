@@ -6,6 +6,8 @@ import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
 import com.example.admin.loadingzone.retrofit.model.MakerResponse;
+import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
+import com.example.admin.loadingzone.retrofit.model.MessageListResponse;
 import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.ModelResponse;
 import com.example.admin.loadingzone.retrofit.model.PendingJobResponse;
@@ -90,25 +92,30 @@ public interface ApiInterface {
     Call<TruckAddResponse> TruckAdd(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("avg_running_speed") String avg_running_speed, @Field("custom_name") String custom_name,
                                     @Field("insurance_exp_date") String insurance_exp_date, @Field("weight") String weight, @Field("container_length") String container_length, @Field("container_width") String container_width
             , @Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year);
+
     @FormUrlEncoded
     @PUT("provider-vehicles/{provider_vehicle_id}")
-    Call<TruckAddResponse> TruckUpdate(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id,@Field("avg_running_speed") String avg_running_speed, @Field("custom_name") String custom_name,
-                                    @Field("insurance_exp_date") String insurance_exp_date, @Field("weight") String weight, @Field("container_length") String container_length, @Field("container_width") String container_width
-            ,@Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year);
+    Call<TruckAddResponse> TruckUpdate(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id, @Field("avg_running_speed") String avg_running_speed, @Field("custom_name") String custom_name,
+                                       @Field("insurance_exp_date") String insurance_exp_date, @Field("weight") String weight, @Field("container_length") String container_length, @Field("container_width") String container_width
+            , @Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year);
+
     @DELETE("provider-vehicles/{provider_vehicle_id}")
-    Call<TruckAddResponse>DeleteTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token,@Path("provider_vehicle_id") String provider_vehicle_id);
+    Call<TruckAddResponse> DeleteTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id);
+
     @GET("provider-vehicles/{provider_vehicle_id}")
-    Call<VehicleDetailsResponse>GetTruckDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id);
+    Call<VehicleDetailsResponse> GetTruckDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id);
+
     @FormUrlEncoded
     @POST("driver")
-    Call<TruckDriverAddResponse> AddDriver(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token,@Field("driver_name") String driver_name, @Field("driver_phone") String driver_phone, @Field("driver_email") String driver_email, @Field("driver_address") String driver_address);
+    Call<TruckDriverAddResponse> AddDriver(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("driver_name") String driver_name, @Field("driver_phone") String driver_phone, @Field("driver_email") String driver_email, @Field("driver_address") String driver_address);
 
 
     @FormUrlEncoded
     @PUT("driver/{driver_id}")
-    Call<TruckDriverAddResponse>UpdateDriver(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token,@Path("driver_id") String driver_id,@Field("driver_name") String driver_name, @Field("driver_phone") String driver_phone, @Field("driver_email") String driver_email, @Field("driver_address") String driver_address);
+    Call<TruckDriverAddResponse> UpdateDriver(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("driver_id") String driver_id, @Field("driver_name") String driver_name, @Field("driver_phone") String driver_phone, @Field("driver_email") String driver_email, @Field("driver_address") String driver_address);
+
     @DELETE("driver/{driver_id}")
-    Call<TruckDriverAddResponse>DeleteDriver(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token,@Path("driver_id") String driver_id);
+    Call<TruckDriverAddResponse> DeleteDriver(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("driver_id") String driver_id);
 
     @Multipart
     @POST("driver/avatar")
@@ -123,28 +130,34 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("quotation")
-    Call<QutationApplyResponse>ApplyQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description);
+    Call<QutationApplyResponse> ApplyQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description);
 
     @FormUrlEncoded
     @PUT("quotation/{quotation_id}")
-    Call<QutationApplyResponse> UpdateQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description );
+    Call<QutationApplyResponse> UpdateQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description);
 
     @DELETE("quotation/{quotation_id}")
     Call<QutationApplyResponse> DeleteQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id);
 
     @GET("quotation/pending-quotations")
     Call<PendingQutationResponse> PendingQutationList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
     @GET("quotation/accepted-quotations")
     Call<PendingQutationResponse> AcceptedQutationList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
     @GET("quotation/rejected-quotations")
     Call<PendingQutationResponse> RejectedQutationList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
     @GET("job/completed-list")
-    Call<PendingJobResponse> CompletedJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("service_provider_id") String service_provider_id,@Query("page") int page);
+    Call<PendingJobResponse> CompletedJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("service_provider_id") String service_provider_id, @Query("page") int page);
+
     @GET("job/pending-list")
-    Call<PendingJobResponse> PendingJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("service_provider_id") String service_provider_id,@Query("page") int page);
+    Call<PendingJobResponse> PendingJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("service_provider_id") String service_provider_id, @Query("page") int page);
+
     @FormUrlEncoded
     @POST("vehicle-driver")
-    Call<AdddriverResponnse>AssignDrivertoTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("driver_id") String driver_id, @Field("vehicle_id") String vehicle_id);
+    Call<AdddriverResponnse> AssignDrivertoTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("driver_id") String driver_id, @Field("vehicle_id") String vehicle_id);
+
     @GET("service-provider/available-trucks")
     Call<ActiveTrucklistResponse> ActiveTruckandDriverList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("expected_start_date") String expected_start_date, @Query("expected_end_date") String expected_end_date, @Query("page") int page);
 
@@ -155,4 +168,12 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("job/block-vehicle")
     Call<Meta> CreateJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id);
+
+    @FormUrlEncoded
+    @POST("message")
+    Call<MessageCreateResponse> CreateMessage(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("reference_id") String referenceid, @Field("message_type_id") String message_type_id, @Field("subject") String subject, @Field("message") String message);
+
+    @GET("message")
+    Call<MessageListResponse> MessageList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
 }

@@ -35,6 +35,7 @@
         android:maxWidth="300dp"
         android:minWidth="250dp"
         android:padding="10dp"
+        android:clickable="true"
         android:text="Send"
         android:textColor="#ffffff"
         android:textSize="20sp" />

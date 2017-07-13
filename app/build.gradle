@@ -32,6 +32,8 @@ dependencies {
     })
 
     //splashanimation
+
+
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.google.code.gson:gson:2.7'
@@ -47,5 +49,4 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
 }
