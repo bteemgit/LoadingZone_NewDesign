@@ -1,6 +1,7 @@
 package com.example.admin.loadingzone.modules.home;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
@@ -91,8 +93,6 @@ public class HomeActivity extends BaseActivity
     @BindView(R.id.rootView)
     RelativeLayout relativeLayoutRoot;
 
-
-   //dfgfdhfgh
     @BindView(R.id.id_linear_myquotation)
     LinearLayout linear_myquotation;
     @BindView(R.id.id_linearmyJob)
@@ -116,7 +116,6 @@ public class HomeActivity extends BaseActivity
             }
             else {
                 showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
-
             }
         }
 
@@ -177,8 +176,8 @@ public class HomeActivity extends BaseActivity
 
         if (isConnectingToInternet(getApplicationContext()))
         {
-       getJobPosted();
-    }
+            getJobPosted();
+        }
         else {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
@@ -186,6 +185,25 @@ public class HomeActivity extends BaseActivity
         linear_myquotation.setOnClickListener(this);
         linear_linearmyJob.setOnClickListener(this);
         img_logout.setOnClickListener(this);
+
+        //setting datas to navigation drawer
+
+        TextView text_users_name = (TextView)findViewById(R.id.id_text_users_name);
+        text_users_name.setText(AppController.getString(getApplicationContext(), "customer_name"));
+
+        TextView text_usersemail = (TextView)findViewById(R.id.id_text_usersemail);
+        text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
+
+        ImageView user_imageView = (ImageView)findViewById(R.id.imageView6);
+        Context context = this;
+        Picasso.with(context)
+               // .load(AppController.getString(getApplicationContext(), "pic"))
+                .load("http://i.imgur.com/DvpvklR.png")
+                .resize(70, 70)
+                .centerCrop()
+                .transform(new CircleTransformation())
+                .into(user_imageView);
+
     }
 
     private void setUpListeners() {
