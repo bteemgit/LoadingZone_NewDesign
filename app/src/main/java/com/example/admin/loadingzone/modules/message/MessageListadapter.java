@@ -15,13 +15,14 @@ import android.widget.TextView;
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.FlipAnimator;
 import com.example.admin.loadingzone.retrofit.model.MessageThread;
+import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by admin on 7/13/2017.
@@ -49,7 +50,7 @@ public class MessageListadapter extends RecyclerView.Adapter<MessageListadapter.
 
         LinearLayout messageLayout;
         TextView textViewMessageSub,textViewMessageRef,textViewMessageDays,textName;
-        private CircleImageView spCircleImageView;
+        private ImageView spCircleImageView;
 
         public MyViewHolder(View view) {
             super(view);
@@ -102,8 +103,17 @@ public class MessageListadapter extends RecyclerView.Adapter<MessageListadapter.
 
         holder.message.setText(data.getCreatedDateRelative());
         String imageUrl=messageThreadList.get(position).getRecipient().getProfilePic();
-        Picasso.with(mContext).load(imageUrl)
+
+       /* Picasso.with(mContext).load(imageUrl)
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                .into(holder.imgProfile);*/
+
+
+        Picasso.with(mContext).load(imageUrl)
+                .placeholder(R.drawable.img_circle_placeholder)
+                .resize(70, 70)
+                .centerCrop()
+                .transform(new CircleTransformation())
                 .into(holder.imgProfile);
 
         // change the row state to activated

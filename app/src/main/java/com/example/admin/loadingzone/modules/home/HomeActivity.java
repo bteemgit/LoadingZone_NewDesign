@@ -378,8 +378,7 @@ public class HomeActivity extends BaseActivity
     }
 
 
-    public void Logout
-            () {
+    public void Logout() {
 
         showProgressDialog(HomeActivity.this, "Log outing...");
         apiService =
