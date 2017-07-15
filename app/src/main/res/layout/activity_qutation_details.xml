@@ -43,8 +43,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-             >
+                android:orientation="vertical">
+
                 <include layout="@layout/headerview_posted_details" />
 
 
@@ -52,9 +52,9 @@
                     android:id="@+id/profileData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
                     android:background="@android:color/white"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="50dp">
+                    android:orientation="vertical">
 
 
                     <TextView
@@ -307,60 +307,66 @@
 
         </ScrollView>
     </LinearLayout>
+
     <RelativeLayout
+        android:id="@+id/relativeSendMessage"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/relativeSendMessage"
-        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:background="#ffffff"
         android:elevation="10dp"
-       android:layout_alignParentBottom="true">
+        android:gravity="bottom">
+
         <TextView
+            android:id="@+id/textMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Message"
-            android:id="@+id/textMessage"
-            android:visibility="gone"
-            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:text="Message"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/linearDelete"
             android:layout_width="170dp"
             android:layout_height="match_parent"
-            android:id="@+id/linearDelete"
-            android:orientation="horizontal"
-            android:elevation="10dp">
+            android:elevation="10dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Delete"
                 android:gravity="center"
-                android:textSize="20sp"/>
+                android:text="Delete"
+                android:textSize="20sp" />
         </LinearLayout>
+
         <View
+            android:id="@+id/view"
             android:layout_width="2dp"
             android:layout_height="100dp"
-            android:id="@+id/view"
-            android:background="#d9d8d8"
+            android:layout_toEndOf="@+id/linearDelete"
             android:layout_toRightOf="@+id/linearDelete"
-            android:layout_toEndOf="@+id/linearDelete">
+            android:background="#d9d8d8">
 
         </View>
+
         <LinearLayout
+            android:id="@+id/linerUpdate"
             android:layout_width="210dp"
             android:layout_height="match_parent"
-            android:id="@+id/linerUpdate"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/view"
+            android:layout_marginLeft="5dp"
             android:layout_toEndOf="@+id/view"
-            android:layout_marginLeft="5dp">
+            android:layout_toRightOf="@+id/view">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Update"
                 android:gravity="center"
-                android:textSize="20sp"/>
+                android:text="Update"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </RelativeLayout>

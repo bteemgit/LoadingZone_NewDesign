@@ -267,6 +267,7 @@ public class HomeActivity extends BaseActivity
                 String QuotationCount = jobList.get(position).getQuotationCount();
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();
+                String job_status_code=jobList.get(position).getJobStatus().getCode();
                 i.putExtra("isFrom","Home");
                 i.putExtra("JobId",JobId);
                 i.putExtra("name",name);
@@ -290,7 +291,7 @@ public class HomeActivity extends BaseActivity
                 i.putExtra("TruckType_id",TruckType_id);
                 i.putExtra("TruckSize_id",TruckSize_id);
                 i.putExtra("TruckSize_dimension",TruckSize_dimension);
-             //   i.putExtra("Currency_name",Currency_name);
+                i.putExtra("job_status_code",job_status_code);
                 i.putExtra("LocationDistance",LocationDistance);
                 i.putExtra("DateRequested",DateRequested);
                 i.putExtra("DateRequestedRelative",DateRequestedRelative);

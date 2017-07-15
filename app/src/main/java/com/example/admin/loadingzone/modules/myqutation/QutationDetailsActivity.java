@@ -120,10 +120,8 @@ public class QutationDetailsActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Quotation Details");
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         ButterKnife.bind(this);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         btnStartjob.setVisibility(View.GONE);
@@ -175,8 +173,6 @@ public class QutationDetailsActivity extends BaseActivity {
         textQutationStatus.setText(quotationStatus);
         textQutationAmount.setText(quotationAmount);
         textQutationCurrency.setText(quotationCurrency);
-
-        //textQutationDate.setText(quotationStatus);
         textQutationDescription.setText(quotationDescription);
         Picasso.with(QutationDetailsActivity.this)
                 .load(cus_profile)

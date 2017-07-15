@@ -251,7 +251,7 @@ showSnakBar(rootView,"Not Working now");
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<TruckDriverViewResponse> call = apiService.driverList(GloablMethods.API_HEADER + acess_token);
+        Call<TruckDriverViewResponse> call = apiService.driverList(GloablMethods.API_HEADER + acess_token,1);
         call.enqueue(new Callback<TruckDriverViewResponse>() {
             @Override
             public void onResponse(Call<TruckDriverViewResponse> call, retrofit2.Response<TruckDriverViewResponse> response) {

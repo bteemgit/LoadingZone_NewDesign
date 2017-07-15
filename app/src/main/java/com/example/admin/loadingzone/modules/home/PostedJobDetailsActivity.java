@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-
 import android.support.design.widget.FloatingActionButton;
 import android.support.transition.Transition;
 import android.support.v4.app.ActivityCompat;
@@ -154,9 +153,8 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         String TruckType = getIntent().getStringExtra("TruckType_name");
         String PaymentMode = getIntent().getStringExtra("PaymentType_name");
         String Currency = getIntent().getStringExtra("Currency_name");
-//        job_status_code = getIntent().getStringExtra("job_status_code");
-//        Log.d("job_status_code", job_status_code);
-
+        job_status_code = getIntent().getStringExtra("job_status_code");
+        Log.d("job_status_code", job_status_code);
         if (isFrom.equals("Home")) {
             linerUserstaus.setVisibility(View.VISIBLE);
             fabQuotationApply.setVisibility(View.VISIBLE);
@@ -166,7 +164,14 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
             fabQuotationApply.setVisibility(View.GONE);
-            buttonJobStart.setVisibility(View.VISIBLE);
+            if (job_status_code.equals("quotation-accepted"))
+            {
+                buttonJobStart.setVisibility(View.VISIBLE);
+            }
+            else {
+                buttonJobStart.setVisibility(View.GONE);
+            }
+
         }
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);

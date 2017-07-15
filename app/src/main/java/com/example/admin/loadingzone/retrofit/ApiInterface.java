@@ -126,7 +126,7 @@ public interface ApiInterface {
     Call<UserProfileResponse> UploadDriverprofilePic(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Part MultipartBody.Part file);
 
     @GET("driver")
-    Call<TruckDriverViewResponse> driverList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token);
+    Call<TruckDriverViewResponse> driverList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token,@Query("page") int page);
 
 
     @GET("job")

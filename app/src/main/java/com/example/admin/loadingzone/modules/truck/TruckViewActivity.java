@@ -54,7 +54,7 @@ public class TruckViewActivity extends BaseActivity {
     ApiInterface apiService;
     private int selectedItemPosition = -1;
     TrckListAdapter trckListAdapter;
-    private int limit = 10;
+    private int limit = 30;
     private int offset = 1;
     private boolean hasReachedTop = false;
     private List<VehicleList> vehicleListList = new ArrayList<>();

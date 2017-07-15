@@ -118,7 +118,7 @@ public class LoginActivity extends BaseActivity {
             public void onResponse(Call<LoginResponse> call, retrofit2.Response<LoginResponse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    if (response.body().getMeta().getStatus().equals(true)) {
+                    if (response.body().getMeta().getStatus().equals("true") || response.body().getMeta().getStatus().equals(true)) {
                         if (response.body().getData().getServiceProviderId() != null) {
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             session.setLogin(true);
@@ -151,10 +151,8 @@ public class LoginActivity extends BaseActivity {
                         Snackbar snackbar = Snackbar
                                 .make(rootView, response.body().getMeta().getMessage(), Snackbar.LENGTH_LONG);
                         snackbar.show();
-
                     }
-                }
-                else {
+                } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
@@ -163,7 +161,7 @@ public class LoginActivity extends BaseActivity {
                         snackbar.show();
 
                     } catch (Exception e) {
-                        Log.d("exception",e.getMessage());
+                        Log.d("exception", e.getMessage());
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
@@ -174,7 +172,7 @@ public class LoginActivity extends BaseActivity {
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 hideProgressDialog();
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("exception>>>",t.getMessage());
+                Log.d("exception>>>", t.getMessage());
 
             }
         });
