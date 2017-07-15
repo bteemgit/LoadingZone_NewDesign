@@ -124,6 +124,13 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
 
     }
 
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void setupRevealBackground(Bundle savedInstanceState) {
         //vRevealBackground.setFillPaintColor(0xFF16121a);
         vRevealBackground.setOnStateChangeListener(this);

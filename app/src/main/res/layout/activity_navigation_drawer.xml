@@ -26,6 +26,7 @@
                 android:src="@mipmap/profileimage" />
 
             <TextView
+                android:id="@+id/id_text_users_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -34,6 +35,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/id_text_usersemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"

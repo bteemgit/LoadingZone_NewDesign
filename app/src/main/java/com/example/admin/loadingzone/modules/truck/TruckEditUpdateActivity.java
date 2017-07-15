@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -113,6 +115,16 @@ public class TruckEditUpdateActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.reltive_existingDriver)
     LinearLayout reltive_existingDriver;
+
+    @BindView(R.id.id_assignDriverClick)
+    LinearLayout assignDriver_card;
+
+
+    @BindView(R.id.id_linear_driver_details)
+    LinearLayout assignDriverDetailsExists;
+
+
+
     ApiInterface apiService;
     String provider_vehicle_id, driver, truckId;
     List<DriverList> Listvechicle = new ArrayList<>();
@@ -140,14 +152,22 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
         }
         if (driver.equals("false")) {
+
+            assignDriverDetailsExists.setVisibility(View.GONE);
+
             reltive_existingDriver.setVisibility(View.GONE);
             textAddNewDriver.setVisibility(View.VISIBLE);
             ivTruckEdit.setVisibility(View.GONE);
         } else {
+            assignDriver_card.setVisibility(View.GONE);
+
+
             reltive_existingDriver.setVisibility(View.VISIBLE);
             textAddNewDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.VISIBLE);
         }
+
+
 
 
     }
@@ -184,12 +204,14 @@ showSnakBar(rootView,"Not Working now");
     }
 
     private void showbottomDriverList() {
+
+
         final LayoutInflater li = LayoutInflater.from(TruckEditUpdateActivity.this);
         final View view = li.inflate(R.layout.trck_model, null);
         final Dialog mBottomSheetDialog = new Dialog(TruckEditUpdateActivity.this, R.style.MaterialDialogSheet);
         EndlessRecyclerView endlessRecyclerViewTrcukModel = (EndlessRecyclerView) view.findViewById(R.id.recyclerViewTruckModel);
         // Recyclerview Layout manager
-        endlessRecyclerViewTrcukModel.setLayoutManager(new GridLayoutManager(this, 2));
+        endlessRecyclerViewTrcukModel.setLayoutManager(new LinearLayoutManager(this));
         endlessRecyclerViewTrcukModel.setHasFixedSize(true);
         endlessRecyclerViewTrcukModel.setNestedScrollingEnabled(true);
         // Driver List
@@ -378,7 +400,9 @@ showSnakBar(rootView,"Not Working now");
             public void onResponse(Call<AdddriverResponnse> call, Response<AdddriverResponnse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    getTruckDetails(provider_vehicle_id);
+                   // getTruckDetails(provider_vehicle_id);
+                    Intent intent = new Intent(getApplicationContext(),TruckViewActivity.class);
+                    startActivity(intent);
 
                 } else {
                     try {

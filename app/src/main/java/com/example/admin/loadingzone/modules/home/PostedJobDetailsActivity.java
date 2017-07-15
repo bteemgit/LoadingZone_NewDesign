@@ -14,6 +14,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -117,7 +118,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
     @BindView(R.id.btnStartjob)
     Button buttonJobStart;
     private static int REQUEST_CODE = 41;
-    String JobId, isFrom;
+    String JobId, isFrom, job_status_code;
 
 
     @Override
@@ -153,6 +154,9 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         String TruckType = getIntent().getStringExtra("TruckType_name");
         String PaymentMode = getIntent().getStringExtra("PaymentType_name");
         String Currency = getIntent().getStringExtra("Currency_name");
+//        job_status_code = getIntent().getStringExtra("job_status_code");
+//        Log.d("job_status_code", job_status_code);
+
         if (isFrom.equals("Home")) {
             linerUserstaus.setVisibility(View.VISIBLE);
             fabQuotationApply.setVisibility(View.VISIBLE);
@@ -198,6 +202,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         mSheetLayout.setFabAnimationEndListener(this);
 
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -209,10 +214,10 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         mSheetLayout.expandFab();
 
     }
+
     @NonNull
     @OnClick(R.id.btnStartjob)
-    public void startJob()
-    {
+    public void startJob() {
         Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
         intent.putExtra("JobId", JobId);
 

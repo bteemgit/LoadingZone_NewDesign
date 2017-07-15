@@ -58,6 +58,7 @@
 
                         <ImageView
                             android:id="@+id/ivUserProfilePhoto"
+                            android:layout_marginTop="7dp"
                             android:layout_width="@dimen/user_profile_avatar_size"
                             android:layout_height="@dimen/user_profile_avatar_size"
                             android:layout_marginRight="16dp" />
@@ -193,6 +194,12 @@
 
                 </LinearLayout>
 
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme.AppBarOverlay">
+
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -211,6 +218,8 @@
                         <!--android:scaleType="center"-->
                         <!--android:src="@drawable/img_toolbar_logo" />-->
                 </android.support.v7.widget.Toolbar>
+
+                </android.support.design.widget.AppBarLayout>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

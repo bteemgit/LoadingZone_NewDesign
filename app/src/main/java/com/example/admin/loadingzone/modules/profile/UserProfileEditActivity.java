@@ -89,11 +89,18 @@ public class UserProfileEditActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile_edit);
-        ButterKnife.bind(this);
-        this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
+        //tool bar init...
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.profile_title);
+        getSupportActionBar().setTitle("Edit Profile");
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ButterKnife.bind(this);
+        this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
+       /* android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.profile_title);*/
         checker = new PermissionsChecker(this);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         //If the session is logged in move to Home
@@ -121,6 +128,13 @@ public class UserProfileEditActivity extends BaseActivity {
                     .into(imageViewProfileImage);
 
         }
+    }
+
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @OnClick(R.id.fabProfileUpload)

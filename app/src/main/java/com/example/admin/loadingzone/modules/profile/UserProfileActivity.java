@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,6 +108,13 @@ String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLoca
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        //tool bar init...
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profile");
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
@@ -115,6 +123,14 @@ String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLoca
         setupRevealBackground(savedInstanceState);
         getuUserProfile();
 
+    }
+
+
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setupTabs() {
@@ -262,7 +278,7 @@ public void navigateToEditProfile()
                     textViewTrckCount.setText(countTruck);
                     textViewUserLocation.setText(userLocation);
                     Picasso.with(UserProfileActivity.this)
-                            .load(profilePhoto)
+                            .load("http://i.imgur.com/DvpvklR.png")
                             .placeholder(R.drawable.img_circle_placeholder)
                             .resize(avatarSize, avatarSize)
                             .centerCrop()
