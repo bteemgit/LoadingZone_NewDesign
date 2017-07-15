@@ -1,7 +1,6 @@
 package com.example.admin.loadingzone.modules.login;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,13 +16,13 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SessionManager;
+import com.example.admin.loadingzone.modules.ForgotOrChangePasswprd.ForgotPassword;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -102,6 +101,13 @@ public class LoginActivity extends BaseActivity {
         startActivity(i);
     }
 
+    @OnClick(R.id.textViewForgotPassword)
+    public void ForgotPassword() {
+        Intent i = new Intent(LoginActivity.this, ForgotPassword.class);
+        startActivity(i);
+    }
+
+
     //api call for singin
     public void Sigin(String username, String password, String usertype) {
 
@@ -174,4 +180,6 @@ public class LoginActivity extends BaseActivity {
         });
 
     }
+
+
 }

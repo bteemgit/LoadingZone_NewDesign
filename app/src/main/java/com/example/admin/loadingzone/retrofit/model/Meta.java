@@ -8,7 +8,7 @@ public class Meta {
 
     @SerializedName("status")
     @Expose
-    private Boolean status;
+    private String status;
     @SerializedName("has_content")
     @Expose
     private Boolean hasContent;
@@ -27,11 +27,11 @@ public class Meta {
         this.status_str = status_str;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public String getStatus() {
+         return String.valueOf(status);
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

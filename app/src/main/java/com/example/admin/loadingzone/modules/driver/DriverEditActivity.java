@@ -153,6 +153,13 @@ public class DriverEditActivity extends BaseActivity {
 
     }
 
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     public void showDetailsFromDriverViewActivity(String driver_name, String driver_email, String driver_mobile, String driver_adress) {
 

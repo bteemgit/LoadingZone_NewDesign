@@ -4,6 +4,8 @@ import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.retrofit.model.ActiveTrucklistResponse;
 import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
+import com.example.admin.loadingzone.retrofit.model.ChangePasswordResponse;
+import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
 import com.example.admin.loadingzone.retrofit.model.MakerResponse;
 import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
@@ -184,6 +186,15 @@ public interface ApiInterface {
     @POST("message")
     Call<ReplyMessageResponse> ReplyMessage(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("message") String message, @Field("message_thread_id") String message_thread_id);
 
+
+    @FormUrlEncoded
+    @POST("main/forgot-password")
+    Call<ForgotPasswordResponse> ForgotPassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("username") String username);
+
+
+    @FormUrlEncoded
+    @POST("user/change-password")
+    Call<ChangePasswordResponse> ChangePassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("old_password") String OldPassword, @Field("new_password") String NewPassword, @Field("confirm_password") String ConfirmPassword);
 
 
 }

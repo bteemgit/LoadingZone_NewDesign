@@ -64,7 +64,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textAllCaps="false"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/editTextCPassword"
         android:layout_alignLeft="@+id/editTextCPassword"
         android:layout_alignStart="@+id/editTextCPassword"

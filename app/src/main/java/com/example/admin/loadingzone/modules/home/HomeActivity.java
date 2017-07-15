@@ -38,6 +38,7 @@ import com.example.admin.loadingzone.global.BottomNavigationViewHelper;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SessionManager;
+import com.example.admin.loadingzone.modules.ForgotOrChangePasswprd.ChangePassword;
 import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
 import com.example.admin.loadingzone.modules.login.LoginActivity;
 import com.example.admin.loadingzone.modules.message.MessageListViewActivity;
@@ -55,6 +56,7 @@ import com.example.admin.loadingzone.retrofit.model.JobList;
 import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckResponse;
+import com.example.admin.loadingzone.retrofit.model.UserProfile;
 import com.example.admin.loadingzone.retrofit.model.VehicleList;
 import com.example.admin.loadingzone.util.Config;
 import com.example.admin.loadingzone.view.CircleTransformation;
@@ -93,14 +95,21 @@ public class HomeActivity extends BaseActivity
     @BindView(R.id.rootView)
     RelativeLayout relativeLayoutRoot;
 
+
+
+    @BindView(R.id.id_profile_xml)
+    LinearLayout linear_profile;
     @BindView(R.id.id_linear_myquotation)
     LinearLayout linear_myquotation;
     @BindView(R.id.id_linearmyJob)
     LinearLayout linear_linearmyJob;
+
+    @BindView(R.id.nav_changepassword)
+    LinearLayout linear_changepassword;
+
+
     @BindView(R.id.id_img_logout)
     ImageView img_logout;
-
-
 
     private PostedJobListAdapter postedJobListAdapter;
     private List<JobList> jobList = new ArrayList<>();
@@ -182,10 +191,11 @@ public class HomeActivity extends BaseActivity
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
 
+        linear_profile.setOnClickListener(this);
         linear_myquotation.setOnClickListener(this);
         linear_linearmyJob.setOnClickListener(this);
         img_logout.setOnClickListener(this);
-
+        linear_changepassword.setOnClickListener(this);
         //setting datas to navigation drawer
 
         TextView text_users_name = (TextView)findViewById(R.id.id_text_users_name);
@@ -497,12 +507,29 @@ public class HomeActivity extends BaseActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.id_profile_xml:
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        int[] startingLocation = new int[2];
+                        View v = new View(HomeActivity.this);
+                        v.getLocationOnScreen(startingLocation);
+                        startingLocation[0] += v.getWidth() / 2;
+                        UserProfileActivity.startUserProfileFromLocation(startingLocation, HomeActivity.this);
+                        overridePendingTransition(0, 0);
+                    }
+                }, 200);
+                break;
             case R.id.id_linear_myquotation:
                 Intent intent = new Intent(getApplicationContext(),MyQuotationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.id_linearmyJob:
                 intent = new Intent(getApplicationContext(), MyJobtabViewActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_changepassword:
+                intent = new Intent(getApplicationContext(), ChangePassword.class);
                 startActivity(intent);
                 break;
             case R.id.id_img_logout:

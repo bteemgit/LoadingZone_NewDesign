@@ -90,6 +90,13 @@ public class DriverViewActivity extends BaseActivity {
         }
     }
 
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     @OnClick(R.id.fabDriverAdd)
     public void truckAdd() {
         int[] startingLocation = new int[2];
