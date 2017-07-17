@@ -67,7 +67,7 @@
                         android:paddingBottom="10dp"
                         android:paddingLeft="15dp"
                         android:paddingTop="10dp"
-                        android:text="Qutation Info"
+                        android:text="Quotation Info"
                         android:textColor="#ffffff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -93,7 +93,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
                                 android:gravity="start|center"
-                                android:text="Qutation Status"
+                                android:text="Quotation Status"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
@@ -109,7 +109,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
                                 android:gravity="start|center"
-                                android:text="Qutation Amount"
+                                android:text="Quotation Amount"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold"

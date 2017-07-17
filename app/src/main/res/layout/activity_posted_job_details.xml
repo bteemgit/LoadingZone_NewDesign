@@ -622,7 +622,6 @@
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
-                                    android:textStyle="bold"
                                     android:visibility="visible" />
 
 
