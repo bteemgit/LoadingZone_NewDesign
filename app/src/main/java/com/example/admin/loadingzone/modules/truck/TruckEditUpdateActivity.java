@@ -140,6 +140,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Truck Details");
+
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
         truckId = getIntent().getStringExtra("truckId");
@@ -172,6 +173,12 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
     }
 
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     // update truck
     @NonNull
     @OnClick(R.id.linerUpdateTruck)

@@ -167,6 +167,8 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
         }
 
+
+
 //        String truck_name = getIntent().getStringExtra("truck_name");
 //        String truck_model = getIntent().getStringExtra("truck_model");
 //        String truck_type = getIntent().getStringExtra("truck_type");
@@ -185,8 +187,14 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
             editTextTrcukWeight.setFocusable(false);
             editTextTrcukLength.setFocusable(false);
 
-
         }
+    }
+
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

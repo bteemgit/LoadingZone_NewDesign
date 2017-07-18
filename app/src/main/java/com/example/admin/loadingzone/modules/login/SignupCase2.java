@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.BaseActivity;
@@ -44,6 +45,9 @@ public class SignupCase2 extends Fragment {
     Button buttonSignUp;
     @BindView(R.id.root)
     LinearLayout relativeLayoutRoot;
+
+
+
     private ApiInterface apiService;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +99,9 @@ public class SignupCase2 extends Fragment {
             public void onResponse(Call<LoginResponse> call, retrofit2.Response<LoginResponse> response) {
                 baseActivity.hideProgressDialog();
                 if (response.isSuccessful()) {
-                    baseActivity.showSnakBar(relativeLayoutRoot,response.body().getMeta().getMessage());
+                   // baseActivity.showSnakBar(relativeLayoutRoot,response.body().getMeta().getMessage());
+                   // baseActivity.showSnakBar(relativeLayoutRoot,"Sign Up Success,Email has been sent to the registered address");
+                    Toast.makeText(getContext(), response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                     getActivity().finish();

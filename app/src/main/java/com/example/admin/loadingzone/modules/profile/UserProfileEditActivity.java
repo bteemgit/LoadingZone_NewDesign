@@ -24,6 +24,7 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SessionManager;
+import com.example.admin.loadingzone.modules.driver.DriverAddActivity;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.permission.PermissionsActivity;
 import com.example.admin.loadingzone.permission.PermissionsChecker;
@@ -32,6 +33,11 @@ import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.UserProfileResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -46,7 +52,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserProfileEditActivity extends BaseActivity {
+public class UserProfileEditActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * Permission List
@@ -128,7 +134,28 @@ public class UserProfileEditActivity extends BaseActivity {
                     .into(imageViewProfileImage);
 
         }
+
+        editTextPrividerLocation.setOnClickListener(this);
     }
+
+
+    @Override
+    public void onClick(View v) {
+        try {
+            Intent intent =
+                    new PlaceAutocomplete
+                            .IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                            .build(UserProfileEditActivity.this);
+            startActivityForResult(intent, 1);
+        } catch (GooglePlayServicesRepairableException e) {
+            // TODO: Handle the error.
+        } catch (GooglePlayServicesNotAvailableException e) {
+            System.out.println(e);
+            // TODO: Handle the error.
+        }
+
+    }
+
 
     // back button action
     @Override
@@ -307,6 +334,26 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                 Snackbar.make(relativeLayoutRoot, R.string.string_unable_to_load_image, Snackbar.LENGTH_LONG).show();
             }
         }
+        else if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                // retrive the data by using getPlace() method.
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.e("Tag", "Place: " + place.getAddress() + place.getPhoneNumber());
+                editTextPrividerLocation.setText(place.getName());
+
+
+
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.e("Tag", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+
+
     }
 
     private void startPermissionsActivity(String[] permission) {
@@ -361,4 +408,6 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
             }
         });
     }
+
+
 }

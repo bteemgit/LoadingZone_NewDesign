@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/id_root_relative"
     tools:context="com.example.admin.loadingzone.modules.login.SignUpActivity">
 
 

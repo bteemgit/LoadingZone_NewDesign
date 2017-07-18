@@ -154,7 +154,7 @@ public void navigateToEditProfile()
         intent.putExtra("isFrom","Profile");
         intent.putExtra("userName", userName);
         intent.putExtra("userMobile", userMobile);
-        intent.putExtra("userMobile", userLocation);
+        intent.putExtra("userLocation", userLocation);
         intent.putExtra("userImage",profilePhoto);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

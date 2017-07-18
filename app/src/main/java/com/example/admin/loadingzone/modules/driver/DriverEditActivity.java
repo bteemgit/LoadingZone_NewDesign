@@ -211,7 +211,7 @@ public void deleteDriver()
    //:-----------Driver Update Api-------------:\\
 
     private void UpdateDriver(String driver_id,String driver_name, String driver_phone, String driver_email, String driver_address) {
-        showProgressDialog(DriverEditActivity.this, "Updatimg Driver,please wait...");
+        showProgressDialog(DriverEditActivity.this, "Updating Driver,please wait...");
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");

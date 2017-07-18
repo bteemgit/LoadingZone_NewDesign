@@ -11,6 +11,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
@@ -37,6 +40,11 @@ import com.example.admin.loadingzone.retrofit.model.UserProfileResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleList;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.example.admin.loadingzone.view.RevealBackgroundView;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -104,7 +112,6 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
     PermissionsChecker checker;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,9 +127,49 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         checker = new PermissionsChecker(this);
 
+       // editTextDriverAdress.setOnClickListener(this);
+        editTextDriverAdress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete
+                                    .IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                                    .build(DriverAddActivity.this);
+                    startActivityForResult(intent, 1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    System.out.println(e);
+                    // TODO: Handle the error.
+                }
+            }
+        });
 
 
     }
+
+
+
+
+   /* @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.editDriverLocation:
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete
+                                    .IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                                    .build(DriverAddActivity.this);
+                    startActivityForResult(intent, 1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    System.out.println(e);
+                    // TODO: Handle the error.
+                }
+        }
+    }*/
 
     // back button action
     @Override
@@ -285,6 +332,24 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
                 Snackbar.make(relativeLayoutRoot, R.string.string_unable_to_load_image, Snackbar.LENGTH_LONG).show();
             }
         }
+        else if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                // retrive the data by using getPlace() method.
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.e("Tag", "Place: " + place.getAddress() + place.getPhoneNumber());
+                editTextDriverAdress.setText(place.getName());
+
+
+
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.e("Tag", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
     }
 
     private void startPermissionsActivity(String[] permission) {
@@ -341,4 +406,6 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
             }
         });
     }
+
+
 }

@@ -188,6 +188,13 @@ public class MessageDetailListActivity extends BaseActivity {
         }
     }
 
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     //getting the message
     public void getMessageList(String message_thread_id, final boolean Isprogress) {
 

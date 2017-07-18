@@ -80,6 +80,10 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Messages");
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         ButterKnife.bind(this);
         actionModeCallback = new ActionModeCallback();
         apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -92,6 +96,15 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
         }
 
     }
+
+
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void setUpListeners() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewMessageList.setLayoutManager(layoutManager);

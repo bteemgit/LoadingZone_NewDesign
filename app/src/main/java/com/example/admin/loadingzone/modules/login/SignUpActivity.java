@@ -40,7 +40,6 @@ public class SignUpActivity extends BaseActivity {
         TextView newTab1 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
          newTab1.setText(R.string.comapny); //tab label txt
         tabLayoutSignup.getTabAt(1).setCustomView(newTab1);
-
     }
     private void setupViewPager(ViewPager viewPager) {
         SignUpActivity.ViewPagerAdapter adapter = new SignUpActivity.ViewPagerAdapter(getSupportFragmentManager());

@@ -36,6 +36,11 @@
             android:name=".global.BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCrkS0Ux-uFiFt156kNN3DPrExm6HQTzmE" />
+
         <activity android:name=".modules.profile.UserProfileEditActivity" />
         <activity android:name=".permission.PermissionsActivity" />
         <activity android:name=".modules.truck.TruckViewActivity" />
