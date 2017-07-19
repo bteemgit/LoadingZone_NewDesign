@@ -34,6 +34,43 @@
                 android:text="Hooooooooooooooo" />
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/liner_cusname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textJobTitle"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="1dp"
+                android:gravity="start"
+                android:paddingLeft="90dp"
+                android:text="Customer"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=":"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/textCustomerName"
+                android:layout_width="190dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:gravity="start"
+                android:text="21/12/12"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:id="@+id/liner_trucktype"
             android:layout_width="match_parent"
@@ -81,7 +118,7 @@
                 android:layout_marginTop="1dp"
                 android:gravity="start"
                 android:paddingLeft="90dp"
-                android:text="Qutation Amount"
+                android:text="Accepted Date"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -107,6 +144,7 @@
             android:id="@+id/linear_truckDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_below="@+id/linear_truckDimension"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp">
@@ -118,7 +156,7 @@
                 android:layout_marginTop="1dp"
                 android:gravity="start"
                 android:paddingLeft="90dp"
-                android:text="Qutation Status:"
+                android:text="Budget"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 

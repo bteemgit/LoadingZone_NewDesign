@@ -95,8 +95,6 @@ public class HomeActivity extends BaseActivity
     @BindView(R.id.rootView)
     RelativeLayout relativeLayoutRoot;
 
-
-
     @BindView(R.id.id_profile_xml)
     LinearLayout linear_profile;
     @BindView(R.id.id_linear_myquotation)
@@ -259,7 +257,7 @@ public class HomeActivity extends BaseActivity
                 String TruckType_id = jobList.get(position).getTruckType().getTruckTypeId();
                 String TruckSize_dimension = jobList.get(position).getTruckSize().getTruckSizeDimension();
                 Integer TruckSize_id = jobList.get(position).getTruckSize().getTruckSizeId();
-            //    String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
+                String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
                 String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
@@ -299,6 +297,7 @@ public class HomeActivity extends BaseActivity
                 i.putExtra("QuotationCount",QuotationCount);
                 i.putExtra("HasActiveQuotations",HasActiveQuotations);
                 i.putExtra("JobStatus",JobStatus);
+                i.putExtra("Currency_name",Currency_name);
                 startActivity(i);
 
             }

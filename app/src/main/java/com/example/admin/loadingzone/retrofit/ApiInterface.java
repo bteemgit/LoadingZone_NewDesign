@@ -18,6 +18,7 @@ import com.example.admin.loadingzone.retrofit.model.PendingQutationResponse;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
 import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
 import com.example.admin.loadingzone.retrofit.model.ReplyMessageResponse;
+import com.example.admin.loadingzone.retrofit.model.SingleJobResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
@@ -196,5 +197,9 @@ public interface ApiInterface {
     @POST("user/change-password")
     Call<ChangePasswordResponse> ChangePassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("old_password") String OldPassword, @Field("new_password") String NewPassword, @Field("confirm_password") String ConfirmPassword);
 
+
+
+    @GET("job/{job_id}")
+    Call<SingleJobResponse> getJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("job_id") String job_id);
 
 }
