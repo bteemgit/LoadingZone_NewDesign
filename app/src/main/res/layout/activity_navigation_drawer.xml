@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:gravity="center">
 
         <LinearLayout
@@ -45,56 +45,35 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="60dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:id="@+id/nav_notification"
-            android:gravity="center|start">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_locked"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorGrey"
-                android:paddingLeft="10dp"
-                android:text="Notification"/>
-        </LinearLayout>
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
             android:id="@+id/id_profile_xml"
-            android:orientation="horizontal"
-            android:gravity="center|start">
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_nav_profile"/>
+                android:src="@drawable/ic_nav_profile" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGrey"
                 android:paddingLeft="10dp"
-                android:text="Profile"/>
+                android:text="Profile"
+                android:textColor="@color/colorGrey" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -148,11 +127,36 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="60dp"
-        android:layout_above="@+id/id_logout"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/nav_notification"
+            android:gravity="center|start">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_bell"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrey"
+                android:paddingLeft="10dp"
+                android:text="Notification"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:gravity="center"
         android:orientation="horizontal">
         <LinearLayout
