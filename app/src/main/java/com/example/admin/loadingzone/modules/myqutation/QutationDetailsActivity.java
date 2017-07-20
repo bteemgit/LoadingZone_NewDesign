@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,19 +28,13 @@ import com.example.admin.loadingzone.modules.login.SignUpActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
-import com.example.admin.loadingzone.retrofit.model.JobList;
 import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
 import com.example.admin.loadingzone.retrofit.model.Meta;
-import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
 import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
-import com.example.admin.loadingzone.retrofit.model.SingleJobResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,10 +96,6 @@ public class QutationDetailsActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textMessage)
     TextView textMessage;
-
-    @BindView(R.id.rootView)
-    RelativeLayout relativeLayoutRoot;
-
     @NonNull
     @BindView(R.id.linearDelete)
     LinearLayout linearLayoutDelete;
@@ -123,8 +112,6 @@ public class QutationDetailsActivity extends BaseActivity {
     private ApiInterface apiService;
     String isFrom;
 
-    private List<JobList> jobList = new ArrayList<>();
-    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +122,10 @@ public class QutationDetailsActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
+
+
+
+
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         btnStartjob.setVisibility(View.GONE);
         qutation_id = getIntent().getStringExtra("qutation_id");
@@ -195,46 +186,16 @@ public class QutationDetailsActivity extends BaseActivity {
                 .into(ivUserProfilePhoto);
         textViewRequestedDate.setText(dateSubmitted);
 
-        if (isConnectingToInternet(getApplicationContext()))
-        {
-            getJobDetails(job_id);
-        }
-        else {
-            showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
-        }
+
     }
 
-    //get job details API
-    public void getJobDetails(String JobId) {
-
-        showProgressDialog(QutationDetailsActivity.this, "loading");
-        apiService = ApiClient.getClient().create(ApiInterface.class);
-        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<SingleJobResponse> call = apiService.getJob(GloablMethods.API_HEADER + acess_token,JobId);
-        call.enqueue(new Callback<SingleJobResponse>() {
-            @Override
-            public void onResponse(Call<SingleJobResponse> call, retrofit2.Response<SingleJobResponse> response) {
-                hideProgressDialog();
-                    //fetch jobdetails from API
-                String Budget = jobList.get(Integer.parseInt(job_id)).getBudget();
-                Toast.makeText(QutationDetailsActivity.this, Budget, Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<SingleJobResponse> call, Throwable t) {
-
-            }
-        });
-    }
-
-            //---------------------------------
     // back button action
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
 
     @OnClick(R.id.linearDelete)
     public void deleteQutation() {
@@ -290,18 +251,14 @@ public class QutationDetailsActivity extends BaseActivity {
     private void sendMessage(String subject, String message) {
 
         showProgressDialog(QutationDetailsActivity.this, "sending...");
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         String message_type_id = "4"; // message type id  :Provider to Customer based on Job Quotation"
         Call<MessageCreateResponse> call = apiService.CreateMessage(GloablMethods.API_HEADER + acess_token, qutation_id, message_type_id, subject, message);
         call.enqueue(new Callback<MessageCreateResponse>() {
             @Override
             public void onResponse(Call<MessageCreateResponse> call, Response<MessageCreateResponse> response) {
-
                 hideProgressDialog();
-
-
                 if (response.isSuccessful())
 
                 {
@@ -315,9 +272,8 @@ public class QutationDetailsActivity extends BaseActivity {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
-                        Snackbar snackbar = Snackbar
-                                .make(rootView, meta.getString("message"), Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        showSnakBar(rootView, meta.getString("message"));
+
 
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
