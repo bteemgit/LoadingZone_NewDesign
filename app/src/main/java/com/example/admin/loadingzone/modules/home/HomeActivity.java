@@ -1,5 +1,6 @@
 package com.example.admin.loadingzone.modules.home;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,20 +8,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -37,20 +46,25 @@ import com.example.admin.loadingzone.modules.myjob.MyJobtabViewActivity;
 import com.example.admin.loadingzone.modules.myqutation.MyQuotationActivity;
 import com.example.admin.loadingzone.modules.nottification.NottificationListActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
+import com.example.admin.loadingzone.modules.truck.TrckListAdapter;
 import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
+import com.example.admin.loadingzone.retrofit.model.FromLocation;
 import com.example.admin.loadingzone.retrofit.model.JobList;
 import com.example.admin.loadingzone.retrofit.model.Meta;
-import com.example.admin.loadingzone.retrofit.model.NotificationList;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
+import com.example.admin.loadingzone.retrofit.model.TruckResponse;
+import com.example.admin.loadingzone.retrofit.model.UserProfile;
+import com.example.admin.loadingzone.retrofit.model.VehicleList;
 import com.example.admin.loadingzone.util.Config;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindDimen;
@@ -63,7 +77,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
     // for bottom menu
     private static final String SELECTED_ITEM = "arg_selected_item";
     private BottomNavigationView mBottomNav;
@@ -92,12 +106,6 @@ public class HomeActivity extends BaseActivity
 
     @BindView(R.id.nav_changepassword)
     LinearLayout linear_changepassword;
-
-
-    @BindView(R.id.nav_notification)
-    LinearLayout linear_notification;
-
-
 
 
     @BindView(R.id.id_img_logout)
@@ -183,12 +191,11 @@ public class HomeActivity extends BaseActivity
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
 
-        linear_profile.setOnClickListener(this);
-        linear_myquotation.setOnClickListener(this);
-        linear_linearmyJob.setOnClickListener(this);
-        img_logout.setOnClickListener(this);
-        linear_changepassword.setOnClickListener(this);
-
+       //linear_profile.setOnClickListener(this);
+       // linear_myquotation.setOnClickListener(this);
+       // linear_linearmyJob.setOnClickListener(this);
+       // img_logout.setOnClickListener(this);
+       // linear_changepassword.setOnClickListener(this);
         //setting datas to navigation drawer
 
         TextView text_users_name = (TextView)findViewById(R.id.id_text_users_name);
@@ -209,6 +216,41 @@ public class HomeActivity extends BaseActivity
 
     }
 
+    @OnClick(R.id.id_profile_xml)
+    void nav_profileClick() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int[] startingLocation = new int[2];
+                View v = new View(HomeActivity.this);
+                v.getLocationOnScreen(startingLocation);
+                startingLocation[0] += v.getWidth() / 2;
+                UserProfileActivity.startUserProfileFromLocation(startingLocation, HomeActivity.this);
+                overridePendingTransition(0, 0);
+            }
+        }, 200);
+    }
+
+    @OnClick(R.id.id_linear_myquotation)
+    void nav_myquotationClick() {
+        Intent intent = new Intent(getApplicationContext(),MyQuotationActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.id_linearmyJob)
+    void nav_myJobClick() {
+        Intent intent = new Intent(getApplicationContext(), MyJobtabViewActivity.class);
+        startActivity(intent);
+
+    }
+
+    @OnClick(R.id.nav_changepassword)
+    void nav_changePasswordClick() {
+
+        Intent intent = new Intent(getApplicationContext(), ChangePassword.class);
+        startActivity(intent);
+    }
+
     @NonNull
     @OnClick(R.id.nav_notification)
     public void navNottification()
@@ -217,6 +259,14 @@ public class HomeActivity extends BaseActivity
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
+
+    @OnClick(R.id.id_img_logout)
+    void nav_logoutClick() {
+        Logout();
+    }
+
+
+
 
     private void setUpListeners() {
 
@@ -508,7 +558,7 @@ public class HomeActivity extends BaseActivity
         endlessRecyclerViewPostedJob.setAdapter(postedJobListAdapter);
     }
 
-    @Override
+   /* @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_profile_xml:
@@ -540,5 +590,5 @@ public class HomeActivity extends BaseActivity
                 Logout();
                 break;
         }
-    }
+    }*/
 }
