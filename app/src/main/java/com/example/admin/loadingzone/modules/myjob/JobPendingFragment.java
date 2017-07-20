@@ -156,7 +156,7 @@ public class JobPendingFragment extends Fragment {
                 String QuotationCount = jobList.get(position).getQuotationCount();
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();
-                String job_status_code=jobList.get(position).getJobStatus().getCode();
+                String job_status_code = jobList.get(position).getJobStatus().getCode();
                 i.putExtra("isFrom", "Pendingjob");
                 i.putExtra("JobId", JobId);
                 i.putExtra("name", name);
@@ -188,7 +188,7 @@ public class JobPendingFragment extends Fragment {
                 i.putExtra("QuotationCount", QuotationCount);
                 i.putExtra("HasActiveQuotations", HasActiveQuotations);
                 i.putExtra("JobStatus", JobStatus);
-               i.putExtra("job_status_code",job_status_code);
+                i.putExtra("job_status_code", job_status_code);
                 startActivity(i);
 
             }

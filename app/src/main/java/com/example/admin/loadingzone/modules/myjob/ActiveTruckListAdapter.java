@@ -120,6 +120,11 @@ public class ActiveTruckListAdapter extends RecyclerView.Adapter<ActiveTruckList
 
         return 0;
     }
+    @Override
+    public int getItemViewType(int position)
+    {
+        return position;
+    }
 }
 
 

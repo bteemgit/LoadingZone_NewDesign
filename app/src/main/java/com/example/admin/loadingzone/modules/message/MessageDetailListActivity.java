@@ -161,7 +161,6 @@ public class MessageDetailListActivity extends BaseActivity {
         messgeSubj = getIntent().getStringExtra("messge_subj");
         messageRefer = getIntent().getStringExtra("messge_refer");
         getSupportActionBar().setTitle(messageUser);
-
         text_reference.setText(messageRefer);
         text_subject.setText(messgeSubj);
         ColorGenerator generator = ColorGenerator.MATERIAL;

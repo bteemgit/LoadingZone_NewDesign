@@ -1,4 +1,4 @@
-package com.example.admin.loadingzone.modules.ForgotOrChangePasswprd;
+package com.example.admin.loadingzone.modules.ForgotOrChangePassword;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

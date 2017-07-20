@@ -164,11 +164,9 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
             fabQuotationApply.setVisibility(View.GONE);
-            if (job_status_code.equals("quotation-accepted"))
-            {
+            if (job_status_code.equals("quotation-accepted")) {
                 buttonJobStart.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 buttonJobStart.setVisibility(View.GONE);
             }
 
@@ -200,8 +198,6 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
                 .centerCrop()
                 .transform(new CircleTransformation())
                 .into(imageViewCustomPic);
-
-
         // fab click & animation
         mSheetLayout.setFab(fabQuotationApply);
         mSheetLayout.setFabAnimationEndListener(this);

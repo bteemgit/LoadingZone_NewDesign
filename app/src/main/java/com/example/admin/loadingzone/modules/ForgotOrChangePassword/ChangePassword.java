@@ -1,11 +1,10 @@
-package com.example.admin.loadingzone.modules.ForgotOrChangePasswprd;
+package com.example.admin.loadingzone.modules.ForgotOrChangePassword;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,14 +24,11 @@ import com.example.admin.loadingzone.modules.login.LoginActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.ChangePasswordResponse;
-import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
 
 import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-
-import static com.example.admin.loadingzone.global.BaseActivity.isConnectingToInternet;
 
 public class ChangePassword extends BaseActivity implements View.OnClickListener {
 

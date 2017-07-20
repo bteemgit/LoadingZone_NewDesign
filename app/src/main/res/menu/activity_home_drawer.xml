@@ -16,6 +16,11 @@
             android:id="@+id/nav_myjob"
             android:icon="@drawable/ic_completedjobs"
             android:title="My Jobs" />
+
+        <item
+            android:id="@+id/nav_myNottification"
+            android:icon="@drawable/ic_completedjobs"
+            android:title="My Nottification" />
     </group>
 
     <item android:title="Settings">

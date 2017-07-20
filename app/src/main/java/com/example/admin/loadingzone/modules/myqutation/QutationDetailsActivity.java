@@ -96,7 +96,6 @@ public class QutationDetailsActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textMessage)
     TextView textMessage;
-
     @NonNull
     @BindView(R.id.linearDelete)
     LinearLayout linearLayoutDelete;
@@ -247,18 +246,14 @@ public class QutationDetailsActivity extends BaseActivity {
     private void sendMessage(String subject, String message) {
 
         showProgressDialog(QutationDetailsActivity.this, "sending...");
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         String message_type_id = "4"; // message type id  :Provider to Customer based on Job Quotation"
         Call<MessageCreateResponse> call = apiService.CreateMessage(GloablMethods.API_HEADER + acess_token, qutation_id, message_type_id, subject, message);
         call.enqueue(new Callback<MessageCreateResponse>() {
             @Override
             public void onResponse(Call<MessageCreateResponse> call, Response<MessageCreateResponse> response) {
-
                 hideProgressDialog();
-
-
                 if (response.isSuccessful())
 
                 {
@@ -272,9 +267,8 @@ public class QutationDetailsActivity extends BaseActivity {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
-                        Snackbar snackbar = Snackbar
-                                .make(rootView, meta.getString("message"), Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        showSnakBar(rootView, meta.getString("message"));
+
 
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();

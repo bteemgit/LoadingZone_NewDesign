@@ -16,7 +16,7 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SessionManager;
-import com.example.admin.loadingzone.modules.ForgotOrChangePasswprd.ForgotPassword;
+import com.example.admin.loadingzone.modules.ForgotOrChangePassword.ForgotPassword;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;

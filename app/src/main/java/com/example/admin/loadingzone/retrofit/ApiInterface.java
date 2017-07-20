@@ -13,6 +13,7 @@ import com.example.admin.loadingzone.retrofit.model.MessageDetailsResponse;
 import com.example.admin.loadingzone.retrofit.model.MessageListResponse;
 import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.ModelResponse;
+import com.example.admin.loadingzone.retrofit.model.NottificationListResponse;
 import com.example.admin.loadingzone.retrofit.model.PendingJobResponse;
 import com.example.admin.loadingzone.retrofit.model.PendingQutationResponse;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
@@ -196,5 +197,10 @@ public interface ApiInterface {
     @POST("user/change-password")
     Call<ChangePasswordResponse> ChangePassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("old_password") String OldPassword, @Field("new_password") String NewPassword, @Field("confirm_password") String ConfirmPassword);
 
+    @GET("notification/unread-list")
+    Call<NottificationListResponse> NotificationList(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Query("page") int page);
+    @FormUrlEncoded
+    @PUT("notification/read")
+    Call<Meta> ReadNottification(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("notification_id") int notification_id, @Field("notification_id") int notification_ids);
 
 }

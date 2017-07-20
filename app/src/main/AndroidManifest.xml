@@ -58,8 +58,9 @@
         <activity android:name=".modules.myjob.SelectActvieTruckActivity" />
         <activity android:name=".modules.message.MessageListViewActivity" />
         <activity android:name=".modules.message.MessageDetailListActivity" />
-        <activity android:name=".modules.ForgotOrChangePasswprd.ForgotPassword" />
-        <activity android:name=".modules.ForgotOrChangePasswprd.ChangePassword"></activity>
+        <activity android:name=".modules.ForgotOrChangePassword.ForgotPassword" />
+        <activity android:name=".modules.ForgotOrChangePassword.ChangePassword" />
+        <activity android:name=".modules.nottification.NottificationListActivity"></activity>
     </application>
 
 </manifest>
