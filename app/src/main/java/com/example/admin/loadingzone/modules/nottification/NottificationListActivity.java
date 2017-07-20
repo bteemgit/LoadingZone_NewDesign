@@ -78,7 +78,7 @@ public class NottificationListActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.truck_title);
+        getSupportActionBar().setTitle("Notification");
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         refreshLayout.setRefreshing(false);
         setUpListeners();
@@ -88,6 +88,12 @@ public class NottificationListActivity extends BaseActivity {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
 
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setUpListeners() {
