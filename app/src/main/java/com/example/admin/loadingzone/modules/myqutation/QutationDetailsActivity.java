@@ -122,6 +122,10 @@ public class QutationDetailsActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
+
+
+
+
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         btnStartjob.setVisibility(View.GONE);
         qutation_id = getIntent().getStringExtra("qutation_id");
@@ -191,6 +195,7 @@ public class QutationDetailsActivity extends BaseActivity {
         onBackPressed();
         return true;
     }
+
 
     @OnClick(R.id.linearDelete)
     public void deleteQutation() {

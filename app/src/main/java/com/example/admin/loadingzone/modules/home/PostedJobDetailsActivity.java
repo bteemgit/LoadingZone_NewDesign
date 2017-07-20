@@ -144,7 +144,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         String Qutoation = getIntent().getStringExtra("QuotationCount");
         String LoadingMaterial = getIntent().getStringExtra("Material_name");
         String LoadingMat_Weight = getIntent().getStringExtra("weight");
-        String Budget = getIntent().getStringExtra("Budget");
+        String materialDescription = getIntent().getStringExtra("MaterialDescription");
         String TotalDistance = getIntent().getStringExtra("LocationDistance");
         String JobFrom = getIntent().getStringExtra("FromLoc_name");
         String JobTo = getIntent().getStringExtra("ToLoc_name");
@@ -182,7 +182,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         textViewQutoation.setText(Qutoation);
         textViewLoadingMaterial.setText(LoadingMaterial);
         textLoadingMat_Weight.setText(LoadingMat_Weight);
-        textViewBudget.setText(Budget);
+        textViewBudget.setText(materialDescription);
         textViewTotalDistance.setText(TotalDistance);
         textViewJobFrom.setText(JobFrom);
         textViewJobTo.setText(JobTo);

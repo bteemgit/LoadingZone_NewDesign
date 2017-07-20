@@ -49,6 +49,14 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         @BindView(R.id.textQutationStatus)
         TextView textViewQutationSttaus;
 
+        @NonNull
+        @BindView(R.id.textCustomerName)
+        TextView textViewcustName;
+
+
+
+
+
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
@@ -73,8 +81,11 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
 
         holder.textViewJobTitle.setText(itemsArrayList.get(position).getJobTitle());
         holder.textViewDateSubmited.setText(itemsArrayList.get(position).getDateSubmitted());
-        holder.textViewQutationAmount.setText(itemsArrayList.get(position).getQuotationAmount());
-        holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getQuotationStatus());
+        holder.textViewQutationAmount.setText(itemsArrayList.get(position).getDateAccepted());
+
+        holder.textViewcustName.setText(itemsArrayList.get(position).getCustomer().getName());
+
+      //  holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getQuotationStatus());
 
 
     }

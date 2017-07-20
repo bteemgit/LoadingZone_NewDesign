@@ -19,6 +19,7 @@ import com.example.admin.loadingzone.retrofit.model.PendingQutationResponse;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
 import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
 import com.example.admin.loadingzone.retrofit.model.ReplyMessageResponse;
+import com.example.admin.loadingzone.retrofit.model.SingleJobResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
@@ -202,5 +203,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @PUT("notification/read")
     Call<Meta> ReadNottification(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("notification_id") int notification_id, @Field("notification_id") int notification_ids);
+
+
+    @GET("job/{job_id}")
+    Call<SingleJobResponse> getJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("job_id") String job_id);
 
 }

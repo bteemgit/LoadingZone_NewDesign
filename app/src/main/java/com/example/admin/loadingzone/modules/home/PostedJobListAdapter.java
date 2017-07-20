@@ -63,6 +63,12 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         ImageView imageViewCustomPic;
 
 
+        @NonNull
+        @BindView(R.id.id_txt_daterequestedrelative)
+        TextView daterequestedrelative;
+
+
+
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
@@ -93,10 +99,13 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
 
         holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
-        holder.textViewTruckType.setText(jobList.get(position).getTruckType().getTruckTypeName());
-        holder.textViewTruckDimension.setText(jobList.get(position).getTruckSize().getTruckSizeDimension());
+        holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());
+        holder.textViewTruckDimension.setText(jobList.get(position).getQuotationCount());
         holder.textViewTruckDate.setText(jobList.get(position).getDateOfLoading());
         holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
+
+        holder.daterequestedrelative.setText(jobList.get(position).getDateRequestedRelative());
+
 
         Picasso.with(context)
                 .load(jobList.get(position).getCustomer().getProfilePic())
