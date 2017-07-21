@@ -135,6 +135,7 @@ public class RejectedQuotationFragment extends Fragment {
        //         String dateRejected=itemsArrayList.get(position).getDateRejected();
                 String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
+                String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
 
                 String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
@@ -158,6 +159,8 @@ public class RejectedQuotationFragment extends Fragment {
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","rejected");
+
+                i.putExtra("quotationAmount", quotationAmount);
 
                 i.putExtra("jobdate",jobdate);
                 i.putExtra("jobDescription",jobDescription);

@@ -53,6 +53,21 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         @BindView(R.id.textCustomerName)
         TextView textViewcustName;
 
+        @NonNull
+        @BindView(R.id.textLocationFrom)
+        TextView textViewLocationFrom;
+
+        @NonNull
+        @BindView(R.id.textLocationTo)
+        TextView textViewLocationTo;
+
+        @NonNull
+        @BindView(R.id.imageViewCustomPic)
+        ImageView imgCustomerPic;
+
+
+
+
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
@@ -75,16 +90,28 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
     @Override
     public void onBindViewHolder(PendingQutationListAdapter.ViewHolder holder, int position) {
 
-        holder.textViewJobTitle.setText(itemsArrayList.get(position).getJobTitle());
+        holder.textViewJobTitle.setText(itemsArrayList.get(position).getJobDetails().getCustomer().getName());
         holder.textViewDateSubmited.setText(itemsArrayList.get(position).getDateSubmitted());
-        holder.textViewQutationAmount.setText(itemsArrayList.get(position).getDateAccepted());
+        String amount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
+        holder.textViewQutationAmount.setText(amount);
 
-        holder.textViewcustName.setText(itemsArrayList.get(position).getCustomer().getName());
+      //  holder.textViewcustName.setText((CharSequence) itemsArrayList.get(position).getJobDetails().getDateRequestedRelative());
 
+        holder.textViewLocationFrom.setText(itemsArrayList.get(position).getJobDetails().getFromLocationName());
+        holder.textViewLocationTo.setText(itemsArrayList.get(position).getJobDetails().getToLocationName());
+
+        holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getJobDetails().getLoadingDate());
 
      //  holder.textViewcustName.setText(itemsArrayList.get(position).getJobDetails().);
       //  holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getQuotationStatus());
 
+        Picasso.with(context)
+                .load(itemsArrayList.get(position).getCustomer().getProfilePic())
+                .placeholder(R.drawable.img_circle_placeholder)
+                .resize(70, 70)
+                .centerCrop()
+                .transform(new CircleTransformation())
+                .into(holder.imgCustomerPic);
 
     }
 

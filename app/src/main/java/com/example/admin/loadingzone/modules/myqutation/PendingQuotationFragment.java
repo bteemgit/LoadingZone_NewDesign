@@ -129,6 +129,7 @@ public class PendingQuotationFragment extends Fragment {
                 String cus_profile = itemsArrayList.get(position).getCustomer().getProfilePic();
                 String quotationCurrency = itemsArrayList.get(position).getQuotationCurrency();
                 String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
+               // Integer quotationAmount = itemsArrayList.get(position).getQuotationAmount();
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
                 String dateRejected = String.valueOf(itemsArrayList.get(position).getDateRejected());
@@ -168,7 +169,6 @@ public class PendingQuotationFragment extends Fragment {
 
                 i.putExtra("fromLocation",fromLocation);
                 i.putExtra("toLocation",toLocation);
-
 
 
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
