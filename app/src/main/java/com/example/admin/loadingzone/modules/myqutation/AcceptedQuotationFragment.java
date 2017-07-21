@@ -136,6 +136,15 @@ public class AcceptedQuotationFragment extends Fragment {
              //   String dateRejected=itemsArrayList.get(position).getDateRejected();
                 String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
+
+
+                String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
+                String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
+                String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
+                String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
+                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getLocationDistance());
+
+
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
                 i.putExtra("job_title", job_title);
@@ -151,6 +160,14 @@ public class AcceptedQuotationFragment extends Fragment {
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","accepted");
+
+                i.putExtra("jobdate",jobdate);
+                i.putExtra("jobDescription",jobDescription);
+                i.putExtra("dateRequested",dateRequested);
+                i.putExtra("activeQuotations",activeQuotations);
+                i.putExtra("distance",distance);
+
+
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);

@@ -134,14 +134,11 @@ public class PendingQuotationFragment extends Fragment {
                 String dateRejected = String.valueOf(itemsArrayList.get(position).getDateRejected());
                 String quotationStatus = itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription = itemsArrayList.get(position).getQuotationDescription();
-
                 String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
                 String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
                 String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getLocationDistance());
-
-
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
                 i.putExtra("job_id", job_id);
