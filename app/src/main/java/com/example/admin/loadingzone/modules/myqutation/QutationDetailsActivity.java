@@ -51,7 +51,7 @@ public class QutationDetailsActivity extends BaseActivity {
     @BindView(R.id.textCustomerEmail)
     TextView textViewCutomerEmail;
     @NonNull
-    @BindView(R.id.textCustomerMobile)
+    @BindView(R.id.textMobile)
     TextView textViewCutomerMobile;
     @NonNull
     @BindView(R.id.text_From)
@@ -149,6 +149,9 @@ public class QutationDetailsActivity extends BaseActivity {
         String activeQuotations = getIntent().getStringExtra("activeQuotations");
         String distance = getIntent().getStringExtra("distance");
 
+        String fromLocation = getIntent().getStringExtra("fromLocation");
+        String ToLocation = getIntent().getStringExtra("toLocation");
+
         Toast.makeText(this, jobDate, Toast.LENGTH_SHORT).show();
         isFrom = getIntent().getStringExtra("isFrom");
         if (!isFrom.equals(null))
@@ -174,22 +177,22 @@ public class QutationDetailsActivity extends BaseActivity {
             textDate.setText("Rejected Date");
             textQutationDate.setText(dateRejected);
         }
-// job title speration
-        String[] splitedTitle = job_title.split("\\s+");
+
+
         textViewRequestedDate.setText(dateRequested);
         textViewJobDate.setText(jobDate);
         textQutationDescription.setText(jobDescription);
         textViewQutoation.setText(activeQuotations);
         textViewJobTotalDist.setText(distance);
+        textViewCutomerMobile.setText(cus_phone);
 
-
-
+        textViewJob_From.setText(fromLocation);
+        textViewJob_To.setText(ToLocation);
 
         textViewCutomerName.setText(cus_name);
         textViewCutomerEmail.setText(cus_email);
         textViewCutomerMobile.setText(cus_phone);
-        textViewJob_From.setText(splitedTitle[2]);
-        textViewJob_To.setText(splitedTitle[4]);
+
         textQutationStatus.setText(quotationStatus);
         textQutationAmount.setText(quotationAmount);
         textQutationCurrency.setText(quotationCurrency);
