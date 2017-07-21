@@ -76,6 +76,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.admin.loadingzone.R.id.view;
+
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     // for bottom menu
@@ -107,6 +109,9 @@ public class HomeActivity extends BaseActivity
     @BindView(R.id.nav_changepassword)
     LinearLayout linear_changepassword;
 
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout nav_drawer;
 
     @BindView(R.id.id_img_logout)
     ImageView img_logout;
@@ -229,17 +234,20 @@ public class HomeActivity extends BaseActivity
                 overridePendingTransition(0, 0);
             }
         }, 200);
+        nav_drawer.closeDrawers();
     }
 
     @OnClick(R.id.id_linear_myquotation)
     void nav_myquotationClick() {
         Intent intent = new Intent(getApplicationContext(),MyQuotationActivity.class);
+        nav_drawer.closeDrawers();
         startActivity(intent);
     }
 
     @OnClick(R.id.id_linearmyJob)
     void nav_myJobClick() {
         Intent intent = new Intent(getApplicationContext(), MyJobtabViewActivity.class);
+        nav_drawer.closeDrawers();
         startActivity(intent);
 
     }
@@ -248,6 +256,7 @@ public class HomeActivity extends BaseActivity
     void nav_changePasswordClick() {
 
         Intent intent = new Intent(getApplicationContext(), ChangePassword.class);
+        nav_drawer.closeDrawers();
         startActivity(intent);
     }
 
@@ -257,12 +266,14 @@ public class HomeActivity extends BaseActivity
     {
         Intent i=new Intent(getApplicationContext(), NottificationListActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        nav_drawer.closeDrawers();
         startActivity(i);
     }
 
     @OnClick(R.id.id_img_logout)
     void nav_logoutClick() {
         Logout();
+        nav_drawer.closeDrawers();
     }
 
 

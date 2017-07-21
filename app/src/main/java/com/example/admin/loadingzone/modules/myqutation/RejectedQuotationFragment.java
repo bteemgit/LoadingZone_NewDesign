@@ -129,10 +129,10 @@ public class RejectedQuotationFragment extends Fragment {
                 String cus_phone = itemsArrayList.get(position).getCustomer().getPhone1();
                 String cus_profile = itemsArrayList.get(position).getCustomer().getProfilePic();
                 String quotationCurrency = itemsArrayList.get(position).getQuotationCurrency();
-                String quotationAmount = itemsArrayList.get(position).getQuotationAmount();
+       //         String quotationAmount = itemsArrayList.get(position).getQuotationAmount();
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
-                String dateRejected=itemsArrayList.get(position).getDateRejected();
+       //         String dateRejected=itemsArrayList.get(position).getDateRejected();
                 String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
@@ -143,10 +143,10 @@ public class RejectedQuotationFragment extends Fragment {
                 i.putExtra("cus_phone", cus_phone);
                 i.putExtra("cus_profile", cus_profile);
                 i.putExtra("quotationCurrency", quotationCurrency);
-                i.putExtra("quotationAmount", quotationAmount);
+       //         i.putExtra("quotationAmount", quotationAmount);
                 i.putExtra("dateSubmitted", dateSubmitted);
                 i.putExtra("dateAccepted", dateAccepted);
-                i.putExtra("dateRejected", dateRejected);
+       //         i.putExtra("dateRejected", dateRejected);
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","rejected");

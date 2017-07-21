@@ -136,12 +136,20 @@ public class QutationDetailsActivity extends BaseActivity {
         String cus_phone = getIntent().getStringExtra("cus_phone");
         String cus_profile = getIntent().getStringExtra("cus_profile");
         String quotationCurrency = getIntent().getStringExtra("quotationCurrency");
-        quotationAmount = getIntent().getStringExtra("quotationAmount");
+        String quotationAmount = getIntent().getStringExtra("quotationAmount");
         String dateSubmitted = getIntent().getStringExtra("dateSubmitted");
         String dateAccepted = getIntent().getStringExtra("dateAccepted");
         String dateRejected = getIntent().getStringExtra("dateRejected");
         String quotationStatus = getIntent().getStringExtra("quotationStatus");
         quotationDescription = getIntent().getStringExtra("quotationDescription");
+
+        String jobDate = getIntent().getStringExtra("jobdate");
+        String jobDescription = getIntent().getStringExtra("jobDescription");
+        String dateRequested = getIntent().getStringExtra("dateRequested");
+        String activeQuotations = getIntent().getStringExtra("activeQuotations");
+        String distance = getIntent().getStringExtra("distance");
+
+        Toast.makeText(this, jobDate, Toast.LENGTH_SHORT).show();
         isFrom = getIntent().getStringExtra("isFrom");
         if (!isFrom.equals(null))
             if (isFrom.equals("pending")) {
@@ -168,6 +176,15 @@ public class QutationDetailsActivity extends BaseActivity {
         }
 // job title speration
         String[] splitedTitle = job_title.split("\\s+");
+        textViewRequestedDate.setText(dateRequested);
+        textViewJobDate.setText(jobDate);
+        textQutationDescription.setText(jobDescription);
+        textViewQutoation.setText(activeQuotations);
+        textViewJobTotalDist.setText(distance);
+
+
+
+
         textViewCutomerName.setText(cus_name);
         textViewCutomerEmail.setText(cus_email);
         textViewCutomerMobile.setText(cus_phone);

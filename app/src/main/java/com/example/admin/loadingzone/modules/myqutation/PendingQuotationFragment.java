@@ -128,12 +128,20 @@ public class PendingQuotationFragment extends Fragment {
                 String cus_phone = itemsArrayList.get(position).getCustomer().getPhone1();
                 String cus_profile = itemsArrayList.get(position).getCustomer().getProfilePic();
                 String quotationCurrency = itemsArrayList.get(position).getQuotationCurrency();
-                String quotationAmount = itemsArrayList.get(position).getQuotationAmount();
+                String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
-                String dateRejected = itemsArrayList.get(position).getDateRejected();
+                String dateRejected = String.valueOf(itemsArrayList.get(position).getDateRejected());
                 String quotationStatus = itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription = itemsArrayList.get(position).getQuotationDescription();
+
+                String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
+                String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
+                String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
+                String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
+                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getLocationDistance());
+
+
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
                 i.putExtra("job_id", job_id);
@@ -150,6 +158,13 @@ public class PendingQuotationFragment extends Fragment {
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom", "pending");
+
+                i.putExtra("jobdate",jobdate);
+                i.putExtra("jobDescription",jobDescription);
+                i.putExtra("dateRequested",dateRequested);
+                i.putExtra("activeQuotations",activeQuotations);
+                i.putExtra("distance",distance);
+
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);

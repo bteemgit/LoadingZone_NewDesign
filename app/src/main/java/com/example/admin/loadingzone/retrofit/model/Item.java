@@ -15,18 +15,15 @@ public class Item {
     @SerializedName("job_title")
     @Expose
     private String jobTitle;
-    @SerializedName("customer")
+    @SerializedName("job_details")
     @Expose
-    private Customer customer;
-    @SerializedName("service_provider")
-    @Expose
-    private ServiceProvider serviceProvider;
+    private JobDetails jobDetails;
     @SerializedName("quotation_currency")
     @Expose
     private String quotationCurrency;
     @SerializedName("quotation_amount")
     @Expose
-    private String quotationAmount;
+    private Integer quotationAmount;
     @SerializedName("date_submitted")
     @Expose
     private String dateSubmitted;
@@ -35,13 +32,16 @@ public class Item {
     private String dateAccepted;
     @SerializedName("date_rejected")
     @Expose
-    private String dateRejected;
+    private Object dateRejected;
     @SerializedName("quotation_status")
     @Expose
     private String quotationStatus;
     @SerializedName("quotation_description")
     @Expose
     private String quotationDescription;
+    @SerializedName("customer")
+    @Expose
+    private Customer_ customer;
 
     public Integer getQuotationId() {
         return quotationId;
@@ -67,20 +67,12 @@ public class Item {
         this.jobTitle = jobTitle;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public JobDetails getJobDetails() {
+        return jobDetails;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public ServiceProvider getServiceProvider() {
-        return serviceProvider;
-    }
-
-    public void setServiceProvider(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    public void setJobDetails(JobDetails jobDetails) {
+        this.jobDetails = jobDetails;
     }
 
     public String getQuotationCurrency() {
@@ -91,11 +83,11 @@ public class Item {
         this.quotationCurrency = quotationCurrency;
     }
 
-    public String getQuotationAmount() {
+    public Integer getQuotationAmount() {
         return quotationAmount;
     }
 
-    public void setQuotationAmount(String quotationAmount) {
+    public void setQuotationAmount(Integer quotationAmount) {
         this.quotationAmount = quotationAmount;
     }
 
@@ -115,11 +107,11 @@ public class Item {
         this.dateAccepted = dateAccepted;
     }
 
-    public String getDateRejected() {
+    public Object getDateRejected() {
         return dateRejected;
     }
 
-    public void setDateRejected(String dateRejected) {
+    public void setDateRejected(Object dateRejected) {
         this.dateRejected = dateRejected;
     }
 
@@ -137,6 +129,14 @@ public class Item {
 
     public void setQuotationDescription(String quotationDescription) {
         this.quotationDescription = quotationDescription;
+    }
+
+    public Customer_ getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer_ customer) {
+        this.customer = customer;
     }
 
 }
