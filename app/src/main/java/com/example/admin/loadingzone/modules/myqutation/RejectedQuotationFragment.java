@@ -159,7 +159,7 @@ public class RejectedQuotationFragment extends Fragment {
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","rejected");
-
+//jflkjflkdjgldfk
                 i.putExtra("quotationAmount", quotationAmount);
 
                 i.putExtra("jobdate",jobdate);
