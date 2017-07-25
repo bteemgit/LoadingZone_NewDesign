@@ -23,10 +23,32 @@ public class LoadStatus {
     private Object locationLongitude;
     @SerializedName("location_name")
     @Expose
-    private Object locationName;
+    private String locationName;
+    @SerializedName("status_date")
+    @Expose
+    private String statusDate;
+    @SerializedName("status_time")
+    @Expose
+    private String statusTime;
     @SerializedName("date_time")
     @Expose
     private String dateTime;
+
+    public String getStatusDate() {
+        return statusDate;
+    }
+
+    public void setStatusDate(String statusDate) {
+        this.statusDate = statusDate;
+    }
+
+    public String getStatusTime() {
+        return statusTime;
+    }
+
+    public void setStatusTime(String statusTime) {
+        this.statusTime = statusTime;
+    }
 
     public Integer getVehicleStatusId() {
         return vehicleStatusId;
@@ -68,11 +90,11 @@ public class LoadStatus {
         this.locationLongitude = locationLongitude;
     }
 
-    public Object getLocationName() {
+    public String getLocationName() {
         return locationName;
     }
 
-    public void setLocationName(Object locationName) {
+    public void setLocationName(String locationName) {
         this.locationName = locationName;
     }
 

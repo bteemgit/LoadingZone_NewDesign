@@ -20,15 +20,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.SplashActivity;
+import com.example.admin.loadingzone.global.AppController;
+import com.example.admin.loadingzone.global.BaseActivity;
+import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.modules.login.LoginActivity;
 import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
+import com.example.admin.loadingzone.retrofit.ApiClient;
+import com.example.admin.loadingzone.retrofit.ApiInterface;
+import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.github.fabtransitionactivity.SheetLayout;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -37,10 +46,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 import static com.example.admin.loadingzone.R.id.ivUserProfilePhoto;
+import static com.example.admin.loadingzone.R.id.rootView;
+import static com.example.admin.loadingzone.R.id.textTruckType;
 
-public class PostedJobDetailsActivity extends AppCompatActivity implements SheetLayout.OnFabAnimationEndListener {
+public class PostedJobDetailsActivity extends BaseActivity implements SheetLayout.OnFabAnimationEndListener {
     @NonNull
     @BindView(R.id.textCustomerName)
     TextView textViewCutomerName;
@@ -180,9 +193,12 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
     @NonNull
     @BindView(R.id.textLastUpdatedTime)
     TextView textLastUpdatedTime;
+    @NonNull
+    @BindView(R.id.rootview)
+    RelativeLayout rootView;
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
-
+    private ApiInterface apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +210,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
+        apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
         isFrom = getIntent().getStringExtra("isFrom");
         String profilepic = getIntent().getStringExtra("profilepic");
@@ -224,8 +241,6 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
             fabQuotationApply.setVisibility(View.VISIBLE);
             buttonJobStart.setVisibility(View.GONE);
         }
-        //git
-
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
             fabQuotationApply.setVisibility(View.GONE);
@@ -241,6 +256,8 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
 
             } else {
                 buttonJobStart.setVisibility(View.GONE);
+                // getting the loading details from the curesponding job
+                getLoadingJobDeatails(JobId);
                 linearAssignedVehicleHeading.setVisibility(View.VISIBLE);
                 linear_assignedDriver_heading.setVisibility(View.VISIBLE);
                 linearAssignedDriverItem.setVisibility(View.VISIBLE);
@@ -321,5 +338,59 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         }
     }
 
+    public void getLoadingJobDeatails(String job_id) {
+
+        showProgressDialog(PostedJobDetailsActivity.this, "Loading");
+        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        Call<JobLoaddetailsResponse> call = apiService.GetLoadingDetails(GloablMethods.API_HEADER + acess_token, job_id);
+        call.enqueue(new Callback<JobLoaddetailsResponse>() {
+            @Override
+            public void onResponse(Call<JobLoaddetailsResponse> call, retrofit2.Response<JobLoaddetailsResponse> response) {
+                hideProgressDialog();
+                if (response.isSuccessful()) {
+                    if (response.body().getMeta().getStatus().equals(true) || response.body().getMeta().getStatus().equals("true")) {
+
+                        textCustomVechicleName.setText(response.body().getAssignedVehicle().getVehicleDetails().getCustomName());
+                        textAssignedTruckType.setText(response.body().getAssignedVehicle().getVehicleDetails().getVehicle().getTruckType().getTruckTypeName());
+                        textStartDate.setText(response.body().getAssignedVehicle().getJobStartingDate());
+                        textEndDate.setText(response.body().getAssignedVehicle().getExpectedEndDate());
+                        textEndTime.setText(response.body().getAssignedVehicle().getExpectedEndTime());
+                        textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
+                        textDriverName.setText(response.body().getAssignedDriver().getDriverName());
+                        textDriverEmail.setText(response.body().getAssignedDriver().getDriverEmail());
+                        textDriverMobile.setText(response.body().getAssignedDriver().getDriverPhone());
+                        textVehicleRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusName());
+                        textVehicleLocation.setText(response.body().getLoadStatus().getLocationName());
+                        textLastUpdatedDate.setText(response.body().getLoadStatus().getStatusDate());
+                        textLastUpdatedTime.setText(response.body().getLoadStatus().getStatusTime());
+
+                    } else {
+                        showSnakBar(rootView, response.body().getMeta().getMessage());
+
+                    }
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        showSnakBar(rootView, meta.getString("message"));
+
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobLoaddetailsResponse> call, Throwable t) {
+                showSnakBar(rootView, call.request().headers().get("meta"));
+
+                hideProgressDialog();
+
+
+            }
+        });
+
+    }
 
 }

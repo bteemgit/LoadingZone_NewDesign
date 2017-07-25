@@ -123,10 +123,6 @@ public class QutationDetailsActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
-
-
-
-
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         btnStartjob.setVisibility(View.GONE);
         qutation_id = getIntent().getStringExtra("qutation_id");
@@ -230,9 +226,7 @@ public class QutationDetailsActivity extends BaseActivity {
                 deleteQutation(qutation_id);
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
-
             }
-
     }
 
     // send message to customer only after qutation id accepted

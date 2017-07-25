@@ -15,7 +15,14 @@ public class AssignedVehicle {
     @SerializedName("job_id")
     @Expose
     private Integer jobId;
+    @SerializedName("expected_start_time")
+    @Expose
+    private String expectedStartTime;
+    @SerializedName("expected_end_time")
+    @Expose
+    private String expectedEndTime;
     @SerializedName("expected_start_date")
+
     @Expose
     private String expectedStartDate;
     @SerializedName("job_starting_date")
@@ -27,6 +34,23 @@ public class AssignedVehicle {
     @SerializedName("job_ended_date")
     @Expose
     private String jobEndedDate;
+
+    public String getExpectedStartTime() {
+        return expectedStartTime;
+    }
+
+    public void setExpectedStartTime(String expectedStartTime) {
+        this.expectedStartTime = expectedStartTime;
+    }
+
+    public String getExpectedEndTime() {
+        return expectedEndTime;
+    }
+
+    public void setExpectedEndTime(String expectedEndTime) {
+        this.expectedEndTime = expectedEndTime;
+    }
+
     @SerializedName("vehicle_details")
     @Expose
     private VehicleDetails vehicleDetails;

@@ -6,6 +6,7 @@ import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.ChangePasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
+import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
 import com.example.admin.loadingzone.retrofit.model.MakerResponse;
 import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
@@ -202,8 +203,10 @@ public interface ApiInterface {
     @PUT("notification/read")
     Call<Meta> ReadNottification(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("notification_id") int notification_id, @Field("notification_id") int notification_ids);
     @GET("job/{job_id}")
-    Call<SingleJobResponse> getJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("job_id") String job_id);
+    Call<SingleJobResponse> GetSingleJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("job_id") String job_id);
     @GET("quotation/{quotation_id}")
     Call<QuotationDetailsResponse> GetQuotationDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id);
+    @GET("job/load-details")
+    Call<JobLoaddetailsResponse> GetLoadingDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("job_id") String job_id);
 
 }
