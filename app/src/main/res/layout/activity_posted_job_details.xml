@@ -34,7 +34,7 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/darker_gray"
@@ -44,13 +44,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <include layout="@layout/headerview_posted_details"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include layout="@layout/headerview_posted_details" />
 
 
-</LinearLayout>
+                </LinearLayout>
 
 
                 <LinearLayout
@@ -58,8 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
 
                     <TextView
@@ -75,8 +76,7 @@
                         android:text="Job Info"
                         android:textColor="#ffffff"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        />
+                        android:textStyle="bold" />
 
 
                     <LinearLayout
@@ -188,6 +188,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:visibility="visible" />
+
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
@@ -280,9 +281,9 @@
                                 android:gravity="start|center"
                                 android:hint="Material Description"
                                 android:maxLength="50"
+                                android:maxLines="1"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:maxLines="1"
                                 android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
@@ -353,6 +354,7 @@
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
+
                             <View
                                 android:layout_width="130dp"
                                 android:layout_height="1px"
@@ -382,15 +384,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@color/colorAccent"
                             android:gravity="start|center"
                             android:padding="10dp"
-                            android:background="@color/colorAccent"
                             android:text="Truck Deatils"
                             android:textColor="#ffffff"
                             android:textSize="16sp"
@@ -400,7 +403,8 @@
                     <View
                         android:layout_width="130dp"
                         android:layout_height="1px"
-                        android:background="@color/theme_purple" />
+                        android:background="@color/theme_purple"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -444,7 +448,6 @@
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
-
 
 
                         </LinearLayout>
@@ -509,15 +512,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@color/colorAccent"
                             android:gravity="start|center"
                             android:padding="10dp"
-                            android:background="@color/colorAccent"
                             android:text="Payment Method"
                             android:textColor="#ffffff"
                             android:textSize="16sp"
@@ -527,7 +531,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
-                        android:background="@color/theme_purple" />
+                        android:background="@color/theme_purple"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -630,11 +635,737 @@
 
                         </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone"
+                        android:id="@+id/linear_assignedVehehicle_heading"
+                        android:background="@color/colorAccent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start|center"
+                            android:padding="10dp"
+                            android:text="Assigned Vehicle Info"
+                            android:textColor="#ffffff"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/ivEditVechicle"
+                            android:src="@drawable/ic_edit"
+                            android:layout_gravity="end"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/theme_purple" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:baselineAligned="false"
+                        android:id="@+id/linearAssignedVehicleItem"
+                        android:gravity="right"
+                        android:visibility="gone"
+                        android:paddingLeft="15dp">
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:minWidth="80dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/customTextView21"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Vehicle Name"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView22"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Truck Type"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView24"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Start Date"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView25"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Start Time"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView27"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="End Date"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView28"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="End Time"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="60dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textCustomVechicleName"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:hint="Custom Name"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textAssignedTruckType"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Truck Type"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textStartDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Start Date"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textStartTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Start Time"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textEndDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="End Date"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textEndTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="End Time"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/colorAccent"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone"
+                        android:id="@+id/linear_assignedDriver_heading"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start|center"
+                            android:padding="10dp"
+                            android:text="Assigned Driver Info"
+                            android:textColor="#ffffff"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/ivEditDriver"
+                            android:src="@drawable/ic_edit"
+                            android:layout_gravity="end"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/theme_purple" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:baselineAligned="false"
+                        android:id="@+id/linearAssignedDriverItem"
+                        android:gravity="right"
+                        android:visibility="gone"
+                        android:paddingLeft="15dp">
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:minWidth="80dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/customTextView33"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Driver Name"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView39"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Email"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView35"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Mobile"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="60dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textDriverName"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:hint="Driver Name"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textDriverEmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Email"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textDriverMobile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Mobile"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/colorAccent"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone"
+                        android:id="@+id/liner_JobStatus_heading"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start|center"
+                            android:padding="10dp"
+                            android:text="Job Status"
+                            android:textColor="#ffffff"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/theme_purple" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:baselineAligned="false"
+                        android:id="@+id/linearJobstatusItem"
+                        android:visibility="gone"
+                        android:gravity="right"
+                        android:paddingLeft="15dp">
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:minWidth="80dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/customTextView41"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Running Status"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView42"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Location"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView43"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Last Updated Date"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+                            <TextView
+                                android:id="@+id/customTextView44"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Last Updated Time"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="60dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textVehicleRunningStatus"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:hint="Running Status"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textVehicleLocation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Location"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textLastUpdatedDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="Updated Date"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textLastUpdatedTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="start|center"
+                                    android:hint="UpdatedTime"
+                                    android:inputType="textCapSentences"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textColor="@color/primaryTextColor"
+                                    android:textSize="13sp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
 
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -645,37 +1376,36 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
-        app:srcCompat="@drawable/ic_add"
         app:borderWidth="0dp"
         app:fabSize="normal"
-        app:rippleColor="#ffffff"/>
+        app:rippleColor="#ffffff"
+        app:srcCompat="@drawable/ic_add" />
 
     <com.github.fabtransitionactivity.SheetLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/layoutButtons"
         android:layout_gravity="bottom"
-        app:ft_container_gravity="center"
-        app:ft_color="@color/colorPrimary"
         android:elevation="2dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/layoutButtons"
-        android:layout_toEndOf="@+id/layoutButtons" />
+        app:ft_color="@color/colorPrimary"
+        app:ft_container_gravity="center" />
 
     <RelativeLayout
         android:id="@+id/layoutButtons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:background="@color/light_primaryColor"
+        android:gravity="center"
         android:visibility="gone">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
-        </LinearLayout>
+            android:gravity="center"
+            android:orientation="vertical"></LinearLayout>
     </RelativeLayout>
 
 

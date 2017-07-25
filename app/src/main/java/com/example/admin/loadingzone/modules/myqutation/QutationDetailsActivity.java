@@ -30,6 +30,7 @@ import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
 import com.example.admin.loadingzone.retrofit.model.Meta;
+import com.example.admin.loadingzone.retrofit.model.QuotationDetailsResponse;
 import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
@@ -176,6 +177,10 @@ public class QutationDetailsActivity extends BaseActivity {
             textQutationDate.setVisibility(View.VISIBLE);
             textDate.setText("Rejected Date");
             textQutationDate.setText(dateRejected);
+        }
+        if (isFrom.equals("Nottification"))
+        {
+            getQuoatationDetails(qutation_id);
         }
 
 
@@ -352,6 +357,78 @@ public class QutationDetailsActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<QutationApplyResponse> call, Throwable t) {
+                Snackbar snackbar = Snackbar
+                        .make(rootView, call.request().headers().get("meta"), Snackbar.LENGTH_LONG);
+                snackbar.show();
+                hideProgressDialog();
+
+
+            }
+        });
+
+    }
+
+    //api call for Quotation Deatils
+
+    public void getQuoatationDetails(String qutation_id) {
+
+        showProgressDialog(QutationDetailsActivity.this, "Loading");
+        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        Call<QuotationDetailsResponse> call = apiService.GetQuotationDetails(GloablMethods.API_HEADER + acess_token, qutation_id);
+        call.enqueue(new Callback<QuotationDetailsResponse>() {
+            @Override
+            public void onResponse(Call<QuotationDetailsResponse> call, retrofit2.Response<QuotationDetailsResponse> response) {
+                hideProgressDialog();
+                if (response.isSuccessful()) {
+                    if (response.body().getMeta().getStatus().equals(true)||response.body().getMeta().getStatus().equals("true")) {
+
+
+                        textViewRequestedDate.setText(response.body().getJobDetails().getDateRequested());
+                        textViewJobDate.setText(response.body().getJobDetails().getLoadingDate());
+                        textQutationDescription.setText(response.body().getQuotationDescription());
+                        textViewQutoation.setText(response.body().getJobDetails().getQuotationCount());
+                        textViewJobTotalDist.setText(response.body().getJobDetails().getLocationDistance()+"");
+                        textQutationDate.setText(response.body().getDateAccepted());
+                        textViewJob_From.setText(response.body().getJobDetails().getFromLocationName());
+                        textViewJob_To.setText(response.body().getJobDetails().getToLocationName());
+
+                        textViewCutomerName.setText(response.body().getJobDetails().getCustomer().getName());
+                        textViewCutomerEmail.setText(response.body().getJobDetails().getCustomer().getEmail());
+                        textViewCutomerMobile.setText(response.body().getJobDetails().getCustomer().getPhone1());
+
+                        textQutationStatus.setText(response.body().getQuotationStatus());
+                        textQutationAmount.setText(response.body().getQuotationAmount()+"");
+                        textQutationCurrency.setText(response.body().getQuotationCurrency());
+                        textQutationDescription.setText(response.body().getQuotationDescription());
+                        Picasso.with(QutationDetailsActivity.this)
+                                .load(response.body().getJobDetails().getCustomer().getProfilePic())
+                                .placeholder(R.drawable.img_circle_placeholder)
+                                .resize(88, 88)
+                                .centerCrop()
+                                .transform(new CircleTransformation())
+                                .into(ivUserProfilePhoto);
+                        textViewRequestedDate.setText(response.body().getDateSubmitted());
+
+                    } else {
+                        Snackbar snackbar = Snackbar
+                                .make(rootView, response.body().getMeta().getMessage(), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        showSnakBar(rootView, meta.getString("message"));
+
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuotationDetailsResponse> call, Throwable t) {
                 Snackbar snackbar = Snackbar
                         .make(rootView, call.request().headers().get("meta"), Snackbar.LENGTH_LONG);
                 snackbar.show();

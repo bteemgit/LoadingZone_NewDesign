@@ -205,14 +205,11 @@ public class HomeActivity extends BaseActivity
 
         TextView text_users_name = (TextView)findViewById(R.id.id_text_users_name);
         text_users_name.setText(AppController.getString(getApplicationContext(), "customer_name"));
-
         TextView text_usersemail = (TextView)findViewById(R.id.id_text_usersemail);
         text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
-
         ImageView user_imageView = (ImageView)findViewById(R.id.imageView6);
         Context context = this;
         Picasso.with(context)
-               // .load(AppController.getString(getApplicationContext(), "pic"))
                 .load("http://i.imgur.com/DvpvklR.png")
                 .resize(70, 70)
                 .centerCrop()
@@ -301,7 +298,8 @@ public class HomeActivity extends BaseActivity
                 String JobId = jobList.get(position).getJobId();
                 String name = jobList.get(position).getCustomer().getName();
                 String email = jobList.get(position).getCustomer().getEmail();
-                String phone1 = jobList.get(position).getCustomer().getPhone1();
+                String
+                        phone1 = jobList.get(position).getCustomer().getPhone1();
                 String profilepic = jobList.get(position).getCustomer().getProfilePic();
                 String FromLoc_latt = jobList.get(position).getFromLocation().getLatitude();
                 String FromLoc_long = jobList.get(position).getFromLocation().getLongitude();
@@ -311,8 +309,6 @@ public class HomeActivity extends BaseActivity
                 String ToLoc_name = jobList.get(position).getToLocation().getName();
                 String Material_name = jobList.get(position).getMaterial().getMaterialName();
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
-
-
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
                 String weight =jobList.get(position).getWeight();
                 String DateOfLoading = jobList.get(position).getDateOfLoading();
@@ -569,37 +565,4 @@ public class HomeActivity extends BaseActivity
         endlessRecyclerViewPostedJob.setAdapter(postedJobListAdapter);
     }
 
-   /* @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.id_profile_xml:
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        int[] startingLocation = new int[2];
-                        View v = new View(HomeActivity.this);
-                        v.getLocationOnScreen(startingLocation);
-                        startingLocation[0] += v.getWidth() / 2;
-                        UserProfileActivity.startUserProfileFromLocation(startingLocation, HomeActivity.this);
-                        overridePendingTransition(0, 0);
-                    }
-                }, 200);
-                break;
-            case R.id.id_linear_myquotation:
-                Intent intent = new Intent(getApplicationContext(),MyQuotationActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.id_linearmyJob:
-                intent = new Intent(getApplicationContext(), MyJobtabViewActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.nav_changepassword:
-                intent = new Intent(getApplicationContext(), ChangePassword.class);
-                startActivity(intent);
-                break;
-            case R.id.id_img_logout:
-                Logout();
-                break;
-        }
-    }*/
 }

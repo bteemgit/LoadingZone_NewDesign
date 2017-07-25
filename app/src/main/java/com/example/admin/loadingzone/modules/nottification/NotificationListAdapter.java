@@ -112,7 +112,6 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         if (nottificationList != null) {
             return nottificationList.size();
         }
-
         return 0;
     }
 }

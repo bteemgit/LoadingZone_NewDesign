@@ -18,6 +18,8 @@ import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.myjob.MyJobtabViewActivity;
+import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
 import com.example.admin.loadingzone.modules.truck.TrckListAdapter;
 import com.example.admin.loadingzone.modules.truck.TruckEditUpdateActivity;
 import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
@@ -56,6 +58,7 @@ public class NottificationListActivity extends BaseActivity {
     ApiInterface apiService;
     private List<NotificationList> nottificationList = new ArrayList<>();
     NotificationListAdapter notificationListAdapter;
+    public static String isFrom="Nottification";
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -122,26 +125,24 @@ public class NottificationListActivity extends BaseActivity {
                 } else {
                     showSnakBar(relativeLayoutRoot,MessageConstants.INTERNET);
                 }
-
                 //for redirecting in to job details
-
-                //if (notification_meta_name.contains("job"))
-
-//                {
-//                    Intent i = new Intent(getApplicationContext(), SingleJobDetailView.class);
-//                    String job_id = String.valueOf(nottificationList.get(position).getNotificationMeta().getJobId());
-//                    i.putExtra("job_id", job_id);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(i);
-//                } else if (notification_meta_name.contains("quotation")) {
-//                    Intent i = new Intent(getApplicationContext(), NotificationToQuotation.class);
-//                    String quotationId = String.valueOf(nottificationList.get(position).getNotificationMeta().getQuotationId());
-//                    i.putExtra("quotation_Id", quotationId);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(i);
-//                }
+                if (notification_meta_name.contains("job"))
+                {
+                    Intent i = new Intent(getApplicationContext(), MyJobtabViewActivity.class);
+                    String job_id = String.valueOf(nottificationList.get(position).getNotificationMeta().getJobId());
+                    i.putExtra("job_id", job_id);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                } else if (notification_meta_name.contains("quotation")) {
+                    Intent i = new Intent(getApplicationContext(), QutationDetailsActivity.class);
+                    String quotationId = String.valueOf(nottificationList.get(position).getNotificationMeta().getQuotationId());
+                    i.putExtra("qutation_id", quotationId);
+                    i.putExtra("isFrom",isFrom);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                }
 
             }
         }));

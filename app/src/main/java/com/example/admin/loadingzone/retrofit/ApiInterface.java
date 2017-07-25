@@ -17,6 +17,7 @@ import com.example.admin.loadingzone.retrofit.model.NottificationListResponse;
 import com.example.admin.loadingzone.retrofit.model.PendingJobResponse;
 import com.example.admin.loadingzone.retrofit.model.PendingQutationResponse;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
+import com.example.admin.loadingzone.retrofit.model.QuotationDetailsResponse;
 import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
 import com.example.admin.loadingzone.retrofit.model.ReplyMessageResponse;
 import com.example.admin.loadingzone.retrofit.model.SingleJobResponse;
@@ -192,20 +193,17 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("main/forgot-password")
     Call<ForgotPasswordResponse> ForgotPassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("username") String username);
-
-
     @FormUrlEncoded
     @POST("user/change-password")
     Call<ChangePasswordResponse> ChangePassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("old_password") String OldPassword, @Field("new_password") String NewPassword, @Field("confirm_password") String ConfirmPassword);
-
     @GET("notification/unread-list")
     Call<NottificationListResponse> NotificationList(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Query("page") int page);
     @FormUrlEncoded
     @PUT("notification/read")
     Call<Meta> ReadNottification(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("notification_id") int notification_id, @Field("notification_id") int notification_ids);
-
-
     @GET("job/{job_id}")
     Call<SingleJobResponse> getJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("job_id") String job_id);
+    @GET("quotation/{quotation_id}")
+    Call<QuotationDetailsResponse> GetQuotationDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id);
 
 }

@@ -116,6 +116,70 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
     @NonNull
     @BindView(R.id.btnStartjob)
     Button buttonJobStart;
+
+    @NonNull
+    @BindView(R.id.linear_assignedVehehicle_heading)
+    LinearLayout linearAssignedVehicleHeading;
+    @NonNull
+    @BindView(R.id.linear_assignedDriver_heading)
+    LinearLayout linear_assignedDriver_heading;
+    @NonNull
+    @BindView(R.id.liner_JobStatus_heading)
+    LinearLayout liner_JobStatus_heading;
+    @NonNull
+    @BindView(R.id.linearJobstatusItem)
+    LinearLayout linearJobstatusItem;
+    @NonNull
+    @BindView(R.id.linearAssignedDriverItem)
+    LinearLayout linearAssignedDriverItem;
+    @NonNull
+    @BindView(R.id.linearAssignedVehicleItem)
+    LinearLayout linearAssignedVehicleItem;
+    @NonNull
+    @BindView(R.id.ivEditVechicle)
+    ImageView imageViewEditAssignedVehicle;
+    @NonNull
+    @BindView(R.id.ivEditDriver)
+    ImageView imageViewEditAssignedDriver;
+    @NonNull
+    @BindView(R.id.textCustomVechicleName)
+    TextView textCustomVechicleName;
+    @NonNull
+    @BindView(R.id.textAssignedTruckType)
+    TextView textAssignedTruckType;
+    @NonNull
+    @BindView(R.id.textStartDate)
+    TextView textStartDate;
+    @NonNull
+    @BindView(R.id.textStartTime)
+    TextView textStartTime;
+    @NonNull
+    @BindView(R.id.textEndDate)
+    TextView textEndDate;
+    @NonNull
+    @BindView(R.id.textEndTime)
+    TextView textEndTime;
+    @NonNull
+    @BindView(R.id.textDriverName)
+    TextView textDriverName;
+    @NonNull
+    @BindView(R.id.textDriverEmail)
+    TextView textDriverEmail;
+    @NonNull
+    @BindView(R.id.textDriverMobile)
+    TextView textDriverMobile;
+    @NonNull
+    @BindView(R.id.textVehicleRunningStatus)
+    TextView textVehicleRunningStatus;
+    @NonNull
+    @BindView(R.id.textVehicleLocation)
+    TextView textVehicleLocation;
+    @NonNull
+    @BindView(R.id.textLastUpdatedDate)
+    TextView textLastUpdatedDate;
+    @NonNull
+    @BindView(R.id.textLastUpdatedTime)
+    TextView textLastUpdatedTime;
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
 
@@ -164,10 +228,24 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
             fabQuotationApply.setVisibility(View.GONE);
+            //here some widgets visibility handled by according to the job status code is quoations accepted
             if (job_status_code.equals("quotation-accepted")) {
                 buttonJobStart.setVisibility(View.VISIBLE);
+                linearAssignedVehicleHeading.setVisibility(View.GONE);
+                linear_assignedDriver_heading.setVisibility(View.GONE);
+                liner_JobStatus_heading.setVisibility(View.GONE);
+                linearAssignedDriverItem.setVisibility(View.GONE);
+                linearAssignedVehicleItem.setVisibility(View.GONE);
+                linearJobstatusItem.setVisibility(View.GONE);
+
             } else {
                 buttonJobStart.setVisibility(View.GONE);
+                linearAssignedVehicleHeading.setVisibility(View.VISIBLE);
+                linear_assignedDriver_heading.setVisibility(View.VISIBLE);
+                linearAssignedDriverItem.setVisibility(View.VISIBLE);
+                linearAssignedVehicleItem.setVisibility(View.VISIBLE);
+                linearJobstatusItem.setVisibility(View.VISIBLE);
+                liner_JobStatus_heading.setVisibility(View.VISIBLE);
             }
 
         }
@@ -221,7 +299,6 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
     public void startJob() {
         Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
         intent.putExtra("JobId", JobId);
-
         startActivity(intent);
 
     }

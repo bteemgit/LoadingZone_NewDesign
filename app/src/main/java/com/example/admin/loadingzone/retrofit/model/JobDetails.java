@@ -41,7 +41,7 @@ public class JobDetails {
     private String quotationCount;
     @SerializedName("date_requested")
     @Expose
-    private Object dateRequested;
+    private String dateRequested;
     @SerializedName("date_requested_relative")
     @Expose
     private Object dateRequestedRelative;
@@ -140,11 +140,11 @@ public class JobDetails {
         this.quotationCount = quotationCount;
     }
 
-    public Object getDateRequested() {
+    public String getDateRequested() {
         return dateRequested;
     }
 
-    public void setDateRequested(Object dateRequested) {
+    public void setDateRequested(String dateRequested) {
         this.dateRequested = dateRequested;
     }
 
