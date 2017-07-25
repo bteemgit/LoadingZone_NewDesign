@@ -34,6 +34,7 @@ import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
+import com.github.clans.fab.FloatingActionMenu;
 import com.github.fabtransitionactivity.SheetLayout;
 import com.squareup.picasso.Picasso;
 
@@ -196,6 +197,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.rootview)
     RelativeLayout rootView;
+
+    @NonNull
+    @BindView(R.id.floating_action_menu)
+    FloatingActionMenu floatingActionMenu;
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
     private ApiInterface apiService;
@@ -240,6 +245,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             linerUserstaus.setVisibility(View.VISIBLE);
             fabQuotationApply.setVisibility(View.VISIBLE);
             buttonJobStart.setVisibility(View.GONE);
+            floatingActionMenu.setVisibility(View.GONE);
         }
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
