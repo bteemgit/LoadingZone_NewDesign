@@ -337,7 +337,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             mSheetLayout.contractFab();
         }
     }
-
+// gettin the loading details and assigned driver details
     public void getLoadingJobDeatails(String job_id) {
 
         showProgressDialog(PostedJobDetailsActivity.this, "Loading");
