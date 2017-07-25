@@ -224,6 +224,7 @@ public class PostedJobDetailsActivity extends AppCompatActivity implements Sheet
             fabQuotationApply.setVisibility(View.VISIBLE);
             buttonJobStart.setVisibility(View.GONE);
         }
+        //git
 
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
