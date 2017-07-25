@@ -130,7 +130,7 @@ public class AcceptedQuotationFragment extends Fragment {
                 String cus_phone = itemsArrayList.get(position).getCustomer().getPhone1();
                 String cus_profile = itemsArrayList.get(position).getCustomer().getProfilePic();
                 String quotationCurrency = itemsArrayList.get(position).getQuotationCurrency();
-                Integer quotationAmount = itemsArrayList.get(position).getQuotationAmount();
+                String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
              //   String dateRejected=itemsArrayList.get(position).getDateRejected();

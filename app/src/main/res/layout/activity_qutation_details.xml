@@ -216,7 +216,7 @@
                                 android:background="@android:color/transparent"
                                 android:ellipsize="end"
                                 android:gravity="start|center"
-                                android:hint="Material Weight"
+                                android:hint="Amount"
                                 android:maxLength="50"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"

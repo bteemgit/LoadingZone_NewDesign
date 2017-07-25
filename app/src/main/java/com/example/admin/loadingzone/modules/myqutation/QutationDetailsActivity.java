@@ -137,6 +137,7 @@ public class QutationDetailsActivity extends BaseActivity {
         String cus_phone = getIntent().getStringExtra("cus_phone");
         String cus_profile = getIntent().getStringExtra("cus_profile");
         String quotationCurrency = getIntent().getStringExtra("quotationCurrency");
+
         String quotationAmount = getIntent().getStringExtra("quotationAmount");
         String dateSubmitted = getIntent().getStringExtra("dateSubmitted");
         String dateAccepted = getIntent().getStringExtra("dateAccepted");
@@ -149,11 +150,9 @@ public class QutationDetailsActivity extends BaseActivity {
         String dateRequested = getIntent().getStringExtra("dateRequested");
         String activeQuotations = getIntent().getStringExtra("activeQuotations");
         String distance = getIntent().getStringExtra("distance");
-
         String fromLocation = getIntent().getStringExtra("fromLocation");
         String ToLocation = getIntent().getStringExtra("toLocation");
 
-        Toast.makeText(this, jobDate, Toast.LENGTH_SHORT).show();
         isFrom = getIntent().getStringExtra("isFrom");
         if (!isFrom.equals(null))
             if (isFrom.equals("pending")) {
@@ -199,9 +198,11 @@ public class QutationDetailsActivity extends BaseActivity {
         textViewCutomerMobile.setText(cus_phone);
 
         textQutationStatus.setText(quotationStatus);
+
         textQutationAmount.setText(quotationAmount);
         textQutationCurrency.setText(quotationCurrency);
-        textQutationDescription.setText(quotationDescription);
+      //  textQutationDescription.setText(quotationDescription);
+
         Picasso.with(QutationDetailsActivity.this)
                 .load(cus_profile)
                 .placeholder(R.drawable.img_circle_placeholder)
