@@ -8,6 +8,7 @@
     android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -1369,7 +1370,12 @@
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_dark_bg"
+        android:visibility="gone"
+        android:background="#85000000"/>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/floating_action_menu"

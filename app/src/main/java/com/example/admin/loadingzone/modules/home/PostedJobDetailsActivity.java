@@ -1,7 +1,11 @@
 package com.example.admin.loadingzone.modules.home;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -54,11 +58,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.R.attr.onClick;
+import static com.example.admin.loadingzone.R.id.floating_action_menu;
 import static com.example.admin.loadingzone.R.id.ivUserProfilePhoto;
 import static com.example.admin.loadingzone.R.id.rootView;
 import static com.example.admin.loadingzone.R.id.textTruckType;
 
-public class PostedJobDetailsActivity extends BaseActivity implements SheetLayout.OnFabAnimationEndListener,View.OnClickListener {
+public class PostedJobDetailsActivity extends BaseActivity implements SheetLayout.OnFabAnimationEndListener {
     @NonNull
     @BindView(R.id.textCustomerName)
     TextView textViewCutomerName;
@@ -217,15 +223,18 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @BindView(R.id.fabcall_customer)
     com.github.clans.fab.FloatingActionButton fab_callCustomer;
     @NonNull
-    @BindView(R.id.floating_action_menu)
+    @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
+
+    String CutomerMobile = null;
+    View dark_bg;
+
 
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
     private ApiInterface apiService;
 //    private FloatingActionMenu floatingActionMenu;
 //    private FloatingActionButton fabmessageDriver,fabMessageCustomer,fabCallDriver,fabCallCustomer;
-
 
 
     @Override
@@ -243,13 +252,27 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 //        fabCallDriver=(FloatingActionButton)findViewById(R.id.fabcall_driver);
 //        fabmessageDriver=(FloatingActionButton)findViewById(R.id.fabmessage_driver);
 //        fabMessageCustomer=(FloatingActionButton)findViewById(R.id.fabmessage_customer);
+        dark_bg = findViewById(R.id.id_dark_bg);
+        floatingActionMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+            @Override
+            public void onMenuToggle(boolean opened) {
+
+                if (opened) {
+                    dark_bg.setVisibility(View.VISIBLE);
+                } else {
+                    dark_bg.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
         isFrom = getIntent().getStringExtra("isFrom");
         String profilepic = getIntent().getStringExtra("profilepic");
         String CutomerName = getIntent().getStringExtra("name");
         String CutomerEmail = getIntent().getStringExtra("email");
-        String CutomerMobile = getIntent().getStringExtra("phone1");
+        CutomerMobile = getIntent().getStringExtra("phone1");
         String Job_From = getIntent().getStringExtra("FromLoc_name");
         String Job_To = getIntent().getStringExtra("ToLoc_name");
         String JobTotalDist = getIntent().getStringExtra("LocationDistance");
@@ -302,6 +325,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
         }
 
+
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
         textViewCutomerMobile.setText(CutomerMobile);
@@ -341,7 +365,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     }
 
 
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -353,11 +376,19 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         mSheetLayout.expandFab();
 
     }
+
+
+    //dimming
+    @NonNull
+    @OnClick(floating_action_menu)
+    public void bg_dim() {
+        dark_bg.setVisibility(View.VISIBLE);
+    }
+
     // for sending messages to Customer
     @NonNull
     @OnClick(R.id.fabmessage_customer)
-    public void messageCustomer()
-    {
+    public void messageCustomer() {
         messageDilog();
         btnSentMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -367,7 +398,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 String message_type_id = "3"; //Provider to Customer based on Job Post"
                 if (message.length() > 0 && subject.length() > 0) {
                     if (isConnectingToInternet(PostedJobDetailsActivity.this)) {
-                        sendMessage(subject, message,message_type_id);
+                        sendMessage(subject, message, message_type_id);
 
 
                     } else {
@@ -379,11 +410,11 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         });
     }
+
     // for sending messages to Driver
     @NonNull
     @OnClick(R.id.fabmessage_driver)
-    public void messageDriver()
-    {
+    public void messageDriver() {
         messageDilog();
         btnSentMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -393,7 +424,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 String message_type_id = "7"; //Provider to Customer based on Job Post"
                 if (message.length() > 0 && subject.length() > 0) {
                     if (isConnectingToInternet(PostedJobDetailsActivity.this)) {
-                        sendMessage(subject, message,message_type_id);
+                        sendMessage(subject, message, message_type_id);
 
 
                     } else {
@@ -405,6 +436,68 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         });
     }
+
+
+    //call driver
+    @NonNull
+    @OnClick(R.id.fabcall_customer)
+    public void callcustomer() {
+        if (isPermissionGranted()) {
+            call_action();
+        }
+    }
+
+    public void call_action() {
+
+        try {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:" + CutomerMobile));
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            startActivity(callIntent);
+        } catch (ActivityNotFoundException activityException) {
+            Log.e("Calling a Phone Number", "Call failed", activityException);
+        }
+       /* try
+        {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", postedUserMobile, null));
+            startActivity(intent);
+        }
+        catch (Exception e)
+        {
+            System.out.print(e);
+        }*/
+
+    }
+
+    public  boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.CALL_PHONE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v("TAG","Permission is granted");
+                return true;
+            } else {
+
+                Log.v("TAG","Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("TAG","Permission is granted");
+            return true;
+        }
+    }
+
+
     @NonNull
     @OnClick(R.id.btnStartjob)
     public void startJob() {
@@ -529,21 +622,5 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         });
     }
 
-    @Override
-    public void onClick(View v) {
-       switch (v.getId())
-       {
-           case R.id.fabcall_customer:
-               break;
-           case R.id.fabcall_driver:
-               break;
-           case R.id.fabmessage_customer:
 
-
-               break;
-           case R.id.fabmessage_driver:
-
-               break;
-       }
-    }
 }
