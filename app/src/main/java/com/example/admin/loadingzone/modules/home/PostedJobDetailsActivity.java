@@ -197,6 +197,22 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.rootview)
     RelativeLayout rootView;
+    @NonNull
+    @BindView(R.id.fabmessage_driver)
+    RelativeLayout fab_messageDriver;
+
+    @NonNull
+    @BindView(R.id.fabmessage_customer)
+    RelativeLayout fab_messageCustomer;
+
+    @NonNull
+    @BindView(R.id.fabcall_driver)
+    RelativeLayout fabcall_driver;
+
+    @NonNull
+    @BindView(R.id.fabcall_customer)
+    RelativeLayout fab_callCustomer;
+
 
     @NonNull
     @BindView(R.id.floating_action_menu)
@@ -204,6 +220,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
     private ApiInterface apiService;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,6 +321,34 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         // fab click & animation
         mSheetLayout.setFab(fabQuotationApply);
         mSheetLayout.setFabAnimationEndListener(this);
+
+    }
+    // for calling driver to his mobile number
+    @NonNull
+    @OnClick(R.id.fabcall_driver)
+    public void callDriver()
+    {
+
+    }
+    // for calling customer to his mobile number
+    @NonNull
+    @OnClick(R.id.fabcall_customer)
+    public void callCustomer()
+    {
+
+    }
+    // for sending messages to Customer
+    @NonNull
+    @OnClick(R.id.fabmessage_customer)
+    public void messageCustomer()
+    {
+
+    }
+    // for sending messages to Driver
+    @NonNull
+    @OnClick(R.id.fabmessage_driver)
+    public void messageDriver()
+    {
 
     }
 
