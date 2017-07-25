@@ -27,12 +27,15 @@ import com.example.admin.loadingzone.SplashActivity;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
+import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.modules.login.LoginActivity;
 import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
+import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
+import com.example.admin.loadingzone.retrofit.model.MessageCreateResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.fabtransitionactivity.SheetLayout;
@@ -49,12 +52,13 @@ import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.admin.loadingzone.R.id.ivUserProfilePhoto;
 import static com.example.admin.loadingzone.R.id.rootView;
 import static com.example.admin.loadingzone.R.id.textTruckType;
 
-public class PostedJobDetailsActivity extends BaseActivity implements SheetLayout.OnFabAnimationEndListener {
+public class PostedJobDetailsActivity extends BaseActivity implements SheetLayout.OnFabAnimationEndListener,View.OnClickListener {
     @NonNull
     @BindView(R.id.textCustomerName)
     TextView textViewCutomerName;
@@ -199,27 +203,28 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     RelativeLayout rootView;
     @NonNull
     @BindView(R.id.fabmessage_driver)
-    RelativeLayout fab_messageDriver;
+    com.github.clans.fab.FloatingActionButton fab_messageDriver;
 
     @NonNull
     @BindView(R.id.fabmessage_customer)
-    RelativeLayout fab_messageCustomer;
+    com.github.clans.fab.FloatingActionButton fab_messageCustomer;
 
     @NonNull
     @BindView(R.id.fabcall_driver)
-    RelativeLayout fabcall_driver;
+    com.github.clans.fab.FloatingActionButton fabcall_driver;
 
     @NonNull
     @BindView(R.id.fabcall_customer)
-    RelativeLayout fab_callCustomer;
-
-
+    com.github.clans.fab.FloatingActionButton fab_callCustomer;
     @NonNull
     @BindView(R.id.floating_action_menu)
     FloatingActionMenu floatingActionMenu;
+
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
     private ApiInterface apiService;
+//    private FloatingActionMenu floatingActionMenu;
+//    private FloatingActionButton fabmessageDriver,fabMessageCustomer,fabCallDriver,fabCallCustomer;
 
 
 
@@ -233,6 +238,11 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
+//        floatingActionMenu=(FloatingActionMenu)findViewById(R.id.floating_action_menu);
+//        fabCallCustomer=(FloatingActionButton)findViewById(R.id.fabcall_customer);
+//        fabCallDriver=(FloatingActionButton)findViewById(R.id.fabcall_driver);
+//        fabmessageDriver=(FloatingActionButton)findViewById(R.id.fabmessage_driver);
+//        fabMessageCustomer=(FloatingActionButton)findViewById(R.id.fabmessage_customer);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
         isFrom = getIntent().getStringExtra("isFrom");
@@ -291,6 +301,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
 
         }
+
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
         textViewCutomerMobile.setText(CutomerMobile);
@@ -321,36 +332,15 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         // fab click & animation
         mSheetLayout.setFab(fabQuotationApply);
         mSheetLayout.setFabAnimationEndListener(this);
+// setting teh click on listner
+//        fabCallCustomer.setOnClickListener(this);
+//        fabCallDriver.setOnClickListener(this);
+//        fabMessageCustomer.setOnClickListener(this);
+//        fabmessageDriver.setOnClickListener(this);
 
     }
-    // for calling driver to his mobile number
-    @NonNull
-    @OnClick(R.id.fabcall_driver)
-    public void callDriver()
-    {
 
-    }
-    // for calling customer to his mobile number
-    @NonNull
-    @OnClick(R.id.fabcall_customer)
-    public void callCustomer()
-    {
 
-    }
-    // for sending messages to Customer
-    @NonNull
-    @OnClick(R.id.fabmessage_customer)
-    public void messageCustomer()
-    {
-
-    }
-    // for sending messages to Driver
-    @NonNull
-    @OnClick(R.id.fabmessage_driver)
-    public void messageDriver()
-    {
-
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -363,7 +353,58 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         mSheetLayout.expandFab();
 
     }
+    // for sending messages to Customer
+    @NonNull
+    @OnClick(R.id.fabmessage_customer)
+    public void messageCustomer()
+    {
+        messageDilog();
+        btnSentMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String subject = et_subject.getText().toString();
+                String message = et_message.getText().toString();
+                String message_type_id = "3"; //Provider to Customer based on Job Post"
+                if (message.length() > 0 && subject.length() > 0) {
+                    if (isConnectingToInternet(PostedJobDetailsActivity.this)) {
+                        sendMessage(subject, message,message_type_id);
 
+
+                    } else {
+                        showSnakBar(rootView, MessageConstants.INTERNET);
+                    }
+                } else {
+                    showSnakBar(rootView, "Please type messge");
+                }
+            }
+        });
+    }
+    // for sending messages to Driver
+    @NonNull
+    @OnClick(R.id.fabmessage_driver)
+    public void messageDriver()
+    {
+        messageDilog();
+        btnSentMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String subject = et_subject.getText().toString();
+                String message = et_message.getText().toString();
+                String message_type_id = "7"; //Provider to Customer based on Job Post"
+                if (message.length() > 0 && subject.length() > 0) {
+                    if (isConnectingToInternet(PostedJobDetailsActivity.this)) {
+                        sendMessage(subject, message,message_type_id);
+
+
+                    } else {
+                        showSnakBar(rootView, MessageConstants.INTERNET);
+                    }
+                } else {
+                    showSnakBar(rootView, "Please type messge");
+                }
+            }
+        });
+    }
     @NonNull
     @OnClick(R.id.btnStartjob)
     public void startJob() {
@@ -445,4 +486,64 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
     }
 
+    // for sending new message to customer or drvier
+    private void sendMessage(String subject, String message,String message_type_id) {
+
+        showProgressDialog(PostedJobDetailsActivity.this, "sending...");
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        String acess_token = AppController.getString(getApplicationContext(),  "acess_token");
+        Call<MessageCreateResponse> call = apiService.CreateMessage(GloablMethods.API_HEADER + acess_token, JobId, message_type_id, subject, message);
+        call.enqueue(new Callback<MessageCreateResponse>() {
+            @Override
+            public void onResponse(Call<MessageCreateResponse> call, Response<MessageCreateResponse> response) {
+                hideProgressDialog();
+                if (response.isSuccessful())
+
+                {
+//                    if (response.body().getMeta().getStatus().equals("true")) {
+                    et_message.setText("");
+                    et_subject.setText("");
+                    showSnakBar(rootView, "Message sent");
+                    finish();
+//                    }
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        showSnakBar(rootView, meta.getString("message"));
+
+
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<MessageCreateResponse> call, Throwable t) {
+                hideProgressDialog();
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+       switch (v.getId())
+       {
+           case R.id.fabcall_customer:
+               break;
+           case R.id.fabcall_driver:
+               break;
+           case R.id.fabmessage_customer:
+
+
+               break;
+           case R.id.fabmessage_driver:
+
+               break;
+       }
+    }
 }
