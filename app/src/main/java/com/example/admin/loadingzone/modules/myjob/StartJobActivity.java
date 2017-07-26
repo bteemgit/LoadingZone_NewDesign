@@ -130,7 +130,7 @@ public class StartJobActivity extends BaseActivity {
     CardView cardViewTrckHead;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
-    String JobId;
+    String JobId, jobStatus;
 
     private int startYear, startMonth, startDay, startHour, startMinute;
     private int endYear, endMonth, endDay, endHour, endMinute;
@@ -149,6 +149,18 @@ public class StartJobActivity extends BaseActivity {
         getSupportActionBar().setTitle("Start Your Job");
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
+        jobStatus = getIntent().getStringExtra("jobStatus");// identyfying the action from which activity
+        if (jobStatus.equals("EditJob")) {
+            String start_date = getIntent().getStringExtra("start_date");
+            String start_time = getIntent().getStringExtra("start_time");
+            String end_time = getIntent().getStringExtra("end_time");
+            String end_date = getIntent().getStringExtra("start_date");
+            textViewSelectedDate.setText(start_date);
+            textViewSelectedTime.setText(start_time);
+            textSelectedDateEnd.setText(end_date);
+            textSelectedTimeEnd.setText(end_time);
+
+        }
     }
 
     @NonNull
@@ -158,8 +170,6 @@ public class StartJobActivity extends BaseActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
@@ -167,7 +177,6 @@ public class StartJobActivity extends BaseActivity {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        // txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                         startYear = year;
                         startMonth = monthOfYear + 1;
                         startDay = dayOfMonth;
@@ -199,10 +208,7 @@ public class StartJobActivity extends BaseActivity {
                             startHour = hourOfDay;
                             startMinute = minute;
                             startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
-                            //  UnixConvertion();
                             textViewSelectedTime.setText(hourOfDay + ":" + minute);
-
-//for animatiting view for select end date
                             animateEndDate(view);
 
                         }
@@ -270,7 +276,7 @@ public class StartJobActivity extends BaseActivity {
         timePickerDialog.show();
     }
 
-
+    // seraching avalible truck on the selected date and time
     @NonNull
     @OnClick(R.id.relative_SerachAvalibleTruck)
     public void serachTruck() {
@@ -285,17 +291,13 @@ public class StartJobActivity extends BaseActivity {
         startActivityForResult(i, 2);
 
     }
+
+    // once the provider selct the avalible truck then job is completed and redirected in to home page
     @NonNull
     @OnClick(R.id.relativeStartJob)
     public void startJob() {
-//        if (isConnectingToInternet(getApplicationContext())) {
-//            CreateJob(JobId);
-//        }
-//        else {
-//            showSnakBar(root, MessageConstants.INTERNET);
-//
-//        }
-        Intent i=new Intent(getApplicationContext(), HomeActivity.class);
+
+        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
@@ -358,39 +360,39 @@ public class StartJobActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if (data!=null)
-        if (requestCode == 2) {
-            cardViewTrckHead.setVisibility(View.VISIBLE);
-            driver_id = data.getStringExtra("driver_id");
-            provider_vehicle_id = data.getStringExtra("truck_id");
-            Log.d("provider_vehicle_id re",provider_vehicle_id);
-            if (!driver_id.equals("driver_isnot_assigned")) {
-                String driver_name = data.getStringExtra("driver_name");
-                String driver_pic = data.getStringExtra("driver_pic");
-                textViewDriverName.setText(driver_name);
-                Picasso.with(getApplicationContext())
-                        .load(driver_pic)
-                        .placeholder(R.drawable.img_circle_placeholder)
-                        .resize(70, 70)
-                        .centerCrop()
-                        .transform(new CircleTransformation())
-                        .into(imageDriverPic);
+        if (data != null)
+            if (requestCode == 2) {
+                cardViewTrckHead.setVisibility(View.VISIBLE);
+                driver_id = data.getStringExtra("driver_id");
+                provider_vehicle_id = data.getStringExtra("truck_id");
+                Log.d("provider_vehicle_id re", provider_vehicle_id);
+                if (!driver_id.equals("driver_isnot_assigned")) {
+                    String driver_name = data.getStringExtra("driver_name");
+                    String driver_pic = data.getStringExtra("driver_pic");
+                    textViewDriverName.setText(driver_name);
+                    Picasso.with(getApplicationContext())
+                            .load(driver_pic)
+                            .placeholder(R.drawable.img_circle_placeholder)
+                            .resize(70, 70)
+                            .centerCrop()
+                            .transform(new CircleTransformation())
+                            .into(imageDriverPic);
+
+                }
+                String truck_name = data.getStringExtra("truck_name");
+                String truck_maker = data.getStringExtra("truck_maker");
+                String truck_type = data.getStringExtra("truck_type");
+                String truck_dimension = data.getStringExtra("truck_dimension");
+                textTruckName.setText(truck_name);
+                textTruckModel.setText(truck_maker);
+                textTruckType.setText(truck_type);
+                textTruckDimension.setText(truck_dimension);
+                String expected_start_date = String.valueOf(startUnixTimeStamp);
+                String expected_end_date = String.valueOf(endUnixTimeStamp);
+                BolockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
+
 
             }
-            String truck_name = data.getStringExtra("truck_name");
-            String truck_maker = data.getStringExtra("truck_maker");
-            String truck_type = data.getStringExtra("truck_type");
-            String truck_dimension = data.getStringExtra("truck_dimension");
-            textTruckName.setText(truck_name);
-            textTruckModel.setText(truck_maker);
-            textTruckType.setText(truck_type);
-            textTruckDimension.setText(truck_dimension);
-            String expected_start_date = String.valueOf(startUnixTimeStamp);
-            String expected_end_date = String.valueOf(endUnixTimeStamp);
-            BolockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
-
-
-        }
     }
 
     //api call for blocking the driver and truck for thsi job

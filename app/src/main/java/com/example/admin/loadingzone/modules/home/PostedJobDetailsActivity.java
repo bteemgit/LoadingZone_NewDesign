@@ -228,13 +228,11 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
     String CutomerMobile = null;
     View dark_bg;
-
-
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code;
     private ApiInterface apiService;
-//    private FloatingActionMenu floatingActionMenu;
-//    private FloatingActionButton fabmessageDriver,fabMessageCustomer,fabCallDriver,fabCallCustomer;
+
+
 
 
     @Override
@@ -247,11 +245,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
-//        floatingActionMenu=(FloatingActionMenu)findViewById(R.id.floating_action_menu);
-//        fabCallCustomer=(FloatingActionButton)findViewById(R.id.fabcall_customer);
-//        fabCallDriver=(FloatingActionButton)findViewById(R.id.fabcall_driver);
-//        fabmessageDriver=(FloatingActionButton)findViewById(R.id.fabmessage_driver);
-//        fabMessageCustomer=(FloatingActionButton)findViewById(R.id.fabmessage_customer);
         dark_bg = findViewById(R.id.id_dark_bg);
         floatingActionMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
             @Override
@@ -356,11 +349,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         // fab click & animation
         mSheetLayout.setFab(fabQuotationApply);
         mSheetLayout.setFabAnimationEndListener(this);
-// setting teh click on listner
-//        fabCallCustomer.setOnClickListener(this);
-//        fabCallDriver.setOnClickListener(this);
-//        fabMessageCustomer.setOnClickListener(this);
-//        fabmessageDriver.setOnClickListener(this);
+
 
     }
 
@@ -378,12 +367,32 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     }
 
 
-    //dimming
+
+
+    // change driver from assigned job
     @NonNull
-    @OnClick(floating_action_menu)
-    public void bg_dim() {
-        dark_bg.setVisibility(View.VISIBLE);
+    @OnClick(R.id.ivEditDriver)
+    public void editDriver() {
+
     }
+    // change Truck from assigned job
+    @NonNull
+    @OnClick(R.id.ivEditVechicle)
+    public void editTruck() {
+        String start_date=textStartDate.getText().toString().trim();
+        String start_time=textStartTime.getText().toString().trim();
+        String end_time=textEndTime.getText().toString().trim();
+        String end_date=textEndDate.getText().toString().trim();
+        Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
+        intent.putExtra("JobId", JobId);
+        intent.putExtra("jobStatus","EditJob"); // for identyfying teh job is new while editing the truck and driver
+        intent.putExtra("start_date",start_date);
+        intent.putExtra("start_time",start_time);
+        intent.putExtra("end_time",end_time);
+        intent.putExtra("end_date",end_date);
+        startActivity(intent);
+    }
+
 
     // for sending messages to Customer
     @NonNull
@@ -454,45 +463,29 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             callIntent.setData(Uri.parse("tel:" + CutomerMobile));
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
             startActivity(callIntent);
         } catch (ActivityNotFoundException activityException) {
             Log.e("Calling a Phone Number", "Call failed", activityException);
         }
-       /* try
-        {
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", postedUserMobile, null));
-            startActivity(intent);
-        }
-        catch (Exception e)
-        {
-            System.out.print(e);
-        }*/
 
     }
 
-    public  boolean isPermissionGranted() {
+    public boolean isPermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.CALL_PHONE)
                     == PackageManager.PERMISSION_GRANTED) {
-                Log.v("TAG","Permission is granted");
+                Log.v("TAG", "Permission is granted");
                 return true;
             } else {
 
-                Log.v("TAG","Permission is revoked");
+                Log.v("TAG", "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
                 return false;
             }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("TAG","Permission is granted");
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("TAG", "Permission is granted");
             return true;
         }
     }
@@ -501,8 +494,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @OnClick(R.id.btnStartjob)
     public void startJob() {
+
         Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
         intent.putExtra("JobId", JobId);
+        intent.putExtra("jobStatus","StartNewJob"); // for identyfying teh job is new while editing the truck and driver
         startActivity(intent);
 
     }
@@ -523,7 +518,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             mSheetLayout.contractFab();
         }
     }
-// gettin the loading details and assigned driver details
+
+    // getting the loading details and assigned driver details
     public void getLoadingJobDeatails(String job_id) {
 
         showProgressDialog(PostedJobDetailsActivity.this, "Loading");
@@ -580,11 +576,11 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     }
 
     // for sending new message to customer or drvier
-    private void sendMessage(String subject, String message,String message_type_id) {
+    private void sendMessage(String subject, String message, String message_type_id) {
 
         showProgressDialog(PostedJobDetailsActivity.this, "sending...");
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        String acess_token = AppController.getString(getApplicationContext(),  "acess_token");
+        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         Call<MessageCreateResponse> call = apiService.CreateMessage(GloablMethods.API_HEADER + acess_token, JobId, message_type_id, subject, message);
         call.enqueue(new Callback<MessageCreateResponse>() {
             @Override
