@@ -245,7 +245,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
-        dark_bg = findViewById(R.id.id_dark_bg);
+        dark_bg = findViewById(R.id.background_dimmer);
         floatingActionMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
             @Override
             public void onMenuToggle(boolean opened) {

@@ -1371,23 +1371,22 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/background_dimmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/id_dark_bg"
-        android:visibility="gone"
-        android:background="#85000000"/>
-
+        android:background="#85000000"
+        android:visibility="gone" />
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/floating_action_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         fab:menu_animationDelayPerItem="55"
-        fab:menu_backgroundColor="@android:color/transparent"
+        fab:menu_backgroundColor="#85000000"
         fab:menu_buttonSpacing="0dp"
         fab:menu_colorNormal = "#000"
         fab:menu_colorPressed="@color/colorAccent"
@@ -1422,7 +1421,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_envelop"
-
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label = "Message Driver "
             fab:fab_size="mini" />
