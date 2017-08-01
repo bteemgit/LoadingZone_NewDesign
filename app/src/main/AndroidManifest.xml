@@ -61,7 +61,9 @@
         <activity android:name=".modules.message.MessageDetailListActivity" />
         <activity android:name=".modules.ForgotOrChangePassword.ForgotPassword" />
         <activity android:name=".modules.ForgotOrChangePassword.ChangePassword" />
-        <activity android:name=".modules.nottification.NottificationListActivity"></activity>
+        <activity android:name=".modules.nottification.NottificationListActivity" />
+        <activity android:name=".modules.myjob.EditAvailbleDriverOrTruckActivity" />
+        <activity android:name=".modules.myjob.AvailableTruckOrDriverActivity"></activity>
     </application>
 
 </manifest>

@@ -33,4 +33,5 @@
     <string name="truck_add_title">Truck Add</string>
     <string name="driver">Drivers</string>
     <string name="my_qutation">My Quotation</string>
+    <string name="request_to_change_the_prfered_date_and_time">Request To Change the Prfered Date and Time</string>
 </resources>

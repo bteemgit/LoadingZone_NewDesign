@@ -120,21 +120,21 @@ public class SelectActvieTruckActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
 
                 String driver_exist = listTrckAvailble.get(position).getDriver_exists();
-                String driver_id=null,driver_name=null,driver_pic=null;
+                String driver_id = null, driver_name = null, driver_pic = null;
                 if (driver_exist.equals("true")) {
                     driver_id = String.valueOf(listTrckAvailble.get(position).getDriver().getDriverId());
-                    driver_name=listTrckAvailble.get(position).getDriver().getDriverName();
-                    driver_pic=listTrckAvailble.get(position).getDriver().getDriverPic();
+                    driver_name = listTrckAvailble.get(position).getDriver().getDriverName();
+                    driver_pic = listTrckAvailble.get(position).getDriver().getDriverPic();
                 } else {
                     driver_id = "driver_isnot_assigned";
                 }
                 String truck_id = String.valueOf(listTrckAvailble.get(position).getProviderVehicleId());
-                String truck_name=listTrckAvailble.get(position).getCustomName();
-                String truck_maker=listTrckAvailble.get(position).getVehicle().getManufacturer().getMakerName();
-                String truck_type=listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
-                String truck_dimension=listTrckAvailble.get(position).getVehicle().getDimension();
+                String truck_name = listTrckAvailble.get(position).getCustomName();
+                String truck_maker = listTrckAvailble.get(position).getVehicle().getManufacturer().getMakerName();
+                String truck_type = listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
+                String truck_dimension = listTrckAvailble.get(position).getVehicle().getDimension();
                 Intent i = new Intent();
-                Log.d("provider_vehicle_id",truck_id);
+                Log.d("provider_vehicle_id", truck_id);
                 i.putExtra("driver_id", driver_id);
                 i.putExtra("truck_id", truck_id);
                 i.putExtra("truck_name", truck_name);
@@ -155,7 +155,7 @@ public class SelectActvieTruckActivity extends BaseActivity {
             () {
 
         if (offset == 1) {
-           showProgressDialog(SelectActvieTruckActivity.this, "loading");
+            showProgressDialog(SelectActvieTruckActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
         }
@@ -169,14 +169,14 @@ public class SelectActvieTruckActivity extends BaseActivity {
 
 
                 refreshLayout.setRefreshing(false);
-               hideProgressDialog();
+                hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getAvailableTrucks().isEmpty()) {
                         List<AvailableTruck> availableTruckList = response.body().getAvailableTrucks();
                         if (offset == 1) {
                             listTrckAvailble = availableTruckList;
                             updateEndlessRecyclerView();
-                       hideProgressDialog();
+                            hideProgressDialog();
                         } else {
                             progressBar.setVisibility(View.VISIBLE);
                             for (AvailableTruck itemModel : availableTruckList) {
@@ -201,7 +201,7 @@ public class SelectActvieTruckActivity extends BaseActivity {
                     endlessRecyclerViewTrucks.setHaveMoreItem(false);
                 }
                 if (!response.isSuccessful()) {
-   showSnakBar(relativeLayoutRoot, MessageConstants.SERVERERROR);
+                    showSnakBar(relativeLayoutRoot, MessageConstants.SERVERERROR);
                 }
                 progressBar.setVisibility(View.GONE);
             }

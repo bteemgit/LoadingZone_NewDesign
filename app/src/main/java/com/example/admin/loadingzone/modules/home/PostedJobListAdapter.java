@@ -102,7 +102,7 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());
         holder.textViewTruckDimension.setText(jobList.get(position).getQuotationCount());
         holder.textViewTruckDate.setText(jobList.get(position).getDateOfLoading());
-        holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
+       // holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
 
         holder.daterequestedrelative.setText(jobList.get(position).getDateRequestedRelative());
 

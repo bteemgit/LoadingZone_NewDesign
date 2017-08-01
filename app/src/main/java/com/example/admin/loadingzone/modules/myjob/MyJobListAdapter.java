@@ -88,7 +88,7 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         holder.textViewTruckType.setText(jobList.get(position).getTruckType().getTruckTypeName());
         holder.textViewTruckDimension.setText(jobList.get(position).getTruckSize().getTruckSizeDimension());
         holder.textViewTruckDate.setText(jobList.get(position).getDateOfLoading());
-        holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
+        //holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
 
         Picasso.with(context)
                 .load(jobList.get(position).getCustomer().getProfilePic())

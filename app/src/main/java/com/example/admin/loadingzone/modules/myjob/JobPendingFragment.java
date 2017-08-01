@@ -148,11 +148,11 @@ public class JobPendingFragment extends Fragment {
                 String TruckType_id = jobList.get(position).getTruckType().getTruckTypeId();
                 String TruckSize_dimension = jobList.get(position).getTruckSize().getTruckSizeDimension();
                 Integer TruckSize_id = jobList.get(position).getTruckSize().getTruckSizeId();
-                String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
+            //    String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
                 String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
-                String Budget = jobList.get(position).getBudget();
+              //  String Budget = jobList.get(position).getBudget();
                 String QuotationCount = jobList.get(position).getQuotationCount();
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();
@@ -180,11 +180,11 @@ public class JobPendingFragment extends Fragment {
                 i.putExtra("TruckType_id", TruckType_id);
                 i.putExtra("TruckSize_id", TruckSize_id);
                 i.putExtra("TruckSize_dimension", TruckSize_dimension);
-                i.putExtra("Currency_name", Currency_name);
+               // i.putExtra("Currency_name", Currency_name);
                 i.putExtra("LocationDistance", LocationDistance);
                 i.putExtra("DateRequested", DateRequested);
                 i.putExtra("DateRequestedRelative", DateRequestedRelative);
-                i.putExtra("Budget", Budget);
+            //;    i.putExtra("Budget", Budget);
                 i.putExtra("QuotationCount", QuotationCount);
                 i.putExtra("HasActiveQuotations", HasActiveQuotations);
                 i.putExtra("JobStatus", JobStatus);

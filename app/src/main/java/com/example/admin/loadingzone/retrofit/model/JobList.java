@@ -39,9 +39,7 @@ public class JobList {
     @SerializedName("truck_size")
     @Expose
     private TruckSize truckSize;
-    @SerializedName("currency")
-    @Expose
-    private Currency currency;
+
     @SerializedName("location_distance")
     @Expose
     private Double locationDistance;
@@ -51,9 +49,12 @@ public class JobList {
     @SerializedName("date_requested_relative")
     @Expose
     private String dateRequestedRelative;
-    @SerializedName("budget")
+    @SerializedName("loading_date")
     @Expose
-    private String budget;
+    private String loadingDate;
+    @SerializedName("loading_time")
+    @Expose
+    private String loadingTime;
     @SerializedName("quotation_count")
     @Expose
     private String quotationCount;
@@ -164,14 +165,6 @@ public class JobList {
         this.truckSize = truckSize;
     }
 
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
     public Double getLocationDistance() {
         return locationDistance;
     }
@@ -196,12 +189,20 @@ public class JobList {
         this.dateRequestedRelative = dateRequestedRelative;
     }
 
-    public String getBudget() {
-        return budget;
+    public String getLoadingDate() {
+        return loadingDate;
     }
 
-    public void setBudget(String budget) {
-        this.budget = budget;
+    public void setLoadingDate(String loadingDate) {
+        this.loadingDate = loadingDate;
+    }
+
+    public String getLoadingTime() {
+        return loadingTime;
+    }
+
+    public void setLoadingTime(String loadingTime) {
+        this.loadingTime = loadingTime;
     }
 
     public String getQuotationCount() {

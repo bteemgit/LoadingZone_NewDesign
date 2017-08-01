@@ -98,21 +98,16 @@ public class HomeActivity extends BaseActivity
     ProgressBar progressBar;
     @BindView(R.id.rootView)
     RelativeLayout relativeLayoutRoot;
-
     @BindView(R.id.id_profile_xml)
     LinearLayout linear_profile;
     @BindView(R.id.id_linear_myquotation)
     LinearLayout linear_myquotation;
     @BindView(R.id.id_linearmyJob)
     LinearLayout linear_linearmyJob;
-
     @BindView(R.id.nav_changepassword)
     LinearLayout linear_changepassword;
-
-
     @BindView(R.id.drawer_layout)
     DrawerLayout nav_drawer;
-
     @BindView(R.id.id_img_logout)
     ImageView img_logout;
 
@@ -124,11 +119,9 @@ public class HomeActivity extends BaseActivity
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
-            if (isConnectingToInternet(getApplicationContext()))
-            {
-              getJobPosted();
-            }
-            else {
+            if (isConnectingToInternet(getApplicationContext())) {
+                getJobPosted();
+            } else {
                 showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
             }
         }
@@ -188,26 +181,17 @@ public class HomeActivity extends BaseActivity
         setUpListeners();
 
 
-        if (isConnectingToInternet(getApplicationContext()))
-        {
+        if (isConnectingToInternet(getApplicationContext())) {
             getJobPosted();
-        }
-        else {
+        } else {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
 
-       //linear_profile.setOnClickListener(this);
-       // linear_myquotation.setOnClickListener(this);
-       // linear_linearmyJob.setOnClickListener(this);
-       // img_logout.setOnClickListener(this);
-       // linear_changepassword.setOnClickListener(this);
-        //setting datas to navigation drawer
-
-        TextView text_users_name = (TextView)findViewById(R.id.id_text_users_name);
+        TextView text_users_name = (TextView) findViewById(R.id.id_text_users_name);
         text_users_name.setText(AppController.getString(getApplicationContext(), "customer_name"));
-        TextView text_usersemail = (TextView)findViewById(R.id.id_text_usersemail);
+        TextView text_usersemail = (TextView) findViewById(R.id.id_text_usersemail);
         text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
-        ImageView user_imageView = (ImageView)findViewById(R.id.imageView6);
+        ImageView user_imageView = (ImageView) findViewById(R.id.imageView6);
         Context context = this;
         Picasso.with(context)
                 .load("http://i.imgur.com/DvpvklR.png")
@@ -236,7 +220,7 @@ public class HomeActivity extends BaseActivity
 
     @OnClick(R.id.id_linear_myquotation)
     void nav_myquotationClick() {
-        Intent intent = new Intent(getApplicationContext(),MyQuotationActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MyQuotationActivity.class);
         nav_drawer.closeDrawers();
         startActivity(intent);
     }
@@ -259,9 +243,8 @@ public class HomeActivity extends BaseActivity
 
     @NonNull
     @OnClick(R.id.nav_notification)
-    public void navNottification()
-    {
-        Intent i=new Intent(getApplicationContext(), NottificationListActivity.class);
+    public void navNottification() {
+        Intent i = new Intent(getApplicationContext(), NottificationListActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         nav_drawer.closeDrawers();
         startActivity(i);
@@ -274,8 +257,6 @@ public class HomeActivity extends BaseActivity
     }
 
 
-
-
     private void setUpListeners() {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -285,7 +266,7 @@ public class HomeActivity extends BaseActivity
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
-                  getJobPosted();
+                getJobPosted();
             }
         });
 
@@ -294,12 +275,13 @@ public class HomeActivity extends BaseActivity
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent i=new Intent(HomeActivity.this,PostedJobDetailsActivity.class);
+                Intent i = new Intent(HomeActivity.this, PostedJobDetailsActivity.class);
                 String JobId = jobList.get(position).getJobId();
+                String job_date = jobList.get(position).getLoadingDate();
+                String job_time = jobList.get(position).getLoadingTime();
                 String name = jobList.get(position).getCustomer().getName();
                 String email = jobList.get(position).getCustomer().getEmail();
-                String
-                        phone1 = jobList.get(position).getCustomer().getPhone1();
+                String phone1 = jobList.get(position).getCustomer().getPhone1();
                 String profilepic = jobList.get(position).getCustomer().getProfilePic();
                 String FromLoc_latt = jobList.get(position).getFromLocation().getLatitude();
                 String FromLoc_long = jobList.get(position).getFromLocation().getLongitude();
@@ -310,7 +292,7 @@ public class HomeActivity extends BaseActivity
                 String Material_name = jobList.get(position).getMaterial().getMaterialName();
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
-                String weight =jobList.get(position).getWeight();
+                String weight = jobList.get(position).getWeight();
                 String DateOfLoading = jobList.get(position).getDateOfLoading();
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
@@ -318,47 +300,46 @@ public class HomeActivity extends BaseActivity
                 String TruckType_id = jobList.get(position).getTruckType().getTruckTypeId();
                 String TruckSize_dimension = jobList.get(position).getTruckSize().getTruckSizeDimension();
                 Integer TruckSize_id = jobList.get(position).getTruckSize().getTruckSizeId();
-                String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
                 String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
-                String Budget = jobList.get(position).getBudget();
+
                 String QuotationCount = jobList.get(position).getQuotationCount();
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();
-                String job_status_code=jobList.get(position).getJobStatus().getCode();
-                i.putExtra("isFrom","Home");
-                i.putExtra("JobId",JobId);
-                i.putExtra("name",name);
-                i.putExtra("email",email);
-                i.putExtra("phone1",phone1);
-                i.putExtra("profilepic",profilepic);
-                i.putExtra("FromLoc_latt",FromLoc_latt);
-                i.putExtra("FromLoc_long",FromLoc_long);
-                i.putExtra("FromLoc_name",FromLoc_name);
-                i.putExtra("ToLoc_latt",ToLoc_latt);
-                i.putExtra("ToLoc_long",ToLoc_long);
-                i.putExtra("ToLoc_name",ToLoc_name);
-                i.putExtra("Material_name",Material_name);
-                i.putExtra("Material_id",Material_id);
-                i.putExtra("MaterialDescription",MaterialDescription);
-                i.putExtra("weight",weight);
-                i.putExtra("DateOfLoading",DateOfLoading);
-                i.putExtra("PaymentType_name",PaymentType_name);
-                i.putExtra("PaymentType_id",PaymentType_id);
-                i.putExtra("TruckType_name",TruckType_name);
-                i.putExtra("TruckType_id",TruckType_id);
-                i.putExtra("TruckSize_id",TruckSize_id);
-                i.putExtra("TruckSize_dimension",TruckSize_dimension);
-                i.putExtra("job_status_code",job_status_code);
-                i.putExtra("LocationDistance",LocationDistance);
-                i.putExtra("DateRequested",DateRequested);
-                i.putExtra("DateRequestedRelative",DateRequestedRelative);
-                i.putExtra("Budget",Budget);
-                i.putExtra("QuotationCount",QuotationCount);
-                i.putExtra("HasActiveQuotations",HasActiveQuotations);
-                i.putExtra("JobStatus",JobStatus);
-                i.putExtra("Currency_name",Currency_name);
+                String job_status_code = jobList.get(position).getJobStatus().getCode();
+                i.putExtra("isFrom", "Home");
+                i.putExtra("job_date", job_date);
+                i.putExtra("job_time", job_time);
+                i.putExtra("JobId", JobId);
+                i.putExtra("name", name);
+                i.putExtra("email", email);
+                i.putExtra("phone1", phone1);
+                i.putExtra("profilepic", profilepic);
+                i.putExtra("FromLoc_latt", FromLoc_latt);
+                i.putExtra("FromLoc_long", FromLoc_long);
+                i.putExtra("FromLoc_name", FromLoc_name);
+                i.putExtra("ToLoc_latt", ToLoc_latt);
+                i.putExtra("ToLoc_long", ToLoc_long);
+                i.putExtra("ToLoc_name", ToLoc_name);
+                i.putExtra("Material_name", Material_name);
+                i.putExtra("Material_id", Material_id);
+                i.putExtra("MaterialDescription", MaterialDescription);
+                i.putExtra("weight", weight);
+                i.putExtra("DateOfLoading", DateOfLoading);
+                i.putExtra("PaymentType_name", PaymentType_name);
+                i.putExtra("PaymentType_id", PaymentType_id);
+                i.putExtra("TruckType_name", TruckType_name);
+                i.putExtra("TruckType_id", TruckType_id);
+                i.putExtra("TruckSize_id", TruckSize_id);
+                i.putExtra("TruckSize_dimension", TruckSize_dimension);
+                i.putExtra("job_status_code", job_status_code);
+                i.putExtra("LocationDistance", LocationDistance);
+                i.putExtra("DateRequested", DateRequested);
+                i.putExtra("DateRequestedRelative", DateRequestedRelative);
+                i.putExtra("QuotationCount", QuotationCount);
+                i.putExtra("HasActiveQuotations", HasActiveQuotations);
+                i.putExtra("JobStatus", JobStatus);
                 startActivity(i);
 
             }
@@ -387,11 +368,11 @@ public class HomeActivity extends BaseActivity
     private void selectFragment(MenuItem item) {
         // init corresponding fragment
 
-        if (item!=null)
+        if (item != null)
             switch (item.getItemId()) {
                 case R.id.mHome:
-                   getJobPosted();
-                   break;
+                    getJobPosted();
+                    break;
                 case R.id.mDriver:
                     Intent intent = new Intent(HomeActivity.this, DriverViewActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -408,7 +389,7 @@ public class HomeActivity extends BaseActivity
                     startActivity(intent1);
                     break;
                 case R.id.mChat:
-                    Intent intent2= new Intent(HomeActivity.this, MessageListViewActivity.class);
+                    Intent intent2 = new Intent(HomeActivity.this, MessageListViewActivity.class);
                     intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent2);
                     break;
@@ -445,20 +426,15 @@ public class HomeActivity extends BaseActivity
             }, 200);
 
 
-        }
-        else if(id==R.id.nav_myjob)
-        {
+        } else if (id == R.id.nav_myjob) {
             Intent intent = new Intent(HomeActivity.this, MyJobtabViewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if(id==R.id.nav_myqutation)
-        {
+        } else if (id == R.id.nav_myqutation) {
             Intent intent = new Intent(HomeActivity.this, MyQuotationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-            else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             Logout();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -517,7 +493,7 @@ public class HomeActivity extends BaseActivity
             public void onResponse(Call<PostedJobResponse> call, retrofit2.Response<PostedJobResponse> response) {
                 refreshLayout.setRefreshing(false);
                 hideProgressDialog();
-                if (response.isSuccessful() ) {
+                if (response.isSuccessful()) {
                     if (!response.body().getJobList().isEmpty()) {
                         List<JobList> JobList = response.body().getJobList();
                         if (offset == 1) {

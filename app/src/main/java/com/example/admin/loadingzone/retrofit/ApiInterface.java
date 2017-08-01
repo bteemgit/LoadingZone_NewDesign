@@ -3,6 +3,7 @@ package com.example.admin.loadingzone.retrofit;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.retrofit.model.ActiveTrucklistResponse;
 import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
+import com.example.admin.loadingzone.retrofit.model.AvailbaleDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.ChangePasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
@@ -138,11 +139,11 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("quotation")
-    Call<QutationApplyResponse> ApplyQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description);
+    Call<QutationApplyResponse> ApplyQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description,@Field("loading_date") String loading_date,@Field("loading_time")String loading_time);
 
     @FormUrlEncoded
     @PUT("quotation/{quotation_id}")
-    Call<QutationApplyResponse> UpdateQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description);
+    Call<QutationApplyResponse> UpdateQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id, @Field("quotation_amount") String quotation_amount, @Field("quotation_description") String quotation_description,@Field("loading_date") String loading_date,@Field("loading_time")String loading_time);
 
     @DELETE("quotation/{quotation_id}")
     Call<QutationApplyResponse> DeleteQutation(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id);
@@ -172,6 +173,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("job/block-vehicle")
     Call<BlockTruckandDriverResponse> BlockTruckandDriverResponse(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("provider_vehicle_id") String provider_vehicle_id, @Field("job_driver_id") String job_driver_id, @Field("expected_start_date") String expected_start_date, @Field("expected_end_date") String expected_end_date);
+    @FormUrlEncoded
+    @POST("job/change-job-vehicle")
+    Call<BlockTruckandDriverResponse> EditDriverOrTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("provider_vehicle_id") String provider_vehicle_id, @Field("job_driver_id") String job_driver_id);
 
     @FormUrlEncoded
     @POST("job/block-vehicle")
@@ -208,5 +212,7 @@ public interface ApiInterface {
     Call<QuotationDetailsResponse> GetQuotationDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("quotation_id") String quotation_id);
     @GET("job/load-details")
     Call<JobLoaddetailsResponse> GetLoadingDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("job_id") String job_id);
+    @GET("service-provider/available-drivers")
+    Call<AvailbaleDriverResponse> AvailbleDriverList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("expected_start_date") String expected_start_date, @Query("expected_end_date") String expected_end_date, @Query("page") int page);
 
 }

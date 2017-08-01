@@ -33,6 +33,7 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.modules.login.LoginActivity;
+import com.example.admin.loadingzone.modules.myjob.EditAvailbleDriverOrTruckActivity;
 import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
 import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
@@ -122,9 +123,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.textPaymentMode)
     TextView textViewPaymentMode;
-    @NonNull
-    @BindView(R.id.textCurrency)
-    TextView textViewCurrency;
+
     @NonNull
     @BindView(R.id.bottom_sheet)
     SheetLayout mSheetLayout;
@@ -229,9 +228,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     String CutomerMobile = null;
     View dark_bg;
     private static int REQUEST_CODE = 41;
-    String JobId, isFrom, job_status_code;
+    String JobId, isFrom, job_status_code,job_time,job_date;
     private ApiInterface apiService;
-
+    public static String IsEditVehicle="EditVehicle";
+    public static String IsEditDriver="EditDriver";
 
 
 
@@ -258,7 +258,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
             }
         });
-
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
         isFrom = getIntent().getStringExtra("isFrom");
@@ -282,8 +281,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         String TruckSize = getIntent().getStringExtra("TruckSize_dimension");
         String TruckType = getIntent().getStringExtra("TruckType_name");
         String PaymentMode = getIntent().getStringExtra("PaymentType_name");
-        String Currency = getIntent().getStringExtra("Currency_name");
         job_status_code = getIntent().getStringExtra("job_status_code");
+        job_date = getIntent().getStringExtra("job_date");
+        job_time = getIntent().getStringExtra("job_time");
         Log.d("job_status_code", job_status_code);
         if (isFrom.equals("Home")) {
             linerUserstaus.setVisibility(View.VISIBLE);
@@ -338,7 +338,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         textViewTruckSize.setText(TruckSize);
         textViewTruckType.setText(TruckType);
         textViewPaymentMode.setText(PaymentMode);
-        textViewCurrency.setText(Currency);
+        //textViewCurrency.setText(Currency);
         Picasso.with(PostedJobDetailsActivity.this)
                 .load(profilepic)
                 .placeholder(R.drawable.img_circle_placeholder)
@@ -374,6 +374,23 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @OnClick(R.id.ivEditDriver)
     public void editDriver() {
 
+        String start_date=textStartDate.getText().toString().trim();
+        String start_time=textStartTime.getText().toString().trim();
+        String end_time=textEndTime.getText().toString().trim();
+        String end_date=textEndDate.getText().toString().trim();
+        // if job_status_code is equals to vehicle-blocked then the driver is not started the job ,only these condition we can change the truck and driver
+        if (job_status_code.equals("vehicle-blocked"))
+        {
+            Intent intent = new Intent(getApplicationContext(), EditAvailbleDriverOrTruckActivity.class);
+            intent.putExtra("JobId", JobId);
+            intent.putExtra("jobStatus",IsEditDriver); // for identyfying teh job is new while editing the truck and driver
+            intent.putExtra("start_date",start_date);
+            intent.putExtra("start_time",start_time);
+            intent.putExtra("end_time",end_time);
+            intent.putExtra("end_date",end_date);
+            startActivityForResult(intent, 2);
+        }
+
     }
     // change Truck from assigned job
     @NonNull
@@ -383,14 +400,19 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         String start_time=textStartTime.getText().toString().trim();
         String end_time=textEndTime.getText().toString().trim();
         String end_date=textEndDate.getText().toString().trim();
-        Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
-        intent.putExtra("JobId", JobId);
-        intent.putExtra("jobStatus","EditJob"); // for identyfying teh job is new while editing the truck and driver
-        intent.putExtra("start_date",start_date);
-        intent.putExtra("start_time",start_time);
-        intent.putExtra("end_time",end_time);
-        intent.putExtra("end_date",end_date);
-        startActivity(intent);
+        // if job_status_code is equals to vehicle-blocked then the driver is not started the job ,only these condition we can change the truck and driver
+        if (job_status_code.equals("vehicle-blocked"))
+        {
+            Intent intent = new Intent(getApplicationContext(), EditAvailbleDriverOrTruckActivity.class);
+            intent.putExtra("JobId", JobId);
+            intent.putExtra("jobStatus",IsEditVehicle); // for identyfying teh job is new while editing the truck and driver
+            intent.putExtra("start_date",start_date);
+            intent.putExtra("start_time",start_time);
+            intent.putExtra("end_time",end_time);
+            intent.putExtra("end_date",end_date);
+            startActivityForResult(intent, 2);
+        }
+
     }
 
 
@@ -508,6 +530,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         Intent intent = new Intent(getApplicationContext(), QuotationApply.class);
         intent.putExtra("JobId", JobId);
         intent.putExtra("qutation_id", "new");
+        intent.putExtra("job_date",job_date);
+        intent.putExtra("job_time",job_time);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -517,6 +541,15 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         if (requestCode == REQUEST_CODE) {
             mSheetLayout.contractFab();
         }
+        if (requestCode==2)
+        {
+            String isUpdated = data.getStringExtra("isUpdated");
+            if (isUpdated.equals("True"))
+            {
+                getLoadingJobDeatails(JobId);
+            }
+        }
+
     }
 
     // getting the loading details and assigned driver details
@@ -534,7 +567,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
                         textCustomVechicleName.setText(response.body().getAssignedVehicle().getVehicleDetails().getCustomName());
                         textAssignedTruckType.setText(response.body().getAssignedVehicle().getVehicleDetails().getVehicle().getTruckType().getTruckTypeName());
-                        textStartDate.setText(response.body().getAssignedVehicle().getJobStartingDate());
+                        textStartDate.setText(response.body().getAssignedVehicle().getExpectedStartDate());
                         textEndDate.setText(response.body().getAssignedVehicle().getExpectedEndDate());
                         textEndTime.setText(response.body().getAssignedVehicle().getExpectedEndTime());
                         textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
@@ -617,6 +650,5 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         });
     }
-
 
 }

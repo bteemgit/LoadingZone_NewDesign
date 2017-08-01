@@ -109,7 +109,7 @@ public class QutationDetailsActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.relativeSendMessage)
     RelativeLayout relativeSendMessage;
-    String qutation_id, quotationAmount, quotationDescription, job_id;
+    String qutation_id, quotationAmount, job_date,job_time,quotationDescription, job_id;
     private ApiInterface apiService;
     String isFrom;
 
@@ -127,6 +127,8 @@ public class QutationDetailsActivity extends BaseActivity {
         btnStartjob.setVisibility(View.GONE);
         qutation_id = getIntent().getStringExtra("qutation_id");
         job_id = getIntent().getStringExtra("job_id");
+        job_date = getIntent().getStringExtra("job_date");
+        job_time = getIntent().getStringExtra("job_time");
         String job_title = getIntent().getStringExtra("job_title");
         String cus_name = getIntent().getStringExtra("cus_name");
         String cus_email = getIntent().getStringExtra("cus_email");
@@ -262,6 +264,8 @@ public class QutationDetailsActivity extends BaseActivity {
         i.putExtra("qutation_id", qutation_id);
         i.putExtra("quotationAmount", quotationAmount);
         i.putExtra("quotationDescription", quotationDescription);
+        i.putExtra("job_time", job_time);
+        i.putExtra("job_date", job_date);
         i.putExtra("JobId", job_id);
         startActivity(i);
 

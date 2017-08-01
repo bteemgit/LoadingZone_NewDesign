@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -137,5 +140,19 @@ public class BaseActivity extends AppCompatActivity {
     protected void overridePendingTransitionExit() {
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
+    // converting the date and time to unixtimestamp
+    public long UnixTimeStampConvertion(int year, int month, int day, int hour, int minute) {
 
+        // String dtStart = "7/3/2017 12:5:10 GMT";
+        String dateToString = month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + "00" + " " + "GMT";
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z");
+        Date date = null;
+        try {
+            date = format.parse(dateToString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long unixTime = (long) date.getTime() / 1000;
+        return unixTime;
+    }
 }
