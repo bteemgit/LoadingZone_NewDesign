@@ -210,7 +210,6 @@ public class NottificationListActivity extends BaseActivity {
                 }
                 progressBar.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<NottificationListResponse> call, Throwable t) {
                 // Log error here since request failed
