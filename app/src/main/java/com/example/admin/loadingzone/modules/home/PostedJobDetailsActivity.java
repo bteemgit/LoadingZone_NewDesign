@@ -139,7 +139,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.btnStartjob)
     Button buttonJobStart;
-
+    @NonNull
+    @BindView(R.id.btnCanceljob)
+    Button buttonCanceljob;
     @NonNull
     @BindView(R.id.linear_assignedVehehicle_heading)
     LinearLayout linearAssignedVehicleHeading;
@@ -228,12 +230,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     String CutomerMobile = null;
     View dark_bg;
     private static int REQUEST_CODE = 41;
-    String JobId, isFrom, job_status_code,job_time,job_date;
+    String JobId, isFrom, job_status_code, job_time, job_date;
     private ApiInterface apiService;
-    public static String IsEditVehicle="EditVehicle";
-    public static String IsEditDriver="EditDriver";
-
-
+    public static String IsEditVehicle = "EditVehicle";
+    public static String IsEditDriver = "EditDriver";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,7 +284,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         job_status_code = getIntent().getStringExtra("job_status_code");
         job_date = getIntent().getStringExtra("job_date");
         job_time = getIntent().getStringExtra("job_time");
-        Log.d("job_status_code", job_status_code);
         if (isFrom.equals("Home")) {
             linerUserstaus.setVisibility(View.VISIBLE);
             fabQuotationApply.setVisibility(View.VISIBLE);
@@ -304,18 +303,24 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 linearAssignedVehicleItem.setVisibility(View.GONE);
                 linearJobstatusItem.setVisibility(View.GONE);
 
+            }
+        }
+        if (isFrom.equals("AssignedJob")) {
+            //the job can only cancel after the drver and vehicle is assignd and before the drvier loading the materials
+            if (job_status_code.equals("job-started") || job_status_code.equals("vehicle-blocked")) {
+                buttonCanceljob.setVisibility(View.VISIBLE);
             } else {
-                buttonJobStart.setVisibility(View.GONE);
-                // getting the loading details from the curesponding job
-                getLoadingJobDeatails(JobId);
-                linearAssignedVehicleHeading.setVisibility(View.VISIBLE);
-                linear_assignedDriver_heading.setVisibility(View.VISIBLE);
-                linearAssignedDriverItem.setVisibility(View.VISIBLE);
-                linearAssignedVehicleItem.setVisibility(View.VISIBLE);
-                linearJobstatusItem.setVisibility(View.VISIBLE);
-                liner_JobStatus_heading.setVisibility(View.VISIBLE);
+                buttonCanceljob.setVisibility(View.GONE);
             }
 
+            // getting the loading details from the curesponding job
+            getLoadingJobDeatails(JobId);
+            linearAssignedVehicleHeading.setVisibility(View.VISIBLE);
+            linear_assignedDriver_heading.setVisibility(View.VISIBLE);
+            linearAssignedDriverItem.setVisibility(View.VISIBLE);
+            linearAssignedVehicleItem.setVisibility(View.VISIBLE);
+            linearJobstatusItem.setVisibility(View.VISIBLE);
+            liner_JobStatus_heading.setVisibility(View.VISIBLE);
         }
 
 
@@ -359,57 +364,49 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         onBackPressed();
         return true;
     }
-
     @OnClick(R.id.fabQuotation)
     public void fabQuotationApply() {
         mSheetLayout.expandFab();
 
     }
-
-
-
-
     // change driver from assigned job
     @NonNull
     @OnClick(R.id.ivEditDriver)
     public void editDriver() {
 
-        String start_date=textStartDate.getText().toString().trim();
-        String start_time=textStartTime.getText().toString().trim();
-        String end_time=textEndTime.getText().toString().trim();
-        String end_date=textEndDate.getText().toString().trim();
+        String start_date = textStartDate.getText().toString().trim();
+        String start_time = textStartTime.getText().toString().trim();
+        String end_time = textEndTime.getText().toString().trim();
+        String end_date = textEndDate.getText().toString().trim();
         // if job_status_code is equals to vehicle-blocked then the driver is not started the job ,only these condition we can change the truck and driver
-        if (job_status_code.equals("vehicle-blocked"))
-        {
+        if (job_status_code.equals("vehicle-blocked")) {
             Intent intent = new Intent(getApplicationContext(), EditAvailbleDriverOrTruckActivity.class);
             intent.putExtra("JobId", JobId);
-            intent.putExtra("jobStatus",IsEditDriver); // for identyfying teh job is new while editing the truck and driver
-            intent.putExtra("start_date",start_date);
-            intent.putExtra("start_time",start_time);
-            intent.putExtra("end_time",end_time);
-            intent.putExtra("end_date",end_date);
+            intent.putExtra("jobStatus", IsEditDriver); // for identyfying teh job is new while editing the truck and driver
+            intent.putExtra("start_date", start_date);
+            intent.putExtra("start_time", start_time);
+            intent.putExtra("end_time", end_time);
+            intent.putExtra("end_date", end_date);
             startActivityForResult(intent, 2);
         }
-
     }
     // change Truck from assigned job
     @NonNull
     @OnClick(R.id.ivEditVechicle)
     public void editTruck() {
-        String start_date=textStartDate.getText().toString().trim();
-        String start_time=textStartTime.getText().toString().trim();
-        String end_time=textEndTime.getText().toString().trim();
-        String end_date=textEndDate.getText().toString().trim();
+        String start_date = textStartDate.getText().toString().trim();
+        String start_time = textStartTime.getText().toString().trim();
+        String end_time = textEndTime.getText().toString().trim();
+        String end_date = textEndDate.getText().toString().trim();
         // if job_status_code is equals to vehicle-blocked then the driver is not started the job ,only these condition we can change the truck and driver
-        if (job_status_code.equals("vehicle-blocked"))
-        {
+        if (job_status_code.equals("vehicle-blocked")) {
             Intent intent = new Intent(getApplicationContext(), EditAvailbleDriverOrTruckActivity.class);
             intent.putExtra("JobId", JobId);
-            intent.putExtra("jobStatus",IsEditVehicle); // for identyfying teh job is new while editing the truck and driver
-            intent.putExtra("start_date",start_date);
-            intent.putExtra("start_time",start_time);
-            intent.putExtra("end_time",end_time);
-            intent.putExtra("end_date",end_date);
+            intent.putExtra("jobStatus", IsEditVehicle); // for identyfying teh job is new while editing the truck and driver
+            intent.putExtra("start_date", start_date);
+            intent.putExtra("start_time", start_time);
+            intent.putExtra("end_time", end_time);
+            intent.putExtra("end_date", end_date);
             startActivityForResult(intent, 2);
         }
 
@@ -477,6 +474,12 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             call_action();
         }
     }
+// for canceling a job(the job can only cancel after the drver and vehicle is assignd and before the drvier loading the materials)
+    @NonNull
+    @OnClick(R.id.btnCanceljob)
+    public void cancelJob() {
+
+    }
 
     public void call_action() {
 
@@ -519,7 +522,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
         Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
         intent.putExtra("JobId", JobId);
-        intent.putExtra("jobStatus","StartNewJob"); // for identyfying teh job is new while editing the truck and driver
+        intent.putExtra("jobStatus", "StartNewJob"); // for identyfying teh job is new while editing the truck and driver
         startActivity(intent);
 
     }
@@ -530,8 +533,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         Intent intent = new Intent(getApplicationContext(), QuotationApply.class);
         intent.putExtra("JobId", JobId);
         intent.putExtra("qutation_id", "new");
-        intent.putExtra("job_date",job_date);
-        intent.putExtra("job_time",job_time);
+        intent.putExtra("job_date", job_date);
+        intent.putExtra("job_time", job_time);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -541,11 +544,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         if (requestCode == REQUEST_CODE) {
             mSheetLayout.contractFab();
         }
-        if (requestCode==2)
-        {
+        if (requestCode == 2) {
             String isUpdated = data.getStringExtra("isUpdated");
-            if (isUpdated.equals("True"))
-            {
+            if (isUpdated.equals("True")) {
                 getLoadingJobDeatails(JobId);
             }
         }

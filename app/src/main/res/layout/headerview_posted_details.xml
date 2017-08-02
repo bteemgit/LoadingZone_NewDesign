@@ -397,6 +397,19 @@
                         android:textColor="#ffffff"
                         android:textSize="12sp"
                         android:visibility="visible" />
+                    <Button
+                        android:id="@+id/btnCanceljob"
+                        android:layout_width="100dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="end"
+                        android:layout_marginRight="24dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/btn_following"
+                        android:text="Cancel Job"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
 
                 </LinearLayout>
 

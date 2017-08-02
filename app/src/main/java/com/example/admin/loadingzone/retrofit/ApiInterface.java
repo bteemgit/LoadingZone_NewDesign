@@ -214,5 +214,9 @@ public interface ApiInterface {
     Call<JobLoaddetailsResponse> GetLoadingDetails(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("job_id") String job_id);
     @GET("service-provider/available-drivers")
     Call<AvailbaleDriverResponse> AvailbleDriverList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("expected_start_date") String expected_start_date, @Query("expected_end_date") String expected_end_date, @Query("page") int page);
-
+    @GET("job/driver-assigned-jobs")
+    Call<PendingJobResponse> AssignedJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("service_provider_id") String service_provider_id, @Query("page") int page);
+    @FormUrlEncoded
+    @POST("quotation/cancel")
+    Call<ForgotPasswordResponse> CancelJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("quotation_id") String quotation_id, @Field("cancel_reason") String cancel_reason);
 }

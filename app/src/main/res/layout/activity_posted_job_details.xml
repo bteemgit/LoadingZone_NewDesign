@@ -1375,7 +1375,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/id_dark_bg"
+        android:id="@+id/background_dimmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#85000000"

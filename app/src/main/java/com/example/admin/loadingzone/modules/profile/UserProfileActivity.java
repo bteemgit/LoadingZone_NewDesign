@@ -24,6 +24,7 @@ import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
+import com.example.admin.loadingzone.modules.myjob.JobCompletedFragment;
 import com.example.admin.loadingzone.modules.myjob.JobPendingFragment;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
@@ -92,7 +93,7 @@ public class UserProfileActivity extends BaseActivity implements RevealBackgroun
     private String profilePhoto;
     private int[] tabIcons = {
             R.drawable.ic_truck_tab,
-            R.drawable.ic_tab_pending,
+          //  R.drawable.ic_tab_pending,
             R.drawable.ic_tab_complted
 
     };
@@ -142,10 +143,7 @@ String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLoca
         TextView newTab1 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
         newTab1.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
         tlUserProfileTabs.getTabAt(1).setCustomView(newTab1);
-        TextView newTab = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
-        //newTab.setText(R.string.completed); //tab label txt
-        newTab.setCompoundDrawablesWithIntrinsicBounds(tabIcons[2], 0, 0, 0);
-        tlUserProfileTabs.getTabAt(2).setCustomView(newTab);
+
     }
     @OnClick(R.id.btnEditProfile)
 public void navigateToEditProfile()
@@ -199,9 +197,8 @@ public void navigateToEditProfile()
 
     private void setupViewPager(ViewPager viewPager) {
         UserProfileActivity.ViewPagerAdapter adapter = new UserProfileActivity.ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new JobPendingFragment(), "Truck");
-        adapter.addFrag(new JobPendingFragment(), "Pending");
-        adapter.addFrag(new JobPendingFragment(), "Completed");
+        adapter.addFrag(new JobCompletedFragment(), "Completed");
+        adapter.addFrag(new JobCompletedFragment(), "Canceled");
         viewPager.setAdapter(adapter);
     }
 
@@ -250,7 +247,7 @@ public void navigateToEditProfile()
         vUserStats.animate().alpha(1).setDuration(200).setStartDelay(400).setInterpolator(INTERPOLATOR).start();
     }
 
-    //    // api call method for user profile details
+    // api call method for user profile details
     private void getuUserProfile() {
         showProgressDialog(UserProfileActivity.this, "Loading Profile..");
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
@@ -278,7 +275,7 @@ public void navigateToEditProfile()
                     textViewTrckCount.setText(countTruck);
                     textViewUserLocation.setText(userLocation);
                     Picasso.with(UserProfileActivity.this)
-                            .load("http://i.imgur.com/DvpvklR.png")
+                            .load(response.body().getProfilePic())
                             .placeholder(R.drawable.img_circle_placeholder)
                             .resize(avatarSize, avatarSize)
                             .centerCrop()

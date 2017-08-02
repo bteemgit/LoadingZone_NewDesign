@@ -30,7 +30,8 @@ public class MyJobtabViewActivity extends BaseActivity {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     JobPendingFragment pendingJobFragment;
-    JobCompletedFragment compltedJobFragment;
+    //JobCompletedFragment compltedJobFragment;
+    AssignedJobFragment assignedJobFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,8 @@ public class MyJobtabViewActivity extends BaseActivity {
     public void intalizeFragment()
     {
         pendingJobFragment=new JobPendingFragment();
-        compltedJobFragment=new JobCompletedFragment();
+       // compltedJobFragment=new JobCompletedFragment();
+        assignedJobFragment=new AssignedJobFragment();
 
     }
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -91,7 +93,8 @@ public class MyJobtabViewActivity extends BaseActivity {
     private void setupViewPager(ViewPager viewPager) {
         MyJobtabViewActivity.ViewPagerAdapter adapter = new MyJobtabViewActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(pendingJobFragment, "Pending");
-        adapter.addFrag(compltedJobFragment, "Completed");
+        adapter.addFrag(assignedJobFragment,"Assinged");
+//        adapter.addFrag(compltedJobFragment, "Completed");
         viewPager.setAdapter(adapter);
     }
 }
