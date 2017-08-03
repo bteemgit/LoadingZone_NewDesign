@@ -1,4 +1,4 @@
-package com.example.admin.loadingzone.modules.myjob;
+package com.example.admin.loadingzone.modules.profile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.modules.home.PostedJobListAdapter;
+import com.example.admin.loadingzone.modules.myjob.MyJobListAdapter;
 import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;

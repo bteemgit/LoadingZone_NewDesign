@@ -1,6 +1,7 @@
 package com.example.admin.loadingzone.modules.home;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,8 +17,11 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,6 +41,10 @@ import com.example.admin.loadingzone.modules.myjob.EditAvailbleDriverOrTruckActi
 import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
 import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
+import com.example.admin.loadingzone.modules.truck.TruckAddActivity;
+import com.example.admin.loadingzone.modules.truck.TruckNameListAdapter;
+import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
+import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
@@ -234,7 +242,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     private ApiInterface apiService;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
-
+    ReasonAdapterList reasonAdapterList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -651,5 +659,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         });
     }
+
+
 
 }

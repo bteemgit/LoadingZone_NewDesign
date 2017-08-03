@@ -5,6 +5,7 @@ import com.example.admin.loadingzone.retrofit.model.ActiveTrucklistResponse;
 import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
 import com.example.admin.loadingzone.retrofit.model.AvailbaleDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
+import com.example.admin.loadingzone.retrofit.model.CancelJobListResponse;
 import com.example.admin.loadingzone.retrofit.model.ChangePasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
@@ -219,4 +220,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("quotation/cancel")
     Call<ForgotPasswordResponse> CancelJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("quotation_id") String quotation_id, @Field("cancel_reason") String cancel_reason);
+    @GET("job/cancelled-list")
+    Call<CancelJobListResponse>CanceledJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
 }

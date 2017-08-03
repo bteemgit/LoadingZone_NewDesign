@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -24,8 +23,6 @@ import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
-import com.example.admin.loadingzone.modules.myjob.JobCompletedFragment;
-import com.example.admin.loadingzone.modules.myjob.JobPendingFragment;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.UserProfileResponse;
@@ -198,7 +195,7 @@ public void navigateToEditProfile()
     private void setupViewPager(ViewPager viewPager) {
         UserProfileActivity.ViewPagerAdapter adapter = new UserProfileActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new JobCompletedFragment(), "Completed");
-        adapter.addFrag(new JobCompletedFragment(), "Canceled");
+        adapter.addFrag(new JobCanceledFragment(), "Canceled");
         viewPager.setAdapter(adapter);
     }
 

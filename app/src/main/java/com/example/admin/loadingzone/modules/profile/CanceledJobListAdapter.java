@@ -1,4 +1,4 @@
-package com.example.admin.loadingzone.modules.myjob;
+package com.example.admin.loadingzone.modules.profile;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.loadingzone.R;
-import com.example.admin.loadingzone.modules.home.PostedJobListAdapter;
+import com.example.admin.loadingzone.modules.myjob.MyJobListAdapter;
+import com.example.admin.loadingzone.retrofit.model.CancelledJob;
 import com.example.admin.loadingzone.retrofit.model.JobList;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
@@ -22,16 +23,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by admin on 6/29/2017.
+ * Created by admin on 8/3/2017.
  */
 
-public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.ViewHolder> {
+public class CanceledJobListAdapter extends RecyclerView.Adapter<CanceledJobListAdapter.ViewHolder> {
 
-    private List<JobList> jobList = new ArrayList<>();
+    List<CancelledJob> joblistCanceled = new ArrayList<>();
     private int rowLayout;
     private Context context;
-
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @NonNull
         @BindView(R.id.textCustomerName)
@@ -41,24 +40,19 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         TextView textViewLocationFrom;
         @NonNull
         @BindView(R.id.textLocationTo)
-
         TextView textViewLocationTo;
         @NonNull
-        @BindView(R.id.textTruckType)
-        TextView textViewTruckType;
+        @BindView(R.id.textLoadingMaterial)
+        TextView textLoadingMaterial;
         @NonNull
-        @BindView(R.id.textTruckDimension)
-        TextView textViewTruckDimension;
+        @BindView(R.id.textCancelReason)
+        TextView textCancelReason;
         @NonNull
         @BindView(R.id.textTruckDate)
         TextView textViewTruckDate;
         @NonNull
-        @BindView(R.id.textTruckBudget)
-        TextView textViewTruckBudget;
-        @NonNull
         @BindView(R.id.imageViewCustomPic)
         ImageView imageViewCustomPic;
-
 
         public ViewHolder(View v) {
             super(v);
@@ -66,30 +60,30 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         }
     }
 
-    public MyJobListAdapter(List<JobList> jobList, int rowLayout, Context context) {
-        this.jobList = jobList;
+    public CanceledJobListAdapter(List<CancelledJob> joblistCanceled, int rowLayout, Context context) {
+        this.joblistCanceled = joblistCanceled;
         this.rowLayout = rowLayout;
         this.context = context;
     }
 
     @Override
-    public MyJobListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                              int viewType) {
+    public CanceledJobListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
-        return new MyJobListAdapter.ViewHolder(view);
+        return new CanceledJobListAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyJobListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CanceledJobListAdapter.ViewHolder holder, int position) {
 
-        holder.textViewCustomerName.setText(jobList.get(position).getCustomer().getName());
-        holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
-        holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
-        holder.textViewTruckType.setText(jobList.get(position).getTruckType().getTruckTypeName());
-        holder.textViewTruckDimension.setText(jobList.get(position).getTruckSize().getTruckSizeDimension());
-        holder.textViewTruckDate.setText(jobList.get(position).getDateOfLoading());
+        holder.textViewCustomerName.setText(joblistCanceled.get(position).getCustomer().getName());
+        holder.textViewLocationTo.setText(joblistCanceled.get(position).getToLocation().getName());
+        holder.textViewLocationFrom.setText(joblistCanceled.get(position).getFromLocation().getName());
+        holder.textLoadingMaterial.setText(joblistCanceled.get(position).getMaterial().getMaterialName());
+        holder.textCancelReason.setText(joblistCanceled.get(position).getCancelReason().getCancelReasonId().getQuotationCancelReason());
+        holder.textViewTruckDate.setText(joblistCanceled.get(position).getLoadingDate());
         Picasso.with(context)
-                .load(jobList.get(position).getCustomer().getProfilePic())
+                .load(joblistCanceled.get(position).getCustomer().getProfilePic())
                 .placeholder(R.drawable.img_circle_placeholder)
                 .resize(70, 70)
                 .centerCrop()
@@ -99,8 +93,8 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
 
     @Override
     public int getItemCount() {
-        if (jobList != null) {
-            return jobList.size();
+        if (joblistCanceled != null) {
+            return joblistCanceled.size();
         }
         return 0;
     }
