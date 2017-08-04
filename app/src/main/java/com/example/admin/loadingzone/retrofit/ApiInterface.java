@@ -6,6 +6,8 @@ import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
 import com.example.admin.loadingzone.retrofit.model.AvailbaleDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.CancelJobListResponse;
+import com.example.admin.loadingzone.retrofit.model.CancelJobReasonResponse;
+import com.example.admin.loadingzone.retrofit.model.CancelJobRequestResponse;
 import com.example.admin.loadingzone.retrofit.model.ChangePasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
 import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
@@ -195,7 +197,6 @@ public interface ApiInterface {
     @POST("message")
     Call<ReplyMessageResponse> ReplyMessage(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("message") String message, @Field("message_thread_id") String message_thread_id);
 
-
     @FormUrlEncoded
     @POST("main/forgot-password")
     Call<ForgotPasswordResponse> ForgotPassword(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("username") String username);
@@ -219,8 +220,10 @@ public interface ApiInterface {
     Call<PendingJobResponse> AssignedJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("service_provider_id") String service_provider_id, @Query("page") int page);
     @FormUrlEncoded
     @POST("quotation/cancel")
-    Call<ForgotPasswordResponse> CancelJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("quotation_id") String quotation_id, @Field("cancel_reason") String cancel_reason);
+    Call<CancelJobRequestResponse> CancelJob(@Header(GloablMethods.HEADER_AUTHORIZATION) String access_token, @Field("job_id") String job_id, @Field("cancel_reason_id") String cancel_reason_id, @Field("cancel_comment") String cancel_comment);
     @GET("job/cancelled-list")
     Call<CancelJobListResponse>CanceledJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+    @GET("quotation/cancel-reason")
+    Call<CancelJobReasonResponse>CancelJobReasonsList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
 
 }

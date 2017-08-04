@@ -1,27 +1,17 @@
 package com.example.admin.loadingzone.modules.home;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.transition.Transition;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,20 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
-import com.example.admin.loadingzone.SplashActivity;
+import com.example.admin.loadingzone.cancel_job.JobCancelReasonListActivity;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
-import com.example.admin.loadingzone.modules.login.LoginActivity;
 import com.example.admin.loadingzone.modules.myjob.EditAvailbleDriverOrTruckActivity;
 import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
-import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
-import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
-import com.example.admin.loadingzone.modules.truck.TruckAddActivity;
-import com.example.admin.loadingzone.modules.truck.TruckNameListAdapter;
-import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
-import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.JobLoaddetailsResponse;
@@ -56,22 +39,14 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import java.io.File;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.codetail.animation.SupportAnimator;
-import io.codetail.animation.ViewAnimationUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.R.attr.onClick;
 import static com.example.admin.loadingzone.R.id.floating_action_menu;
-import static com.example.admin.loadingzone.R.id.ivUserProfilePhoto;
-import static com.example.admin.loadingzone.R.id.rootView;
-import static com.example.admin.loadingzone.R.id.textTruckType;
 
 public class PostedJobDetailsActivity extends BaseActivity implements SheetLayout.OnFabAnimationEndListener {
     @NonNull
@@ -242,7 +217,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     private ApiInterface apiService;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
-    ReasonAdapterList reasonAdapterList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -372,11 +348,13 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         onBackPressed();
         return true;
     }
+
     @OnClick(R.id.fabQuotation)
     public void fabQuotationApply() {
         mSheetLayout.expandFab();
 
     }
+
     // change driver from assigned job
     @NonNull
     @OnClick(R.id.ivEditDriver)
@@ -398,6 +376,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             startActivityForResult(intent, 2);
         }
     }
+
     // change Truck from assigned job
     @NonNull
     @OnClick(R.id.ivEditVechicle)
@@ -482,11 +461,14 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             call_action();
         }
     }
-// for canceling a job(the job can only cancel after the drver and vehicle is assignd and before the drvier loading the materials)
+
+    // for canceling a job(the job can only cancel after the drver and vehicle is assignd and before the drvier loading the materials)
     @NonNull
     @OnClick(R.id.btnCanceljob)
     public void cancelJob() {
-
+        Intent i = new Intent(PostedJobDetailsActivity.this, JobCancelReasonListActivity.class);
+      i.putExtra("JobId",JobId);
+        startActivity(i);
     }
 
     public void call_action() {
@@ -659,7 +641,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         });
     }
-
 
 
 }

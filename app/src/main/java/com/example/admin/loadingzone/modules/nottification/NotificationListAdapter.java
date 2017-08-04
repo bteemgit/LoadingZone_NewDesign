@@ -29,13 +29,12 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     private Context context;
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder  {
 
         TextView textViewNottificationMsg;
         RelativeLayout linearLayoutNottification;
         TextView textNotificationDate;
         TextView textJobTitle;
-
         ImageView img;
 
         public ViewHolder(View v) {
@@ -45,16 +44,12 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             textNotificationDate = (TextView) v.findViewById(R.id.text_notificationDate);
             linearLayoutNottification = (RelativeLayout) v.findViewById(R.id.liner_nottifiction);
             textJobTitle = (TextView) v.findViewById(R.id.text_jobTitle);
-
             img = (ImageView) v.findViewById(R.id.imageLogo_quot);
 
 
         }
 
-        @Override
-        public void onClick(View v) {
 
-        }
     }
 
     public NotificationListAdapter(List<NotificationList> nottificationList, int rowLayout, Context context) {
