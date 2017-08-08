@@ -22,7 +22,6 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -65,7 +64,7 @@
         <activity android:name=".modules.myjob.EditAvailbleDriverOrTruckActivity" />
         <activity android:name=".modules.myjob.AvailableTruckOrDriverActivity" />
         <activity android:name=".cancel_job.JobCancelReasonListActivity" />
-        <activity android:name=".cancel_job.CancelJobActivity"></activity>
+        <activity android:name=".cancel_job.CancelJobActivity" />
 
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>

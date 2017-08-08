@@ -62,8 +62,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity {
     // for bottom menu
     private static final String SELECTED_ITEM = "arg_selected_item";
     private BottomNavigationView mBottomNav;
@@ -100,6 +99,7 @@ public class HomeActivity extends BaseActivity
     private int limit = 30;
     private int offset = 1;
     private boolean hasReachedTop = false;
+    // endless scroll hamdler
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -115,7 +115,39 @@ public class HomeActivity extends BaseActivity
             hasReachedTop = true;
         }
     };
-    String profilepic="01";
+
+    // bottom navigation click listner
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.mHome:
+                    getJobPosted();
+                    return true;
+                case R.id.mDriver:
+                    Intent intent = new Intent(HomeActivity.this, DriverViewActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    return true;
+                case R.id.mTruck:
+                    Intent i = new Intent(HomeActivity.this, TruckViewActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    return true;
+                case R.id.mChat:
+                    Intent intent2 = new Intent(HomeActivity.this, MessageListViewActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent2);
+                    return true;
+            }
+            return false;
+        }
+
+    };
+    String profilepic = "01";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,55 +166,29 @@ public class HomeActivity extends BaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        // bottom navigation
-
-        BottomNavigationViewHelper.disableShiftMode(mBottomNav);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectFragment(item);
-                return true;
-            }
-        });
-
-        MenuItem selectedItem;
-        if (savedInstanceState != null) {
-            mSelectedItem = savedInstanceState.getInt(SELECTED_ITEM, 1);
-            selectedItem = mBottomNav.getMenu().findItem(mSelectedItem);
-        } else {
-            selectedItem = mBottomNav.getMenu().getItem(0);
-        }
-        selectFragment(selectedItem);
-
+        BottomNavigationViewHelper.disableShiftMode(mBottomNav);   // bottom navigation disabling the animations
+        mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         refreshLayout.setRefreshing(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         endlessRecyclerViewPostedJob.setLayoutManager(layoutManager);
         setUpListeners();
-
-
         if (isConnectingToInternet(getApplicationContext())) {
             getJobPosted();
         } else {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
+// setting the drawer header items
 
-       profilepic=AppController.getString(getApplicationContext(),"provider_pic");
+        profilepic = AppController.getString(getApplicationContext(), "provider_pic");
         TextView text_users_name = (TextView) findViewById(R.id.id_text_users_name);
         text_users_name.setText(AppController.getString(getApplicationContext(), "customer_name"));
         TextView text_usersemail = (TextView) findViewById(R.id.id_text_usersemail);
         text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
         ImageView user_imageView = (ImageView) findViewById(R.id.imageView6);
         Context context = this;
-        if (profilepic.length()<3){
-            Log.d("hgh",profilepic);
-        }
-        else
-        {
+        if (profilepic.length() < 3) {
+            Log.d("profile", profilepic);
+        } else {
             Picasso.with(context)
                     .load(profilepic)
                     .resize(70, 70)
@@ -274,7 +280,7 @@ public class HomeActivity extends BaseActivity
                 String name = jobList.get(position).getCustomer().getName();
                 String email = jobList.get(position).getCustomer().getEmail();
                 String phone1 = jobList.get(position).getCustomer().getPhone1();
-                 profilepic = jobList.get(position).getCustomer().getProfilePic();
+                profilepic = jobList.get(position).getCustomer().getProfilePic();
                 String FromLoc_latt = jobList.get(position).getFromLocation().getLatitude();
                 String FromLoc_long = jobList.get(position).getFromLocation().getLongitude();
                 String FromLoc_name = jobList.get(position).getFromLocation().getName();
@@ -347,93 +353,8 @@ public class HomeActivity extends BaseActivity
         } else {
             super.onBackPressed();
         }
-        MenuItem homeItem = mBottomNav.getMenu().getItem(0);
-        if (mSelectedItem != homeItem.getItemId()) {
-            // select home item
-            selectFragment(homeItem);
 
-        } else {
-            super.onBackPressed();
-        }
     }
-
-    private void selectFragment(MenuItem item) {
-        // init corresponding fragment
-
-        if (item != null)
-            switch (item.getItemId()) {
-                case R.id.mHome:
-                    getJobPosted();
-                    break;
-                case R.id.mDriver:
-                    Intent intent = new Intent(HomeActivity.this, DriverViewActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    break;
-                case R.id.mTruck:
-                    Intent i = new Intent(HomeActivity.this, TruckViewActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    break;
-                case R.id.id_linear_myquotation:
-                    Intent intent1 = new Intent(HomeActivity.this, MyQuotationActivity.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent1);
-                    break;
-                case R.id.mChat:
-                    Intent intent2 = new Intent(HomeActivity.this, MessageListViewActivity.class);
-                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent2);
-                    break;
-
-            }
-        // update selected item
-        mSelectedItem = item.getItemId();
-        // uncheck the other items.
-        for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
-            MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-        }
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_profile) {
-
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    int[] startingLocation = new int[2];
-                    View v = new View(HomeActivity.this);
-                    v.getLocationOnScreen(startingLocation);
-                    startingLocation[0] += v.getWidth() / 2;
-                    UserProfileActivity.startUserProfileFromLocation(startingLocation, HomeActivity.this);
-                    overridePendingTransition(0, 0);
-                }
-            }, 200);
-
-
-        } else if (id == R.id.nav_myjob) {
-            Intent intent = new Intent(HomeActivity.this, MyJobtabViewActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } else if (id == R.id.nav_myqutation) {
-            Intent intent = new Intent(HomeActivity.this, MyQuotationActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } else if (id == R.id.nav_logout) {
-            Logout();
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
 
     public void Logout() {
 
