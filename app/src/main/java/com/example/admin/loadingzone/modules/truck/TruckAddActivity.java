@@ -7,11 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,37 +23,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
-import com.example.admin.loadingzone.modules.driver.DriverEditActivity;
-import com.example.admin.loadingzone.modules.home.HomeActivity;
-import com.example.admin.loadingzone.modules.login.LoginActivity;
-import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.MakerResponse;
-import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.Model;
 import com.example.admin.loadingzone.retrofit.model.ModelResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckAddResponse;
-import com.example.admin.loadingzone.retrofit.model.TruckDriverAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckType;
 import com.example.admin.loadingzone.retrofit.model.TruckTypeResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckYearResponse;
-import com.example.admin.loadingzone.retrofit.model.UserProfileResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleMaker;
 import com.example.admin.loadingzone.retrofit.model.VehicleYear;
-import com.example.admin.loadingzone.util.Config;
-import com.example.admin.loadingzone.view.CircleTransformation;
+import com.example.admin.loadingzone.app.Config;
 import com.example.admin.loadingzone.view.RevealBackgroundView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -70,8 +57,6 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.admin.loadingzone.modules.profile.UserProfileActivity.ARG_REVEAL_START_LOCATION;
 
 public class TruckAddActivity extends BaseActivity implements RevealBackgroundView.OnStateChangeListener {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";

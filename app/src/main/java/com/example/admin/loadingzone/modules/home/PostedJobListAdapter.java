@@ -94,8 +94,14 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         //holder.textViewCustomerName.setText(jobList.get(position).getCustomer().getName());
         //code to set data in textview as initCap
         String var = jobList.get(position).getCustomer().getName();
-        String output = var.substring(0,1).toUpperCase() + var.substring(1);
-        holder.textViewCustomerName.setText(output);
+        if (var!=null)
+        {
+            String output = var.substring(0,1).toUpperCase() + var.substring(1);
+            holder.textViewCustomerName.setText(output);
+        }
+        else
+            holder.textViewCustomerName.setText(var);
+
 
         holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());

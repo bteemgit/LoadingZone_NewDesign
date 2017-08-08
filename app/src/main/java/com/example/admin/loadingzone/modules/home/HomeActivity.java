@@ -1,6 +1,5 @@
 package com.example.admin.loadingzone.modules.home;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,28 +7,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -46,25 +38,19 @@ import com.example.admin.loadingzone.modules.myjob.MyJobtabViewActivity;
 import com.example.admin.loadingzone.modules.myqutation.MyQuotationActivity;
 import com.example.admin.loadingzone.modules.nottification.NottificationListActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
-import com.example.admin.loadingzone.modules.truck.TrckListAdapter;
 import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
-import com.example.admin.loadingzone.retrofit.model.FromLocation;
 import com.example.admin.loadingzone.retrofit.model.JobList;
 import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.retrofit.model.PostedJobResponse;
-import com.example.admin.loadingzone.retrofit.model.TruckResponse;
-import com.example.admin.loadingzone.retrofit.model.UserProfile;
-import com.example.admin.loadingzone.retrofit.model.VehicleList;
-import com.example.admin.loadingzone.util.Config;
+import com.example.admin.loadingzone.app.Config;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindDimen;
@@ -75,8 +61,6 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.admin.loadingzone.R.id.view;
 
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -131,7 +115,7 @@ public class HomeActivity extends BaseActivity
             hasReachedTop = true;
         }
     };
-
+    String profilepic="01";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,18 +171,26 @@ public class HomeActivity extends BaseActivity
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
 
+       profilepic=AppController.getString(getApplicationContext(),"provider_pic");
         TextView text_users_name = (TextView) findViewById(R.id.id_text_users_name);
         text_users_name.setText(AppController.getString(getApplicationContext(), "customer_name"));
         TextView text_usersemail = (TextView) findViewById(R.id.id_text_usersemail);
         text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
         ImageView user_imageView = (ImageView) findViewById(R.id.imageView6);
         Context context = this;
-        Picasso.with(context)
-                .load("http://i.imgur.com/DvpvklR.png")
-                .resize(70, 70)
-                .centerCrop()
-                .transform(new CircleTransformation())
-                .into(user_imageView);
+        if (profilepic.length()<3){
+            Log.d("hgh",profilepic);
+        }
+        else
+        {
+            Picasso.with(context)
+                    .load(profilepic)
+                    .resize(70, 70)
+                    .centerCrop()
+                    .transform(new CircleTransformation())
+                    .into(user_imageView);
+        }
+
 
     }
 
@@ -282,7 +274,7 @@ public class HomeActivity extends BaseActivity
                 String name = jobList.get(position).getCustomer().getName();
                 String email = jobList.get(position).getCustomer().getEmail();
                 String phone1 = jobList.get(position).getCustomer().getPhone1();
-                String profilepic = jobList.get(position).getCustomer().getProfilePic();
+                 profilepic = jobList.get(position).getCustomer().getProfilePic();
                 String FromLoc_latt = jobList.get(position).getFromLocation().getLatitude();
                 String FromLoc_long = jobList.get(position).getFromLocation().getLongitude();
                 String FromLoc_name = jobList.get(position).getFromLocation().getName();
@@ -496,6 +488,7 @@ public class HomeActivity extends BaseActivity
                 if (response.isSuccessful()) {
                     if (!response.body().getJobList().isEmpty()) {
                         List<JobList> JobList = response.body().getJobList();
+
                         if (offset == 1) {
                             jobList = JobList;
                             updateEndlessRecyclerView();

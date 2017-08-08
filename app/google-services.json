@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "718030794601",
+    "firebase_url": "https://lodgingzoneprovider.firebaseio.com",
+    "project_id": "lodgingzoneprovider",
+    "storage_bucket": "lodgingzoneprovider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718030794601:android:f45519351bc1ead3",
+        "android_client_info": {
+          "package_name": "com.example.admin.loadingzone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718030794601-5tv0o26c362hihgtv49jj9g3cd4lfq8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkDUA4Ei2_Vti49LTqsfvJ7ESY8jijUhc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

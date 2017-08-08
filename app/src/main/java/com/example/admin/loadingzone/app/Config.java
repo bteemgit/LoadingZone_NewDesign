@@ -1,10 +1,11 @@
-package com.example.admin.loadingzone.util;
+package com.example.admin.loadingzone.app;
 
 /**
- * Created by admin on 5/19/2017.
+ * Created by admin on 4/5/2017.
  */
 
 public class Config {
+
     // global topic to receive app wide push notifications
     public static final String TOPIC_GLOBAL = "global";
 

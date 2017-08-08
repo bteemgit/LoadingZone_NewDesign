@@ -1,8 +1,13 @@
 package com.example.admin.loadingzone.modules.login;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +27,9 @@ import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
+import com.example.admin.loadingzone.app.Config;
+import com.example.admin.loadingzone.utils.NotificationUtils;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
@@ -51,7 +59,8 @@ public class LoginActivity extends BaseActivity {
 
     List<Error> errorArrayList = new ArrayList<>();
     private SessionManager session;
-
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    String regId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +80,72 @@ public class LoginActivity extends BaseActivity {
             Log.d("login Isuue", "sessionfalse");
         }
 
+///firebase
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
 
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+                    displayFirebaseRegId();
+
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+
+                    //   String message = intent.getStringExtra("message");
+
+                    //  Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+                    //  txtMessage.setText(message);
+                }
+            }
+        };
+
+        displayFirebaseRegId();
     }
+
+    // Fetches reg id from shared preferences
+    // and displays on the screen
+    private void displayFirebaseRegId() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        regId = pref.getString("regId", null);
+
+
+        Log.e("deviceid ", "Firebase reg id: " + regId);
+
+      /*  if (!TextUtils.isEmpty(regId))
+            txtRegId.setText("Firebase Reg Id: " + regId);
+        else
+            txtRegId.setText("Firebase Reg Id is not received yet!");*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
 
     @OnClick(R.id.buttonLogin)
     public void sigin() {
@@ -112,7 +185,7 @@ public class LoginActivity extends BaseActivity {
     public void Sigin(String username, String password, String usertype) {
 
         showProgressDialog(LoginActivity.this, "Loading");
-        Call<LoginResponse> call = apiService.Singin(username, password, usertype);
+        Call<LoginResponse> call = apiService.Singin(username, password, usertype,regId);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, retrofit2.Response<LoginResponse> response) {
@@ -127,7 +200,7 @@ public class LoginActivity extends BaseActivity {
                             AppController.setString(getApplicationContext(), "customer_name", response.body().getData().getName());
                             AppController.setString(getApplicationContext(), "acess_token", response.body().getData().getAccessToken());
                             AppController.setString(getApplicationContext(), "user_id", String.valueOf(response.body().getData().getUserId()));
-                            AppController.setString(getApplicationContext(), "pic", response.body().getData().getProfilePic());
+                            AppController.setString(getApplicationContext(), "provider_pic", response.body().getData().getProfilePic());
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
@@ -139,7 +212,6 @@ public class LoginActivity extends BaseActivity {
                             AppController.setString(getApplicationContext(), "customer_name", response.body().getData().getName());
                             AppController.setString(getApplicationContext(), "acess_token", response.body().getData().getAccessToken());
                             AppController.setString(getApplicationContext(), "user_id", String.valueOf(response.body().getData().getUserId()));
-                            AppController.setString(getApplicationContext(), "pic", response.body().getData().getProfilePic());
                             intent.putExtra("email", AppController.getString(getApplicationContext(), "customer_email"));
                             intent.putExtra("isFrom", "login");
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -171,8 +243,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 hideProgressDialog();
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("exception>>>", t.getMessage());
+
 
             }
         });

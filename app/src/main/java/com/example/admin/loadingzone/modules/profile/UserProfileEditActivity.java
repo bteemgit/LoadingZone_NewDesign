@@ -91,6 +91,7 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
     private int avatarSize;
     String imagePath;
     PermissionsChecker checker;
+    String service_provider_id="null";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,8 +156,6 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
         }
 
     }
-
-
     // back button action
     @Override
     public boolean onSupportNavigateUp() {
@@ -169,12 +168,12 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
         String providerName = editTextPrividerName.getText().toString().trim();
         String location = editTextPrividerLocation.getText().toString().trim();
         String mobile = editTextPrividerMobile.getText().toString().trim();
-        String service_provider_id = AppController.getString(getApplicationContext(), "service_provider_id");
+        service_provider_id = AppController.getString(getApplicationContext(), "service_provider_id");
         //if profile is already created
         if (!isFrom.equals("login"))
         {
             //if profile is created
-            if (service_provider_id.length() > 0||service_provider_id!="") {
+            if (!service_provider_id.equals("null")||service_provider_id!="null") {
                 if (GloablMethods.validate(providerName, location, mobile)) {
                     if (isConnectingToInternet(UserProfileEditActivity.this)) {
                         userProfileUpdate(service_provider_id,providerName, mobile, location, "54.9", "89.99");
@@ -187,11 +186,25 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
             }
         }
         else {
-            if (isConnectingToInternet(UserProfileEditActivity.this)) {
-                userProfileCreate(providerName, mobile, location, "54.9", "89.99");
-            } else {
-                showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+            Log.d("serviceid",service_provider_id);
+            if (!service_provider_id.equals("null")||service_provider_id!="null")
+            {
+                if (isConnectingToInternet(UserProfileEditActivity.this)) {
+                    userProfileUpdate(service_provider_id,providerName, mobile, location, "54.9", "89.99");
+
+                } else {
+                    showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+                }
             }
+            else
+            {
+                if (isConnectingToInternet(UserProfileEditActivity.this)) {
+                    userProfileCreate(providerName, mobile, location, "54.9", "89.99");
+                } else {
+                    showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+                }
+            }
+
         }
 
 
@@ -228,6 +241,7 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                 if (response.isSuccessful()) {
                     session.setLogin(true);
                     AppController.setString(UserProfileEditActivity.this, "user_name", response.body().getProviderName());
+                    AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
                     AppController.setString(UserProfileEditActivity.this, "service_provider_id", response.body().getServiceProviderId());
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -256,6 +270,7 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     AppController.setString(UserProfileEditActivity.this, "customer_name", response.body().getProviderName());
+                    AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -379,6 +394,7 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                 // Response Success or Fail
                 if (response.isSuccessful()) {
                  AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
+                    AppController.setString(getApplicationContext(), "service_provider_id", String.valueOf(response.body().getServiceProviderId()));
                     btnEditProfilePicUpload.setVisibility(View.GONE);
                     btnEditProfilePic.setVisibility(View.VISIBLE);
                     Picasso.with(UserProfileEditActivity.this)

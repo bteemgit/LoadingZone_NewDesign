@@ -61,7 +61,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("main/login")
-    Call<LoginResponse> Singin(@Field("username") String username, @Field("password") String password, @Field("user_type") String user_type);
+    Call<LoginResponse> Singin(@Field("username") String username, @Field("password") String password, @Field("user_type") String user_type, @Field("device_token") String device_token);
 
     @FormUrlEncoded
     @POST("service-provider")

@@ -92,7 +92,7 @@
             android:drawablePadding="20dp"
             android:drawableTint="@color/colorAccent"
             android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Name"
+            android:hint="Name"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/secondaryTextColor"
@@ -108,7 +108,7 @@
             android:drawablePadding="20dp"
             android:drawableTint="@color/colorAccent"
             android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Email"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/secondaryTextColor"
@@ -124,7 +124,7 @@
             android:drawablePadding="20dp"
             android:drawableTint="@color/colorAccent"
             android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Location"
+            android:hint="Location"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/secondaryTextColor"
@@ -140,7 +140,7 @@
             android:drawablePadding="20dp"
             android:drawableTint="@color/colorAccent"
             android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Phone"
+            android:hint="Phone"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/secondaryTextColor"
@@ -188,10 +188,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
-
-
     </LinearLayout>
 
 
