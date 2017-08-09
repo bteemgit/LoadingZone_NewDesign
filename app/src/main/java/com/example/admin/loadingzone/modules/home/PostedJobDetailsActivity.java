@@ -536,6 +536,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         }
         if (requestCode == 2) {
             String isUpdated = data.getStringExtra("isUpdated");
+            if (isUpdated!=null)
             if (isUpdated.equals("True")) {
                 getLoadingJobDeatails(JobId);
             }

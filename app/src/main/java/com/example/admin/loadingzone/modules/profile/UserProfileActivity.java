@@ -2,6 +2,8 @@ package com.example.admin.loadingzone.modules.profile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -136,10 +138,14 @@ String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLoca
         tlUserProfileTabs.setupWithViewPager(viewPager);
         TextView newTab0 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
         newTab0.setCompoundDrawablesWithIntrinsicBounds(tabIcons[0], 0, 0, 0);
-        tlUserProfileTabs.getTabAt(0).setCustomView(newTab0);
+        TextView title=(TextView)LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs,null);
+        title.setText("Completed");
+
+        tlUserProfileTabs.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
         TextView newTab1 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
         newTab1.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
-        tlUserProfileTabs.getTabAt(1).setCustomView(newTab1);
+        TextView title1=(TextView)LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs,null);
+        title1.setText("Cancled");
 
     }
     @OnClick(R.id.btnEditProfile)

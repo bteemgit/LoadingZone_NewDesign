@@ -380,6 +380,15 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent();
+        i.putExtra("isUpdated", "false");
+        setResult(2, i);
+        finish();
+    }
 }
 
 
