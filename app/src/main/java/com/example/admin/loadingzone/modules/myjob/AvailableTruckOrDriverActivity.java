@@ -58,6 +58,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
     private AvalibleTruckListAdapter avalibleTruckListAdapter;
     private AvailbleDriverListAdapter availbleDriverListAdapter;
     String jobStatus;
+    String isFrom="null";
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -78,9 +79,16 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Avalible Trucks");
+
         service = ApiClient.getClient().create(ApiInterface.class);
         jobStatus = getIntent().getStringExtra("jobStatus");
+        isFrom=getIntent().getStringExtra("isFrom");
+        // toolbar title
+        if (jobStatus.equals(IsEditVehicle)) {
+            getSupportActionBar().setTitle("Avalible Trucks");
+        } else {
+            getSupportActionBar().setTitle("Avalible Drivers");
+        }
         startUnixTimeStamp = getIntent().getStringExtra("startUnixTimeStamp");
         endUnixTimeStamp = getIntent().getStringExtra("endUnixTimeStamp");
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
@@ -112,36 +120,69 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
         endlessRecyclerViewItem.addOnItemTouchListener(new RecyclerItemClickListener(AvailableTruckOrDriverActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+//if isFrom is StartJob then actvity result is set to startJob Activity
 
+                if (isFrom.equals("StartJob"))
+                {
+                    if (jobStatus.equals(IsEditVehicle)) {
+
+                        String truck_name = listTrckAvailble.get(position).getCustomName();
+                        String truck_type = listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
+                        String truck_size = listTrckAvailble.get(position).getVehicle().getDimension();
+                        String truck_id = String.valueOf(listTrckAvailble.get(position).getProviderVehicleId());
+                        Intent i = new Intent();
+                        i.putExtra("isEdit", "isTruckEdit");
+                        i.putExtra("truck_name", truck_name);
+                        i.putExtra("truck_id", truck_id);
+                        i.putExtra("truck_type", truck_type);
+                        i.putExtra("truck_size", truck_size);
+                        setResult(4, i);
+                        finish();
+                    } else {
+                        String driver_name = listAvailableDriver.get(position).getDriverName();
+                        String driver_email = listAvailableDriver.get(position).getDriverEmail();
+                        String driver_mobile = listAvailableDriver.get(position).getDriverPhone();
+                        String driver_id = String.valueOf(listAvailableDriver.get(position).getDriverId());
+                        Intent i = new Intent();
+                        i.putExtra("isEdit", "isDriverEdit");
+                        i.putExtra("driver_id", driver_id);
+                        i.putExtra("driver_email", driver_email);
+                        i.putExtra("driver_mobile", driver_mobile);
+                        i.putExtra("driver_name", driver_name);
+                        setResult(4, i);
+                        finish();
+                    }
+                }
+                else {
 // return the the selected values on the on actvity result of EditAvailbleDriverOrTruckActivity based on the job status
-                if (jobStatus.equals(IsEditVehicle)) {
+                    if (jobStatus.equals(IsEditVehicle)) {
 
-                    String truck_name = listTrckAvailble.get(position).getCustomName();
-                    String truck_type = listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
-                    String truck_size = listTrckAvailble.get(position).getVehicle().getDimension();
-                    String truck_id = String.valueOf(listTrckAvailble.get(position).getProviderVehicleId());
-                    Intent i = new Intent();
-                    i.putExtra("isEdit", "isTruckEdit");
-                    i.putExtra("truck_name", truck_name);
-                    i.putExtra("truck_id", truck_id);
-                    i.putExtra("truck_type", truck_type);
-                    i.putExtra("truck_size", truck_size);
-                    setResult(2, i);
-                    finish();
-
-                } else {
-                    String driver_name = listAvailableDriver.get(position).getDriverName();
-                    String driver_email = listAvailableDriver.get(position).getDriverEmail();
-                    String driver_mobile = listAvailableDriver.get(position).getDriverPhone();
-                    String driver_id = String.valueOf(listAvailableDriver.get(position).getDriverId());
-                    Intent i = new Intent();
-                    i.putExtra("isEdit", "isDriverEdit");
-                    i.putExtra("driver_id", driver_id);
-                    i.putExtra("driver_email", driver_email);
-                    i.putExtra("driver_mobile", driver_mobile);
-                    i.putExtra("driver_name", driver_name);
-                    setResult(2, i);
-                    finish();
+                        String truck_name = listTrckAvailble.get(position).getCustomName();
+                        String truck_type = listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
+                        String truck_size = listTrckAvailble.get(position).getVehicle().getDimension();
+                        String truck_id = String.valueOf(listTrckAvailble.get(position).getProviderVehicleId());
+                        Intent i = new Intent();
+                        i.putExtra("isEdit", "isTruckEdit");
+                        i.putExtra("truck_name", truck_name);
+                        i.putExtra("truck_id", truck_id);
+                        i.putExtra("truck_type", truck_type);
+                        i.putExtra("truck_size", truck_size);
+                        setResult(2, i);
+                        finish();
+                    } else {
+                        String driver_name = listAvailableDriver.get(position).getDriverName();
+                        String driver_email = listAvailableDriver.get(position).getDriverEmail();
+                        String driver_mobile = listAvailableDriver.get(position).getDriverPhone();
+                        String driver_id = String.valueOf(listAvailableDriver.get(position).getDriverId());
+                        Intent i = new Intent();
+                        i.putExtra("isEdit", "isDriverEdit");
+                        i.putExtra("driver_id", driver_id);
+                        i.putExtra("driver_email", driver_email);
+                        i.putExtra("driver_mobile", driver_mobile);
+                        i.putExtra("driver_name", driver_name);
+                        setResult(2, i);
+                        finish();
+                    }
                 }
             }
         }));
@@ -155,19 +196,16 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
             showProgressDialog(AvailableTruckOrDriverActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
-            apiService =
-                    ApiClient.getClient().create(ApiInterface.class);
 
         }
         // handling the edit truck and driver with in single function
+        apiService = ApiClient.getClient().create(ApiInterface.class);
         if (jobStatus.equals(IsEditVehicle)) {
             String acess_token = AppController.getString(getApplicationContext(), "acess_token");
             Call<ActiveTrucklistResponse> call = apiService.ActiveTruckandDriverList(GloablMethods.API_HEADER + acess_token, startUnixTimeStamp, endUnixTimeStamp, offset);
             call.enqueue(new Callback<ActiveTrucklistResponse>() {
                 @Override
                 public void onResponse(Call<ActiveTrucklistResponse> call, retrofit2.Response<ActiveTrucklistResponse> response) {
-
-
                     refreshLayout.setRefreshing(false);
                     hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null) {
@@ -276,5 +314,55 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
         availbleDriverListAdapter = new AvailbleDriverListAdapter(listAvailableDriver, R.layout.item_avalible_driver, getApplicationContext());
         endlessRecyclerViewItem.setAdapter(availbleDriverListAdapter);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isFrom.equals("StartJob"))
+        {
+            if (jobStatus.equals(IsEditVehicle)) {
+                Intent i = new Intent();
+                i.putExtra("isEdit", "isTruckEdit");
+                i.putExtra("truck_name", "");
+                i.putExtra("truck_id", "");
+                i.putExtra("truck_type", "");
+                i.putExtra("truck_size", "");
+                setResult(4, i);
+                finish();
+            }
+            else {
+                Intent i = new Intent();
+                i.putExtra("driver_id", "");
+                i.putExtra("driver_email", "");
+                i.putExtra("driver_mobile", "");
+                i.putExtra("driver_name", "");
+                setResult(4, i);
+                finish();
+            }
+        }
+        else
+        {
+            if (jobStatus.equals(IsEditVehicle)) {
+                Intent i = new Intent();
+                i.putExtra("isEdit", "isTruckEdit");
+                i.putExtra("truck_name", "");
+                i.putExtra("truck_id", "");
+                i.putExtra("truck_type", "");
+                i.putExtra("truck_size", "");
+                setResult(2, i);
+                finish();
+            }
+            else
+            {
+                Intent i = new Intent();
+                i.putExtra("isEdit", "isDriverEdit");
+                i.putExtra("driver_id", "");
+                i.putExtra("driver_email", "");
+                i.putExtra("driver_mobile", "");
+                i.putExtra("driver_name", "");
+                setResult(2, i);
+                finish();
+            }
+        }
     }
 }

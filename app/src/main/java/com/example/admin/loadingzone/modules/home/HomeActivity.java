@@ -301,7 +301,6 @@ public class HomeActivity extends BaseActivity {
                 String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
-
                 String QuotationCount = jobList.get(position).getQuotationCount();
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();

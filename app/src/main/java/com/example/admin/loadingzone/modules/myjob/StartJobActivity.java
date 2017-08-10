@@ -138,6 +138,8 @@ public class StartJobActivity extends BaseActivity {
     String driver_id, provider_vehicle_id;
     public static int RESULT_OK = 51;
     ApiInterface apiService;
+    public static String IsEditVehicle = "EditVehicle";
+    public static String IsEditDriver = "EditDriver";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,7 +272,6 @@ public class StartJobActivity extends BaseActivity {
     @OnClick(R.id.relative_SerachAvalibleTruck)
     public void serachTruck() {
         View v = new View(getApplicationContext());
-
         SlideAnimationUtil.slideInFromLeft(this, v);
         Intent i = new Intent(StartJobActivity.this, SelectActvieTruckActivity.class);
         String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
@@ -279,6 +280,20 @@ public class StartJobActivity extends BaseActivity {
         i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
         startActivityForResult(i, 2);
 
+    }
+    // if drver is not added in the selected truck then we can assign driver or change driver (existing driver in truck)
+    @NonNull
+    @OnClick(R.id.textChangeDriver)
+    public void changeDriver()
+    {
+        Intent i = new Intent(StartJobActivity.this, AvailableTruckOrDriverActivity.class);
+        String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
+        String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
+        i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
+        i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
+        i.putExtra("jobStatus", IsEditDriver); // for identyfying teh job is new while editing the truck and driver
+        i.putExtra("isFrom","StartJob");
+        startActivityForResult(i, 4);
     }
 
     // once the provider selct the avalible truck then job is completed and redirected in to home page
@@ -338,20 +353,6 @@ public class StartJobActivity extends BaseActivity {
                 cardViewTrckHead.setVisibility(View.VISIBLE);
                 driver_id = data.getStringExtra("driver_id");
                 provider_vehicle_id = data.getStringExtra("truck_id");
-                Log.d("provider_vehicle_id re", provider_vehicle_id);
-                if (!driver_id.equals("driver_isnot_assigned")) {
-                    String driver_name = data.getStringExtra("driver_name");
-                    String driver_pic = data.getStringExtra("driver_pic");
-                    textViewDriverName.setText(driver_name);
-                    Picasso.with(getApplicationContext())
-                            .load(driver_pic)
-                            .placeholder(R.drawable.img_circle_placeholder)
-                            .resize(70, 70)
-                            .centerCrop()
-                            .transform(new CircleTransformation())
-                            .into(imageDriverPic);
-
-                }
                 String truck_name = data.getStringExtra("truck_name");
                 String truck_maker = data.getStringExtra("truck_maker");
                 String truck_type = data.getStringExtra("truck_type");
@@ -360,12 +361,49 @@ public class StartJobActivity extends BaseActivity {
                 textTruckModel.setText(truck_maker);
                 textTruckType.setText(truck_type);
                 textTruckDimension.setText(truck_dimension);
-                String expected_start_date = String.valueOf(startUnixTimeStamp);
-                String expected_end_date = String.valueOf(endUnixTimeStamp);
-                BlockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
+                Log.d("provider_vehicle_id", provider_vehicle_id);
+                if (!driver_id.equals("driver_isnot_assigned")) {
+                    String driver_name = data.getStringExtra("driver_name");
+                    String driver_pic = data.getStringExtra("driver_pic");
+                    textViewDriverName.setText(driver_name);
+                    textChangeDriver.setText("Change Driver");
+                    Picasso.with(getApplicationContext())
+                            .load(driver_pic)
+                            .placeholder(R.drawable.img_circle_placeholder)
+                            .resize(70, 70)
+                            .centerCrop()
+                            .transform(new CircleTransformation())
+                            .into(imageDriverPic);
+                    String expected_start_date = String.valueOf(startUnixTimeStamp);
+                    String expected_end_date = String.valueOf(endUnixTimeStamp);
+                    BlockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
 
+                }
+                else
+                {
+                   showSnakBar(root,"Please select a Driver for complete the process");
+                    textChangeDriver.setText("Add Driver");
+                    relativeSerachAvalibleTruck.setVisibility(View.GONE);
 
+                }
             }
+        if (requestCode == 4) {
+            String driver_name = data.getStringExtra("driver_name");
+            String driver_pic = data.getStringExtra("driver_pic");
+            String driverId=data.getStringExtra("driver_id");
+            textViewDriverName.setText(driver_name);
+            textChangeDriver.setText("Change Driver");
+            Picasso.with(getApplicationContext())
+                    .load(driver_pic)
+                    .placeholder(R.drawable.img_circle_placeholder)
+                    .resize(70, 70)
+                    .centerCrop()
+                    .transform(new CircleTransformation())
+                    .into(imageDriverPic);
+            String expected_start_date = String.valueOf(startUnixTimeStamp);
+            String expected_end_date = String.valueOf(endUnixTimeStamp);
+            BlockTruckandDriver(JobId, provider_vehicle_id, driverId, expected_start_date, expected_end_date);
+        }
     }
 
     //api call for blocking the driver and truck for this job
@@ -392,7 +430,8 @@ public class StartJobActivity extends BaseActivity {
                                 .make(root, meta.getString("message"), Snackbar.LENGTH_LONG);
                         snackbar.show();
 
-                    } catch (Exception e) {
+                    } catch (Exception e)
+                    {
                         Log.d("exception", e.getMessage());
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }

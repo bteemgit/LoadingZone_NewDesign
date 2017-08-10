@@ -189,21 +189,24 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_below="@+id/textSelectedTimeEnd"
+            android:layout_marginBottom="7dp"
+            android:visibility="gone"
             android:layout_marginTop="15dp"
             android:elevation="6dp"
             android:orientation="vertical"
-            android:visibility="gone"
             app:cardCornerRadius="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <RelativeLayout
                     android:id="@+id/relativeDriverHead"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:background="#83C740">
+                    android:background="#83C740"
+                   >
 
                     <ImageView
                         android:id="@+id/imageDriverPic"
@@ -221,21 +224,18 @@
                         android:layout_alignStart="@+id/imageDriverPic"
                         android:layout_below="@+id/imageDriverPic"
                         android:layout_marginTop="4dp"
-                        android:text="Swaroop Lal"
                         android:textColor="#ffffff"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textChangeDriver"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/textViewDriverName"
-                        android:layout_alignRight="@+id/textViewDriverName"
                         android:layout_below="@+id/textViewDriverName"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
                         android:text="Change"
-                        android:textSize="10sp" />
+                        android:textSize="15sp" />
 
 
                 </RelativeLayout>

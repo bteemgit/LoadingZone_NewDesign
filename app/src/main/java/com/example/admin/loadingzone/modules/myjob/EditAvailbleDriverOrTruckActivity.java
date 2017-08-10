@@ -113,7 +113,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     private int endYear, endMonth, endDay, endHour, endMinute;
     private long startUnixTimeStamp, endUnixTimeStamp;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    String jobStatus,Job_id,truck_id,driver_id;
+    String jobStatus, Job_id, truck_id, driver_id;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
     public static String SEARCH_AVAIlABLE_DRIVER = "Search Avalible Driver";
@@ -135,7 +135,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         String start_time = getIntent().getStringExtra("start_time");
         String end_time = getIntent().getStringExtra("end_time");
         String end_date = getIntent().getStringExtra("start_date");
-        Job_id=getIntent().getStringExtra("JobId");
+        Job_id = getIntent().getStringExtra("JobId");
         textViewSelectedDate.setText(start_date);
         textViewSelectedTime.setText(start_time);
         textSelectedDateEnd.setText(end_date);
@@ -265,8 +265,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     @NonNull
     @OnClick(R.id.relative_SerachAvalibleTruck)
     public void serachTruck() {
-        if (textSelection.getText().equals(SEARCH_AVAILaBLE_TRUCK)||textSelection.getText().equals(SEARCH_AVAIlABLE_DRIVER))
-        {
+        if (textSelection.getText().equals(SEARCH_AVAILaBLE_TRUCK) || textSelection.getText().equals(SEARCH_AVAIlABLE_DRIVER)) {
             View v = new View(getApplicationContext());
             SlideAnimationUtil.slideInFromLeft(this, v);
             Intent i = new Intent(EditAvailbleDriverOrTruckActivity.this, AvailableTruckOrDriverActivity.class);
@@ -278,15 +277,13 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
             startActivityForResult(i, 2);
 
         }
-        if (textSelection.getText().equals(SAVE_DRIVER))
-        {
+        if (textSelection.getText().equals(SAVE_DRIVER)) {
 // for change teh driver
-            EditDriverOrTruck(Job_id,"",driver_id);
+            EditDriverOrTruck(Job_id, "", driver_id);
         }
-        if (textSelection.getText().equals(SAVE_TRUCK))
-        {
+        if (textSelection.getText().equals(SAVE_TRUCK)) {
             // for change the Truck
-            EditDriverOrTruck(Job_id,truck_id,"");
+            EditDriverOrTruck(Job_id, truck_id, "");
         }
 
     }
@@ -299,29 +296,26 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         if (data != null)
             if (requestCode == 2) {
 
-                String isEdit= data.getStringExtra("isEdit");
-                if (isEdit.equals("isDriverEdit"))
-                {
+                String isEdit = data.getStringExtra("isEdit");
+                if (isEdit.equals("isDriverEdit")) {
                     cardViewDriver.setVisibility(View.VISIBLE);
                     cardViewVehicle.setVisibility(View.GONE);
                     textSelection.setText(SAVE_DRIVER);
                     String driver_name = data.getStringExtra("driver_name");
                     String driver_email = data.getStringExtra("driver_email");
                     String driver_mobile = data.getStringExtra("driver_mobile");
-                  driver_id=data.getStringExtra("driver_id");
+                    driver_id = data.getStringExtra("driver_id");
                     textSelctedDriverEmail.setText(driver_email);
                     textSelctedDriverMobile.setText(driver_mobile);
                     textSelctedDriverName.setText(driver_name);
-                }
-                else
-                {
+                } else {
                     cardViewVehicle.setVisibility(View.VISIBLE);
                     cardViewDriver.setVisibility(View.GONE);
                     textSelection.setText(SAVE_TRUCK);
-                    String truck_name=data.getStringExtra("truck_name");
-                    String truck_type=data.getStringExtra("truck_type");
-                    String truck_size=data.getStringExtra("truck_size");
-                     truck_id=data.getStringExtra("truck_id");
+                    String truck_name = data.getStringExtra("truck_name");
+                    String truck_type = data.getStringExtra("truck_type");
+                    String truck_size = data.getStringExtra("truck_size");
+                    truck_id = data.getStringExtra("truck_id");
                     textSelctedTruckName.setText(truck_name);
                     textSelctedTruckType.setText(truck_type);
                     textSelctedTruckSize.setText(truck_size);
@@ -343,18 +337,15 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
             public void onResponse(Call<BlockTruckandDriverResponse> call, retrofit2.Response<BlockTruckandDriverResponse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    if (response.body().getMeta().getStatus().equals("true") || response.body().getMeta().getStatus().equals(true))
-                    {
+                    if (response.body().getMeta().getStatus().equals("true") || response.body().getMeta().getStatus().equals(true)) {
                         showSnakBar(root, response.body().getMeta().getMessage());
                         Intent i = new Intent();
                         i.putExtra("isUpdated", "True");
                         setResult(2, i);
                         finish();
+                    } else {
+                        showSnakBar(root, response.body().getMeta().getMessage());
                     }
-                    else {
-                        showSnakBar(root,response.body().getMeta().getMessage());
-                    }
-
 
 
                 } else {
@@ -383,7 +374,6 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent i = new Intent();
         i.putExtra("isUpdated", "false");
         setResult(2, i);

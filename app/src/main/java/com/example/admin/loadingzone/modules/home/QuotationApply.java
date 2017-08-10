@@ -75,6 +75,10 @@ public class QuotationApply extends BaseActivity {
     String qutation_id, quotationAmount, quotationDescription;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private int startYear, startMonth, startDay, startHour, startMinute;
+    // the variable for checking the provider change the job date or time
+    String isChangeDtae="false";
+    String isChangeTime="false";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +97,10 @@ public class QuotationApply extends BaseActivity {
         String job_date = getIntent().getStringExtra("job_date");
         String job_time = getIntent().getStringExtra("job_time");
         // for displaying customer prefered time and date
-        if (job_date!=null)
+        if (job_date != null)
             textCustomerJobDate.setText(job_date);
-        if (job_time!=null)
-        textCustomerJobTime.setText(job_time);
+        if (job_time != null)
+            textCustomerJobTime.setText(job_time);
         quotationDescription = getIntent().getStringExtra("quotationDescription");
         if (!qutation_id.equals("new")) {
             editTextQuotAmount.setText(quotationAmount);
@@ -111,37 +115,39 @@ public class QuotationApply extends BaseActivity {
         onBackPressed();
         return true;
     }
-// Date selection
-@NonNull
-@OnClick(R.id.linearDatePicker)
-public void StartdatePicker() {
-    final Calendar c = Calendar.getInstance();
-    mYear = c.get(Calendar.YEAR);
-    mMonth = c.get(Calendar.MONTH);
-    mDay = c.get(Calendar.DAY_OF_MONTH);
-    DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-            new DatePickerDialog.OnDateSetListener() {
 
-                @Override
-                public void onDateSet(DatePicker view, int year,
-                                      int monthOfYear, int dayOfMonth) {
+    // Date selection
+    @NonNull
+    @OnClick(R.id.linearDatePicker)
+    public void StartdatePicker() {
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
 
-                    startYear = year;
-                    startMonth = monthOfYear + 1;
-                    startDay = dayOfMonth;
-                    textDateRequsting.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
 
-                }
-            }, mYear, mMonth, mDay);
-    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-    datePickerDialog.show();
+                        startYear = year;
+                        startMonth = monthOfYear + 1;
+                        startDay = dayOfMonth;
+                        textCustomerJobDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 
-}
-// select time
-@NonNull
-@OnClick(R.id.linearTimePicker)
-public void StartTimePicker() {
-    final Calendar c = Calendar.getInstance();
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+
+    }
+
+    // select time
+    @NonNull
+    @OnClick(R.id.linearTimePicker)
+    public void StartTimePicker() {
+        final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
 
@@ -154,28 +160,27 @@ public void StartTimePicker() {
                                           int minute) {
                         startHour = hourOfDay;
                         startMinute = minute;
-
-                        textTimeRequsting.setText(hourOfDay + ":" + minute);
+                        textCustomerJobTime.setText(String.format("%02d:%02d", hourOfDay, minute));
 
 
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();
 
-}
+    }
 
     @OnClick(R.id.relative_submit)
     public void applyQutation() {
         String amount = editTextQuotAmount.getText().toString();
         String description = editTextQuotDescrption.getText().toString();
-        String loading_date=textDateRequsting.getText().toString();
-        String loading_time=textTimeRequsting.getText().toString();
+        String loading_date = textCustomerJobDate.getText().toString();
+        String loading_time = textCustomerJobTime.getText().toString();
         if (amount != null && JobId != null) {
             if (isConnectingToInternet(getApplicationContext())) {
                 if (!qutation_id.equals("new")) {
-                    updateQutation(qutation_id, amount, description,loading_date,loading_time);
+                    updateQutation(qutation_id, amount, description, loading_date, loading_time);
                 } else {
-                    applyQutation(JobId, amount, description,loading_date,loading_time);
+                    applyQutation(JobId, amount, description, loading_date, loading_time);
                 }
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
@@ -189,11 +194,11 @@ public void StartTimePicker() {
     }
 
     //api call for apply qutation
-    public void applyQutation(String job_id, String amount, String descrption,String loading_date,String loading_time) {
+    public void applyQutation(String job_id, String amount, String descrption, String loading_date, String loading_time) {
 
         showProgressDialog(QuotationApply.this, "Loading");
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<QutationApplyResponse> call = apiService.ApplyQutation(GloablMethods.API_HEADER + acess_token, job_id, amount, descrption,loading_date,loading_time);
+        Call<QutationApplyResponse> call = apiService.ApplyQutation(GloablMethods.API_HEADER + acess_token, job_id, amount, descrption, loading_date, loading_time);
         call.enqueue(new Callback<QutationApplyResponse>() {
             @Override
             public void onResponse(Call<QutationApplyResponse> call, retrofit2.Response<QutationApplyResponse> response) {
@@ -242,17 +247,17 @@ public void StartTimePicker() {
 
 
     //api call for Update qutation
-    public void updateQutation(String qutation_id, String amount, String descrption,String loading_date,String loading_time) {
+    public void updateQutation(String qutation_id, String amount, String descrption, String loading_date, String loading_time) {
 
         showProgressDialog(QuotationApply.this, "Loading");
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<QutationApplyResponse> call = apiService.UpdateQutation(GloablMethods.API_HEADER + acess_token, qutation_id, amount, descrption,loading_date,loading_time);
+        Call<QutationApplyResponse> call = apiService.UpdateQutation(GloablMethods.API_HEADER + acess_token, qutation_id, amount, descrption, loading_date, loading_time);
         call.enqueue(new Callback<QutationApplyResponse>() {
             @Override
             public void onResponse(Call<QutationApplyResponse> call, retrofit2.Response<QutationApplyResponse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    if (response.body().getMeta().getStatus().equals(true)) {
+                    if (response.body().getMeta().getStatus().equals("true") || response.body().getMeta().getStatus().equals(true)) {
                         Intent i = new Intent(QuotationApply.this, MyQuotationActivity.class);
                         Snackbar snackbar = Snackbar
                                 .make(rootView, response.body().getMeta().getMessage(), Snackbar.LENGTH_LONG);

@@ -540,6 +540,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             if (isUpdated.equals("True")) {
                 getLoadingJobDeatails(JobId);
             }
+            else return;
         }
 
     }
@@ -599,6 +600,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         });
 
     }
+
 
     // for sending new message to customer or drvier
     private void sendMessage(String subject, String message, String message_type_id) {
