@@ -30,7 +30,10 @@ import com.example.admin.loadingzone.retrofit.model.QutationApplyResponse;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,7 +73,7 @@ public class QuotationApply extends BaseActivity {
     @NonNull
     @BindView(R.id.textTimeRequsting)
     TextView textTimeRequsting;
-
+    SimpleDateFormat sdf;
     String JobId;
     String qutation_id, quotationAmount, quotationDescription;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -296,5 +299,20 @@ public class QuotationApply extends BaseActivity {
             }
         });
 
+    }
+    public String setNormalDate(String date) {
+        final String OLD_FORMAT = "yyyy-MM-dd";
+        final String NEW_FORMAT = "yyyy-MM-dd";
+
+        String newDate = "";
+        try {
+            sdf = new SimpleDateFormat(OLD_FORMAT);
+            Date d = sdf.parse(date);
+            sdf.applyPattern(NEW_FORMAT);
+            newDate = sdf.format(d);
+        } catch (ParseException e) {
+            // TODO: handle exception
+        }
+        return newDate;
     }
 }

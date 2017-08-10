@@ -209,7 +209,7 @@ public class JobPendingFragment extends Fragment {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getActivity(), "acess_token");
         String service_provider_id = AppController.getString(getActivity(), "service_provider_id");
-        Call<PendingJobResponse> call = apiService.PendingJobList(GloablMethods.API_HEADER + acess_token, service_provider_id, offset);
+        Call<PendingJobResponse> call = apiService.PendingJobList(GloablMethods.API_HEADER + acess_token, offset);
         call.enqueue(new Callback<PendingJobResponse>() {
             @Override
             public void onResponse(Call<PendingJobResponse> call, retrofit2.Response<PendingJobResponse> response) {
