@@ -153,7 +153,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                         finish();
                     }
                 }
-                else {
+                if (isFrom.equals("Posted")) {
 // return the the selected values on the on actvity result of EditAvailbleDriverOrTruckActivity based on the job status
                     if (jobStatus.equals(IsEditVehicle)) {
 
@@ -221,7 +221,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                                     listTrckAvailble.add(itemModel);
                                 }
 
-//                                adapter.addToList(contestItemsList);
                             }
                             if (listTrckAvailble.size() < limit) {
                                 endlessRecyclerViewItem.setHaveMoreItem(false);

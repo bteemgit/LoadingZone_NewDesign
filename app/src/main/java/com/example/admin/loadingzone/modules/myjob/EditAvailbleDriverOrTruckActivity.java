@@ -274,6 +274,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
             i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
             i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
             i.putExtra("jobStatus", jobStatus);
+            i.putExtra("isFrom","Posted");
             startActivityForResult(i, 2);
 
         }
