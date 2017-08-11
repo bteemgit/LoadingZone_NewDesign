@@ -199,7 +199,7 @@ public class StartJobActivity extends BaseActivity {
                             startHour = hourOfDay;
                             startMinute = minute;
                             startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
-                            textViewSelectedTime.setText(hourOfDay + ":" + minute);
+                            textViewSelectedTime.setText(String.format("%02d:%02d", hourOfDay, minute));
                             animateEndDate(view);
 
                         }
@@ -257,7 +257,8 @@ public class StartJobActivity extends BaseActivity {
                         endHour = hourOfDay;
                         endMinute = minute;
                         endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
-                        textSelectedTimeEnd.setText(hourOfDay + ":" + minute);
+                        textSelectedTimeEnd.setText(String.format("%02d:%02d", hourOfDay, minute));
+
 
 //for animatiting view for selction for avalaible truck action
                         animateSerachTruck(view);

@@ -394,6 +394,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             intent.putExtra("start_time", start_time);
             intent.putExtra("end_time", end_time);
             intent.putExtra("end_date", end_date);
+            intent.putExtra("isFrom", "Posted");
             startActivityForResult(intent, 2);
         }
 
@@ -467,7 +468,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @OnClick(R.id.btnCanceljob)
     public void cancelJob() {
         Intent i = new Intent(PostedJobDetailsActivity.this, JobCancelReasonListActivity.class);
-      i.putExtra("JobId",JobId);
+        i.putExtra("JobId", JobId);
         startActivity(i);
     }
 
@@ -536,11 +537,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         }
         if (requestCode == 2) {
             String isUpdated = data.getStringExtra("isUpdated");
-            if (isUpdated!=null)
-            if (isUpdated.equals("True")) {
-                getLoadingJobDeatails(JobId);
-            }
-            else return;
+            if (isUpdated != null)
+                if (isUpdated.equals("True")) {
+                    getLoadingJobDeatails(JobId);
+                } else return;
         }
 
     }

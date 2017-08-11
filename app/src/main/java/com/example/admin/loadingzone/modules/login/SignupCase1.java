@@ -2,7 +2,9 @@ package com.example.admin.loadingzone.modules.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.LoginResponse;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,7 +75,7 @@ public class SignupCase1 extends Fragment {
     public void signup() {
         String userName = editTextUsername.getText().toString().trim();
         String passWord = editTextPassword.getText().toString().trim();
-        String CpassWord = editTextPassword.getText().toString().trim();
+        String CpassWord = editTextCpassWord.getText().toString().trim();
         String user_type_role = "1";//for individual signup
         String user_type_id = "2";//for provider identification
         if (GloablMethods.validate(userName, passWord, CpassWord)) {
@@ -108,8 +112,19 @@ public class SignupCase1 extends Fragment {
                     startActivity(intent);
                     getActivity().finish();
                 }
-                if (response.code() == 422) {
-                    baseActivity.showSnakBar(relativeLayoutRoot, "The Email is already registered ");
+                else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(relativeLayoutRoot, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+
+                    }
+
                 }
             }
 
