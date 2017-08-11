@@ -56,7 +56,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @BindView(R.id.textCustomerEmail)
     TextView textViewCutomerEmail;
     @NonNull
-    @BindView(R.id.textCustomerMobile)
+    @BindView(R.id.textMobile)
     TextView textViewCutomerMobile;
     @NonNull
     @BindView(R.id.text_From)
@@ -188,6 +188,12 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.textLastUpdatedTime)
     TextView textLastUpdatedTime;
+
+    @NonNull
+    @BindView(R.id.textTruckCustName)
+    TextView textViewTruckCustName;
+
+
     @NonNull
     @BindView(R.id.rootview)
     RelativeLayout rootView;
@@ -209,6 +215,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
+
+
 
     String CutomerMobile = null;
     View dark_bg;
@@ -248,7 +256,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         String profilepic = getIntent().getStringExtra("profilepic");
         String CutomerName = getIntent().getStringExtra("name");
         String CutomerEmail = getIntent().getStringExtra("email");
-        CutomerMobile = getIntent().getStringExtra("phone1");
+        String CutomerMobileNo = getIntent().getStringExtra("phone1");
         String Job_From = getIntent().getStringExtra("FromLoc_name");
         String Job_To = getIntent().getStringExtra("ToLoc_name");
         String JobTotalDist = getIntent().getStringExtra("LocationDistance");
@@ -310,7 +318,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
-        textViewCutomerMobile.setText(CutomerMobile);
+        textViewCutomerMobile.setText(CutomerMobileNo);
         textViewJob_From.setText(Job_From);
         textViewJob_To.setText(Job_To);
         textViewJobTotalDist.setText(JobTotalDist);
@@ -324,6 +332,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         textViewJobFrom.setText(JobFrom);
         textViewJobTo.setText(JobTo);
         textViewLoadingDate.setText(LoadingDate);
+
+      //  textViewTruckCustName.setText();
+
         textViewTruckSize.setText(TruckSize);
         textViewTruckType.setText(TruckType);
         textViewPaymentMode.setText(PaymentMode);
@@ -560,10 +571,14 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
                         textCustomVechicleName.setText(response.body().getAssignedVehicle().getVehicleDetails().getCustomName());
                         textAssignedTruckType.setText(response.body().getAssignedVehicle().getVehicleDetails().getVehicle().getTruckType().getTruckTypeName());
+
                         textStartDate.setText(response.body().getAssignedVehicle().getExpectedStartDate());
                         textEndDate.setText(response.body().getAssignedVehicle().getExpectedEndDate());
                         textEndTime.setText(response.body().getAssignedVehicle().getExpectedEndTime());
                         textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
+
+
+
                         textDriverName.setText(response.body().getAssignedDriver().getDriverName());
                         textDriverEmail.setText(response.body().getAssignedDriver().getDriverEmail());
                         textDriverMobile.setText(response.body().getAssignedDriver().getDriverPhone());

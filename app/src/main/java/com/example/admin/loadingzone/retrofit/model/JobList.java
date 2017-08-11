@@ -40,9 +40,26 @@ public class JobList {
     @Expose
     private TruckSize truckSize;
 
+
+
+
     @SerializedName("location_distance")
     @Expose
     private Double locationDistance;
+
+    public Double getOrigin_destination_distance() {
+        return origin_destination_distance;
+    }
+
+    public void setOrigin_destination_distance(Double origin_destination_distance) {
+        this.origin_destination_distance = origin_destination_distance;
+    }
+
+    @SerializedName("origin_destination_distance")
+    @Expose
+    private Double origin_destination_distance;
+
+
     @SerializedName("date_requested")
     @Expose
     private String dateRequested;
@@ -228,5 +245,46 @@ public class JobList {
     public void setJobStatus(JobStatus jobStatus) {
         this.jobStatus = jobStatus;
     }
+
+
+    public MaterialWeight getMaterial_weight() {
+        return material_weight;
+    }
+
+    public void setMaterial_weight(MaterialWeight material_weight) {
+        this.material_weight = material_weight;
+    }
+
+    @SerializedName("material_weight")
+    @Expose
+    private MaterialWeight material_weight;
+
+
+    public String getPreferred_loading_date() {
+        return preferred_loading_date;
+    }
+
+    public void setPreferred_loading_date(String preferred_loading_date) {
+        this.preferred_loading_date = preferred_loading_date;
+    }
+
+    @SerializedName("preferred_loading_date")
+    @Expose
+    private String preferred_loading_date;
+
+
+    public String getPreferred_loading_time() {
+        return preferred_loading_time;
+    }
+
+    public void setPreferred_loading_time(String preferred_loading_time) {
+        this.preferred_loading_time = preferred_loading_time;
+    }
+
+    @SerializedName("preferred_loading_time")
+    @Expose
+    private String preferred_loading_time;
+
+
 
 }

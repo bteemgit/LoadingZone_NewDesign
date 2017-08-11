@@ -8,7 +8,6 @@
     android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,7 +154,7 @@
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
-                                android:visibility="visible" />
+                                android:visibility="gone" />
 
                             <View
                                 android:layout_width="match_parent"
@@ -298,6 +297,7 @@
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
+                                android:visibility="gone"
                                 android:id="@+id/textTotalDistance"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
@@ -387,7 +387,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -423,6 +423,22 @@
                             android:minWidth="80dp"
                             android:orientation="vertical">
 
+                            <TextView
+                                android:id="@+id/textTruckCustomName"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Truck Custom name"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
                             <TextView
                                 android:id="@+id/customTextView11"
                                 android:layout_width="match_parent"
@@ -461,6 +477,31 @@
                             android:layout_weight="1"
                             android:gravity="left"
                             android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/textTruckCustName"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/white"
+                                android:gravity="start|center"
+                                android:hint="Trck Cust Name"
+                                android:inputType="textCapSentences"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:visibility="visible" />
+
+
+                            <View
+                                android:layout_width="130dp"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
 
                             <TextView
                                 android:id="@+id/textTruckSize"
@@ -514,8 +555,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -542,6 +583,7 @@
                         android:background="@android:color/white"
                         android:baselineAligned="false"
                         android:gravity="right"
+                        android:visibility="gone"
                         android:paddingLeft="15dp">
 
                         <LinearLayout
@@ -584,6 +626,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="60dp"
                             android:layout_weight="1"
+                            android:visibility="gone"
                             android:gravity="left"
                             android:orientation="vertical">
 

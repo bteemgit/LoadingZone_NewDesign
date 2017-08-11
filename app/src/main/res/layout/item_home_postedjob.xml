@@ -118,7 +118,7 @@
                 android:layout_height="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
-                android:text=":TruckType"
+                android:text="Material"
                 android:textSize="12sp"/>
 
         </LinearLayout>
@@ -156,7 +156,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
                 android:textSize="12sp"
-                android:text=":TruckType" />
+                android:text=":Quotations" />
 
         </LinearLayout>
 
@@ -192,7 +192,7 @@
                 android:layout_height="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
-                android:text=":TruckType" />
+                android:text="Loading Date" />
 
         </LinearLayout>
 

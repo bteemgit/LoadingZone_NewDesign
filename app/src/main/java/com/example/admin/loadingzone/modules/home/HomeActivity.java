@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -290,21 +291,28 @@ public class HomeActivity extends BaseActivity {
                 String Material_name = jobList.get(position).getMaterial().getMaterialName();
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
-                String weight = jobList.get(position).getWeight();
-                String DateOfLoading = jobList.get(position).getDateOfLoading();
+                String weight = jobList.get(position).getMaterial_weight().getMaterialWeightText();
+
+                String DateOfLoading = jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time();
+
+
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
                 String TruckType_name = jobList.get(position).getTruckType().getTruckTypeName();
                 String TruckType_id = jobList.get(position).getTruckType().getTruckTypeId();
                 String TruckSize_dimension = jobList.get(position).getTruckSize().getTruckSizeDimension();
                 Integer TruckSize_id = jobList.get(position).getTruckSize().getTruckSizeId();
-                String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
+
+                String LocationDistance = String.valueOf(jobList.get(position).getOrigin_destination_distance());
+
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
                 String QuotationCount = jobList.get(position).getQuotationCount();
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();
                 String job_status_code = jobList.get(position).getJobStatus().getCode();
+
+                //String truckCust_name = jobList.get(position).getT().getCode();
                 i.putExtra("isFrom", "Home");
                 i.putExtra("job_date", job_date);
                 i.putExtra("job_time", job_time);
