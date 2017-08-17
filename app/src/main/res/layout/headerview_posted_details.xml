@@ -47,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="30dp"
                         android:gravity="center">
 
                         <ImageView
@@ -317,6 +317,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:id="@+id/LinearAciveQuotation"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -384,6 +385,103 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ExpStartEndJob_assignedJobs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/texExpStartDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingBottom="3dp"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
+                                    android:paddingTop="3dp"
+                                    android:text="dd/mm/yyyy"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Exp. Start Date"
+                                android:textColor="#ffffff"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="40dp"
+                            android:background="#FFF" />
+
+
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="40dp"
+                            android:background="#FFF" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/textExpEndDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingBottom="3dp"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
+                                    android:paddingTop="3dp"
+                                    android:text="dd/mm/yyyy"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Exp.End Date"
+                                android:textColor="#ffffff"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+
 
                     <Button
                         android:id="@+id/btnStartjob"

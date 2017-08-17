@@ -115,6 +115,7 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
         userEmail = AppController.getString(getApplicationContext(), "customer_email");
         if (userEmail != null || userEmail.length() > 0) {
             editTextUserEmail.setText(userEmail);
+            editTextUserEmail.setKeyListener(null);
         }
         // :-fetching the details from userprofile activity
         isFrom = getIntent().getStringExtra("isFrom");
@@ -270,7 +271,10 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     AppController.setString(UserProfileEditActivity.this, "customer_name", response.body().getProviderName());
+
+
                     AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
+
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -382,8 +386,9 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
         // create RequestBody instance from file
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
+         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("profile_pic", file.getName(), requestFile);
+
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         Call<UserProfileResponse> resultCall = apiService.UploadprofilePicProvider(GloablMethods.API_HEADER + acess_token, body);
         // finally, execute the request
@@ -393,7 +398,8 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                hideProgressDialog();
                 // Response Success or Fail
                 if (response.isSuccessful()) {
-                 AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
+                    //setting Image to AppController
+                    AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
                     AppController.setString(getApplicationContext(), "service_provider_id", String.valueOf(response.body().getServiceProviderId()));
                     btnEditProfilePicUpload.setVisibility(View.GONE);
                     btnEditProfilePic.setVisibility(View.VISIBLE);

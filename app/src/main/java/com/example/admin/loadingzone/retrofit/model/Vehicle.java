@@ -25,6 +25,8 @@ public class Vehicle {
     @Expose
     private String dimension;
 
+
+
     public Integer getVehicleId() {
         return vehicleId;
     }

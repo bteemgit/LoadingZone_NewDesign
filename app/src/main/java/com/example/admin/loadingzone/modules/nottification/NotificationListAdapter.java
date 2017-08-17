@@ -90,7 +90,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
                     .withBorder(0).endConfig()
                     .buildRound(firstLetter.toUpperCase(), color
                     );
-            holder.img.setImageDrawable(drawable1);
+       //     holder.img.setImageDrawable(drawable1);
             //code to set data in textview as initCap
             String var = (String) holder.textJobTitle.getText();
             String output = var.substring(0,1).toUpperCase() + var.substring(1);

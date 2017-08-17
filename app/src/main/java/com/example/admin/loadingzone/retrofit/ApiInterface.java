@@ -103,13 +103,13 @@ public interface ApiInterface {
     @POST("provider-vehicles")
     Call<TruckAddResponse> TruckAdd(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("avg_running_speed") String avg_running_speed, @Field("custom_name") String custom_name,
                                     @Field("insurance_exp_date") String insurance_exp_date, @Field("weight") String weight, @Field("container_length") String container_length, @Field("container_width") String container_width
-            , @Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year);
+            , @Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year,@Field("registration_number") String registration_number,@Field("chassis_number") String chassis_number,@Field("licence_number") String licence_number );
 
     @FormUrlEncoded
     @PUT("provider-vehicles/{provider_vehicle_id}")
     Call<TruckAddResponse> TruckUpdate(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id, @Field("avg_running_speed") String avg_running_speed, @Field("custom_name") String custom_name,
                                        @Field("insurance_exp_date") String insurance_exp_date, @Field("weight") String weight, @Field("container_length") String container_length, @Field("container_width") String container_width
-            , @Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year);
+            , @Field("container_height") String container_height, @Field("model_id") String model_id, @Field("truck_type_id") String truck_type_id, @Field("model_year") String model_year,@Field("registration_number") String registration_number,@Field("chassis_number") String chassis_number,@Field("licence_number") String licence_number);
 
     @DELETE("provider-vehicles/{provider_vehicle_id}")
     Call<TruckAddResponse> DeleteTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Path("provider_vehicle_id") String provider_vehicle_id);
@@ -225,5 +225,4 @@ public interface ApiInterface {
     Call<CancelJobListResponse>CanceledJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
     @GET("quotation/cancel-reason")
     Call<CancelJobReasonResponse>CancelJobReasonsList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
-
 }

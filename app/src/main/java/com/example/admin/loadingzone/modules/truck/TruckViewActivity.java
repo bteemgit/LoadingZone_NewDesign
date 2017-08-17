@@ -120,11 +120,24 @@ public class TruckViewActivity extends BaseActivity {
                 String provider_vehicle_id = String.valueOf(vehicleListList.get(position).getProviderVehicleId());
                 String driver=vehicleListList.get(position).getDriver();
                 String truckId= String.valueOf(vehicleListList.get(position).getProviderVehicleId());
+
+                String reg_no=vehicleListList.get(position).getRegistration_number();
+                String chassis_no=vehicleListList.get(position).getChassis_number();
+                String License_no=vehicleListList.get(position).getLicence_number();
+
+
+
                 Intent i = new Intent(TruckViewActivity.this, TruckEditUpdateActivity.class);
                 i.putExtra("isFrom", "TruckView");
                 i.putExtra("driver", driver);
                 i.putExtra("provider_vehicle_id", provider_vehicle_id);
                 i.putExtra("truckId", truckId);
+
+
+                i.putExtra("reg_no",reg_no);
+                i.putExtra("chassis_no",chassis_no);
+                i.putExtra("License_no",License_no);
+
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
 

@@ -28,7 +28,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/circle"
                 android:layout_gravity="center"
-                card_view:srcCompat="@drawable/ic_bell"/>
+                card_view:srcCompat="@drawable/ic_belll"/>
         </RelativeLayout>
 
         <LinearLayout

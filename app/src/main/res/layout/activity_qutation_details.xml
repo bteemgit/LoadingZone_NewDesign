@@ -286,6 +286,7 @@
                                 android:gravity="center_vertical"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
+                                android:hint="Nil"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"

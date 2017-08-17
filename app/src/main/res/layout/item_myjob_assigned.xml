@@ -124,6 +124,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/linear_truckDimension"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -165,7 +166,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear_truckDimension"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/textView3"
@@ -175,7 +177,7 @@
                 android:gravity="start"
                 android:textSize="12sp"
                 android:paddingLeft="90dp"
-                android:text="Loading Date"
+                android:text="Exp.Start Date"
                 android:textColor="@color/colorPrimary" />
             <TextView
                 android:layout_width="wrap_content"
@@ -199,10 +201,9 @@
             android:id="@+id/linear_truckBudget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_below="@+id/linear_truckDate"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="200dp"
@@ -227,7 +228,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
                 android:textSize="12sp"
-                android:text="Job Code" />
+                android:text="job code" />
 
         </LinearLayout>
 

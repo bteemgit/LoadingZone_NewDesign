@@ -73,7 +73,7 @@ public class TrckListAdapter  extends RecyclerView.Adapter<TrckListAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.textViewTrckName.setText(vehicleListList.get(position).getCustomName());
+        holder.textViewTrckName.setText(vehicleListList.get(position).getCustomName()+" - "+vehicleListList.get(position).getRegistration_number());
         holder.textAvgSpeed.setText(vehicleListList.get(position).getAvgRunningSpeed()+"Km/hr");
         holder.textManufacture.setText(vehicleListList.get(position).getVehicle().getManufacturer().getMakerName());
         holder.textTruckType.setText(vehicleListList.get(position).getVehicle().getTruckType().getTruckTypeName());

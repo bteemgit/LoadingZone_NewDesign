@@ -97,9 +97,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.texLoadingDate)
     TextView textViewLoadingDate;
-    @NonNull
-    @BindView(R.id.textTruckSize)
-    TextView textViewTruckSize;
+
     @NonNull
     @BindView(R.id.textTruckType)
     TextView textViewTruckType;
@@ -119,6 +117,21 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.vUserStats)
     LinearLayout linerUserstaus;
+
+    @NonNull
+    @BindView(R.id.ExpStartEndJob_assignedJobs)
+    LinearLayout linerExpStartEndJob_assignedJobs;
+
+
+    @NonNull
+    @BindView(R.id.texExpStartDate)
+    TextView textViewExpStartDate;
+
+    @NonNull
+    @BindView(R.id.textExpEndDate)
+    TextView textViewExpEndDate;
+
+
     @NonNull
     @BindView(R.id.btnStartjob)
     Button buttonJobStart;
@@ -176,9 +189,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.textDriverMobile)
     TextView textDriverMobile;
-    @NonNull
-    @BindView(R.id.textVehicleRunningStatus)
-    TextView textVehicleRunningStatus;
+
     @NonNull
     @BindView(R.id.textVehicleLocation)
     TextView textVehicleLocation;
@@ -190,9 +201,12 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     TextView textLastUpdatedTime;
 
     @NonNull
-    @BindView(R.id.textTruckCustName)
-    TextView textViewTruckCustName;
+    @BindView(R.id.id_LinearStart_EndDateime)
+    LinearLayout linearLayout_id_Start_EndDateime;
 
+    @NonNull
+    @BindView(R.id.id_LinearStart_EndDateime_Label)
+    LinearLayout LinearLayout_id_Start_EndDateime_Label;
 
     @NonNull
     @BindView(R.id.rootview)
@@ -216,6 +230,35 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
 
+    @NonNull
+    @BindView(R.id.texJobCode)
+    TextView textViewjbCode;
+
+    @NonNull
+    @BindView(R.id.linear_prefferedtruckDetails)
+    LinearLayout linearPrefferedTruckDetails;
+
+    @NonNull
+    @BindView(R.id.linear_truckLabel)
+    LinearLayout linearTruckLabel;
+
+    @NonNull
+    @BindView(R.id.textCustomTruckSize_inAssignedVehicleInfo)
+    TextView textViewCustomTruckSize_inAssignedVehicleInfo;
+
+    @NonNull
+    @BindView(R.id.textTruckSize_inPrefferedTruckDetails)
+    TextView textViewCustomTruckSize_inPrefferedTruckDetails;
+
+
+    @NonNull
+    @BindView(R.id.textJobStatus)
+    TextView textViewJobStatus;
+
+
+    @NonNull
+    @BindView(R.id.TextRunningStatus)
+    TextView textViewRunningStatus;
 
 
     String CutomerMobile = null;
@@ -252,6 +295,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         });
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
+        String job_code = getIntent().getStringExtra("job_code");
+        String JobStatus = getIntent().getStringExtra("JobStatus");
+
         isFrom = getIntent().getStringExtra("isFrom");
         String profilepic = getIntent().getStringExtra("profilepic");
         String CutomerName = getIntent().getStringExtra("name");
@@ -294,10 +340,22 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 linearAssignedDriverItem.setVisibility(View.GONE);
                 linearAssignedVehicleItem.setVisibility(View.GONE);
                 linearJobstatusItem.setVisibility(View.GONE);
-
             }
         }
         if (isFrom.equals("AssignedJob")) {
+
+            //setting visibility of Exp.Start/End Date in headerview
+            linerExpStartEndJob_assignedJobs.setVisibility(View.VISIBLE);
+            //setting invisibile of ActiveQuotation.etc in headerview
+            linerUserstaus.setVisibility(View.GONE);
+            //setting invisibile of preffered truckdetails
+            linearPrefferedTruckDetails.setVisibility(View.GONE);
+            linearTruckLabel.setVisibility(View.GONE);
+
+            //setting visibility of Start/End date and time
+            linearLayout_id_Start_EndDateime.setVisibility(View.VISIBLE);
+            LinearLayout_id_Start_EndDateime_Label.setVisibility(View.VISIBLE);
+
             //the job can only cancel after the drver and vehicle is assignd and before the drvier loading the materials
             if (job_status_code.equals("job-started") || job_status_code.equals("vehicle-blocked")) {
                 buttonCanceljob.setVisibility(View.VISIBLE);
@@ -333,9 +391,16 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         textViewJobTo.setText(JobTo);
         textViewLoadingDate.setText(LoadingDate);
 
+        textViewjbCode.setText(job_code);
+
+
+        textViewJobStatus.setText(JobStatus);
+
+
       //  textViewTruckCustName.setText();
 
-        textViewTruckSize.setText(TruckSize);
+        textViewCustomTruckSize_inAssignedVehicleInfo.setText(TruckSize);
+        textViewCustomTruckSize_inPrefferedTruckDetails.setText(TruckSize);
         textViewTruckType.setText(TruckType);
         textViewPaymentMode.setText(PaymentMode);
         //textViewCurrency.setText(Currency);
@@ -349,7 +414,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         // fab click & animation
         mSheetLayout.setFab(fabQuotationApply);
         mSheetLayout.setFabAnimationEndListener(this);
-
 
     }
 
@@ -578,11 +642,16 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                         textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
 
 
+                        textViewRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusText());
+
+
+                        textViewExpStartDate.setText(response.body().getAssignedVehicle().getExpectedStartDate());
+                        textViewExpEndDate.setText(response.body().getAssignedVehicle().getExpectedEndDate());
 
                         textDriverName.setText(response.body().getAssignedDriver().getDriverName());
                         textDriverEmail.setText(response.body().getAssignedDriver().getDriverEmail());
                         textDriverMobile.setText(response.body().getAssignedDriver().getDriverPhone());
-                        textVehicleRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusName());
+                      //  textVehicleRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusName());
                         textVehicleLocation.setText(response.body().getLoadStatus().getLocationName());
                         textLastUpdatedDate.setText(response.body().getLoadStatus().getStatusDate());
                         textLastUpdatedTime.setText(response.body().getLoadStatus().getStatusTime());

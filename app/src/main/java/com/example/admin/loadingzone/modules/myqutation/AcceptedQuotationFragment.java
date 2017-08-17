@@ -132,17 +132,18 @@ public class AcceptedQuotationFragment extends Fragment {
                 String quotationCurrency = itemsArrayList.get(position).getQuotationCurrency();
                 String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
+
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
              //   String dateRejected=itemsArrayList.get(position).getDateRejected();
                 String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
 
 
-                String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
+                String jobdate = itemsArrayList.get(position).getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
                 String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
-                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getLocationDistance());
+                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getOrigin_destination_distance());
 
 
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
@@ -161,7 +162,7 @@ public class AcceptedQuotationFragment extends Fragment {
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","accepted");
 
-                i.putExtra("jobdate",jobdate);
+                i.putExtra("job_date",jobdate);
                 i.putExtra("jobDescription",jobDescription);
                 i.putExtra("dateRequested",dateRequested);
                 i.putExtra("activeQuotations",activeQuotations);

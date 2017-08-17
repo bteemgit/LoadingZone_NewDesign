@@ -33,6 +33,21 @@ public class JobDetails {
     @SerializedName("loading_time")
     @Expose
     private String loadingTime;
+
+    public Double getOrigin_destination_distance() {
+        return origin_destination_distance;
+    }
+
+    public void setOrigin_destination_distance(Double origin_destination_distance) {
+        this.origin_destination_distance = origin_destination_distance;
+    }
+
+    @SerializedName("origin_destination_distance")
+    @Expose
+    private Double origin_destination_distance;
+
+
+
     @SerializedName("location_distance")
     @Expose
     private Integer locationDistance;

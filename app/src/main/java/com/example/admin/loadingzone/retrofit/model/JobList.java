@@ -9,6 +9,20 @@ public class JobList {
     @SerializedName("job_id")
     @Expose
     private String jobId;
+
+
+    public String getJob_code() {
+        return job_code;
+    }
+
+    public void setJob_code(String job_code) {
+        this.job_code = job_code;
+    }
+
+    @SerializedName("job_code")
+    @Expose
+    private String job_code;
+
     @SerializedName("customer")
     @Expose
     private Customer customer;
@@ -284,6 +298,19 @@ public class JobList {
     @SerializedName("preferred_loading_time")
     @Expose
     private String preferred_loading_time;
+
+
+    public JobDates getJobdates() {
+        return Jobdates;
+    }
+
+    public void setJobdates(JobDates jobdates) {
+        Jobdates = jobdates;
+    }
+
+    @SerializedName("job_dates")
+    @Expose
+    private JobDates Jobdates;
 
 
 

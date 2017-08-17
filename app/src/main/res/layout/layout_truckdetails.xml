@@ -29,18 +29,14 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center|start"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_insurance" />
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
                 android:weightSum="3">
                 <TextView
                     android:layout_width="0dp"
@@ -49,7 +45,8 @@
                     android:gravity="start"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    android:text="Insurance"/>
+                    android:text="Insurance"
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -65,24 +62,146 @@
                     android:textColor="@color/colorAccent"
                     android:text="0000-00-00"/>
             </LinearLayout>
-
         </LinearLayout>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center|start"
             android:orientation="horizontal"
             android:layout_marginLeft="25dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_avgspeed"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginLeft="15dp"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="start"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Registration No"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight=".2"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/textRegistrationNo"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:text="KL 45 L 317"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginLeft="25dp"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="start"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Chasis No"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight=".2"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/textChasisNo"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:text="TR12345"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginLeft="25dp"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="start"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="License No"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight=".2"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/textLicenseNo"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:text="NR1235"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginLeft="25dp"
                 android:weightSum="3">
 
                 <TextView
@@ -93,7 +212,8 @@
                     android:layout_weight="1"
                     android:gravity="start"
                     android:text="Speed"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -116,18 +236,14 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center|start"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_weight"/>
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginLeft="25dp"
                 android:gravity="center"
-                android:layout_marginLeft="15dp"
                 android:weightSum="3">
                 <TextView
                     android:layout_width="0dp"
@@ -136,7 +252,8 @@
                     android:gravity="start"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    android:text="Weight"/>
+                    android:text="Weight"
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -157,19 +274,14 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center|start"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dimension"
-                />
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="25dp"
                 android:weightSum="3">
                 <TextView
                     android:layout_width="0dp"
@@ -178,7 +290,8 @@
                     android:paddingLeft="10dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    android:text="Dimension"/>
+                    android:text="Dimension"
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -210,6 +323,18 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:text="Driver Details"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_ChangeDriver"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_edit"/>
+            </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -229,7 +354,7 @@
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textStyle="bold"
-                    android:layout_weight=".5"
+                    android:layout_weight=".9"
                     android:textColor="@color/colorPrimary"/>
                 <TextView
                     android:layout_width="0dp"
@@ -258,7 +383,7 @@
                     android:layout_height="wrap_content"
                     android:text="Place"
                     android:textStyle="bold"
-                    android:layout_weight=".5"
+                    android:layout_weight=".9"
                     android:textColor="@color/colorPrimary"/>
                 <TextView
                     android:layout_width="0dp"
@@ -286,7 +411,7 @@
                     android:layout_height="wrap_content"
                     android:text="Email"
                     android:textStyle="bold"
-                    android:layout_weight=".5"
+                    android:layout_weight=".9"
                     android:textColor="@color/colorPrimary"/>
                 <TextView
                     android:layout_width="0dp"
@@ -315,7 +440,7 @@
                     android:layout_marginLeft="25dp"
                     android:text="Phone"
                     android:textStyle="bold"
-                    android:layout_weight=".5"
+                    android:layout_weight=".9"
                     android:textColor="@color/colorPrimary"/>
                 <TextView
                     android:layout_width="0dp"
@@ -396,9 +521,7 @@
                     android:layout_below="@id/view1"
                     android:textSize="13sp"
                     android:visibility="gone"
-                    android:layout_marginLeft="40dp"
-                    android:paddingTop="60dp"
-                    android:paddingLeft="30dp"
+                    android:gravity="center"
                     android:layout_centerHorizontal="true"/>
 
                 <LinearLayout

@@ -3,6 +3,7 @@ package com.example.admin.loadingzone.modules.ForgotOrChangePassword;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
@@ -24,8 +25,13 @@ import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.ForgotPasswordResponse;
 
+import org.json.JSONObject;
+
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
+
+import static android.R.attr.password;
 
 public class ForgotPassword extends BaseActivity implements View.OnClickListener {
     private EditText editTextUserName;
@@ -36,6 +42,13 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
     ProgressDialog progressDialog;
 
     LinearLayout linearLayout;
+
+    private ApiInterface apiService;
+
+    @NonNull
+    @BindView(R.id.id_linearForgot)
+    LinearLayout rootView;
+
 
 
     @Override
@@ -116,30 +129,91 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
     private void ForgotPassword(String userName) {
         progressDialog.setMessage("loading");
         progressDialog.show();
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+      //  Call<PostedJobResponse> call = apiService.PostedJobList(GloablMethods.API_HEADER + acess_token, offset);
         Call<ForgotPasswordResponse> call = apiService.ForgotPassword(GloablMethods.API_HEADER + acess_token,userName);
         call.enqueue(new Callback<ForgotPasswordResponse>() {
             @Override
             public void onResponse(Call<ForgotPasswordResponse> call, retrofit2.Response<ForgotPasswordResponse> response) {
-                progressDialog.dismiss();
+                hideProgressDialog();
+                if (response.isSuccessful()) {
+                    if (response.body().getMeta().getStatus().equals("true") || response.body().getMeta().getStatus().equals(true)) {
+                       /* Snackbar snackbar = Snackbar
+                                .make(linearLayout,"Password has been sent to your mail ID", Snackbar.LENGTH_LONG);
+                        snackbar.show();*/
+                       Toast.makeText(ForgotPassword.this,response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+                   /* } else {
+                        Snackbar snackbar = Snackbar
+                                .make(rootView, response.body().getErrors().getMessage(), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }*/
+                    }
 
-                if (response.body().getMeta().getStatus().equals("true")) {
-                    Toast.makeText(ForgotPassword.this, response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("test..............", response.body().getMeta().getMessage());
 
-                } else {
-                    Toast.makeText(getApplicationContext(), response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+                    Intent in = new Intent(getApplicationContext(), LoginActivity.class);
+
+
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(in);
+
+
+                }else if(!response.isSuccessful()){
+
+                    progressDialog.dismiss();
+
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(linearLayout, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+
                 }
-                Log.e("test..............", response.body().getMeta().getMessage());
-
-                Intent in = new Intent(getApplicationContext(), LoginActivity.class);
 
 
-                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                /*if (response.code() == 404) {
+                    progressDialog.dismiss();
+                    //Toast.makeText(ForgotPassword.this,, Toast.LENGTH_SHORT).show();
 
-                startActivity(in);
+
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout,"Please enter a registered Email ID" , Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }*/
+
+
+
+               /*
+                else {
+                    hideProgressDialog();
+
+                    showSnakBar(rootView, MessageConstants.SERVERERROR);
+                     *//*try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(rootView, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }*//*
+
+                }*/
+
+
+
 
             }
 
@@ -148,7 +222,13 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
                 // Log error here since request failed
                 progressDialog.dismiss();
             }
+
+
+
+
         });
+
+
     }
 
 

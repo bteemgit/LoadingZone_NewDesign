@@ -132,16 +132,16 @@ public class RejectedQuotationFragment extends Fragment {
        //         String quotationAmount = itemsArrayList.get(position).getQuotationAmount();
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
-       //         String dateRejected=itemsArrayList.get(position).getDateRejected();
+                String dateRejected= String.valueOf(itemsArrayList.get(position).getDateRejected());
                 String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
                 String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
 
-                String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
+                String jobdate = itemsArrayList.get(position).getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
                 String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
-                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getLocationDistance());
+                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getOrigin_destination_distance());
 
 
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
@@ -155,14 +155,14 @@ public class RejectedQuotationFragment extends Fragment {
        //         i.putExtra("quotationAmount", quotationAmount);
                 i.putExtra("dateSubmitted", dateSubmitted);
                 i.putExtra("dateAccepted", dateAccepted);
-       //         i.putExtra("dateRejected", dateRejected);
+                i.putExtra("dateRejected", dateRejected);
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","rejected");
 
                 i.putExtra("quotationAmount", quotationAmount);
 
-                i.putExtra("jobdate",jobdate);
+                i.putExtra("job_date",jobdate);
                 i.putExtra("jobDescription",jobDescription);
                 i.putExtra("dateRequested",dateRequested);
                 i.putExtra("activeQuotations",activeQuotations);

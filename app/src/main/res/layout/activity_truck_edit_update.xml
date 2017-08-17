@@ -218,7 +218,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#ffffff"
+        android:background="@color/colorPrimaryDark"
         android:elevation="10dp"
         android:gravity="bottom"
         android:visibility="visible">
@@ -226,8 +226,13 @@
         <LinearLayout
             android:id="@+id/linearDeleteTruck"
             android:layout_width="170dp"
+            android:background="@color/colorPrimary"
             android:layout_height="match_parent"
             android:elevation="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="2.5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -235,16 +240,18 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Delete"
-                android:textSize="20sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <View
+            android:visibility="gone"
             android:id="@+id/view"
             android:layout_width="2dp"
             android:layout_height="100dp"
             android:layout_toEndOf="@+id/linearDeleteTruck"
             android:layout_toRightOf="@+id/linearDeleteTruck"
-            android:background="#d9d8d8">
+            android:background="@color/colorPrimaryDark">
 
         </View>
 
@@ -253,16 +260,21 @@
             android:layout_width="210dp"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
+            android:background="@color/colorPrimary"
             android:layout_toEndOf="@+id/view"
-            android:layout_toRightOf="@+id/view">
+            android:layout_toRightOf="@+id/view"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="#FFFFFF"
                 android:text="Update"
-                android:textSize="20sp" />
+                android:textSize="13sp" />
         </LinearLayout>
 
     </RelativeLayout>

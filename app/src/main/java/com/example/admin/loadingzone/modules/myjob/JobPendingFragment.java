@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -127,6 +128,8 @@ public class JobPendingFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), PostedJobDetailsActivity.class);
                 String JobId = jobList.get(position).getJobId();
+                String job_code = jobList.get(position).getJob_code();
+
                 String name = jobList.get(position).getCustomer().getName();
                 String email = jobList.get(position).getCustomer().getEmail();
                 String phone1 = jobList.get(position).getCustomer().getPhone1();
@@ -141,7 +144,7 @@ public class JobPendingFragment extends Fragment {
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
                 String weight = String.valueOf(jobList.get(position).getWeight());
-                String DateOfLoading = jobList.get(position).getDateOfLoading();
+                String DateOfLoading = jobList.get(position).getLoadingDate();
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
                 String TruckType_name = jobList.get(position).getTruckType().getTruckTypeName();
@@ -149,7 +152,7 @@ public class JobPendingFragment extends Fragment {
                 String TruckSize_dimension = jobList.get(position).getTruckSize().getTruckSizeDimension();
                 Integer TruckSize_id = jobList.get(position).getTruckSize().getTruckSizeId();
             //    String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
-                String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
+                String LocationDistance = String.valueOf(jobList.get(position).getOrigin_destination_distance());
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
               //  String Budget = jobList.get(position).getBudget();
@@ -159,6 +162,8 @@ public class JobPendingFragment extends Fragment {
                 String job_status_code = jobList.get(position).getJobStatus().getCode();
                 i.putExtra("isFrom", "Pendingjob");
                 i.putExtra("JobId", JobId);
+                i.putExtra("job_code", job_code);
+
                 i.putExtra("name", name);
                 i.putExtra("email", email);
                 i.putExtra("phone1", phone1);
@@ -271,7 +276,7 @@ public class JobPendingFragment extends Fragment {
     }
 
     private void updateEndlessRecyclerView() {
-        postedJobListAdapter = new MyJobListAdapter(jobList, R.layout.item_home_postedjob, getContext());
+        postedJobListAdapter = new MyJobListAdapter(jobList, R.layout.item_myjob_pending, getContext());
         endlessRecyclerViewPostedJob.setAdapter(postedJobListAdapter);
     }
 }

@@ -119,7 +119,7 @@
                 android:layout_height="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
-                android:text=":TruckType"
+                android:text="Quotation Amount"
                 android:textSize="12sp"/>
 
         </LinearLayout>
@@ -159,7 +159,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
                 android:textSize="12sp"
-                android:text=":TruckType" />
+                android:text="Date Submitted" />
 
         </LinearLayout>
 
@@ -168,8 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear_truckDimension"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:id="@+id/textView3"
@@ -188,25 +187,24 @@
                 android:text=":"/>
 
             <TextView
-                android:id="@+id/textQutationStatus"
+                android:id="@+id/textExpectedDate"
                 android:layout_width="190dp"
                 android:gravity="start"
                 android:textSize="12sp"
                 android:layout_height="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
-                android:text=":TruckType" />
+                android:text="Expected Date" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/linear_truckBudget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_below="@+id/linear_truckDate"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="200dp"
@@ -224,14 +222,50 @@
                 android:text=":"/>
 
             <TextView
-                android:id="@+id/textTruckBudget"
+                android:id="@+id/textBudget"
                 android:layout_width="190dp"
                 android:gravity="start"
                 android:layout_height="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
                 android:textSize="12sp"
-                android:text=":TruckType" />
+                android:text="Budget with currency" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear_jobcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_truckBudget"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="200dp"
+                android:paddingLeft="90dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="1dp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="start"
+                android:textSize="12sp"
+                android:text="Job Code" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/textJobcode"
+                android:layout_width="190dp"
+                android:gravity="start"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:textSize="12sp"
+                android:text="Job Code" />
 
         </LinearLayout>
 

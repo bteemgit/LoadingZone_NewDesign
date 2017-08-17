@@ -34,13 +34,20 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-
         @BindView(R.id.textViewDriverName)
         TextView textViewDriverName;
         @BindView(R.id.textViewDriverEmail)
         TextView textViewDriverEmail;
         @BindView(R.id.textViewDriverMobile)
         TextView textViewDriverMobile;
+
+        @BindView(R.id.textJoinedDate)
+        TextView textViewJoinedDate;
+
+        @BindView(R.id.textCurrentlyAssignedTruck)
+        TextView textViewCurrentlyAssignedTruck;
+
+
         @BindView(R.id.imageDriverPic)
         ImageView imageDriverPic;
 
@@ -70,6 +77,11 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
         holder.textViewDriverName.setText(driverLists.get(position).getDriverName());
         holder.textViewDriverEmail.setText(driverLists.get(position).getDriverEmail());
         holder.textViewDriverMobile.setText(driverLists.get(position).getDriverPhone());
+
+        holder.textViewJoinedDate.setText(driverLists.get(position).getCreatedDate());
+        holder.textViewCurrentlyAssignedTruck.setText(driverLists.get(position).getDriverTruck().getCustomName());
+
+
         Picasso.with(context)
                 .load(driverLists.get(position).getDriverPic())
                 .placeholder(R.drawable.img_circle_placeholder)
@@ -77,8 +89,6 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
                 .centerCrop()
                 .transform(new CircleTransformation())
                 .into(holder.imageDriverPic);
-
-
 
     }
 

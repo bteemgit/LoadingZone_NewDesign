@@ -46,8 +46,8 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         @BindView(R.id.textQutationAmount)
         TextView textViewQutationAmount;
         @NonNull
-        @BindView(R.id.textQutationStatus)
-        TextView textViewQutationSttaus;
+        @BindView(R.id.textExpectedDate)
+        TextView textViewExpectedDate;
 
         @NonNull
         @BindView(R.id.textCustomerName)
@@ -64,6 +64,15 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         @NonNull
         @BindView(R.id.imageViewCustomPic)
         ImageView imgCustomerPic;
+
+        @NonNull
+        @BindView(R.id.textBudget)
+        TextView textViewBudget;
+
+        @NonNull
+        @BindView(R.id.textJobcode)
+        TextView textViewJobCode;
+
 
 
 
@@ -93,14 +102,18 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         holder.textViewJobTitle.setText(itemsArrayList.get(position).getJobDetails().getCustomer().getName());
         holder.textViewDateSubmited.setText(itemsArrayList.get(position).getDateSubmitted());
         String amount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
-        holder.textViewQutationAmount.setText(amount);
+        holder.textViewQutationAmount.setText(amount+" "+itemsArrayList.get(position).getQuotationCurrency());
 
       //  holder.textViewcustName.setText((CharSequence) itemsArrayList.get(position).getJobDetails().getDateRequestedRelative());
 
         holder.textViewLocationFrom.setText(itemsArrayList.get(position).getJobDetails().getFromLocationName());
         holder.textViewLocationTo.setText(itemsArrayList.get(position).getJobDetails().getToLocationName());
 
-        holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getJobDetails().getLoadingDate());
+        holder.textViewExpectedDate.setText(itemsArrayList.get(position).getLoadingDate());
+
+        holder.textViewBudget.setText(amount+" "+itemsArrayList.get(position).getQuotationCurrency());
+
+        holder.textViewJobCode.setText(itemsArrayList.get(position).getJob_code());
 
      //  holder.textViewcustName.setText(itemsArrayList.get(position).getJobDetails().);
       //  holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getQuotationStatus());

@@ -55,9 +55,12 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         @NonNull
         @BindView(R.id.textTruckDate)
         TextView textViewTruckDate;
+
+
         @NonNull
-        @BindView(R.id.textTruckBudget)
-        TextView textViewTruckBudget;
+        @BindView(R.id.textJobCode)
+        TextView textViewJobCode;
+
         @NonNull
         @BindView(R.id.imageViewCustomPic)
         ImageView imageViewCustomPic;
@@ -109,6 +112,7 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         holder.textViewTruckDimension.setText(jobList.get(position).getQuotationCount());
         holder.textViewTruckDate.setText(jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time());
        // holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
+        holder.textViewJobCode.setText(jobList.get(position).getJob_code());
 
         holder.daterequestedrelative.setText(jobList.get(position).getDateRequestedRelative());
 

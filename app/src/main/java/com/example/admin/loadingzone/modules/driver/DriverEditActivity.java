@@ -105,11 +105,21 @@ public class DriverEditActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.editDriverMobile)
     EditText editTextDriverMobile;
+
+    @NonNull
+    @BindView(R.id.editJoinedDate)
+    EditText editTextJoinedDate;
+
+    @NonNull
+    @BindView(R.id.editAssignedTruck)
+    EditText editTextAssignedTruck;
+
+
     private ApiInterface apiService;
     private int avatarSize;
     String imagePath;
     PermissionsChecker checker;
-    String driver_name, driver_id, driver_email, driver_mobile, driver_adress, isFrom,profile_pic;
+    String driver_name, driver_id, driver_email, driver_mobile, driver_adress, isFrom,profile_pic,driverJoinedDate,currentlyAssignedTruck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +145,10 @@ public class DriverEditActivity extends BaseActivity {
         driver_adress = getIntent().getStringExtra("driver_adress");
         profile_pic=getIntent().getStringExtra("profile_pic");
 
+
+        driverJoinedDate = getIntent().getStringExtra("driverJoinedDate");
+        currentlyAssignedTruck = getIntent().getStringExtra("currentlyAssignedTruck");
+
         Picasso.with(DriverEditActivity.this)
                 .load(profile_pic)
                 .placeholder(R.drawable.img_circle_placeholder)
@@ -148,7 +162,7 @@ public class DriverEditActivity extends BaseActivity {
             fabDriverAdd.setVisibility(View.GONE);
             btnEditProfilePic.setVisibility(View.GONE);
             btnEditProfilePicUpload.setVisibility(View.GONE);
-            showDetailsFromDriverViewActivity(driver_name, driver_email, driver_mobile, driver_adress);
+            showDetailsFromDriverViewActivity(driver_name, driver_email, driver_mobile, driver_adress,driverJoinedDate,currentlyAssignedTruck);
         }
 
     }
@@ -161,7 +175,7 @@ public class DriverEditActivity extends BaseActivity {
     }
 
 
-    public void showDetailsFromDriverViewActivity(String driver_name, String driver_email, String driver_mobile, String driver_adress) {
+    public void showDetailsFromDriverViewActivity(String driver_name, String driver_email, String driver_mobile, String driver_adress,String driver_joinedDate,String currentlyAssignedTruck) {
 
 
         if (!driver_name.equals(null))
@@ -173,8 +187,10 @@ public class DriverEditActivity extends BaseActivity {
         if (!driver_adress.equals(null))
             editTextDriverAdress.setText(driver_adress);
 
-
-
+        if (!driver_adress.equals(null))
+            editTextJoinedDate.setText(driver_joinedDate);
+        if (!driver_adress.equals(null))
+            editTextAssignedTruck.setText(currentlyAssignedTruck);
     }
 // update the driver
     @OnClick(R.id.linerUpdate)

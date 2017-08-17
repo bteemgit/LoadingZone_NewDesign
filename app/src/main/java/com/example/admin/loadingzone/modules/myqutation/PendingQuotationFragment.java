@@ -138,12 +138,12 @@ public class PendingQuotationFragment extends Fragment {
 
                 String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
-                String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
+                String dateRequested = (String) itemsArrayList.get(position).getDateSubmitted();
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
-                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getLocationDistance());
+                String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getOrigin_destination_distance());
                 String fromLocation = itemsArrayList.get(position).getJobDetails().getFromLocationName();
                 String toLocation = itemsArrayList.get(position).getJobDetails().getToLocationName();
-                String job_date = itemsArrayList.get(position).getJobDetails().getLoadingDate();
+                String job_date = itemsArrayList.get(position).getLoadingDate();
                 String job_time = itemsArrayList.get(position).getJobDetails().getLoadingTime();
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
@@ -163,7 +163,6 @@ public class PendingQuotationFragment extends Fragment {
                 i.putExtra("isFrom", "pending");
                 i.putExtra("job_date", job_date);
                 i.putExtra("job_time",job_time );
-                i.putExtra("jobdate",jobdate);
                 i.putExtra("jobDescription",jobDescription);
                 i.putExtra("dateRequested",dateRequested);
                 i.putExtra("activeQuotations",activeQuotations);

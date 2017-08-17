@@ -83,7 +83,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
     TextView textCustomName;
     @NonNull
     @BindView(R.id.textInsuranceDate)
-    TextView textInsuranceDate;
+    TextView textViewInsuranceDate;
     @NonNull
     @BindView(R.id.textAverageSpeed)
     TextView textAverageSpeed;
@@ -124,9 +124,25 @@ public class TruckEditUpdateActivity extends BaseActivity {
     LinearLayout assignDriverDetailsExists;
 
 
+    @NonNull
+    @BindView(R.id.textRegistrationNo)
+    TextView textViewRegistrationNo;
+
+    @NonNull
+    @BindView(R.id.textChasisNo)
+    TextView textViewChasisNo;
+
+    @NonNull
+    @BindView(R.id.textLicenseNo)
+    TextView textViewLicenseNo;
+
+    @NonNull
+    @BindView(R.id.img_ChangeDriver)
+    ImageView imageViewChangeDriver;
+
 
     ApiInterface apiService;
-    String provider_vehicle_id, driver, truckId;
+    String provider_vehicle_id, driver, truckId,reg_no,chassis_no,License_no;
     List<DriverList> Listvechicle = new ArrayList<>();
     DriverListAdapter driverListAdapter;
 
@@ -145,6 +161,12 @@ public class TruckEditUpdateActivity extends BaseActivity {
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
         truckId = getIntent().getStringExtra("truckId");
         driver = getIntent().getStringExtra("driver");
+
+        reg_no=getIntent().getStringExtra("reg_no");
+        chassis_no=getIntent().getStringExtra("chassis_no");
+        License_no=getIntent().getStringExtra("License_no");
+
+
         Log.d("driver>>>",driver);
         if (isConnectingToInternet(getApplicationContext()))
             getTruckDetails(provider_vehicle_id);
@@ -158,11 +180,11 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
             reltive_existingDriver.setVisibility(View.GONE);
             textAddNewDriver.setVisibility(View.VISIBLE);
+            imageViewChangeDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.GONE);
+
         } else {
             assignDriver_card.setVisibility(View.GONE);
-
-
             reltive_existingDriver.setVisibility(View.VISIBLE);
             textAddNewDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.VISIBLE);
@@ -187,12 +209,24 @@ public class TruckEditUpdateActivity extends BaseActivity {
 showSnakBar(rootView,"Not Working now");
     }
 
-    // update truck
+
+
+
+    // Add driver
     @NonNull
     @OnClick(R.id.textAddNewDriver)
     public void addDriver() {
         showbottomDriverList();
     }
+
+    // Change driver
+    @NonNull
+    @OnClick(R.id.img_ChangeDriver)
+    public void changeDriver() {
+        showbottomDriverList();
+
+    }
+
 
     // delete truck
     @NonNull
@@ -310,7 +344,12 @@ showSnakBar(rootView,"Not Working now");
                     textViewTruckYear.setText(response.body().getVehicle().getModelYear());
                     textCustomName.setText(response.body().getCustomName());
                     textAverageSpeed.setText(response.body().getAvgRunningSpeed());
-                    textInsuranceDate.setText(response.body().getInsuranceExpDate());
+                    textViewInsuranceDate.setText(response.body().getInsuranceExpDate());
+
+                    textViewRegistrationNo.setText(reg_no);
+                    textViewChasisNo.setText(chassis_no);
+                    textViewLicenseNo.setText(License_no);
+
                     textTruckWeight.setText(response.body().getWeight() + "");
                     textTruckDimension.setText(response.body().getVehicle().getDimension());
                     String driver_exists=response.body().getDriver_exists();

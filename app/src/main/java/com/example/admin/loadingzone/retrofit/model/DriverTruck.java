@@ -4,7 +4,7 @@ package com.example.admin.loadingzone.retrofit.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleList {
+public class DriverTruck {
 
     @SerializedName("provider_vehicle_id")
     @Expose
@@ -20,70 +20,22 @@ public class VehicleList {
     private String insuranceExpDate;
     @SerializedName("avg_running_speed")
     @Expose
-    private String avgRunningSpeed;
+    private Integer avgRunningSpeed;
     @SerializedName("custom_name")
     @Expose
     private String customName;
-
-
-    public String getRegistration_number() {
-        return registration_number;
-    }
-
-    public void setRegistration_number(String registration_number) {
-        this.registration_number = registration_number;
-    }
-
     @SerializedName("registration_number")
     @Expose
-    private String registration_number;
-
-
-    public String getChassis_number() {
-        return chassis_number;
-    }
-
-    public void setChassis_number(String chassis_number) {
-        this.chassis_number = chassis_number;
-    }
-
-    public String getLicence_number() {
-        return licence_number;
-    }
-
-    public void setLicence_number(String licence_number) {
-        this.licence_number = licence_number;
-    }
-
+    private Object registrationNumber;
     @SerializedName("chassis_number")
     @Expose
-    private String chassis_number;
-
-
+    private Object chassisNumber;
     @SerializedName("licence_number")
     @Expose
-    private String licence_number;
-
-
-
-
+    private Object licenceNumber;
     @SerializedName("date_added")
     @Expose
     private String dateAdded;
-
-
-
-    public String getDriver() {
-        return driver;
-    }
-
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
-
-    @SerializedName("driver")
-    @Expose
-    private String driver;
 
     public Integer getProviderVehicleId() {
         return providerVehicleId;
@@ -117,11 +69,11 @@ public class VehicleList {
         this.insuranceExpDate = insuranceExpDate;
     }
 
-    public String getAvgRunningSpeed() {
+    public Integer getAvgRunningSpeed() {
         return avgRunningSpeed;
     }
 
-    public void setAvgRunningSpeed(String avgRunningSpeed) {
+    public void setAvgRunningSpeed(Integer avgRunningSpeed) {
         this.avgRunningSpeed = avgRunningSpeed;
     }
 
@@ -131,6 +83,30 @@ public class VehicleList {
 
     public void setCustomName(String customName) {
         this.customName = customName;
+    }
+
+    public Object getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(Object registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public Object getChassisNumber() {
+        return chassisNumber;
+    }
+
+    public void setChassisNumber(Object chassisNumber) {
+        this.chassisNumber = chassisNumber;
+    }
+
+    public Object getLicenceNumber() {
+        return licenceNumber;
+    }
+
+    public void setLicenceNumber(Object licenceNumber) {
+        this.licenceNumber = licenceNumber;
     }
 
     public String getDateAdded() {

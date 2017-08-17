@@ -8,31 +8,31 @@ public class Meta {
 
     @SerializedName("status")
     @Expose
-    private String status;
+    private Boolean status;
+    @SerializedName("status_str")
+    @Expose
+    private String statusStr;
     @SerializedName("has_content")
     @Expose
     private Boolean hasContent;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("status_str")
-    @Expose
-    private String status_str;
 
-    public String getStatus_str() {
-        return status_str;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setStatus_str(String status_str) {
-        this.status_str = status_str;
-    }
-
-    public String getStatus() {
-         return String.valueOf(status);
-    }
-
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getStatusStr() {
+        return statusStr;
+    }
+
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
     }
 
     public Boolean getHasContent() {
@@ -50,4 +50,5 @@ public class Meta {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

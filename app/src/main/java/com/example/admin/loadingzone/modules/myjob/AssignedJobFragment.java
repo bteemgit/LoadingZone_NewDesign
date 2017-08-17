@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -57,7 +58,7 @@ public class AssignedJobFragment extends Fragment {
     @BindView(R.id.root)
     RelativeLayout relativeLayoutRoot;
     private ProgressDialog pDialog;
-    private MyJobListAdapter postedJobListAdapter;
+    private AssignedJobListAdapter postedJobListAdapter;
     private List<JobList> jobList = new ArrayList<>();
     private int limit = 30;
     private int offset = 1;
@@ -90,6 +91,8 @@ public class AssignedJobFragment extends Fragment {
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         pDialog = new ProgressDialog(getActivity());
         refreshLayout.setRefreshing(false);
+
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         endlessRecyclerViewAssignedJobList.setLayoutManager(layoutManager);
         endlessRecyclerViewAssignedJobList.setHasFixedSize(true);
@@ -138,7 +141,7 @@ public class AssignedJobFragment extends Fragment {
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
                 String weight = String.valueOf(jobList.get(position).getWeight());
-                String DateOfLoading = jobList.get(position).getDateOfLoading();
+                String DateOfLoading = jobList.get(position).getLoadingDate();
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
                 String TruckType_name = jobList.get(position).getTruckType().getTruckTypeName();
@@ -146,7 +149,7 @@ public class AssignedJobFragment extends Fragment {
                 String TruckSize_dimension = jobList.get(position).getTruckSize().getTruckSizeDimension();
                 Integer TruckSize_id = jobList.get(position).getTruckSize().getTruckSizeId();
                 //    String Currency_name = jobList.get(position).getCurrency().getCurrencyName();
-                String LocationDistance = String.valueOf(jobList.get(position).getLocationDistance());
+                String LocationDistance = String.valueOf(jobList.get(position).getOrigin_destination_distance());
                 String DateRequested = jobList.get(position).getDateRequested();
                 String DateRequestedRelative = jobList.get(position).getDateRequestedRelative();
                 //  String Budget = jobList.get(position).getBudget();
@@ -154,8 +157,13 @@ public class AssignedJobFragment extends Fragment {
                 String HasActiveQuotations = jobList.get(position).getHasActiveQuotations();
                 String JobStatus = jobList.get(position).getJobStatus().getName();
                 String job_status_code = jobList.get(position).getJobStatus().getCode();
+
+
+                String job_code = jobList.get(position).getJob_code();
+
                 i.putExtra("isFrom", "AssignedJob");
                 i.putExtra("JobId", JobId);
+                i.putExtra("job_code", job_code);
                 i.putExtra("name", name);
                 i.putExtra("email", email);
                 i.putExtra("phone1", phone1);
@@ -267,7 +275,7 @@ public class AssignedJobFragment extends Fragment {
     }
 
     private void updateEndlessRecyclerView() {
-        postedJobListAdapter = new MyJobListAdapter(jobList, R.layout.item_home_postedjob, getContext());
+        postedJobListAdapter = new AssignedJobListAdapter(jobList, R.layout.item_myjob_assigned, getContext());
         endlessRecyclerViewAssignedJobList.setAdapter(postedJobListAdapter);
     }
 }

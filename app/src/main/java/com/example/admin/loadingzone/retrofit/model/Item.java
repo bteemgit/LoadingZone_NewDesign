@@ -12,9 +12,42 @@ public class Item {
     @SerializedName("job_id")
     @Expose
     private Integer jobId;
+
+    public String getJob_code() {
+        return job_code;
+    }
+
+    public void setJob_code(String job_code) {
+        this.job_code = job_code;
+    }
+
+    @SerializedName("job_code")
+    @Expose
+    private String job_code;
+
     @SerializedName("job_title")
     @Expose
     private String jobTitle;
+
+
+    public String getLoadingDate() {
+        return loadingDate;
+    }
+
+    public void setLoadingDate(String loadingDate) {
+        this.loadingDate = loadingDate;
+    }
+
+
+
+
+
+
+    @SerializedName("loading_date")
+    @Expose
+    private String loadingDate;
+
+
     @SerializedName("job_details")
     @Expose
     private JobDetails jobDetails;

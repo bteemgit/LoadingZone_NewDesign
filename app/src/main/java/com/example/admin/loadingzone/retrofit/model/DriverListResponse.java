@@ -1,17 +1,18 @@
 
 package com.example.admin.loadingzone.retrofit.model;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ForgotPasswordResponse {
+public class DriverListResponse {
 
     @SerializedName("meta")
     @Expose
     private Meta meta;
-    @SerializedName("errors")
+    @SerializedName("driver-list")
     @Expose
-    private Errors errors;
+    private List<DriverList> driverList = null;
 
     public Meta getMeta() {
         return meta;
@@ -21,12 +22,12 @@ public class ForgotPasswordResponse {
         this.meta = meta;
     }
 
-    public Errors getErrors() {
-        return errors;
+    public List<DriverList> getDriverList() {
+        return driverList;
     }
 
-    public void setErrors(Errors errors) {
-        this.errors = errors;
+    public void setDriverList(List<DriverList> driverList) {
+        this.driverList = driverList;
     }
 
 }

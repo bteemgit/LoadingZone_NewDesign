@@ -1,6 +1,7 @@
 package com.example.admin.loadingzone.modules.home;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -149,6 +152,8 @@ public class HomeActivity extends BaseActivity {
     };
     String profilepic = "01";
 
+    ImageView user_imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,12 +186,13 @@ public class HomeActivity extends BaseActivity {
 // setting the drawer header items
 
         profilepic = AppController.getString(getApplicationContext(), "provider_pic");
+
         TextView text_users_name = (TextView) findViewById(R.id.id_text_users_name);
         text_users_name.setText(AppController.getString(getApplicationContext(), "customer_name"));
         TextView text_usersemail = (TextView) findViewById(R.id.id_text_usersemail);
         text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
-        ImageView user_imageView = (ImageView) findViewById(R.id.imageView6);
-        Context context = this;
+        user_imageView = (ImageView) findViewById(R.id.imageView6);
+       /* Context context = this;
         if (profilepic.length() < 3) {
             Log.d("profile", profilepic);
         } else {
@@ -196,10 +202,34 @@ public class HomeActivity extends BaseActivity {
                     .centerCrop()
                     .transform(new CircleTransformation())
                     .into(user_imageView);
-        }
 
+        }*/
+
+        Context context = this;
+        Picasso.with(context)
+                .load(AppController.getString(getApplicationContext(), "provider_pic"))
+                .resize(70, 70)
+                .centerCrop()
+                .transform(new CircleTransformation())
+                .into(user_imageView);
 
     }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Context context = this;
+        Picasso.with(context)
+                .load(AppController.getString(getApplicationContext(), "provider_pic"))
+                .resize(70, 70)
+                .centerCrop()
+                .transform(new CircleTransformation())
+                .into(user_imageView);
+
+    }
+
+
 
     @OnClick(R.id.id_profile_xml)
     void nav_profileClick() {
@@ -276,6 +306,7 @@ public class HomeActivity extends BaseActivity {
 
                 Intent i = new Intent(HomeActivity.this, PostedJobDetailsActivity.class);
                 String JobId = jobList.get(position).getJobId();
+                String job_code = jobList.get(position).getJob_code();
                 String job_date = jobList.get(position).getLoadingDate();
                 String job_time = jobList.get(position).getLoadingTime();
                 String name = jobList.get(position).getCustomer().getName();
@@ -317,6 +348,7 @@ public class HomeActivity extends BaseActivity {
                 i.putExtra("job_date", job_date);
                 i.putExtra("job_time", job_time);
                 i.putExtra("JobId", JobId);
+                i.putExtra("job_code", job_code);
                 i.putExtra("name", name);
                 i.putExtra("email", email);
                 i.putExtra("phone1", phone1);
@@ -460,6 +492,44 @@ public class HomeActivity extends BaseActivity {
     private void updateEndlessRecyclerView() {
         postedJobListAdapter = new PostedJobListAdapter(jobList, R.layout.item_home_postedjob, getApplicationContext());
         endlessRecyclerViewPostedJob.setAdapter(postedJobListAdapter);
+    }
+
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey();
+
+            //moveTaskToBack(false);
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    protected void exitByBackKey() {
+
+        AlertDialog alertbox = new AlertDialog.Builder(this)
+                .setMessage("Are you sure..? want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        finish();
+                        //close();
+
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                })
+                .show();
+
     }
 
 }

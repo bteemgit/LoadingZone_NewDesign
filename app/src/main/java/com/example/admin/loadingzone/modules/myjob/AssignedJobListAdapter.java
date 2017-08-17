@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by admin on 6/29/2017.
  */
 
-public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.ViewHolder> {
+public class AssignedJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.ViewHolder> {
 
     private List<JobList> jobList = new ArrayList<>();
     private int rowLayout;
@@ -52,14 +52,12 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         @NonNull
         @BindView(R.id.textTruckDate)
         TextView textViewTruckDate;
-
+        @NonNull
+        @BindView(R.id.textTruckBudget)
+        TextView textViewTruckBudget;
         @NonNull
         @BindView(R.id.imageViewCustomPic)
         ImageView imageViewCustomPic;
-
-        @NonNull
-        @BindView(R.id.textJobCode)
-        TextView textViewJobCode;
 
 
         public ViewHolder(View v) {
@@ -68,7 +66,7 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         }
     }
 
-    public MyJobListAdapter(List<JobList> jobList, int rowLayout, Context context) {
+    public AssignedJobListAdapter(List<JobList> jobList, int rowLayout, Context context) {
         this.jobList = jobList;
         this.rowLayout = rowLayout;
         this.context = context;
@@ -76,7 +74,7 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
 
     @Override
     public MyJobListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                              int viewType) {
+                                                          int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
         return new MyJobListAdapter.ViewHolder(view);
     }
@@ -96,7 +94,8 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
         holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());
         holder.textViewTruckDimension.setText(jobList.get(position).getQuotationCount());
-        holder.textViewTruckDate.setText(jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time());
+        holder.textViewTruckDate.setText((CharSequence) jobList.get(position).getJobdates().getExpectedStartDate()+" "+jobList.get(position).getJobdates().getExpectedStartTime());
+
         holder.textViewJobCode.setText(jobList.get(position).getJob_code());
 
         Picasso.with(context)

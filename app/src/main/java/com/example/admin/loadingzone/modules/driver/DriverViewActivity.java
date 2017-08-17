@@ -132,6 +132,10 @@ public class DriverViewActivity extends BaseActivity {
                 String driver_mobile = driverList.get(position).getDriverPhone();
                 String driver_adress = driverList.get(position).getDriverAddress();
                 String profile_pic = driverList.get(position).getDriverPic();
+
+                String driverJoinedDate = driverList.get(position).getCreatedDate();
+                String currentlyAssignedTruck = driverList.get(position).getDriverTruck().getCustomName();
+
                 String isFrom = "driverView";
                 Intent i = new Intent(DriverViewActivity.this, DriverEditActivity.class);
                 i.putExtra("driver_name", driver_name);
@@ -140,6 +144,10 @@ public class DriverViewActivity extends BaseActivity {
                 i.putExtra("driver_mobile", driver_mobile);
                 i.putExtra("driver_adress", driver_adress);
                 i.putExtra("profile_pic", profile_pic);
+
+                i.putExtra("driverJoinedDate",driverJoinedDate);
+                i.putExtra("currentlyAssignedTruck",currentlyAssignedTruck);
+
                 i.putExtra("isFrom", isFrom);
                 startActivity(i);
             }

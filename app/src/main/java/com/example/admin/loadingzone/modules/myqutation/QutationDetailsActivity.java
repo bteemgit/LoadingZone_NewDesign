@@ -143,7 +143,7 @@ public class QutationDetailsActivity extends BaseActivity {
         String quotationStatus = getIntent().getStringExtra("quotationStatus");
         quotationDescription = getIntent().getStringExtra("quotationDescription");
 
-        String jobDate = getIntent().getStringExtra("jobdate");
+        String jobDate = getIntent().getStringExtra("job_date");
         String jobDescription = getIntent().getStringExtra("jobDescription");
         String dateRequested = getIntent().getStringExtra("dateRequested");
         String activeQuotations = getIntent().getStringExtra("activeQuotations");
@@ -183,7 +183,7 @@ public class QutationDetailsActivity extends BaseActivity {
 
         textViewRequestedDate.setText(dateRequested);
         textViewJobDate.setText(jobDate);
-        textQutationDescription.setText(jobDescription);
+       // textQutationDescription.setText(jobDescription);
         textViewQutoation.setText(activeQuotations);
         textViewJobTotalDist.setText(distance);
         textViewCutomerMobile.setText(cus_phone);
@@ -199,7 +199,8 @@ public class QutationDetailsActivity extends BaseActivity {
 
         textQutationAmount.setText(quotationAmount);
         textQutationCurrency.setText(quotationCurrency);
-      //  textQutationDescription.setText(quotationDescription);
+
+        textQutationDescription.setText(quotationDescription);
 
         Picasso.with(QutationDetailsActivity.this)
                 .load(cus_profile)
@@ -383,7 +384,7 @@ public class QutationDetailsActivity extends BaseActivity {
 
 
                         textViewRequestedDate.setText(response.body().getJobDetails().getDateRequested());
-                        textViewJobDate.setText(response.body().getJobDetails().getLoadingDate());
+                       // textViewJobDate.setText(response.body().getJobDetails().getLoadingDate());
                         textQutationDescription.setText(response.body().getQuotationDescription());
                         textViewQutoation.setText(response.body().getJobDetails().getQuotationCount());
                         textViewJobTotalDist.setText(response.body().getJobDetails().getLocationDistance()+"");

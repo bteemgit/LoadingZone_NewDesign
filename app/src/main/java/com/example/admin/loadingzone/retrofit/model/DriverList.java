@@ -30,6 +30,12 @@ public class DriverList {
     @SerializedName("driver_pic")
     @Expose
     private String driverPic;
+    @SerializedName("created_date")
+    @Expose
+    private String createdDate;
+    @SerializedName("driver_truck")
+    @Expose
+    private DriverTruck driverTruck;
 
     public Integer getDriverId() {
         return driverId;
@@ -93,6 +99,22 @@ public class DriverList {
 
     public void setDriverPic(String driverPic) {
         this.driverPic = driverPic;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public DriverTruck getDriverTruck() {
+        return driverTruck;
+    }
+
+    public void setDriverTruck(DriverTruck driverTruck) {
+        this.driverTruck = driverTruck;
     }
 
 }

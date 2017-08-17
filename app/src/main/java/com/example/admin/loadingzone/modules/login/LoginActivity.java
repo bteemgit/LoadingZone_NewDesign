@@ -212,6 +212,8 @@ public class LoginActivity extends BaseActivity {
                             AppController.setString(getApplicationContext(), "customer_name", response.body().getData().getName());
                             AppController.setString(getApplicationContext(), "acess_token", response.body().getData().getAccessToken());
                             AppController.setString(getApplicationContext(), "user_id", String.valueOf(response.body().getData().getUserId()));
+
+
                             intent.putExtra("email", AppController.getString(getApplicationContext(), "customer_email"));
                             intent.putExtra("isFrom", "login");
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
