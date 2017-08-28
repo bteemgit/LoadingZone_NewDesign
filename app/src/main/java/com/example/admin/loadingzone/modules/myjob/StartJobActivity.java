@@ -62,7 +62,7 @@ public class StartJobActivity extends BaseActivity {
     Toolbar toolbar;
     @NonNull
     @BindView(R.id.root)
-    RelativeLayout root;
+    LinearLayout root;
     @NonNull
     @BindView(R.id.linearDatePicker)
     LinearLayout linearLayoutDatePicker;
@@ -92,10 +92,10 @@ public class StartJobActivity extends BaseActivity {
     TextView textSelectedDateEnd;
     @NonNull
     @BindView(R.id.relative_SerachAvalibleTruck)
-    RelativeLayout relativeSerachAvalibleTruck;
+    LinearLayout relativeSerachAvalibleTruck;
     @NonNull
     @BindView(R.id.relativeStartJob)
-    RelativeLayout relativeStartJob;
+    LinearLayout relativeStartJob;
 
     //assigned driver and truck
     @NonNull
@@ -141,10 +141,17 @@ public class StartJobActivity extends BaseActivity {
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_job);
+        setContentView(R.layout.activity_start_job_02);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

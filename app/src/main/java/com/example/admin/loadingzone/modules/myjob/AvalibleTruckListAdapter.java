@@ -79,7 +79,7 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
         if (truckname!=null)
         {
             int color = generator.getColor(truckname);
-            holder.relativeDriverHead.setBackgroundColor(color);
+            //holder.relativeDriverHead.setBackgroundColor(color);
         }
 
 

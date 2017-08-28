@@ -141,7 +141,7 @@
             android:drawableTint="@color/colorAccent"
             android:fontFamily="Open-Sans-condensed"
             android:hint="Driver Phone"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/secondaryTextColor"
             android:textSize="13sp" />

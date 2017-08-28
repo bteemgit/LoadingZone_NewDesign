@@ -32,169 +32,288 @@
         <TextView
             android:id="@+id/textviewTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="Please Select the Job Start date and Start time from below"
+            android:text="Please Select the Job Start date and Start time "
             android:textAlignment="center"
             android:textColor="#412e41"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:id="@+id/linearDatePicker"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/textviewTitle"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/rounded_corner"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="Start Date"
-                android:textAlignment="center"
-                android:textColor="#ffffff" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textSelectedDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearDatePicker"
-            android:layout_marginLeft="45dp"
-            android:text="0000-00-00" />
-
-        <LinearLayout
-            android:id="@+id/linearTimePicker"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/textviewTitle"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/linearDatePicker"
-            android:layout_toRightOf="@+id/linearDatePicker"
-            android:background="@drawable/rounded_corner"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="Start Time"
-                android:textAlignment="center"
-                android:textColor="#ffffff" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textSelectedTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/linearTimePicker"
-            android:layout_alignStart="@+id/linearTimePicker"
-            android:layout_below="@+id/linearTimePicker"
-            android:layout_marginLeft="31dp"
-            android:layout_marginStart="31dp"
-            android:text="00:00" />
+            android:textSize="15sp" />
 
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linear_startDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textSelectedTime"
-            android:layout_marginTop="20dp">
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_below="@+id/textviewTitle">
 
             <LinearLayout
-                android:id="@+id/linearDatePickerEnd"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/textviewTitle"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/rounded_corner"
-                android:orientation="horizontal"
-               >
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/linearDatePicker"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_below="@+id/textviewTitle"
+                    android:background="@drawable/rounded_corner"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Start Date"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"  />
+
+
+
+                </LinearLayout>
                 <TextView
+                    android:id="@+id/textSelectedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:padding="10dp"
-                    android:text="End Date"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
-
+                    android:layout_below="@+id/linearDatePicker"
+                    android:layout_marginLeft="0dp"
+                    android:text="0000-00-00"/>
             </LinearLayout>
 
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="25dp"
+            android:orientation="vertical"
+            android:weightSum="2">
             <LinearLayout
-                android:id="@+id/linearTimePickerEnd"
+                android:id="@+id/linearTimePicker"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_below="@+id/textviewTitle"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/linearDatePicker"
                 android:layout_toRightOf="@+id/linearDatePicker"
                 android:background="@drawable/rounded_corner"
                 android:orientation="horizontal"
-               >
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="18dp"
-                    android:text="End Time"
+                    android:text="Start Time"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textSelectedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/linearTimePicker"
+                android:layout_alignStart="@+id/linearTimePicker"
+                android:layout_below="@+id/linearTimePicker"
+                android:text="00:00"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textSelectedDateEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textSelectedDate"
-            android:layout_alignStart="@+id/textSelectedDate"
-            android:layout_below="@+id/linearLayout"
-            android:text="0000-00-00"
-             />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textSelectedTimeEnd"
-            android:layout_width="wrap_content"
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linear_endDateTime"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textSelectedDateEnd"
-            android:layout_alignBottom="@+id/textSelectedDateEnd"
-            android:layout_alignLeft="@+id/textSelectedTime"
-            android:layout_alignStart="@+id/textSelectedTime"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:text="00:00"
-            />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_below="@+id/linear_startDateTime">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearDatePickerEnd"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/textviewTitle"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rounded_corner"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="End Date"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/textSelectedDateEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textSelectedDate"
+                    android:layout_alignStart="@+id/textSelectedDate"
+                    android:layout_below="@+id/linearLayout"
+                    android:text="0000-00-00"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginRight="25dp"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+
+
+                <LinearLayout
+                    android:id="@+id/linearTimePickerEnd"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/textviewTitle"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/linearDatePicker"
+                    android:layout_toRightOf="@+id/linearDatePicker"
+                    android:background="@drawable/rounded_corner"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="End Time"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/textSelectedTimeEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textSelectedDateEnd"
+                    android:layout_alignBottom="@+id/textSelectedDateEnd"
+                    android:layout_alignLeft="@+id/textSelectedTime"
+                    android:layout_alignStart="@+id/textSelectedTime"
+                    android:text="00:00"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:id="@+id/card_driver"
             android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/linear_endDateTime"
+            android:layout_centerHorizontal="true"
             android:visibility="gone"
-            android:layout_below="@+id/textSelectedDateEnd"
-            android:layout_centerHorizontal="true">
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relativeDriverHead"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/linear_ImageView"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imageDriverPic"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp" />
+
+
+
+                    <TextView
+                        android:id="@+id/textViewDriverNme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_alignLeft="@+id/linear_ImageView"
+                        android:layout_alignStart="@+id/linear_ImageView"
+                        android:layout_below="@+id/linear_ImageView"
+                        android:gravity="center"
+                        android:text="Driver"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textChangeDriver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textViewDriverName"
+                        android:layout_marginLeft="0dp"
+                        android:text="Change"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="100dp"
+                android:layout_marginLeft="62dp"
+                android:layout_marginStart="62dp">
 
                 <TextView
                     android:id="@+id/textSelctedItem"
@@ -206,28 +325,23 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="90dp"
                     android:layout_marginStart="90dp"
-                    android:text="Selcted Driver InFo"
-                    android:textSize="18sp" />
+                    android:text="Selcted Driver Info"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/textSelctedDriverName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_below="@+id/textSelctedItem"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
-                    android:text="Swarooplal" />
+
                 <TextView
                     android:id="@+id/textSelctedDriverEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedItem"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
                     android:text="Email" />
 
                 <TextView
@@ -236,9 +350,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedItem"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
                     android:text="9895875554" />
 
             </RelativeLayout>
@@ -247,14 +363,67 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:id="@+id/card_vehicle"
-            android:visibility="gone"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
             android:layout_below="@+id/card_driver"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="10dp"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/relativeDriverHead"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/linear_ImageView"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imageDriverPic"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp" />
+
+
+
+                    <TextView
+                        android:id="@+id/textViewDriverName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/linear_ImageView"
+                        android:layout_alignStart="@+id/linear_ImageView"
+                        android:layout_below="@+id/linear_ImageView"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/driver"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textChangeDriver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textViewDriverName"
+                        android:layout_marginLeft="0dp"
+                        android:text="Change"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="100dp"
+                android:layout_marginLeft="62dp"
+                android:layout_marginStart="62dp">
 
                 <TextView
                     android:id="@+id/textSelctedItemTruckHeading"
@@ -266,8 +435,9 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="90dp"
                     android:layout_marginStart="90dp"
-                    android:text="Selcted Driver InFo"
-                    android:textSize="18sp" />
+                    android:text="Selcted Vehicle Info"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textSelctedTruckName"
@@ -276,8 +446,10 @@
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedItemTruckHeading"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
                     android:text="Swarooplal" />
                 <TextView
                     android:id="@+id/textSelctedTruckType"
@@ -286,8 +458,10 @@
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedTruckName"
                     android:layout_marginTop="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
                     android:text="Type" />
 
                 <TextView
@@ -297,42 +471,67 @@
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedTruckType"
                     android:layout_marginTop="70dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="16sp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
                     android:text="12812" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
+
     </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/fabSearchTruck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="36dp"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:rippleColor="#ffffff"
+        app:srcCompat="@drawable/ic_edit" />
+
 
     <RelativeLayout
         android:id="@+id/relative_SerachAvalibleTruck"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
         android:animateLayoutChanges="true"
-        android:background="#eaeaea"
-        android:orientation="horizontal"
-       >
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:id="@+id/textSelection"
-            android:layout_gravity="center"
-            android:layout_marginLeft="77dp"
-            android:layout_marginStart="77dp"
-            android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:id="@+id/textSelection"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_truck_rigtaroow" />
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_truck_rigtaroow" />
+
+
+
 
     </RelativeLayout>
 </RelativeLayout>

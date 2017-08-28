@@ -264,11 +264,12 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     String CutomerMobile = null;
     View dark_bg;
     private static int REQUEST_CODE = 41;
-    String JobId, isFrom, job_status_code, job_time, job_date;
+    String JobId, isFrom, job_status_code, job_time, job_date,PrefferedLoadingDate,PrefferedLoadingTime;
     private ApiInterface apiService;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
 
+    String Exp_StartDateForAssignedJob,Exp_EndDateForAssignedJob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -316,6 +317,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         String JobFrom = getIntent().getStringExtra("FromLoc_name");
         String JobTo = getIntent().getStringExtra("ToLoc_name");
         String LoadingDate = getIntent().getStringExtra("DateOfLoading");
+
+        PrefferedLoadingDate = getIntent().getStringExtra("PrefferedLoadingDate");
+        PrefferedLoadingTime = getIntent().getStringExtra("PrefferedLoadingTime");
+
         String TruckSize = getIntent().getStringExtra("TruckSize_dimension");
         String TruckType = getIntent().getStringExtra("TruckType_name");
         String PaymentMode = getIntent().getStringExtra("PaymentType_name");
@@ -327,6 +332,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             fabQuotationApply.setVisibility(View.VISIBLE);
             buttonJobStart.setVisibility(View.GONE);
             floatingActionMenu.setVisibility(View.GONE);
+
+            textViewRequestedDate.setText(RequestedDate);
+            textViewJobDate.setText(JobDate);
+
         }
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
@@ -340,6 +349,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 linearAssignedDriverItem.setVisibility(View.GONE);
                 linearAssignedVehicleItem.setVisibility(View.GONE);
                 linearJobstatusItem.setVisibility(View.GONE);
+
             }
         }
         if (isFrom.equals("AssignedJob")) {
@@ -371,6 +381,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             linearAssignedVehicleItem.setVisibility(View.VISIBLE);
             linearJobstatusItem.setVisibility(View.VISIBLE);
             liner_JobStatus_heading.setVisibility(View.VISIBLE);
+
         }
 
 
@@ -380,8 +391,10 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         textViewJob_From.setText(Job_From);
         textViewJob_To.setText(Job_To);
         textViewJobTotalDist.setText(JobTotalDist);
-        textViewRequestedDate.setText(RequestedDate);
-        textViewJobDate.setText(JobDate);
+
+        /*textViewRequestedDate.setText(RequestedDate);
+        textViewJobDate.setText(JobDate);*/
+
         textViewQutoation.setText(Qutoation);
         textViewLoadingMaterial.setText(LoadingMaterial);
         textLoadingMat_Weight.setText(LoadingMat_Weight);
@@ -393,11 +406,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
         textViewjbCode.setText(job_code);
 
-
         textViewJobStatus.setText(JobStatus);
 
-
-      //  textViewTruckCustName.setText();
+        //  textViewTruckCustName.setText();
 
         textViewCustomTruckSize_inAssignedVehicleInfo.setText(TruckSize);
         textViewCustomTruckSize_inPrefferedTruckDetails.setText(TruckSize);
@@ -601,6 +612,12 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         intent.putExtra("qutation_id", "new");
         intent.putExtra("job_date", job_date);
         intent.putExtra("job_time", job_time);
+
+        intent.putExtra("PrefferedLoadingDate", PrefferedLoadingDate);
+        intent.putExtra("PrefferedLoadingTime", PrefferedLoadingTime);
+
+
+
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -641,6 +658,13 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                         textEndTime.setText(response.body().getAssignedVehicle().getExpectedEndTime());
                         textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
 
+
+                        Exp_StartDateForAssignedJob = response.body().getAssignedVehicle().getExpectedStartDate()+" "+response.body().getAssignedVehicle().getExpectedStartTime();
+
+                        Exp_EndDateForAssignedJob = response.body().getAssignedVehicle().getExpectedEndDate()+" "+response.body().getAssignedVehicle().getExpectedEndTime();
+
+                        textViewRequestedDate.setText(Exp_StartDateForAssignedJob);
+                        textViewJobDate.setText(Exp_EndDateForAssignedJob);
 
                         textViewRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusText());
 

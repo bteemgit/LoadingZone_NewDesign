@@ -72,6 +72,16 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
         }
     };
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +111,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
 
         }
     }
+
 
     private void setUpListeners() {
 
@@ -143,12 +154,15 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                         String driver_email = listAvailableDriver.get(position).getDriverEmail();
                         String driver_mobile = listAvailableDriver.get(position).getDriverPhone();
                         String driver_id = String.valueOf(listAvailableDriver.get(position).getDriverId());
+                        String driver_image = listAvailableDriver.get(position).getDriverPic();
                         Intent i = new Intent();
                         i.putExtra("isEdit", "isDriverEdit");
                         i.putExtra("driver_id", driver_id);
                         i.putExtra("driver_email", driver_email);
                         i.putExtra("driver_mobile", driver_mobile);
                         i.putExtra("driver_name", driver_name);
+
+                        i.putExtra("driver_image", driver_image);
                         setResult(4, i);
                         finish();
                     }
@@ -174,12 +188,14 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                         String driver_email = listAvailableDriver.get(position).getDriverEmail();
                         String driver_mobile = listAvailableDriver.get(position).getDriverPhone();
                         String driver_id = String.valueOf(listAvailableDriver.get(position).getDriverId());
+                        String driver_image = listAvailableDriver.get(position).getDriverPic() ;
                         Intent i = new Intent();
                         i.putExtra("isEdit", "isDriverEdit");
                         i.putExtra("driver_id", driver_id);
                         i.putExtra("driver_email", driver_email);
                         i.putExtra("driver_mobile", driver_mobile);
                         i.putExtra("driver_name", driver_name);
+                        i.putExtra("driver_image", driver_image);
                         setResult(2, i);
                         finish();
                     }

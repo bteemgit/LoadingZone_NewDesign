@@ -2,6 +2,7 @@ package com.example.admin.loadingzone.modules.myjob;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.view.CircleTransformation;
+import com.github.clans.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -82,9 +85,9 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textSelctedDriverEmail)
     TextView textSelctedDriverEmail;
-    @NonNull
+/*    @NonNull
     @BindView(R.id.textSelctedDriverName)
-    TextView textSelctedDriverName;
+    TextView textSelctedDriverName;*/
     @NonNull
     @BindView(R.id.textSelctedDriverMobile)
     TextView textSelctedDriverMobile;
@@ -107,6 +110,23 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textSelctedTruckSize)
     TextView textSelctedTruckSize;
+
+    @NonNull
+    @BindView(R.id.imageDriverPic)
+    ImageView imageViewDriverPic;
+
+
+    @NonNull
+    @BindView(R.id.textViewDriverNme)
+    TextView textViewDriver;
+
+
+    @NonNull
+    @BindView(R.id.fabSearchTruck)
+    android.support.design.widget.FloatingActionButton fabtruckAddOrEdit;
+
+
+
 
     ApiInterface apiService;
     private int startYear, startMonth, startDay, startHour, startMinute;
@@ -134,7 +154,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         String start_date = getIntent().getStringExtra("start_date");
         String start_time = getIntent().getStringExtra("start_time");
         String end_time = getIntent().getStringExtra("end_time");
-        String end_date = getIntent().getStringExtra("start_date");
+        String end_date = getIntent().getStringExtra("end_date");
         Job_id = getIntent().getStringExtra("JobId");
         textViewSelectedDate.setText(start_date);
         textViewSelectedTime.setText(start_time);
@@ -261,6 +281,9 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         timePickerDialog.show();
     }
 
+
+
+
     // seraching avalible truck on the selected date and time or driver
     @NonNull
     @OnClick(R.id.relative_SerachAvalibleTruck)
@@ -276,7 +299,6 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
             i.putExtra("jobStatus", jobStatus);
             i.putExtra("isFrom","Posted");
             startActivityForResult(i, 2);
-
         }
         if (textSelection.getText().equals(SAVE_DRIVER)) {
 // for change teh driver
@@ -289,6 +311,26 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
 
     }
 
+    //edit truck
+
+    @NonNull
+    @OnClick(R.id.fabSearchTruck)
+    public void serachTruck_() {
+
+            View v = new View(getApplicationContext());
+            SlideAnimationUtil.slideInFromLeft(this, v);
+            Intent i = new Intent(EditAvailbleDriverOrTruckActivity.this, AvailableTruckOrDriverActivity.class);
+            String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
+            String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
+            i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
+            i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
+            i.putExtra("jobStatus", jobStatus);
+            i.putExtra("isFrom","Posted");
+            startActivityForResult(i, 2);
+
+    }
+
+
     // on activity result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -299,20 +341,39 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
 
                 String isEdit = data.getStringExtra("isEdit");
                 if (isEdit.equals("isDriverEdit")) {
-                    cardViewDriver.setVisibility(View.VISIBLE);
+                   // cardViewDriver.setVisibility(View.VISIBLE);
                     cardViewVehicle.setVisibility(View.GONE);
-                    textSelection.setText(SAVE_DRIVER);
+
                     String driver_name = data.getStringExtra("driver_name");
                     String driver_email = data.getStringExtra("driver_email");
                     String driver_mobile = data.getStringExtra("driver_mobile");
+                    String driver_photo = data.getStringExtra("driver_image");
                     driver_id = data.getStringExtra("driver_id");
                     textSelctedDriverEmail.setText(driver_email);
                     textSelctedDriverMobile.setText(driver_mobile);
-                    textSelctedDriverName.setText(driver_name);
+                   // textSelctedDriverName.setText(driver_name);
+
+                    textViewDriver.setText(driver_name);
+
+                    Context context = this;
+                    Picasso.with(context)
+                            .load(driver_photo)
+                            .resize(70, 70)
+                            .centerCrop()
+                            .transform(new CircleTransformation())
+                            .into(imageViewDriverPic);
+
+
+                    if(driver_name.length() > 0){
+                        cardViewDriver.setVisibility(View.VISIBLE);
+                        textSelection.setText(SAVE_DRIVER);
+                        textSelection.setVisibility(View.VISIBLE);
+                    }
+                    fabtruckAddOrEdit.setVisibility(View.VISIBLE);
                 } else {
-                    cardViewVehicle.setVisibility(View.VISIBLE);
+
                     cardViewDriver.setVisibility(View.GONE);
-                    textSelection.setText(SAVE_TRUCK);
+
                     String truck_name = data.getStringExtra("truck_name");
                     String truck_type = data.getStringExtra("truck_type");
                     String truck_size = data.getStringExtra("truck_size");
@@ -320,8 +381,14 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                     textSelctedTruckName.setText(truck_name);
                     textSelctedTruckType.setText(truck_type);
                     textSelctedTruckSize.setText(truck_size);
-                }
 
+                    if(truck_name.length() > 0){
+                        cardViewVehicle.setVisibility(View.VISIBLE);
+                        textSelection.setText(SAVE_TRUCK);
+                        textSelection.setVisibility(View.VISIBLE);
+                    }
+                    fabtruckAddOrEdit.setVisibility(View.VISIBLE);
+                }
 
             }
     }
@@ -372,6 +439,14 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         });
 
     }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     @Override
     public void onBackPressed() {

@@ -61,6 +61,10 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         @BindView(R.id.textJobCode)
         TextView textViewJobCode;
 
+        @NonNull
+        @BindView(R.id.id_txt_daterequestedrelative)
+        TextView textViewDateRequestedRelative;
+
 
         public ViewHolder(View v) {
             super(v);
@@ -92,6 +96,9 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         holder.textViewTruckDate.*/
 
         holder.textViewCustomerName.setText(jobList.get(position).getCustomer().getName());
+
+        holder.textViewDateRequestedRelative.setText(jobList.get(position).getDateRequestedRelative());
+
         holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
         holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());

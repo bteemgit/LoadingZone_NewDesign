@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/textLocationFrom"
-                android:layout_width="55dp"
+                android:layout_width="102.5dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
@@ -76,7 +76,7 @@
 
             <TextView
                 android:id="@+id/textLocationTo"
-                android:layout_width="150dp"
+                android:layout_width="102.5dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"

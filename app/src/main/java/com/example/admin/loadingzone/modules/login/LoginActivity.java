@@ -8,9 +8,16 @@ import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +46,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -55,12 +63,19 @@ public class LoginActivity extends BaseActivity {
     TextView textViewSignup;
     @BindView(R.id.rootView)
     RelativeLayout rootView;
+
+    @BindView(R.id.linearEye)
+    LinearLayout linearLayoutEye;
+
+
+
     private ApiInterface apiService;
 
     List<Error> errorArrayList = new ArrayList<>();
     private SessionManager session;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     String regId;
+    Boolean isPasswordVisible = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +121,30 @@ public class LoginActivity extends BaseActivity {
         };
 
         displayFirebaseRegId();
+
+
+        //manage password visibility
+        editTextPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                linearLayoutEye.setVisibility(View.VISIBLE);
+                if(count == 0){
+                    linearLayoutEye.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
     }
 
     // Fetches reg id from shared preferences
@@ -180,7 +219,6 @@ public class LoginActivity extends BaseActivity {
         startActivity(i);
     }
 
-
     //api call for singin
     public void Sigin(String username, String password, String usertype) {
 
@@ -252,5 +290,16 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    @OnClick (R.id.linearEye)
+    public void PasswordVisibility() {
+
+        if(isPasswordVisible.equals(false)) {
+            editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            isPasswordVisible = true;
+        } else if(isPasswordVisible.equals(true)){
+            editTextPassword.setInputType(129);
+            isPasswordVisible = false;
+        }
+    }
 
 }

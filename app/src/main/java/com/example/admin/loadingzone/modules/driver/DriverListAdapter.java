@@ -79,7 +79,13 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
         holder.textViewDriverMobile.setText(driverLists.get(position).getDriverPhone());
 
         holder.textViewJoinedDate.setText(driverLists.get(position).getCreatedDate());
-        holder.textViewCurrentlyAssignedTruck.setText(driverLists.get(position).getDriverTruck().getCustomName());
+
+        if(driverLists.get(position).getDriverTruck() == null){
+            holder.textViewCurrentlyAssignedTruck.setText("Nil");
+        }else {
+            holder.textViewCurrentlyAssignedTruck.setText(driverLists.get(position).getDriverTruck().getCustomName());
+        }
+
 
 
         Picasso.with(context)

@@ -16,7 +16,7 @@
             android:id="@+id/relativeDriverHead"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:background="#83C740">
+            android:background="@color/colorPrimary">
 
             <ImageView
                 android:id="@+id/imageDriverPic"
@@ -54,7 +54,7 @@
             android:layout_toEndOf="@+id/relativeDriverHead"
             android:layout_toRightOf="@+id/relativeDriverHead"
             android:text="kl 01 CB 4190"
-            android:textColor="#5b5959"
+            android:textColor="@color/colorPrimary"
             android:textSize="17sp" />
 
         <TextView
@@ -68,6 +68,7 @@
             android:layout_toEndOf="@+id/relativeDriverHead"
             android:layout_toRightOf="@+id/relativeDriverHead"
             android:text="Hundayai"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
 
         <TextView
@@ -81,6 +82,7 @@
             android:layout_toEndOf="@+id/relativeDriverHead"
             android:layout_toRightOf="@+id/relativeDriverHead"
             android:text="OpenType"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
 
         <TextView
@@ -94,6 +96,7 @@
             android:layout_toEndOf="@+id/relativeDriverHead"
             android:layout_toRightOf="@+id/relativeDriverHead"
             android:text="15*10*190"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
     </RelativeLayout>
 

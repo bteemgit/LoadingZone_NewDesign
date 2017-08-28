@@ -59,6 +59,11 @@ public class AssignedJobListAdapter extends RecyclerView.Adapter<MyJobListAdapte
         @BindView(R.id.imageViewCustomPic)
         ImageView imageViewCustomPic;
 
+        @NonNull
+        @BindView(R.id.id_txt_daterequestedrelative)
+        TextView textViewDateRequestedRelative;
+
+
 
         public ViewHolder(View v) {
             super(v);
@@ -90,6 +95,9 @@ public class AssignedJobListAdapter extends RecyclerView.Adapter<MyJobListAdapte
         holder.textViewTruckDate.*/
 
         holder.textViewCustomerName.setText(jobList.get(position).getCustomer().getName());
+
+        holder.textViewDateRequestedRelative.setText(jobList.get(position).getDateRequestedRelative());
+
         holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
         holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());
@@ -97,6 +105,8 @@ public class AssignedJobListAdapter extends RecyclerView.Adapter<MyJobListAdapte
         holder.textViewTruckDate.setText((CharSequence) jobList.get(position).getJobdates().getExpectedStartDate()+" "+jobList.get(position).getJobdates().getExpectedStartTime());
 
         holder.textViewJobCode.setText(jobList.get(position).getJob_code());
+
+
 
         Picasso.with(context)
                 .load(jobList.get(position).getCustomer().getProfilePic())

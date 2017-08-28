@@ -326,6 +326,9 @@ public class HomeActivity extends BaseActivity {
 
                 String DateOfLoading = jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time();
 
+                String PrefferedLoadingDate = jobList.get(position).getPreferred_loading_date();
+                String PrefferedLoadingTime = jobList.get(position).getPreferred_loading_time();
+
 
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
@@ -377,6 +380,10 @@ public class HomeActivity extends BaseActivity {
                 i.putExtra("QuotationCount", QuotationCount);
                 i.putExtra("HasActiveQuotations", HasActiveQuotations);
                 i.putExtra("JobStatus", JobStatus);
+
+                i.putExtra("PrefferedLoadingDate",PrefferedLoadingDate);
+                i.putExtra("PrefferedLoadingTime",PrefferedLoadingTime);
+
                 startActivity(i);
 
             }

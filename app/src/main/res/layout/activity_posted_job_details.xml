@@ -630,6 +630,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal"
+                        android:background="@color/colorAccent"
                         android:id="@+id/linear_prefferedtruckDetails"
                         android:visibility="visible">
 
@@ -639,6 +640,7 @@
                             android:layout_weight="1"
                             android:background="@color/colorAccent"
                             android:gravity="start|center"
+                            android:layout_marginLeft="5dp"
                             android:padding="10dp"
                             android:text="Preffered Truck Deatils"
                             android:textColor="#ffffff"
@@ -1620,13 +1622,12 @@
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/layoutButtons"
         android:layout_gravity="bottom"
         android:elevation="2dp"
         app:ft_color="@color/colorPrimary"
-        app:ft_container_gravity="center" />
+        app:ft_container_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <RelativeLayout
         android:id="@+id/layoutButtons"

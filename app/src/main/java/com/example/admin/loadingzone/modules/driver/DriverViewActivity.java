@@ -134,7 +134,15 @@ public class DriverViewActivity extends BaseActivity {
                 String profile_pic = driverList.get(position).getDriverPic();
 
                 String driverJoinedDate = driverList.get(position).getCreatedDate();
-                String currentlyAssignedTruck = driverList.get(position).getDriverTruck().getCustomName();
+                String currentlyAssignedTruck;
+                if(driverList.get(position).getDriverTruck() == null ){
+                     currentlyAssignedTruck = "Nil";
+                }else {
+                     currentlyAssignedTruck  = driverList.get(position).getDriverTruck().getCustomName();
+                }
+
+
+
 
                 String isFrom = "driverView";
                 Intent i = new Intent(DriverViewActivity.this, DriverEditActivity.class);

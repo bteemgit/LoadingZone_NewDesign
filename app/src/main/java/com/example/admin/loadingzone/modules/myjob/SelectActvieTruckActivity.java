@@ -48,6 +48,9 @@ public class SelectActvieTruckActivity extends BaseActivity {
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.progressBarFooter)
     ProgressBar progressBar;
+
+
+
     private ApiInterface service;
     private int limit = 10;
     private int offset = 1;
@@ -71,6 +74,13 @@ public class SelectActvieTruckActivity extends BaseActivity {
             hasReachedTop = true;
         }
     };
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,6 +203,7 @@ public class SelectActvieTruckActivity extends BaseActivity {
                         activeTruckListAdapter.notifyDataSetChanged();
                         offset = offset + 1;
                     } else {
+                        showSnakBar(relativeLayoutRoot, response.body().getMeta().getMessage());
                         endlessRecyclerViewTrucks.setHaveMoreItem(false);
                     }
 

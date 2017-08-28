@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -45,7 +46,7 @@ import retrofit2.Callback;
 public class QuotationApply extends BaseActivity {
     private ApiInterface apiService;
     @BindView(R.id.rootView)
-    RelativeLayout rootView;
+    LinearLayout rootView;
     @NonNull
     @BindView(R.id.edit_quotAmount)
     EditText editTextQuotAmount;
@@ -73,6 +74,35 @@ public class QuotationApply extends BaseActivity {
     @NonNull
     @BindView(R.id.textTimeRequsting)
     TextView textTimeRequsting;
+
+
+
+
+
+    @NonNull
+    @BindView(R.id.linearDateTime)
+    LinearLayout linearLayoutDateTime;
+
+    @NonNull
+    @BindView(R.id.layout_ProviderPrefferedJobDate)
+    LinearLayout linearLayoutProviderPrefferedJobDate;
+
+    @NonNull
+    @BindView(R.id.layout_ProviderPrefferedJobTime)
+    LinearLayout linearLayoutProviderPrefferedJobTime;
+
+    @NonNull
+    @BindView(R.id.textProviderPrefferedJobDate)
+    TextView textViewProviderPrefferedJobDate;
+
+
+    @NonNull
+    @BindView(R.id.textProviderPrefferedJobTime)
+    TextView textViewProviderPrefferedJobTime;
+
+
+
+
     SimpleDateFormat sdf;
     String JobId;
     String qutation_id, quotationAmount, quotationDescription;
@@ -85,7 +115,7 @@ public class QuotationApply extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quotation_apply);
+        setContentView(R.layout.activity_quotation_apply_02);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Apply Quotation");
@@ -99,11 +129,18 @@ public class QuotationApply extends BaseActivity {
         quotationAmount = getIntent().getStringExtra("quotationAmount");
         String job_date = getIntent().getStringExtra("job_date");
         String job_time = getIntent().getStringExtra("job_time");
+
+        String PrefferedLoadingDate = getIntent().getStringExtra("PrefferedLoadingDate");
+        String PrefferedLoadingTime  = getIntent().getStringExtra("PrefferedLoadingTime");
+
+
+
+
         // for displaying customer prefered time and date
-        if (job_date != null)
-            textCustomerJobDate.setText(job_date);
-        if (job_time != null)
-            textCustomerJobTime.setText(job_time);
+        if (PrefferedLoadingDate != null)
+            textCustomerJobDate.setText(PrefferedLoadingDate);
+        if (PrefferedLoadingTime != null)
+            textCustomerJobTime.setText(PrefferedLoadingTime);
         quotationDescription = getIntent().getStringExtra("quotationDescription");
         if (!qutation_id.equals("new")) {
             editTextQuotAmount.setText(quotationAmount);
@@ -137,7 +174,10 @@ public class QuotationApply extends BaseActivity {
                         startYear = year;
                         startMonth = monthOfYear + 1;
                         startDay = dayOfMonth;
-                        textCustomerJobDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        textViewProviderPrefferedJobDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
+                        linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
+                        StartTimePicker();
 
                     }
                 }, mYear, mMonth, mDay);
@@ -163,8 +203,9 @@ public class QuotationApply extends BaseActivity {
                                           int minute) {
                         startHour = hourOfDay;
                         startMinute = minute;
-                        textCustomerJobTime.setText(String.format("%02d:%02d", hourOfDay, minute));
-
+                        textViewProviderPrefferedJobTime.setText(String.format("%02d:%02d", hourOfDay, minute));
+                        linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
+                        linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
 
                     }
                 }, mHour, mMinute, false);
@@ -174,10 +215,18 @@ public class QuotationApply extends BaseActivity {
 
     @OnClick(R.id.relative_submit)
     public void applyQutation() {
+        String  loading_date = null;
+        String  loading_time = null;
         String amount = editTextQuotAmount.getText().toString();
         String description = editTextQuotDescrption.getText().toString();
-        String loading_date = textCustomerJobDate.getText().toString();
-        String loading_time = textCustomerJobTime.getText().toString();
+        if(textViewProviderPrefferedJobDate.getText().length() == 0 || textViewProviderPrefferedJobTime.getText().length() == 0){
+             loading_date = textCustomerJobDate.getText().toString();
+             loading_time = textCustomerJobTime.getText().toString();
+        }else{
+             loading_date = textViewProviderPrefferedJobDate.getText().toString();
+             loading_time = textViewProviderPrefferedJobTime.getText().toString();
+        }
+
         if (amount != null && JobId != null) {
             if (isConnectingToInternet(getApplicationContext())) {
                 if (!qutation_id.equals("new")) {
