@@ -97,6 +97,11 @@ public class QutationDetailsActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textMessage)
     TextView textMessage;
+
+    @NonNull
+    @BindView(R.id.textQutationCode)
+    TextView textViewQuotationCode;
+
     @NonNull
     @BindView(R.id.linearDelete)
     LinearLayout linearLayoutDelete;
@@ -151,6 +156,8 @@ public class QutationDetailsActivity extends BaseActivity {
         String fromLocation = getIntent().getStringExtra("fromLocation");
         String ToLocation = getIntent().getStringExtra("toLocation");
 
+        String QuotationCode = getIntent().getStringExtra("quotation_code");
+
         isFrom = getIntent().getStringExtra("isFrom");
         if (!isFrom.equals(null))
             if (isFrom.equals("pending")) {
@@ -201,6 +208,8 @@ public class QutationDetailsActivity extends BaseActivity {
         textQutationCurrency.setText(quotationCurrency);
 
         textQutationDescription.setText(quotationDescription);
+
+        textViewQuotationCode.setText(QuotationCode);
 
         Picasso.with(QutationDetailsActivity.this)
                 .load(cus_profile)

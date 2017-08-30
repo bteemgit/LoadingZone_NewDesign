@@ -41,7 +41,7 @@ import retrofit2.Callback;
 
 import static com.example.admin.loadingzone.R.id.floating_action_menu;
 
-public class TruckViewActivity extends BaseActivity {
+public class PendingTruckViewActivity extends BaseActivity {
 
     @BindView(R.id.recyclerViewTruck)
     EndlessRecyclerView endlessRecyclerViewTrck;
@@ -55,11 +55,6 @@ public class TruckViewActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.fabAddTruck)
     com.github.clans.fab.FloatingActionButton fab_messageDriver;
-
-
-    @NonNull
-    @BindView(R.id.fabPendingTrucks)
-    com.github.clans.fab.FloatingActionButton fab_pendingTrucks;
 
 
     @NonNull
@@ -85,32 +80,17 @@ public class TruckViewActivity extends BaseActivity {
             hasReachedTop = true;
         }
     };
-    View dark_bg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_view);
         ButterKnife.bind(this);
-
-        dark_bg = findViewById(R.id.background_dimmer);
-        floatingActionMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
-            @Override
-            public void onMenuToggle(boolean opened) {
-
-                if (opened) {
-                    dark_bg.setVisibility(View.VISIBLE);
-                } else {
-                    dark_bg.setVisibility(View.GONE);
-                }
-
-            }
-        });
-
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.truck_title);
+        getSupportActionBar().setTitle("Pending Trucks");
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         refreshLayout.setRefreshing(false);
         setUpListeners();
@@ -120,6 +100,8 @@ public class TruckViewActivity extends BaseActivity {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
 
         }
+
+        floatingActionMenu.setVisibility(View.GONE);
     }
 
     @Override
@@ -143,7 +125,7 @@ public class TruckViewActivity extends BaseActivity {
         });
 
         endlessRecyclerViewTrck.addPaginationListener(paginationListener);
-        endlessRecyclerViewTrck.addOnItemTouchListener(new RecyclerItemClickListener(TruckViewActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+        endlessRecyclerViewTrck.addOnItemTouchListener(new RecyclerItemClickListener(PendingTruckViewActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -157,7 +139,7 @@ public class TruckViewActivity extends BaseActivity {
 
 
 
-                Intent i = new Intent(TruckViewActivity.this, TruckEditUpdateActivity.class);
+                Intent i = new Intent(PendingTruckViewActivity.this, TruckEditUpdateActivity.class);
                 i.putExtra("isFrom", "TruckView");
                 i.putExtra("driver", driver);
                 i.putExtra("provider_vehicle_id", provider_vehicle_id);
@@ -180,38 +162,25 @@ public class TruckViewActivity extends BaseActivity {
     @OnClick(R.id.fabAddTruck)
     public void truckAdd() {
         int[] startingLocation = new int[2];
-        View v = new View(TruckViewActivity.this);
+        View v = new View(PendingTruckViewActivity.this);
         v.getLocationOnScreen(startingLocation);
         startingLocation[0] += v.getWidth() / 2;
-        TruckAddActivity.startTruckAddActvity(startingLocation, TruckViewActivity.this, NEW_TRUCK_ADD);
+        TruckAddActivity.startTruckAddActvity(startingLocation, PendingTruckViewActivity.this, NEW_TRUCK_ADD);
         overridePendingTransition(0, 0);
     }
-
-
-    @Optional
-    @OnClick(R.id.fabPendingTrucks)
-    public void pendingTrucks() {
-       Intent intent = new Intent(TruckViewActivity.this,PendingTruckViewActivity.class);
-       startActivity(intent);
-    }
-
-
-
-
-
 
     public void getTrckList
             () {
 
         if (offset == 1) {
-            showProgressDialog(TruckViewActivity.this, "loading");
+            showProgressDialog(PendingTruckViewActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
         }
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<TruckResponse> call = apiService.TrckList(GloablMethods.API_HEADER + acess_token, offset);
+        Call<TruckResponse> call = apiService.PendingTruckList(GloablMethods.API_HEADER + acess_token, offset);
         call.enqueue(new Callback<TruckResponse>() {
             @Override
             public void onResponse(Call<TruckResponse> call, retrofit2.Response<TruckResponse> response) {

@@ -86,7 +86,7 @@ public class ActiveTruckListAdapter extends RecyclerView.Adapter<ActiveTruckList
             holder.textViewDriverName.setText("No Driver");
             ColorGenerator generator = ColorGenerator.MATERIAL;
             int color = generator.getColor("No Driver");
-            holder.relativeDriverHead.setBackgroundColor(color);
+            //holder.relativeDriverHead.setBackgroundColor(color);
         }
       else  {
             holder.textViewDriverName.setText(listTrckAvailble.get(position).getDriver().getDriverName());
@@ -101,7 +101,7 @@ public class ActiveTruckListAdapter extends RecyclerView.Adapter<ActiveTruckList
             ColorGenerator generator = ColorGenerator.MATERIAL;
             String drivername=listTrckAvailble.get(position).getDriver().getDriverName();
             int color = generator.getColor(drivername);
-            holder.relativeDriverHead.setBackgroundColor(color);
+            //holder.relativeDriverHead.setBackgroundColor(color);
         }
 
         holder.textTruckModel.setText(listTrckAvailble.get(position).getVehicle().getManufacturer().getMakerName());

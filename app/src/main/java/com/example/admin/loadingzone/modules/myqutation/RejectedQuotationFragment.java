@@ -143,6 +143,9 @@ public class RejectedQuotationFragment extends Fragment {
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
                 String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getOrigin_destination_distance());
 
+                String job_code = itemsArrayList.get(position).getJob_code();
+                String quotation_code = itemsArrayList.get(position).getQuotation_code();
+
 
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
@@ -168,6 +171,8 @@ public class RejectedQuotationFragment extends Fragment {
                 i.putExtra("activeQuotations",activeQuotations);
                 i.putExtra("distance",distance);
 
+                i.putExtra("job_code",job_code);
+                i.putExtra("quotation_code",quotation_code);
 
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -120,6 +120,24 @@
                                 android:layout_height="1px"
                                 android:background="@color/upper_divider_purple" />
 
+
+                            <TextView
+                                android:id="@+id/customTextView34"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Quotation Code"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
                             <TextView
                                 android:id="@+id/customTextView534"
                                 android:layout_width="match_parent"
@@ -230,6 +248,30 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textQutationCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:ellipsize="end"
+                                android:gravity="start|center"
+                                android:hint="Quotation Code"
+                                android:maxLength="50"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
 
                             <TextView
                                 android:id="@+id/textQutationCurrency"

@@ -87,6 +87,13 @@ public interface ApiInterface {
     @GET("provider-vehicles")
     Call<TruckResponse> TrckList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
 
+
+
+    @GET("provider-vehicles/pending-list")
+    Call<TruckResponse> PendingTruckList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+
+
+
     @GET("vehicle/maker")
     Call<MakerResponse> TrckMakerList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token);
 

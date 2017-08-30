@@ -91,10 +91,10 @@ public class StartJobActivity extends BaseActivity {
     @BindView(R.id.textSelectedDateEnd)
     TextView textSelectedDateEnd;
     @NonNull
-    @BindView(R.id.relative_SerachAvalibleTruck)
+    @BindView(R.id.linear_SerachAvalibleTruck)
     LinearLayout relativeSerachAvalibleTruck;
     @NonNull
-    @BindView(R.id.relativeStartJob)
+    @BindView(R.id.linearStartJob)
     LinearLayout relativeStartJob;
 
     //assigned driver and truck
@@ -129,6 +129,12 @@ public class StartJobActivity extends BaseActivity {
     @BindView(R.id.cardTruck)
     CardView cardViewTrckHead;
 
+    @NonNull
+    @BindView(R.id.fabSearchTruck)
+    FloatingActionButton fab_searchTruck;
+
+
+
     private int mYear, mMonth, mDay, mHour, mMinute;
     String JobId, jobStatus;
 
@@ -140,13 +146,6 @@ public class StartJobActivity extends BaseActivity {
     ApiInterface apiService;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
-
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,7 +276,7 @@ public class StartJobActivity extends BaseActivity {
 
     // seraching avalible truck on the selected date and time
     @NonNull
-    @OnClick(R.id.relative_SerachAvalibleTruck)
+    @OnClick(R.id.linear_SerachAvalibleTruck)
     public void serachTruck() {
         View v = new View(getApplicationContext());
         SlideAnimationUtil.slideInFromLeft(this, v);
@@ -289,6 +288,26 @@ public class StartJobActivity extends BaseActivity {
         startActivityForResult(i, 2);
 
     }
+
+    // seraching avalible truck on the selected date and time to change the selected truck
+    @NonNull
+    @OnClick(R.id.fabSearchTruck)
+    public void fab_searchAvilableTruck(){
+        View v = new View(getApplicationContext());
+        SlideAnimationUtil.slideInFromLeft(this, v);
+        Intent i = new Intent(StartJobActivity.this, SelectActvieTruckActivity.class);
+        String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
+        String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
+        i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
+        i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
+        startActivityForResult(i, 2);
+    }
+
+
+
+
+
+
     // if drver is not added in the selected truck then we can assign driver or change driver (existing driver in truck)
     @NonNull
     @OnClick(R.id.textChangeDriver)
@@ -306,7 +325,7 @@ public class StartJobActivity extends BaseActivity {
 
     // once the provider selct the avalible truck then job is completed and redirected in to home page
     @NonNull
-    @OnClick(R.id.relativeStartJob)
+    @OnClick(R.id.linearStartJob)
     public void startJob() {
 
         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
@@ -389,7 +408,7 @@ public class StartJobActivity extends BaseActivity {
                 }
                 else
                 {
-                   showSnakBar(root,"Please select a Driver for complete the process");
+                    showSnakBar(root,"Please select a Driver for complete the process");
                     textChangeDriver.setText("Add Driver");
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
 

@@ -145,6 +145,10 @@ public class PendingQuotationFragment extends Fragment {
                 String toLocation = itemsArrayList.get(position).getJobDetails().getToLocationName();
                 String job_date = itemsArrayList.get(position).getLoadingDate();
                 String job_time = itemsArrayList.get(position).getJobDetails().getLoadingTime();
+
+                String job_code = itemsArrayList.get(position).getJob_code();
+                String quotation_code = itemsArrayList.get(position).getQuotation_code();
+
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
                 i.putExtra("job_id", job_id);
@@ -170,6 +174,9 @@ public class PendingQuotationFragment extends Fragment {
 
                 i.putExtra("fromLocation",fromLocation);
                 i.putExtra("toLocation",toLocation);
+
+                i.putExtra("job_code",job_code);
+                i.putExtra("quotation_code",quotation_code);
 
 
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

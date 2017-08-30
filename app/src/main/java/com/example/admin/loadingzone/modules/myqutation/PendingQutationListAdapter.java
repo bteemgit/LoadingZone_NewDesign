@@ -73,8 +73,9 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         @BindView(R.id.textJobcode)
         TextView textViewJobCode;
 
-
-
+        @NonNull
+        @BindView(R.id.textQuotationcode)
+        TextView textViewQuotationCode;
 
 
         public ViewHolder(View v) {
@@ -114,6 +115,8 @@ public class PendingQutationListAdapter extends RecyclerView.Adapter<PendingQuta
         holder.textViewBudget.setText(amount+" "+itemsArrayList.get(position).getQuotationCurrency());
 
         holder.textViewJobCode.setText(itemsArrayList.get(position).getJob_code());
+
+        holder.textViewQuotationCode.setText(itemsArrayList.get(position).getQuotation_code());
 
      //  holder.textViewcustName.setText(itemsArrayList.get(position).getJobDetails().);
       //  holder.textViewQutationSttaus.setText(itemsArrayList.get(position).getQuotationStatus());

@@ -167,7 +167,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
         License_no=getIntent().getStringExtra("License_no");
 
 
-        Log.d("driver>>>",driver);
+       // Log.d("driver>>>",driver);
         if (isConnectingToInternet(getApplicationContext()))
             getTruckDetails(provider_vehicle_id);
         else {
@@ -189,9 +189,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
             textAddNewDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.VISIBLE);
         }
-
-
-
 
     }
 

@@ -25,6 +25,18 @@ public class Item {
     @Expose
     private String job_code;
 
+    public String getQuotation_code() {
+        return quotation_code;
+    }
+
+    public void setQuotation_code(String quotation_code) {
+        this.quotation_code = quotation_code;
+    }
+
+    @SerializedName("quotation_code")
+    @Expose
+    private String quotation_code;
+
     @SerializedName("job_title")
     @Expose
     private String jobTitle;
@@ -171,5 +183,6 @@ public class Item {
     public void setCustomer(Customer_ customer) {
         this.customer = customer;
     }
+
 
 }

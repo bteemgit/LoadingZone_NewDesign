@@ -23,7 +23,7 @@
                 android:layout_marginLeft="25dp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:text="KL-01-CA-125"/>
+                android:text="Nil"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="0000-00-00"/>
+                    android:text="Nil"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -101,7 +101,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="KL 45 L 317"/>
+                    android:text="Nil"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -143,7 +143,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="TR12345"/>
+                    android:text="Nil"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -184,7 +184,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="NR1235"/>
+                    android:text="Nil"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -228,7 +228,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="12"/>
+                    android:text="Nil"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -267,7 +267,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="25kg"></TextView>
+                    android:text="Nil"></TextView>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -305,7 +305,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="25kg"/>
+                    android:text="Nil"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -328,8 +328,8 @@
                 android:layout_height="match_parent"
                 android:gravity="end|center">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:id="@+id/img_ChangeDriver"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/ic_edit"/>
@@ -368,7 +368,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="Sojan Somasundaran"
+                    android:text="Nil"
                     android:layout_weight="2.4"/>
             </LinearLayout>
             <LinearLayout
@@ -396,7 +396,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="Thoppumpadi"
+                    android:text="Nil"
                     android:layout_weight="2.4"/>
             </LinearLayout>
             <LinearLayout
@@ -424,7 +424,7 @@
                     android:id="@+id/textDriverEmail"
                     android:layout_width="0dp"
                     android:textColor="@color/colorAccent"
-                    android:text="Sojan@gmail.com"
+                    android:text="Nil"
                     android:layout_height="wrap_content"
                     android:layout_weight="2.4"/>
             </LinearLayout>
@@ -454,7 +454,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="9855653241"
+                    android:text="Nil"
                     android:layout_weight="2.4"/>
             </LinearLayout>
 
