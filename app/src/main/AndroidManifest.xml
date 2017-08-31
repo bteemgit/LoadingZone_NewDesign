@@ -119,10 +119,10 @@
             android:name=".modules.myjob.AvailableTruckOrDriverActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cancel_job.JobCancelReasonListActivity"
+            android:name=".modules.cancel_job.JobCancelReasonListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cancel_job.CancelJobActivity"
+            android:name=".modules.cancel_job.CancelJobActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".service.MyFirebaseMessagingService">
@@ -136,7 +136,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".modules.truck.PendingTruckViewActivity"></activity>
+        <activity android:name=".modules.truck.PendingTruckViewActivity" />
+        <activity android:name=".modules.truck.TruckDocumentAddActivity"></activity>
     </application>
 
 </manifest>

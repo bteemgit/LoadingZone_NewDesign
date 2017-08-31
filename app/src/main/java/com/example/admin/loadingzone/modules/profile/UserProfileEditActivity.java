@@ -327,18 +327,14 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
             }
             Uri selectedImageUri = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
             Cursor cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
 
             if (cursor != null) {
                 cursor.moveToFirst();
-
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imagePath = cursor.getString(columnIndex);
                 btnEditProfilePicUpload.setVisibility(View.VISIBLE);
                 btnEditProfilePic.setVisibility(View.GONE);
-//                Picasso.with(getApplicationContext()).load(new File(imagePath))
-//                        .into(imageViewProfile);
                 Picasso.with(UserProfileEditActivity.this)
                         .load(new File(imagePath))
                         .placeholder(R.drawable.img_circle_placeholder)

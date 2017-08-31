@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
-import com.example.admin.loadingzone.cancel_job.JobCancelReasonListActivity;
+import com.example.admin.loadingzone.modules.cancel_job.JobCancelReasonListActivity;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;

@@ -1,13 +1,11 @@
-package com.example.admin.loadingzone.cancel_job;
+package com.example.admin.loadingzone.modules.cancel_job;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -18,10 +16,8 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.modules.myjob.MyJobtabViewActivity;
-import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
-import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
 import com.example.admin.loadingzone.retrofit.model.CancelJobRequestResponse;
 
 import org.json.JSONObject;

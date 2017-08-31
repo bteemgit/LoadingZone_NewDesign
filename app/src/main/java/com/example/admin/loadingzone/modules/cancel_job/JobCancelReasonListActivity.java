@@ -1,4 +1,4 @@
-package com.example.admin.loadingzone.cancel_job;
+package com.example.admin.loadingzone.modules.cancel_job;
 
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;

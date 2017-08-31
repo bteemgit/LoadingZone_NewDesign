@@ -100,7 +100,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     EditText editTextTrcukCutsomName;
 
 
-
     @NonNull
     @BindView(R.id.editTruckRegistrationNo)
     EditText editTextTruckRegistrationNo;
@@ -112,10 +111,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     @NonNull
     @BindView(R.id.editTruckLicenceNo)
     EditText editTextTruckLicenceNo;
-
-
-
-
     @NonNull
     @BindView(R.id.editTruckInsurance)
     TextView editTextViewTrcukInsurance;
@@ -150,6 +145,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     private List<VehicleYear> truckYearList = new ArrayList<>();
     String model_id, truck_type_id, model_year, isFrom, provider_vehicle_id;
     private int mYear, mMonth, mDay, mHour, mMinute;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,17 +167,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
         }
 
-
-
-//        String truck_name = getIntent().getStringExtra("truck_name");
-//        String truck_model = getIntent().getStringExtra("truck_model");
-//        String truck_type = getIntent().getStringExtra("truck_type");
-//        String truck_year = getIntent().getStringExtra("truck_year");
-//        String custom_name = getIntent().getStringExtra("custom_name");
-//        String insurance_date = getIntent().getStringExtra("insurance_date");
-//        String avg_spped = getIntent().getStringExtra("avg_spped");
-//        String truck_weight = getIntent().getStringExtra("truck_weight");
-//        String truck_dimension = getIntent().getStringExtra("insurance_date");
         if (isFrom.equals("TruckView")) {
             getSupportActionBar().setTitle("Truck Details");
             fabAddTruck.setVisibility(View.GONE);
@@ -217,31 +202,32 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         showbottomTrckName();
 
     }
-@OnClick(R.id.editTruckInsurance)
-public void PickInsurancedate()
-{
-    final Calendar c = Calendar.getInstance();
-    mYear = c.get(Calendar.YEAR);
-    mMonth = c.get(Calendar.MONTH);
-    mDay = c.get(Calendar.DAY_OF_MONTH);
+
+    @OnClick(R.id.editTruckInsurance)
+    public void PickInsurancedate() {
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-    DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-            new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
 
-                @Override
-                public void onDateSet(DatePicker view, int year,
-                                      int monthOfYear, int dayOfMonth) {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
 
-                    // txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        // txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                    editTextViewTrcukInsurance.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        editTextViewTrcukInsurance.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 
-                }
-            }, mYear, mMonth, mDay);
-    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-    datePickerDialog.show();
-}
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
+
     // select model
     @OnClick(R.id.ivTruckModel)
     public void selectModel() {
@@ -261,11 +247,6 @@ public void PickInsurancedate()
         showbottomTrckYear();
     }
 
-
-
-
-
-
     // Add new Truck
     @OnClick(R.id.fabTruckAdd)
     public void addTruck() {
@@ -284,7 +265,7 @@ public void PickInsurancedate()
         String container_height = editTextTrcukHeight.getText().toString().trim();
         if (isFrom.equals("NewTruck")) {
             if (isConnectingToInternet(getApplicationContext())) {
-                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year,reg_no,chasisNo,LicNo);
+                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year, reg_no, chasisNo, LicNo);
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
 
@@ -293,7 +274,7 @@ public void PickInsurancedate()
         } else {
             if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
                 if (isConnectingToInternet(getApplicationContext())) {
-                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year,reg_no,chasisNo,LicNo);
+                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year, reg_no, chasisNo, LicNo);
                 } else {
                     showSnakBar(rootView, MessageConstants.INTERNET);
                 }
@@ -540,14 +521,14 @@ public void PickInsurancedate()
     //:-----------Truck Add Api-------------:\\
 
     private void AddTruck(String avg_running_speed, String custom_name, String insurance_exp_date, String weight,
-                          String container_length, String container_width, String container_height, String model_id, String truck_type_id, String model_year,String reg_no,String chasisNo,String LicNo) {
+                          String container_length, String container_width, String container_height, String model_id, String truck_type_id, String model_year, String reg_no, String chasisNo, String LicNo) {
         showProgressDialog(TruckAddActivity.this, "Add Truck,please wait...");
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         //  String device_token = pref.getString("regId", null);
-        Call<TruckAddResponse> call = apiService.TruckAdd(GloablMethods.API_HEADER + acess_token, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year,reg_no,chasisNo,LicNo);
+        Call<TruckAddResponse> call = apiService.TruckAdd(GloablMethods.API_HEADER + acess_token, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year, reg_no, chasisNo, LicNo);
         call.enqueue(new Callback<TruckAddResponse>() {
             @Override
             public void onResponse(Call<TruckAddResponse> call, Response<TruckAddResponse> response) {
@@ -555,19 +536,19 @@ public void PickInsurancedate()
                 if (response.isSuccessful())
 
                 {
-                    Intent i = new Intent(TruckAddActivity.this, TruckViewActivity.class);
+                    String vehicle_id=response.body().getProviderVehicleId();
+                    Intent i = new Intent(TruckAddActivity.this, TruckDocumentAddActivity.class);
+                    i.putExtra("vehicle_id", vehicle_id);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     showSnakBar(rootView, "Truck Added Successfully");
                     startActivity(i);
-                }
-
-                else {
+                } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
                         showSnakBar(rootView, meta.getString("message"));
                     } catch (Exception e) {
-                        Log.d("exception",e.getMessage());
+                        Log.d("exception", e.getMessage());
 
                     }
                 }
@@ -586,14 +567,14 @@ public void PickInsurancedate()
     //:-----------Truck Update Api-------------:\\
 
     private void UpdateTruck(String vehicle_id, String avg_running_speed, String custom_name, String insurance_exp_date, String weight,
-                             String container_length, String container_width, String container_height, String model_id, String truck_type_id, String model_year,String reg_no,String chasisNo,String LicNo) {
+                             String container_length, String container_width, String container_height, String model_id, String truck_type_id, String model_year, String reg_no, String chasisNo, String LicNo) {
         showProgressDialog(TruckAddActivity.this, "please wait...");
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         //  String device_token = pref.getString("regId", null);
-        Call<TruckAddResponse> call = apiService.TruckUpdate(GloablMethods.API_HEADER + acess_token, vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year,reg_no,chasisNo,LicNo);
+        Call<TruckAddResponse> call = apiService.TruckUpdate(GloablMethods.API_HEADER + acess_token, vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year, reg_no, chasisNo, LicNo);
         call.enqueue(new Callback<TruckAddResponse>() {
             @Override
             public void onResponse(Call<TruckAddResponse> call, Response<TruckAddResponse> response) {
@@ -605,13 +586,13 @@ public void PickInsurancedate()
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     showSnakBar(rootView, "Truck Updated Successfully");
                     startActivity(i);
-                }    else {
+                } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
                         showSnakBar(rootView, meta.getString("message"));
                     } catch (Exception e) {
-                        Log.d("exception",e.getMessage());
+                        Log.d("exception", e.getMessage());
 
                     }
                 }

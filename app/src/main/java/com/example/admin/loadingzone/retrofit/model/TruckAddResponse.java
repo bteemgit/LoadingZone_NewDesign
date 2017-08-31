@@ -11,7 +11,7 @@ public class TruckAddResponse {
     private Meta meta;
     @SerializedName("provider_vehicle_id")
     @Expose
-    private Integer providerVehicleId;
+    private String providerVehicleId;
     @SerializedName("vehicle")
     @Expose
     private Vehicle vehicle;
@@ -33,11 +33,11 @@ public class TruckAddResponse {
         this.meta = meta;
     }
 
-    public Integer getProviderVehicleId() {
+    public String getProviderVehicleId() {
         return providerVehicleId;
     }
 
-    public void setProviderVehicleId(Integer providerVehicleId) {
+    public void setProviderVehicleId(String providerVehicleId) {
         this.providerVehicleId = providerVehicleId;
     }
 

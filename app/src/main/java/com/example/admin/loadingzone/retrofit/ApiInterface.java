@@ -32,10 +32,12 @@ import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckTypeResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckYearResponse;
+import com.example.admin.loadingzone.retrofit.model.TruckdocumentsResponse;
 import com.example.admin.loadingzone.retrofit.model.UserProfileResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleDetailsResponse;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -232,4 +234,9 @@ public interface ApiInterface {
     Call<CancelJobListResponse>CanceledJobList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
     @GET("quotation/cancel-reason")
     Call<CancelJobReasonResponse>CancelJobReasonsList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("page") int page);
+    @Multipart
+    @POST("provider-vehicles/upload-document")
+    Call<TruckdocumentsResponse> UploadTruckDocuments(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Part MultipartBody.Part file, @Part("vehicle_id") String vehicle_id,@Part("document_title") String document_title);
+
+
 }
