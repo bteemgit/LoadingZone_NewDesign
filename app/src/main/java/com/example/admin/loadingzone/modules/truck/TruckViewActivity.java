@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -28,6 +29,8 @@ import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.TruckResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleList;
 import com.github.clans.fab.FloatingActionMenu;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,8 +165,6 @@ public class TruckViewActivity extends BaseActivity {
                 i.putExtra("driver", driver);
                 i.putExtra("provider_vehicle_id", provider_vehicle_id);
                 i.putExtra("truckId", truckId);
-
-
                 i.putExtra("reg_no",reg_no);
                 i.putExtra("chassis_no",chassis_no);
                 i.putExtra("License_no",License_no);
@@ -248,7 +249,14 @@ public class TruckViewActivity extends BaseActivity {
                     endlessRecyclerViewTrck.setHaveMoreItem(false);
                 }
                 if (!response.isSuccessful()) {
-                    showSnakBar(relativeLayoutRoot, MessageConstants.SERVERERROR);
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        showSnakBar(relativeLayoutRoot, meta.getString("message"));
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+
+                    }
                 }
                 progressBar.setVisibility(View.GONE);
             }

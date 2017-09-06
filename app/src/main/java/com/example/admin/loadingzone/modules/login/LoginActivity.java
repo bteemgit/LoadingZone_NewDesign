@@ -281,6 +281,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 hideProgressDialog();
+                Toast.makeText(getApplicationContext(),"Server Issue",Toast.LENGTH_LONG).show();
 
 
             }

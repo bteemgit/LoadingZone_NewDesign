@@ -1,12 +1,13 @@
 package com.example.admin.loadingzone.modules.truck;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -26,9 +27,7 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.modules.driver.DriverListAdapter;
-import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
-import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -37,7 +36,9 @@ import com.example.admin.loadingzone.retrofit.model.AdddriverResponnse;
 import com.example.admin.loadingzone.retrofit.model.DriverList;
 import com.example.admin.loadingzone.retrofit.model.TruckAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
+import com.example.admin.loadingzone.retrofit.model.TruckdocumentsViewResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleDetailsResponse;
+import com.example.admin.loadingzone.retrofit.model.VehicleDoc;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -115,19 +116,13 @@ public class TruckEditUpdateActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.reltive_existingDriver)
     LinearLayout reltive_existingDriver;
-
     @BindView(R.id.id_assignDriverClick)
     LinearLayout assignDriver_card;
-
-
     @BindView(R.id.id_linear_driver_details)
     LinearLayout assignDriverDetailsExists;
-
-
     @NonNull
     @BindView(R.id.textRegistrationNo)
     TextView textViewRegistrationNo;
-
     @NonNull
     @BindView(R.id.textChasisNo)
     TextView textViewChasisNo;
@@ -140,11 +135,17 @@ public class TruckEditUpdateActivity extends BaseActivity {
     @BindView(R.id.img_ChangeDriver)
     ImageView imageViewChangeDriver;
 
-
+    @NonNull
+    @BindView(R.id.recyclerview_doc_list)
+    EndlessRecyclerView endlessRecyclerViewTruckDocList;
     ApiInterface apiService;
-    String provider_vehicle_id, driver, truckId,reg_no,chassis_no,License_no;
+    String provider_vehicle_id, truckId, reg_no, chassis_no, License_no;
+    String driver = "driver";
     List<DriverList> Listvechicle = new ArrayList<>();
     DriverListAdapter driverListAdapter;
+    TruckDocumentListAdapter truckDocumentListAdapter;
+    private List<VehicleDoc> vehicleDocArrayList = new ArrayList<>();
+    private boolean Onclick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,23 +162,28 @@ public class TruckEditUpdateActivity extends BaseActivity {
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
         truckId = getIntent().getStringExtra("truckId");
         driver = getIntent().getStringExtra("driver");
+        reg_no = getIntent().getStringExtra("reg_no");
+        chassis_no = getIntent().getStringExtra("chassis_no");
+        License_no = getIntent().getStringExtra("License_no");
+        // recyclerview layout manager
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(TruckEditUpdateActivity.this, 2);
+        endlessRecyclerViewTruckDocList.setLayoutManager(gridLayoutManager);
 
-        reg_no=getIntent().getStringExtra("reg_no");
-        chassis_no=getIntent().getStringExtra("chassis_no");
-        License_no=getIntent().getStringExtra("License_no");
+        if (isConnectingToInternet(getApplicationContext()))
+            getTrckDocList(provider_vehicle_id);
+        else {
+            showSnakBar(rootView, MessageConstants.INTERNET);
+        }
 
-
-       // Log.d("driver>>>",driver);
         if (isConnectingToInternet(getApplicationContext()))
             getTruckDetails(provider_vehicle_id);
         else {
             showSnakBar(rootView, MessageConstants.INTERNET);
-
         }
+
         if (driver.equals("false")) {
 
             assignDriverDetailsExists.setVisibility(View.GONE);
-
             reltive_existingDriver.setVisibility(View.GONE);
             textAddNewDriver.setVisibility(View.VISIBLE);
             imageViewChangeDriver.setVisibility(View.GONE);
@@ -192,21 +198,21 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
     }
 
+
     // back button action
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
     // update truck
     @NonNull
     @OnClick(R.id.linerUpdateTruck)
     public void updateTruck() {
 
-showSnakBar(rootView,"Not Working now");
+        showSnakBar(rootView, "Not Working now");
     }
-
-
 
 
     // Add driver
@@ -272,8 +278,6 @@ showSnakBar(rootView,"Not Working now");
             public void onItemClick(View view, int position) {
 
                 String driverId = String.valueOf(Listvechicle.get(position).getDriverId());
-
-
                 assignDriverToTruck(driverId, truckId);
                 mBottomSheetDialog.dismiss();
 
@@ -281,15 +285,68 @@ showSnakBar(rootView,"Not Working now");
         }));
     }
 
+    //getting the truck document list
+    public void getTrckDocList
+    (String provider_vehicle_id) {
 
+        apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        Call<TruckdocumentsViewResponse> call = apiService.getTruckDocList(GloablMethods.API_HEADER + acess_token, provider_vehicle_id, 1);
+        call.enqueue(new Callback<TruckdocumentsViewResponse>() {
+            @Override
+            public void onResponse(Call<TruckdocumentsViewResponse> call, retrofit2.Response<TruckdocumentsViewResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (!response.body().getVehicleDocs().isEmpty()) {
+                        vehicleDocArrayList = response.body().getVehicleDocs();
+                        truckDocumentListAdapter = new TruckDocumentListAdapter(vehicleDocArrayList, TruckEditUpdateActivity.this);
+                        endlessRecyclerViewTruckDocList.setAdapter(truckDocumentListAdapter);
+                        truckDocumentListAdapter.notifyDataSetChanged();
+                        endlessRecyclerViewTruckDocList.addOnItemTouchListener(new RecyclerItemClickListener(TruckEditUpdateActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                                Intent i = new Intent(getApplicationContext(), TruckDocumentDetailActivity.class);
+                                i.putExtra("image_url", vehicleDocArrayList.get(position).getDocumentFile());
+                                i.putExtra("doc_date", vehicleDocArrayList.get(position).getDocumentDate());
+                                i.putExtra("doc_title", vehicleDocArrayList.get(position).getDocumentTitle());
+                                startActivity(i);
+
+                            }
+                        }));
+
+                    }
+                }
+                if (!response.isSuccessful()) {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        showSnakBar(rootView, meta.getString("message"));
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<TruckdocumentsViewResponse> call, Throwable t) {
+                // Log error here since request failed
+
+            }
+        });
+    }
+
+    // getting the driver list aded by the provider
     public List<DriverList> getDriverList
-            () {
+    () {
 
 
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<TruckDriverViewResponse> call = apiService.driverList(GloablMethods.API_HEADER + acess_token,1);
+        Call<TruckDriverViewResponse> call = apiService.driverList(GloablMethods.API_HEADER + acess_token, 1);
         call.enqueue(new Callback<TruckDriverViewResponse>() {
             @Override
             public void onResponse(Call<TruckDriverViewResponse> call, retrofit2.Response<TruckDriverViewResponse> response) {
@@ -297,6 +354,7 @@ showSnakBar(rootView,"Not Working now");
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getDriverList().isEmpty()) {
                         Listvechicle = response.body().getDriverList();
+
 
                     } else {
                         showSnakBar(rootView, "You didnt Add any drivers,please Add drivers");
@@ -349,7 +407,7 @@ showSnakBar(rootView,"Not Working now");
 
                     textTruckWeight.setText(response.body().getWeight() + "");
                     textTruckDimension.setText(response.body().getVehicle().getDimension());
-                    String driver_exists=response.body().getDriver_exists();
+                    String driver_exists = response.body().getDriver_exists();
                     if (driver_exists.equals("true")) {
                         reltive_existingDriver.setVisibility(View.VISIBLE);
                         textAddNewDriver.setVisibility(View.GONE);
@@ -443,8 +501,8 @@ showSnakBar(rootView,"Not Working now");
             public void onResponse(Call<AdddriverResponnse> call, Response<AdddriverResponnse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                   // getTruckDetails(provider_vehicle_id);
-                    Intent intent = new Intent(getApplicationContext(),TruckViewActivity.class);
+                    // getTruckDetails(provider_vehicle_id);
+                    Intent intent = new Intent(getApplicationContext(), TruckViewActivity.class);
                     startActivity(intent);
 
                 } else {
@@ -490,4 +548,6 @@ showSnakBar(rootView,"Not Working now");
                     .transform(new CircleTransformation())
                     .into(ivDriverProfilePhoto);
     }
+
+
 }

@@ -33,6 +33,7 @@ import com.example.admin.loadingzone.retrofit.model.TruckResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckTypeResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckYearResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckdocumentsResponse;
+import com.example.admin.loadingzone.retrofit.model.TruckdocumentsViewResponse;
 import com.example.admin.loadingzone.retrofit.model.UserProfileResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleDetailsResponse;
 
@@ -237,6 +238,10 @@ public interface ApiInterface {
     @Multipart
     @POST("provider-vehicles/upload-document")
     Call<TruckdocumentsResponse> UploadTruckDocuments(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Part MultipartBody.Part file, @Part("vehicle_id") String vehicle_id,@Part("document_title") String document_title);
+
+    @GET("provider-vehicles/documents")
+    Call<TruckdocumentsViewResponse> getTruckDocList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("vehicle_id") String vehicle_id, @Query("page") int page);
+
 
 
 }

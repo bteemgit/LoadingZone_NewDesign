@@ -42,11 +42,6 @@
 
                 </android.support.v7.widget.Toolbar>
 
-
-
-
-
-
                 <LinearLayout
                     android:id="@+id/img_profile"
                     android:layout_width="match_parent"
@@ -199,6 +194,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/nested_scroll_view"
         android:layout_below="@+id/app_bar">
 
 
@@ -206,10 +202,11 @@
             android:id="@+id/reltive_driverView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <include layout="@layout/layout_truckdetails">
-
+            <include layout="@layout/layout_truckdetails"
+                android:id="@+id/layout_truck"
+               >
             </include>
+
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
@@ -276,6 +273,5 @@
                 android:text="Update"
                 android:textSize="13sp" />
         </LinearLayout>
-
     </RelativeLayout>
 </RelativeLayout>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -26,5 +26,10 @@
     <style name="MaterialDialogSheetAnimation">
         <item name="android:windowEnterAnimation">@anim/popup_show</item>
         <item name="android:windowExitAnimation">@anim/popup_hide</item>
+    </style>
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Add this line -->
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
+
     </style>
 </resources>

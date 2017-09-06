@@ -23,8 +23,6 @@
         android:background="@mipmap/logintop"
         android:orientation="horizontal">
 
-
-
     </LinearLayout>
 
     <LinearLayout

@@ -7,24 +7,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center|start">
+
             <TextView
                 android:id="@+id/textCustomName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
+                android:text="Nil"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text="Nil"/>
+                android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -34,78 +36,81 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
                     android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:paddingLeft="10dp"
                     android:text="Insurance"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textInsuranceDate"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"/>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
         </LinearLayout>
-
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
             android:gravity="center|start"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
                     android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:paddingLeft="10dp"
                     android:text="Registration No"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textRegistrationNo"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"/>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
         </LinearLayout>
-
-
 
 
         <LinearLayout
@@ -117,36 +122,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
                     android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:paddingLeft="10dp"
                     android:text="Chasis No"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textChasisNo"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"/>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -158,36 +165,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
                     android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:paddingLeft="10dp"
                     android:text="License No"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textLicenseNo"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"/>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -199,39 +208,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
                     android:layout_weight="1"
                     android:gravity="start"
+                    android:paddingLeft="10dp"
                     android:text="Speed"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textAverageSpeed"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"/>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -241,35 +252,39 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="25dp"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
                     android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:paddingLeft="10dp"
                     android:text="Weight"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textTruckWeight"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"></TextView>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent"></TextView>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -279,33 +294,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="start"
                     android:paddingLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
                     android:text="Dimension"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textTruckDimension"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"/>
+                    android:layout_weight="2"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
         </LinearLayout>
@@ -314,168 +332,191 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center|start"
-            android:background="@color/colorAccent">
+            android:background="@color/colorAccent"
+            android:gravity="center|start">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
+                android:text="Driver Details"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:text="Driver Details"/>
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="end|center">
+
                 <ImageView
+                    android:id="@+id/img_ChangeDriver"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:id="@+id/img_ChangeDriver"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/ic_edit"/>
+                    android:src="@drawable/ic_edit" />
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/id_linear_driver_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/id_linear_driver_details"
-            android:paddingBottom="50dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
                 android:gravity="center|start"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginLeft="25dp">
+                android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textStyle="bold"
                     android:layout_weight=".9"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="Name"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textDriverName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:layout_weight="2.4"
                     android:text="Nil"
-                    android:layout_weight="2.4"/>
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center|start"
-                android:orientation="horizontal"
                 android:layout_marginLeft="25dp"
+                android:gravity="center|start"
+                android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Place"
-                    android:textStyle="bold"
                     android:layout_weight=".9"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="Place"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:layout_weight="2.4"
                     android:text="Nil"
-                    android:layout_weight="2.4"/>
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
                 android:gravity="center|start"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginLeft="25dp">
+                android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textStyle="bold"
                     android:layout_weight=".9"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="Email"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textDriverEmail"
                     android:layout_width="0dp"
-                    android:textColor="@color/colorAccent"
-                    android:text="Nil"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.4"/>
+                    android:layout_weight="2.4"
+                    android:text="Nil"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center|start"
                 android:orientation="horizontal"
                 android:weightSum="3">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
-                    android:text="Phone"
-                    android:textStyle="bold"
                     android:layout_weight=".9"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="Phone"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".2"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:layout_weight=".2"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/textDriverPhone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:layout_weight="2.4"
                     android:text="Nil"
-                    android:layout_weight="2.4"/>
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
         </LinearLayout>
 
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/id_assignDriverClick"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/id_assignDriverClick">
+        android:layout_height="wrap_content">
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/cardTruck"
+            android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"
             android:elevation="6dp"
             app:cardCornerRadius="6dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -488,48 +529,50 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="7dp"
-                    android:visibility="gone"
                     android:text=" Driver Details"
                     android:textColor="@color/colorAccent"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
                 <ImageView
+                    android:id="@+id/ivTruckEdit"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/ivTruckEdit"
-                    android:visibility="visible"
+                    android:layout_marginLeft="50dp"
                     android:layout_toEndOf="@+id/text"
                     android:layout_toRightOf="@+id/text"
                     android:paddingTop="5dp"
                     android:src="@drawable/ic_edit"
-                    android:layout_marginLeft="50dp"/>
+                    android:visibility="visible" />
 
                 <View
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:visibility="gone"
                     android:layout_below="@id/text"
                     android:layout_marginTop="2dp"
-                    android:background="@color/colorPrimary">
+                    android:background="@color/colorPrimary"
+                    android:visibility="gone">
 
                 </View>
+
                 <TextView
+                    android:id="@+id/textAddNewDriver"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/textAddNewDriver"
-                    android:text="Driver is not Assigned ,Click here add driver"
                     android:layout_below="@id/view1"
-                    android:textSize="13sp"
-                    android:visibility="gone"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="Driver is not Assigned ,Click here add driver"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/reltive_existingDriver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_below="@id/view1">
+                    android:layout_below="@id/view1"
+                    android:visibility="gone">
 
 
                     <ImageView
@@ -635,10 +678,11 @@
 
             </RelativeLayout>
 
-
         </android.support.v7.widget.CardView>
+
     </LinearLayout>
+    <include layout="@layout/layout_truck_documents">
 
-
-
+    </include>
 </LinearLayout>
+

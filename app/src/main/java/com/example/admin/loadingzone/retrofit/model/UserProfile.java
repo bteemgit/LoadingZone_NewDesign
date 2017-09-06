@@ -29,7 +29,7 @@ public class UserProfile {
     private String phone1;
     @SerializedName("phone_2")
     @Expose
-    private Object phone2;
+    private String phone2;
     @SerializedName("latitude")
     @Expose
     private String latitude;
@@ -107,11 +107,11 @@ public class UserProfile {
         this.phone1 = phone1;
     }
 
-    public Object getPhone2() {
+    public String getPhone2() {
         return phone2;
     }
 
-    public void setPhone2(Object phone2) {
+    public void setPhone2(String phone2) {
         this.phone2 = phone2;
     }
 

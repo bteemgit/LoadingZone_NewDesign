@@ -39,4 +39,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="truck_documents">Truck Documents</string>
+    <string name="transition_string">TruckTranstion</string>
 </resources>

@@ -282,12 +282,7 @@ public class TruckDocumentAddActivity extends BaseActivity {
                 hideProgressDialog();
                 // Response Success or Fail
                 if (response.isSuccessful()) {
-                    //setting Image to AppController
-
                     Snackbar.make(relativeLayout, R.string.string_upload_success, Snackbar.LENGTH_LONG).show();
-                    /**
-                     * Update Views
-                     */
                     imagePath = "";
                     linearDocuments.setVisibility(View.GONE);
                     editTextDescription.setText("");

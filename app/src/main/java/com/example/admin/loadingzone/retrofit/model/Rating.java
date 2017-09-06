@@ -8,24 +8,23 @@ public class Rating {
 
     @SerializedName("average_rating")
     @Expose
-    private Integer averageRating;
+    private String averageRating;
     @SerializedName("total_reviews")
     @Expose
-    private Integer totalReviews;
-
-    public Integer getAverageRating() {
+    private String totalReviews;
+    public String getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(Integer averageRating) {
+    public void setAverageRating(String averageRating) {
         this.averageRating = averageRating;
     }
 
-    public Integer getTotalReviews() {
+    public String getTotalReviews() {
         return totalReviews;
     }
 
-    public void setTotalReviews(Integer totalReviews) {
+    public void setTotalReviews(String totalReviews) {
         this.totalReviews = totalReviews;
     }
 
