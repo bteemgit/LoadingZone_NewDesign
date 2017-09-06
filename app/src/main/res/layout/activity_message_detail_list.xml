@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/ic_writesomething" />
+                    app:srcCompat="@drawable/ic_writesomething" />
 
             </LinearLayout>
 

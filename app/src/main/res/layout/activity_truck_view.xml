@@ -99,7 +99,7 @@
             android:id="@+id/fabAddTruck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            app:srcCompat="@drawable/fab_add"
 
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label="Add Truck"
@@ -109,7 +109,7 @@
             android:id="@+id/fabPendingTrucks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delivery_truck_"
+            app:srcCompat="@drawable/ic_delivery_truck_"
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label="Pending Trucks"
             fab:fab_size="mini" />

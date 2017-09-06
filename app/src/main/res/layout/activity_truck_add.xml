@@ -77,7 +77,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_truck_white" />
+                                    app:srcCompat="@drawable/ic_truck_white" />
                             </LinearLayout>
 
                             <TextView
@@ -108,7 +108,7 @@
                                     android:layout_marginRight="10dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_modelwhite" />
+                                    app:srcCompat="@drawable/ic_modelwhite" />
                             </LinearLayout>
 
                             <TextView
@@ -138,7 +138,7 @@
                                     android:layout_marginLeft="10dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_type_white" />
+                                    app:srcCompat="@drawable/ic_type_white" />
                             </LinearLayout>
 
                             <TextView
@@ -169,7 +169,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:paddingLeft="8dp"
-                                    android:src="@drawable/ic_calender_white" />
+                                    app:srcCompat="@drawable/ic_calender_white" />
                             </LinearLayout>
 
                             <TextView

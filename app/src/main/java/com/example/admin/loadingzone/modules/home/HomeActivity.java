@@ -323,13 +323,9 @@ public class HomeActivity extends BaseActivity {
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
                 String weight = jobList.get(position).getMaterial_weight().getMaterialWeightText();
-
                 String DateOfLoading = jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time();
-
                 String PrefferedLoadingDate = jobList.get(position).getPreferred_loading_date();
                 String PrefferedLoadingTime = jobList.get(position).getPreferred_loading_time();
-
-
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
                 String TruckType_name = jobList.get(position).getTruckType().getTruckTypeName();

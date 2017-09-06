@@ -80,7 +80,7 @@
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="0dp"
                         android:layout_marginRight="2.5dp"
-                        android:src="@drawable/ic_weekly_calendar" />
+                        app:srcCompat="@drawable/ic_weekly_calendar" />
 
                     <TextView
                         android:id="@+id/textCustomerJobDate"
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginRight="2.5dp"
-                        android:src="@drawable/ic_alarm_clock" />
+                        app:srcCompat="@drawable/ic_alarm_clock" />
 
                     <TextView
                         android:id="@+id/textCustomerJobTime"
@@ -232,7 +232,7 @@
                         android:layout_gravity="center"
                         android:layout_marginRight="2.5dp"
                         android:layout_marginLeft="0dp"
-                        android:src="@drawable/ic_weekly_calendar"/>
+                        app:srcCompat="@drawable/ic_weekly_calendar"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -262,7 +262,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="2.5dp"
-                        android:src="@drawable/ic_alarm_clock" />
+                        app:srcCompat="@drawable/ic_alarm_clock" />
 
                     <TextView
                         android:id="@+id/textProviderPrefferedJobTime"

@@ -47,7 +47,7 @@
                         android:id="@+id/imageView5"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_avgspeed" />
+                        app:srcCompat="@drawable/ic_avgspeed" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,7 +98,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_manufacturer" />
+                    app:srcCompat="@drawable/ic_manufacturer" />
 
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_truck_black" />
+                    app:srcCompat="@drawable/ic_truck_black" />
             </LinearLayout>
 
             <LinearLayout

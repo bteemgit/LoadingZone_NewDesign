@@ -57,7 +57,7 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="5dp"
                             android:layout_marginRight="16dp"
-                            android:src="@drawable/ic_driverimage" />
+                            app:srcCompat="@drawable/ic_driverimage" />
 
                     </LinearLayout>
 
@@ -185,7 +185,7 @@
                                 android:id="@+id/imageFromTo"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:src="@drawable/ic_arrows_white_black" />
+                                app:srcCompat="@drawable/ic_arrows_white_black" />
 
                         </LinearLayout>
 
@@ -242,7 +242,7 @@
                             android:layout_width="27dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="1dp"
-                            android:background="@drawable/ic_km"
+                            app:srcCompat="@drawable/ic_km"
                             android:gravity="center" />
 
                         <TextView

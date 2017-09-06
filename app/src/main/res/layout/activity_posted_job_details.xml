@@ -915,7 +915,7 @@
                             android:layout_height="20dp"
                             android:layout_gravity="center|end"
                             android:layout_marginEnd="10dp"
-                            android:src="@drawable/ic_edit" />
+                            app:srcCompat="@drawable/ic_edit" />
 
                     </LinearLayout>
 
@@ -1095,7 +1095,7 @@
                             android:layout_height="20dp"
                             android:layout_gravity="center|end"
                             android:layout_marginEnd="10dp"
-                            android:src="@drawable/ic_edit" />
+                            app:srcCompat="@drawable/ic_edit" />
                     </LinearLayout>
 
 
@@ -1566,8 +1566,7 @@
             android:id="@+id/fabmessage_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_envelop"
-
+            app:srcCompat="@drawable/ic_envelop"
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label="Message Driver "
             fab:fab_size="mini" />
@@ -1576,7 +1575,7 @@
             android:id="@+id/fabmessage_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_envelop"
+            app:srcCompat="@drawable/ic_envelop"
 
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label="Message Customer"
@@ -1587,8 +1586,7 @@
             android:id="@+id/fabcall_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_call"
-
+            app:srcCompat="@drawable/ic_call"
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label="Call Driver "
             fab:fab_size="mini" />
@@ -1597,7 +1595,7 @@
             android:id="@+id/fabcall_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_call"
+            app:srcCompat="@drawable/ic_call"
             app:fab_colorNormal="@color/btn_send_normal"
             app:fab_label="Call Customer"
             fab:fab_size="mini" />

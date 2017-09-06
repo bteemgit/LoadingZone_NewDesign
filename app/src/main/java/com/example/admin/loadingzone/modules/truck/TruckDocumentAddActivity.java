@@ -282,7 +282,7 @@ public class TruckDocumentAddActivity extends BaseActivity {
                 hideProgressDialog();
                 // Response Success or Fail
                 if (response.isSuccessful()) {
-                    Snackbar.make(relativeLayout, R.string.string_upload_success, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(relativeLayout,response.body().getMeta().getMessage(), Snackbar.LENGTH_LONG).show();
                     imagePath = "";
                     linearDocuments.setVisibility(View.GONE);
                     editTextDescription.setText("");

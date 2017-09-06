@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/squareview"
+            app:srcCompat="@drawable/squareview"
             android:ems="10"
             android:focusable="false"
             android:inputType="number"
@@ -68,7 +68,7 @@
             android:layout_margin="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/squareview"
+            app:srcCompat="@drawable/squareview"
             android:ems="10"
             android:gravity="top"
             android:hint="Comment     (Optional)"
@@ -109,7 +109,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
-            android:src="@drawable/ic_truck_rigtaroow" />
+            app:srcCompat="@drawable/ic_truck_rigtaroow" />
 
     </RelativeLayout>
 </RelativeLayout>

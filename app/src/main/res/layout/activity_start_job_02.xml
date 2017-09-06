@@ -511,7 +511,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_truck_rigtaroow" />
+                app:srcCompat="@drawable/ic_truck_rigtaroow" />
 
         </LinearLayout>
 
@@ -543,7 +543,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_truck_rigtaroow" />
+                app:srcCompat="@drawable/ic_truck_rigtaroow" />
 
 
         </LinearLayout>

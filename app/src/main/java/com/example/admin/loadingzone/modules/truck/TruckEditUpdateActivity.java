@@ -145,7 +145,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
     DriverListAdapter driverListAdapter;
     TruckDocumentListAdapter truckDocumentListAdapter;
     private List<VehicleDoc> vehicleDocArrayList = new ArrayList<>();
-    private boolean Onclick = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +182,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
         }
 
         if (driver.equals("false")) {
-
             assignDriverDetailsExists.setVisibility(View.GONE);
             reltive_existingDriver.setVisibility(View.GONE);
             textAddNewDriver.setVisibility(View.VISIBLE);
@@ -210,8 +209,19 @@ public class TruckEditUpdateActivity extends BaseActivity {
     @NonNull
     @OnClick(R.id.linerUpdateTruck)
     public void updateTruck() {
+        Intent i = new Intent(TruckEditUpdateActivity.this, TruckAddActivity.class);
+        i.putExtra("isFrom", "TruckView");
+        i.putExtra("driver", driver);
+        i.putExtra("provider_vehicle_id", provider_vehicle_id);
+        i.putExtra("truckId", truckId);
+        i.putExtra("reg_no",reg_no);
+        i.putExtra("chassis_no",chassis_no);
+        i.putExtra("License_no",License_no);
 
-        showSnakBar(rootView, "Not Working now");
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+
+
     }
 
 
@@ -400,11 +410,9 @@ public class TruckEditUpdateActivity extends BaseActivity {
                     textCustomName.setText(response.body().getCustomName());
                     textAverageSpeed.setText(response.body().getAvgRunningSpeed());
                     textViewInsuranceDate.setText(response.body().getInsuranceExpDate());
-
                     textViewRegistrationNo.setText(reg_no);
                     textViewChasisNo.setText(chassis_no);
                     textViewLicenseNo.setText(License_no);
-
                     textTruckWeight.setText(response.body().getWeight() + "");
                     textTruckDimension.setText(response.body().getVehicle().getDimension());
                     String driver_exists = response.body().getDriver_exists();
@@ -532,7 +540,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
         });
     }
 
-    public void SetDriverField(String drivername, String driverEmail, String driverMobile, String driverPic) {
+    public void SetDriverField(String drivername, String driverEmail, String driverMobile, String driverPic)
+    {
         if (drivername != null)
             textDriverName.setText(drivername);
         if (driverEmail != null)

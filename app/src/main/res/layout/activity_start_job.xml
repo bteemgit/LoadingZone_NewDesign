@@ -338,7 +338,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_truck_rigtaroow" />
+            app:srcCompat="@drawable/ic_truck_rigtaroow" />
 
     </RelativeLayout>
 
@@ -369,7 +369,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_truck_rigtaroow" />
+            app:srcCompat="@drawable/ic_truck_rigtaroow" />
 
     </RelativeLayout>
 

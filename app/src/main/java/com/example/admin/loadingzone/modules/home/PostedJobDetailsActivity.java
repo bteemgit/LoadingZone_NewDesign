@@ -298,7 +298,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         JobId = getIntent().getStringExtra("JobId");
         String job_code = getIntent().getStringExtra("job_code");
         String JobStatus = getIntent().getStringExtra("JobStatus");
-
         isFrom = getIntent().getStringExtra("isFrom");
         String profilepic = getIntent().getStringExtra("profilepic");
         String CutomerName = getIntent().getStringExtra("name");
@@ -332,7 +331,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             fabQuotationApply.setVisibility(View.VISIBLE);
             buttonJobStart.setVisibility(View.GONE);
             floatingActionMenu.setVisibility(View.GONE);
-
             textViewRequestedDate.setText(RequestedDate);
             textViewJobDate.setText(JobDate);
 

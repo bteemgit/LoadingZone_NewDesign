@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +24,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="69dp"
                 android:layout_height="71dp"
-                android:src="@mipmap/profileimage" />
+                app:srcCompat="@mipmap/profileimage" />
 
             <TextView
                 android:id="@+id/id_text_users_name"
@@ -63,7 +64,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_nav_profile" />
+                app:srcCompat="@drawable/ic_nav_profile" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,7 +90,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_thumbsup"/>
+                app:srcCompat="@drawable/ic_thumbsup"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +115,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_suitcase"/>
+                app:srcCompat="@drawable/ic_suitcase"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -143,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_bell"/>
+                app:srcCompat="@drawable/ic_bell"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_locked"/>
+                app:srcCompat="@drawable/ic_locked"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/id_img_logout"
-            android:src="@drawable/ic_logout"/>
+            app:srcCompat="@drawable/ic_logout"/>
     </LinearLayout>
 </LinearLayout>
 

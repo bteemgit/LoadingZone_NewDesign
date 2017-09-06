@@ -62,7 +62,8 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
-
+    private  static String NEW_TRUCK_ADD="NewTruck";
+    private  static String TRUCK_UPDATE="UpdateTruck";
     public static void startTruckAddActvity(int[] startingLocation, Activity startingActivity, String isFrom) {
         Intent intent = new Intent(startingActivity, TruckAddActivity.class);
         intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
@@ -98,8 +99,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     @NonNull
     @BindView(R.id.editTruckCustomName)
     EditText editTextTrcukCutsomName;
-
-
     @NonNull
     @BindView(R.id.editTruckRegistrationNo)
     EditText editTextTruckRegistrationNo;
@@ -162,7 +161,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         getTruckYearList();
         isFrom = getIntent().getStringExtra("isFrom");
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
-        if (isFrom.equals("NewTruck")) {
+        if (isFrom.equals(NEW_TRUCK_ADD)) {
             setupRevealBackground(savedInstanceState);
 
         }
@@ -269,8 +268,8 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
 
-            }
 
+        }
         } else {
             if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
                 if (isConnectingToInternet(getApplicationContext())) {
