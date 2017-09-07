@@ -65,12 +65,9 @@ public class VehicleList {
     private String licence_number;
 
 
-
-
     @SerializedName("date_added")
     @Expose
     private String dateAdded;
-
 
 
     public String getDriver() {

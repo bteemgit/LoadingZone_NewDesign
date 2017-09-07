@@ -76,7 +76,7 @@ public class TruckViewActivity extends BaseActivity {
     private int offset = 1;
     private boolean hasReachedTop = false;
     private List<VehicleList> vehicleListList = new ArrayList<>();
-    private  static String NEW_TRUCK_ADD="NewTruck";
+    private static String NEW_TRUCK_ADD = "NewTruck";
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -89,6 +89,7 @@ public class TruckViewActivity extends BaseActivity {
         }
     };
     View dark_bg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,24 +152,26 @@ public class TruckViewActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
 
                 String provider_vehicle_id = String.valueOf(vehicleListList.get(position).getProviderVehicleId());
-                String driver=vehicleListList.get(position).getDriver();
-                String truckId= String.valueOf(vehicleListList.get(position).getProviderVehicleId());
+                String driver = vehicleListList.get(position).getDriver();
+                String truckId = String.valueOf(vehicleListList.get(position).getProviderVehicleId());
 
-                String reg_no=vehicleListList.get(position).getRegistration_number();
-                String chassis_no=vehicleListList.get(position).getChassis_number();
-                String License_no=vehicleListList.get(position).getLicence_number();
-
-
-
+                String reg_no = vehicleListList.get(position).getRegistration_number();
+                String chassis_no = vehicleListList.get(position).getChassis_number();
+                String License_no = vehicleListList.get(position).getLicence_number();
+//                String truck_typeId = vehicleListList.get(position).getVehicle().getTruckType().getTruckTypeId();
+//                String model_id=vehicleListList.get(position).getVehicle().getModel().getModelId();
+//                String model_year=vehicleListList.get(position).getVehicle().getModelYear();
                 Intent i = new Intent(TruckViewActivity.this, TruckEditUpdateActivity.class);
                 i.putExtra("isFrom", "TruckView");
                 i.putExtra("driver", driver);
                 i.putExtra("provider_vehicle_id", provider_vehicle_id);
                 i.putExtra("truckId", truckId);
-                i.putExtra("reg_no",reg_no);
-                i.putExtra("chassis_no",chassis_no);
-                i.putExtra("License_no",License_no);
-
+                i.putExtra("reg_no", reg_no);
+                i.putExtra("chassis_no", chassis_no);
+                i.putExtra("License_no", License_no);
+//                i.putExtra("truck_typeId", truck_typeId);
+//                i.putExtra("model_id", model_id);
+//                i.putExtra("model_year", model_year);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
 
@@ -192,13 +195,9 @@ public class TruckViewActivity extends BaseActivity {
     @Optional
     @OnClick(R.id.fabPendingTrucks)
     public void pendingTrucks() {
-       Intent intent = new Intent(TruckViewActivity.this,PendingTruckViewActivity.class);
-       startActivity(intent);
+        Intent intent = new Intent(TruckViewActivity.this, PendingTruckViewActivity.class);
+        startActivity(intent);
     }
-
-
-
-
 
 
     public void getTrckList

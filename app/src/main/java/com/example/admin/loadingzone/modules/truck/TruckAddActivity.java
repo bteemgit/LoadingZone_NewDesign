@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -40,6 +42,7 @@ import com.example.admin.loadingzone.retrofit.model.TruckAddResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckType;
 import com.example.admin.loadingzone.retrofit.model.TruckTypeResponse;
 import com.example.admin.loadingzone.retrofit.model.TruckYearResponse;
+import com.example.admin.loadingzone.retrofit.model.VehicleDetailsResponse;
 import com.example.admin.loadingzone.retrofit.model.VehicleMaker;
 import com.example.admin.loadingzone.retrofit.model.VehicleYear;
 import com.example.admin.loadingzone.app.Config;
@@ -62,8 +65,9 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
-    private  static String NEW_TRUCK_ADD="NewTruck";
-    private  static String TRUCK_UPDATE="UpdateTruck";
+    private static String NEW_TRUCK_ADD = "NewTruck";
+    private static String TRUCK_UPDATE = "UpdateTruck";
+
     public static void startTruckAddActvity(int[] startingLocation, Activity startingActivity, String isFrom) {
         Intent intent = new Intent(startingActivity, TruckAddActivity.class);
         intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
@@ -85,7 +89,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     @NonNull
     @BindView(R.id.textTruckModel)
     TextView textViewTrckModel;
-
     @BindView(R.id.ivTruckType)
     ImageView imageViewTruckType;
     @NonNull
@@ -142,7 +145,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     private List<Model> truckModelList = new ArrayList<>();
     private List<TruckType> truckTypeList = new ArrayList<>();
     private List<VehicleYear> truckYearList = new ArrayList<>();
-    String model_id, truck_type_id, model_year, isFrom, provider_vehicle_id;
+    String model_id, truck_typeId, model_year, isFrom, provider_vehicle_id,reg_no, chassis_no, License_no;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
@@ -163,19 +166,26 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
         if (isFrom.equals(NEW_TRUCK_ADD)) {
             setupRevealBackground(savedInstanceState);
-
         }
+        if (isFrom.equals(TRUCK_UPDATE)) {
+            reg_no = getIntent().getStringExtra("reg_no");
+            chassis_no = getIntent().getStringExtra("chassis_no");
+            License_no = getIntent().getStringExtra("License_no");
+//            truck_typeId=getIntent().getStringExtra("truck_typeId");
+//            model_id=getIntent().getStringExtra("model_id");
+//            model_year=getIntent().getStringExtra("model_year");
 
-        if (isFrom.equals("TruckView")) {
-            getSupportActionBar().setTitle("Truck Details");
-            fabAddTruck.setVisibility(View.GONE);
-            editTextTrcukCutsomName.setFocusable(true);
-            editTextTrcukAvgSpeed.setFocusable(false);
-            editTextViewTrcukInsurance.setFocusable(false);
-            editTextTrcukWeight.setFocusable(false);
-            editTextTrcukLength.setFocusable(false);
-
+            getTruckDetails(provider_vehicle_id);
         }
+//        if (isFrom.equals("TruckView")) {
+//            getSupportActionBar().setTitle("Truck Details");
+//            fabAddTruck.setVisibility(View.GONE);
+//            editTextTrcukCutsomName.setFocusable(true);
+//            editTextTrcukAvgSpeed.setFocusable(false);
+//            editTextViewTrcukInsurance.setFocusable(false);
+//            editTextTrcukWeight.setFocusable(false);
+//            editTextTrcukLength.setFocusable(false);
+//        }
     }
 
     // back button action
@@ -264,16 +274,16 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         String container_height = editTextTrcukHeight.getText().toString().trim();
         if (isFrom.equals("NewTruck")) {
             if (isConnectingToInternet(getApplicationContext())) {
-                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year, reg_no, chasisNo, LicNo);
+                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
 
 
-        }
+            }
         } else {
             if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
                 if (isConnectingToInternet(getApplicationContext())) {
-                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_type_id, model_year, reg_no, chasisNo, LicNo);
+                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
                 } else {
                     showSnakBar(rootView, MessageConstants.INTERNET);
                 }
@@ -323,7 +333,20 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
                 int trick_id = truckNameList.get(position).getMakerId();
                 getTruckModelList(trick_id);
-                textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
+                {
+                    textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
+                }
+
+                if (isFrom.equals(TRUCK_UPDATE))
+                {
+                    textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
+                    textViewTrckModel.setText("");
+                    textViewTrckType.setText("");
+                    textViewTrckYear.setText("");
+                    model_id="";
+                    model_year="";
+                    truck_typeId="";
+                }
                 mBottomSheetDialog.dismiss();
 
             }
@@ -342,8 +365,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         truckModelListAdapter = new TruckModelListAdapter(getApplicationContext(), truckModelList);
         endlessRecyclerViewTrcukModel.setAdapter(truckModelListAdapter);
         truckModelListAdapter.notifyDataSetChanged();
-
-
         mBottomSheetDialog.setContentView(view);
         mBottomSheetDialog.setCancelable(true);
         mBottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -386,7 +407,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
 
                 textViewTrckType.setText(truckTypeList.get(position).getTruckTypeName());
-                truck_type_id = truckTypeList.get(position).getTruckTypeId();
+                truck_typeId = truckTypeList.get(position).getTruckTypeId();
                 mBottomSheetDialog.dismiss();
 
             }
@@ -532,10 +553,8 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
             @Override
             public void onResponse(Call<TruckAddResponse> call, Response<TruckAddResponse> response) {
                 hideProgressDialog();
-                if (response.isSuccessful())
-
-                {
-                    String vehicle_id=response.body().getProviderVehicleId();
+                if (response.isSuccessful()) {
+                    String vehicle_id = response.body().getProviderVehicleId();
                     Intent i = new Intent(TruckAddActivity.this, TruckDocumentAddActivity.class);
                     i.putExtra("vehicle_id", vehicle_id);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -606,5 +625,77 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         });
     }
 
+// getting the existing truck details
 
+private void getTruckDetails(String provider_vehicle_id) {
+    showProgressDialog(TruckAddActivity.this, "please wait...");
+    apiService =
+            ApiClient.getClient().create(ApiInterface.class);
+    String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+    Call<VehicleDetailsResponse> call = apiService.GetTruckDetails(GloablMethods.API_HEADER + acess_token, provider_vehicle_id);
+    call.enqueue(new Callback<VehicleDetailsResponse>() {
+        @Override
+        public void onResponse(Call<VehicleDetailsResponse> call, Response<VehicleDetailsResponse> response) {
+            hideProgressDialog();
+            if (response.isSuccessful()) {
+                textViewTrckMaker.setText(response.body().getVehicle().getManufacturer().getMakerName());
+                textViewTrckModel.setText(response.body().getVehicle().getModel().getModelName());
+                textViewTrckType.setText(response.body().getVehicle().getTruckType().getTruckTypeName());
+                textViewTrckYear.setText(response.body().getVehicle().getModelYear());
+                editTextTrcukCutsomName.setText(response.body().getCustomName());
+                editTextTrcukAvgSpeed.setText(response.body().getAvgRunningSpeed());
+                editTextViewTrcukInsurance.setText(response.body().getInsuranceExpDate());
+                editTextTruckRegistrationNo.setText(reg_no);
+                editTextTruckChasisNo.setText(chassis_no);
+                editTextTruckLicenceNo.setText(License_no);
+                editTextTrcukWeight.setText(response.body().getWeight() + "");
+                truck_typeId=response.body().getVehicle().getTruckType().getTruckTypeId();
+                model_year=response.body().getVehicle().getModelYear();
+                model_id=response.body().getVehicle().getModel().getModelId();
+                String dimensions=response.body().getVehicle().getDimension();
+                if (dimensions!=null ||!dimensions.equals(""))
+                {
+                    String[] separated = dimensions.split("x");
+                    String height_=separated[0];
+                    String[] height_coma = height_.split("'");
+                    String height=height_coma[0];
+                    String length_=separated[1];
+                    String[] length_coma = length_.split("'");
+                    String length=length_coma[0];
+                    String width_=separated[2];
+                    String[] width_coma = width_.split("'");
+                    String width=width_coma[0];
+                    editTextTrcukHeight.setText(height);
+                    editTextTrcukLength.setText(length);
+                    editTextTrcukWidth.setText(width);
+                }
+
+
+
+            } else {
+                try {
+                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                    JSONObject meta = jObjError.getJSONObject("meta");
+                    Snackbar snackbar = Snackbar
+                            .make(rootView, meta.getString("message"), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }
+
+        @Override
+        public void onFailure(Call<VehicleDetailsResponse> call, Throwable t) {
+            Snackbar snackbar = Snackbar
+                    .make(rootView, call.request().headers().get("meta"), Snackbar.LENGTH_LONG);
+            snackbar.show();
+            hideProgressDialog();
+
+
+        }
+    });
+}
 }
