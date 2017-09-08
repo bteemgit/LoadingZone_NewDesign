@@ -90,12 +90,12 @@ public class UserProfileActivity extends BaseActivity implements RevealBackgroun
     private ApiInterface apiService;
     private int avatarSize;
     private String profilePhoto;
-    private int[] tabIcons = {
-            R.drawable.ic_truck_tab,
-          //  R.drawable.ic_tab_pending,
-            R.drawable.ic_tab_complted
-
-    };
+//    private int[] tabIcons = {
+//            R.drawable.ic_truck_tab,
+//          //  R.drawable.ic_tab_pending,
+//            R.drawable.ic_tab_complted
+//
+//    };
 String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLocation;
 
     public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity) {
@@ -137,13 +137,13 @@ String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLoca
         setupViewPager(viewPager);
         tlUserProfileTabs.setupWithViewPager(viewPager);
         TextView newTab0 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
-        newTab0.setCompoundDrawablesWithIntrinsicBounds(tabIcons[0], 0, 0, 0);
+     //   newTab0.setCompoundDrawablesWithIntrinsicBounds(tabIcons[0], 0, 0, 0);
         TextView title=(TextView)LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs,null);
         title.setText("Completed");
 
         tlUserProfileTabs.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
         TextView newTab1 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
-        newTab1.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
+        //newTab1.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
         TextView title1=(TextView)LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs,null);
         title1.setText("Cancled");
 

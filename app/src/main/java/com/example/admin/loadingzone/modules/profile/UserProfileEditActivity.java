@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.admin.loadingzone.R;
@@ -39,6 +40,8 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -200,7 +203,14 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
             else
             {
                 if (isConnectingToInternet(UserProfileEditActivity.this)) {
-                    userProfileCreate(providerName, mobile, location, "54.9", "89.99");
+                    if (!providerName.equals(null)&&mobile.equals(null)&&location.equals(null))
+                    {
+                        userProfileCreate(providerName, mobile, location, "54.9", "89.99");
+                    }
+                    else {
+                        showSnakBar(relativeLayoutRoot, MessageConstants.PLEASE_FILL_ALL);
+                    }
+
                 } else {
                     showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
                 }
@@ -342,8 +352,6 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                         .centerCrop()
                         .transform(new CircleTransformation())
                         .into(imageViewProfileImage);
-
-                Snackbar.make(relativeLayoutRoot, R.string.string_reselect, Snackbar.LENGTH_LONG).show();
                 cursor.close();
             } else {
                 Snackbar.make(relativeLayoutRoot, R.string.string_unable_to_load_image, Snackbar.LENGTH_LONG).show();
@@ -409,10 +417,20 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                     Snackbar.make(relativeLayoutRoot, R.string.string_upload_success, Snackbar.LENGTH_LONG).show();
 
 
-                } else {
-                    Snackbar.make(relativeLayoutRoot, R.string.string_upload_fail, Snackbar.LENGTH_LONG).show();
-                }
+                }else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(relativeLayoutRoot, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
 
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
                 /**
                  * Update Views
                  */

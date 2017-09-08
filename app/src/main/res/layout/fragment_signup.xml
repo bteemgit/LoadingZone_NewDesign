@@ -20,6 +20,7 @@
         android:maxLines="1"
         android:textSize="13sp"
         android:singleLine="true"
+        android:fontFamily="sans-serif"
         android:textCursorDrawable="@null" />
 
     <EditText
@@ -30,6 +31,7 @@
         android:layout_marginRight="60dp"
         android:focusable="true"
         android:hint="Password"
+        android:fontFamily="sans-serif"
         android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
         android:maxLines="1"
@@ -49,6 +51,7 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:textSize="13sp"
+        android:fontFamily="sans-serif"
         android:singleLine="true"
         android:textCursorDrawable="@null"/>
     <Button

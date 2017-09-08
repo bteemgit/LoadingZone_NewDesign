@@ -136,7 +136,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
     @BindView(R.id.recyclerview_doc_list)
     EndlessRecyclerView endlessRecyclerViewTruckDocList;
     ApiInterface apiService;
-    String provider_vehicle_id, truckId, reg_no,model_id,model_year, chassis_no, License_no,truck_typeId;
+    String provider_vehicle_id, truckId, reg_no, chassis_no, License_no;
     String driver = "driver";
     List<DriverList> Listvechicle = new ArrayList<>();
     DriverListAdapter driverListAdapter;
@@ -162,16 +162,12 @@ public class TruckEditUpdateActivity extends BaseActivity {
         reg_no = getIntent().getStringExtra("reg_no");
         chassis_no = getIntent().getStringExtra("chassis_no");
         License_no = getIntent().getStringExtra("License_no");
-//        truck_typeId=getIntent().getStringExtra("truck_typeId");
-//        model_id=getIntent().getStringExtra("model_id");
-//        model_year=getIntent().getStringExtra("model_year");
-
         // recyclerview layout manager
         GridLayoutManager gridLayoutManager = new GridLayoutManager(TruckEditUpdateActivity.this, 2);
         endlessRecyclerViewTruckDocList.setLayoutManager(gridLayoutManager);
 
         if (isConnectingToInternet(getApplicationContext()))
-            getTrckDocList(provider_vehicle_id);
+            getTruckDocList(provider_vehicle_id);
         else {
             showSnakBar(rootView, MessageConstants.INTERNET);
         }
@@ -216,13 +212,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
         i.putExtra("reg_no",reg_no);
         i.putExtra("chassis_no",chassis_no);
         i.putExtra("License_no",License_no);
-//        i.putExtra("truck_typeId", truck_typeId);
-//        i.putExtra("model_id", model_id);
-//        i.putExtra("model_year", model_year);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
-
-
     }
 
 
@@ -254,13 +245,10 @@ public class TruckEditUpdateActivity extends BaseActivity {
                 showSnakBar(rootView, MessageConstants.INTERNET);
 
             }
-
         }
     }
 
     private void showbottomDriverList() {
-
-
         final LayoutInflater li = LayoutInflater.from(TruckEditUpdateActivity.this);
         final View view = li.inflate(R.layout.trck_model, null);
         final Dialog mBottomSheetDialog = new Dialog(TruckEditUpdateActivity.this, R.style.MaterialDialogSheet);
@@ -297,9 +285,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
     }
 
     //getting the truck document list
-    public void getTrckDocList
+    public void getTruckDocList
     (String provider_vehicle_id) {
-
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
@@ -343,8 +330,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<TruckdocumentsViewResponse> call, Throwable t) {
-                // Log error here since request failed
-
             }
         });
     }
@@ -352,8 +337,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
     // getting the driver list aded by the provider
     public List<DriverList> getDriverList
     () {
-
-
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
@@ -482,7 +465,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-
                 }
             }
 
@@ -510,10 +492,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
             public void onResponse(Call<AdddriverResponnse> call, Response<AdddriverResponnse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    // getTruckDetails(provider_vehicle_id);
                     Intent intent = new Intent(getApplicationContext(), TruckViewActivity.class);
                     startActivity(intent);
-
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
@@ -535,8 +515,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
                         .make(rootView, call.request().headers().get("meta"), Snackbar.LENGTH_LONG);
                 snackbar.show();
                 hideProgressDialog();
-
-
             }
         });
     }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/tools"
-    android:id="@+id/rootView"
+    android:id="@+id/mrootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".modules.truck.TruckDocumentAddActivity">
@@ -35,7 +35,7 @@
             android:id="@+id/btnSelectPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Photo" />
+            android:text="Select Document" />
     </LinearLayout>
 
     <LinearLayout

@@ -241,6 +241,8 @@ public interface ApiInterface {
 
     @GET("provider-vehicles/documents")
     Call<TruckdocumentsViewResponse> getTruckDocList(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("vehicle_id") String vehicle_id, @Query("page") int page);
+    @DELETE("provider-vehicles/delete-document")
+    Call<Meta> DeleteTruckDocumet(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Query("doc_id") int doc_id);
 
 
 

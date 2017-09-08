@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:id="@+id/relativeRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modules.truck.TruckViewActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <com.example.admin.loadingzone.recyclerview.EndlessRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerTruckDocDeleteList"
+        android:layout_below="@+id/toolbar1"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp">
+
+
+    </com.example.admin.loadingzone.recyclerview.EndlessRecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/relative_submit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="10dp"
+        android:gravity="bottom"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linearTruckDocAdd"
+            android:layout_width="170dp"
+            android:background="@color/colorPrimary"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="2.5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Add New Document"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/view"
+            android:layout_width="2dp"
+            android:layout_height="100dp"
+            android:layout_toEndOf="@+id/linearTruckDocAdd"
+            android:layout_toRightOf="@+id/linearTruckDocAdd"
+            android:background="@color/colorPrimaryDark">
+
+        </View>
+
+        <LinearLayout
+            android:id="@+id/linerTruckEditFinish"
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:layout_toEndOf="@+id/view"
+            android:layout_toRightOf="@+id/view"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:text="Complete"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    </RelativeLayout>

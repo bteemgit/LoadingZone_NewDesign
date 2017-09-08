@@ -83,8 +83,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @BindView(R.id.textLoadingMat_Weight)
     TextView textLoadingMat_Weight;
     @NonNull
-    @BindView(R.id.textBudget)
-    TextView textViewBudget;
+    @BindView(R.id.textMaterialDescription)
+    TextView textMaterialDescription;
     @NonNull
     @BindView(R.id.textTotalDistance)
     TextView textViewTotalDistance;
@@ -379,35 +379,23 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             linearAssignedVehicleItem.setVisibility(View.VISIBLE);
             linearJobstatusItem.setVisibility(View.VISIBLE);
             liner_JobStatus_heading.setVisibility(View.VISIBLE);
-
         }
-
-
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
         textViewCutomerMobile.setText(CutomerMobileNo);
         textViewJob_From.setText(Job_From);
         textViewJob_To.setText(Job_To);
         textViewJobTotalDist.setText(JobTotalDist);
-
-        /*textViewRequestedDate.setText(RequestedDate);
-        textViewJobDate.setText(JobDate);*/
-
         textViewQutoation.setText(Qutoation);
         textViewLoadingMaterial.setText(LoadingMaterial);
         textLoadingMat_Weight.setText(LoadingMat_Weight);
-        textViewBudget.setText(materialDescription);
+        textMaterialDescription.setText(materialDescription);
         textViewTotalDistance.setText(TotalDistance);
         textViewJobFrom.setText(JobFrom);
         textViewJobTo.setText(JobTo);
         textViewLoadingDate.setText(LoadingDate);
-
         textViewjbCode.setText(job_code);
-
         textViewJobStatus.setText(JobStatus);
-
-        //  textViewTruckCustName.setText();
-
         textViewCustomTruckSize_inAssignedVehicleInfo.setText(TruckSize);
         textViewCustomTruckSize_inPrefferedTruckDetails.setText(TruckSize);
         textViewTruckType.setText(TruckType);

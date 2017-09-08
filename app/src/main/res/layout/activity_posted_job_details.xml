@@ -122,22 +122,7 @@
                                 android:textStyle="bold"
                                 android:visibility="visible" />
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@color/upper_divider_purple" />
 
-                            <TextView
-                                android:id="@+id/customTextView534"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:gravity="start|center"
-                                android:text="Material Description"
-                                android:textColor="@color/primaryTextColor"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:visibility="visible" />
 
                             <View
                                 android:layout_width="match_parent"
@@ -155,40 +140,6 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:visibility="gone" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@color/upper_divider_purple" />
-
-                            <TextView
-                                android:id="@+id/customTextView234"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:gravity="start|center"
-                                android:text="From"
-                                android:textColor="@color/primaryTextColor"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:visibility="visible" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@color/upper_divider_purple" />
-
-                            <TextView
-                                android:id="@+id/customTextView23"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:gravity="start|center"
-                                android:text="To"
-                                android:textColor="@color/primaryTextColor"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:visibility="visible" />
 
                             <View
                                 android:layout_width="match_parent"
@@ -218,6 +169,55 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="start|center"
                                 android:text="Job code"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView534"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="Material Description"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView234"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="From"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/customTextView23"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:text="To"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
@@ -353,33 +353,10 @@
                                 android:maxLength="50"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
 
-                            <View
-                                android:layout_width="130dp"
-                                android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@color/upper_divider_purple" />
 
-                            <TextView
-                                android:id="@+id/textBudget"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@android:color/transparent"
-                                android:ellipsize="end"
-                                android:gravity="start|center"
-                                android:hint="Nil"
-                                android:maxLength="50"
-                                android:maxLines="1"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
-                                android:singleLine="true"
-                                android:textColor="@color/primaryTextColor"
-                                android:textSize="13sp" />
 
                             <View
                                 android:layout_width="130dp"
@@ -398,50 +375,6 @@
                                 android:background="@android:color/transparent"
                                 android:gravity="center_vertical"
                                 android:hint="Total Distance"
-                                android:inputType="textCapSentences"
-                                android:maxLength="50"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
-                                android:textColor="@color/primaryTextColor"
-                                android:textSize="13sp" />
-
-                            <View
-                                android:layout_width="130dp"
-                                android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@color/upper_divider_purple" />
-
-                            <TextView
-                                android:id="@+id/textJobFrom"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@android:color/transparent"
-                                android:gravity="center_vertical"
-                                android:hint="From"
-                                android:inputType="textCapSentences"
-                                android:maxLength="50"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
-                                android:textColor="@color/primaryTextColor"
-                                android:textSize="13sp" />
-
-                            <View
-                                android:layout_width="130dp"
-                                android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@color/upper_divider_purple" />
-
-                            <TextView
-                                android:id="@+id/texJobTo"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@android:color/transparent"
-                                android:gravity="center_vertical"
-                                android:hint="To"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
                                 android:paddingLeft="10dp"
@@ -491,6 +424,63 @@
                                 android:maxLength="50"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+                            <View
+                                android:layout_width="130dp"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textMaterialDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:background="@android:color/transparent"
+                                android:gravity="start|center"
+                                android:hint="Descrpition"
+                                android:ellipsize="end"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+                            <View
+                                android:layout_width="130dp"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/textJobFrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:hint="From"
+                                android:inputType="textCapSentences"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+
+                            <View
+                                android:layout_width="130dp"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/upper_divider_purple" />
+
+                            <TextView
+                                android:id="@+id/texJobTo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:gravity="start|center"
+                                android:hint="Nil"
+                                android:ellipsize="end"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
                         <LinearLayout
@@ -1509,7 +1499,6 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
