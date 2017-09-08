@@ -109,8 +109,9 @@ public class QuotationApply extends BaseActivity {
     private int mYear, mMonth, mDay, mHour, mMinute;
     private int startYear, startMonth, startDay, startHour, startMinute;
     // the variable for checking the provider change the job date or time
-    String isChangeDtae="false";
-    String isChangeTime="false";
+  private boolean isChangeDate=false;
+    private  boolean isChangeTime=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,25 +127,28 @@ public class QuotationApply extends BaseActivity {
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
         qutation_id = getIntent().getStringExtra("qutation_id");
-        quotationAmount = getIntent().getStringExtra("quotationAmount");
-        String job_date = getIntent().getStringExtra("job_date");
-        String job_time = getIntent().getStringExtra("job_time");
-
-        String PrefferedLoadingDate = getIntent().getStringExtra("PrefferedLoadingDate");
-        String PrefferedLoadingTime  = getIntent().getStringExtra("PrefferedLoadingTime");
 
 
 
 
-        // for displaying customer prefered time and date
-        if (PrefferedLoadingDate != null)
+        // applying new quotation
+        if (qutation_id.equals("new"))
+        {
+            String PrefferedLoadingDate = getIntent().getStringExtra("PrefferedLoadingDate");
+            String PrefferedLoadingTime  = getIntent().getStringExtra("PrefferedLoadingTime");
             textCustomerJobDate.setText(PrefferedLoadingDate);
-        if (PrefferedLoadingTime != null)
             textCustomerJobTime.setText(PrefferedLoadingTime);
-        quotationDescription = getIntent().getStringExtra("quotationDescription");
-        if (!qutation_id.equals("new")) {
+        }
+        else
+        {
+            quotationAmount = getIntent().getStringExtra("quotationAmount");
+            String job_date = getIntent().getStringExtra("job_date");
+            String job_time = getIntent().getStringExtra("job_time");
+            quotationDescription = getIntent().getStringExtra("quotationDescription");
             editTextQuotAmount.setText(quotationAmount);
             editTextQuotDescrption.setText(quotationDescription);
+            textCustomerJobTime.setText(job_time);
+            textCustomerJobDate.setText(job_date);
         }
 
     }
@@ -175,9 +179,10 @@ public class QuotationApply extends BaseActivity {
                         startMonth = monthOfYear + 1;
                         startDay = dayOfMonth;
                         textViewProviderPrefferedJobDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        isChangeDate=true;
                         linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
                         linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
-                        StartTimePicker();
+
 
                     }
                 }, mYear, mMonth, mDay);
@@ -204,6 +209,7 @@ public class QuotationApply extends BaseActivity {
                         startHour = hourOfDay;
                         startMinute = minute;
                         textViewProviderPrefferedJobTime.setText(String.format("%02d:%02d", hourOfDay, minute));
+                        isChangeTime=true;
                         linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
                         linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
 
@@ -219,13 +225,23 @@ public class QuotationApply extends BaseActivity {
         String  loading_time = null;
         String amount = editTextQuotAmount.getText().toString();
         String description = editTextQuotDescrption.getText().toString();
-        if(textViewProviderPrefferedJobDate.getText().length() == 0 || textViewProviderPrefferedJobTime.getText().length() == 0){
-             loading_date = textCustomerJobDate.getText().toString();
-             loading_time = textCustomerJobTime.getText().toString();
-        }else{
-             loading_date = textViewProviderPrefferedJobDate.getText().toString();
-             loading_time = textViewProviderPrefferedJobTime.getText().toString();
+        if (isChangeDate)
+        {
+            loading_date=textViewProviderPrefferedJobDate.getText().toString();
         }
+        else
+        {
+            loading_date = textCustomerJobDate.getText().toString();
+        }
+        if (isChangeTime)
+        {
+            loading_time = textViewProviderPrefferedJobTime.getText().toString();
+        }
+        else
+        {
+            loading_time = textCustomerJobTime.getText().toString();
+        }
+
 
         if (amount != null && JobId != null) {
             if (isConnectingToInternet(getApplicationContext())) {

@@ -51,10 +51,6 @@ public class Item {
     }
 
 
-
-
-
-
     @SerializedName("loading_date")
     @Expose
     private String loadingDate;
@@ -87,6 +83,11 @@ public class Item {
     @SerializedName("customer")
     @Expose
     private Customer_ customer;
+    @SerializedName("loading_time")
+    @Expose
+    private String loading_time;
+
+
 
     public Integer getQuotationId() {
         return quotationId;
@@ -102,6 +103,14 @@ public class Item {
 
     public void setJobId(Integer jobId) {
         this.jobId = jobId;
+    }
+
+    public String getLoading_time() {
+        return loading_time;
+    }
+
+    public void setLoading_time(String loading_time) {
+        this.loading_time = loading_time;
     }
 
     public String getJobTitle() {

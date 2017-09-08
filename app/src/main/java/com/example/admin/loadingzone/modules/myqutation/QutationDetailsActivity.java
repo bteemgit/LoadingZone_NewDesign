@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -134,6 +135,7 @@ public class QutationDetailsActivity extends BaseActivity {
         job_id = getIntent().getStringExtra("job_id");
         job_date = getIntent().getStringExtra("job_date");
         job_time = getIntent().getStringExtra("job_time");
+        Log.d("job_time",job_time);
         String job_title = getIntent().getStringExtra("job_title");
         String cus_name = getIntent().getStringExtra("cus_name");
         String cus_email = getIntent().getStringExtra("cus_email");
@@ -141,7 +143,7 @@ public class QutationDetailsActivity extends BaseActivity {
         String cus_profile = getIntent().getStringExtra("cus_profile");
         String quotationCurrency = getIntent().getStringExtra("quotationCurrency");
 
-        String quotationAmount = getIntent().getStringExtra("quotationAmount");
+        quotationAmount = getIntent().getStringExtra("quotationAmount");
         String dateSubmitted = getIntent().getStringExtra("dateSubmitted");
         String dateAccepted = getIntent().getStringExtra("dateAccepted");
         String dateRejected = getIntent().getStringExtra("dateRejected");

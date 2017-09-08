@@ -47,7 +47,6 @@ public class JobDetails {
     private Double origin_destination_distance;
 
 
-
     @SerializedName("location_distance")
     @Expose
     private Integer locationDistance;

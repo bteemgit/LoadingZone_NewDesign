@@ -245,22 +245,15 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @NonNull
     @BindView(R.id.textCustomTruckSize_inAssignedVehicleInfo)
     TextView textViewCustomTruckSize_inAssignedVehicleInfo;
-
     @NonNull
     @BindView(R.id.textTruckSize_inPrefferedTruckDetails)
     TextView textViewCustomTruckSize_inPrefferedTruckDetails;
-
-
     @NonNull
     @BindView(R.id.textJobStatus)
     TextView textViewJobStatus;
-
-
     @NonNull
     @BindView(R.id.TextRunningStatus)
     TextView textViewRunningStatus;
-
-
     String CutomerMobile = null;
     View dark_bg;
     private static int REQUEST_CODE = 41;
@@ -389,7 +382,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         textViewQutoation.setText(Qutoation);
         textViewLoadingMaterial.setText(LoadingMaterial);
         textLoadingMat_Weight.setText(LoadingMat_Weight);
-        textMaterialDescription.setText(materialDescription);
+        textMaterialDescription.setText(LoadingMaterial+" \n"+materialDescription);
         textViewTotalDistance.setText(TotalDistance);
         textViewJobFrom.setText(JobFrom);
         textViewJobTo.setText(JobTo);
@@ -598,12 +591,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         intent.putExtra("qutation_id", "new");
         intent.putExtra("job_date", job_date);
         intent.putExtra("job_time", job_time);
-
         intent.putExtra("PrefferedLoadingDate", PrefferedLoadingDate);
         intent.putExtra("PrefferedLoadingTime", PrefferedLoadingTime);
-
-
-
         startActivityForResult(intent, REQUEST_CODE);
     }
 

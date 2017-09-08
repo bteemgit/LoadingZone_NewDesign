@@ -135,8 +135,6 @@ public class PendingQuotationFragment extends Fragment {
                 String dateRejected = String.valueOf(itemsArrayList.get(position).getDateRejected());
                 String quotationStatus = itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription = itemsArrayList.get(position).getQuotationDescription();
-
-                String jobdate = itemsArrayList.get(position).getJobDetails().getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
                 String dateRequested = (String) itemsArrayList.get(position).getDateSubmitted();
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
@@ -144,8 +142,7 @@ public class PendingQuotationFragment extends Fragment {
                 String fromLocation = itemsArrayList.get(position).getJobDetails().getFromLocationName();
                 String toLocation = itemsArrayList.get(position).getJobDetails().getToLocationName();
                 String job_date = itemsArrayList.get(position).getLoadingDate();
-                String job_time = itemsArrayList.get(position).getJobDetails().getLoadingTime();
-
+                String job_time = itemsArrayList.get(position).getLoading_time();
                 String job_code = itemsArrayList.get(position).getJob_code();
                 String quotation_code = itemsArrayList.get(position).getQuotation_code();
 
@@ -171,7 +168,6 @@ public class PendingQuotationFragment extends Fragment {
                 i.putExtra("dateRequested",dateRequested);
                 i.putExtra("activeQuotations",activeQuotations);
                 i.putExtra("distance",distance);
-
                 i.putExtra("fromLocation",fromLocation);
                 i.putExtra("toLocation",toLocation);
 
