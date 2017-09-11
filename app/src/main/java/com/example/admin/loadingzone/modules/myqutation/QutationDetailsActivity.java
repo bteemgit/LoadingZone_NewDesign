@@ -135,7 +135,7 @@ public class QutationDetailsActivity extends BaseActivity {
         job_id = getIntent().getStringExtra("job_id");
         job_date = getIntent().getStringExtra("job_date");
         job_time = getIntent().getStringExtra("job_time");
-        Log.d("job_time",job_time);
+
         String job_title = getIntent().getStringExtra("job_title");
         String cus_name = getIntent().getStringExtra("cus_name");
         String cus_email = getIntent().getStringExtra("cus_email");

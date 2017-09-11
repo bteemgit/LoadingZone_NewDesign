@@ -37,7 +37,7 @@
         <com.example.admin.loadingzone.recyclerview.EndlessRecyclerView
             android:id="@+id/recyclerViewHomePostedJob"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -45,12 +45,12 @@
     <ProgressBar
         android:id="@+id/progressBarFooter"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

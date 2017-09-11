@@ -134,18 +134,18 @@ public class AcceptedQuotationFragment extends Fragment {
                 String dateSubmitted = itemsArrayList.get(position).getDateSubmitted();
 
                 String dateAccepted = itemsArrayList.get(position).getDateAccepted();
-             //   String dateRejected=itemsArrayList.get(position).getDateRejected();
-                String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
-                String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
+                //   String dateRejected=itemsArrayList.get(position).getDateRejected();
+                String quotationStatus = itemsArrayList.get(position).getQuotationStatus();
+                String quotationDescription = itemsArrayList.get(position).getQuotationDescription();
 
 
                 String jobdate = itemsArrayList.get(position).getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
                 String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
-                String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
+                String activeQuotations = itemsArrayList.get(position).getJobDetails().getQuotationCount();
                 String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getOrigin_destination_distance());
 
-
+                String job_time = itemsArrayList.get(position).getLoading_time();
                 String job_code = itemsArrayList.get(position).getJob_code();
                 String quotation_code = itemsArrayList.get(position).getQuotation_code();
 
@@ -160,19 +160,19 @@ public class AcceptedQuotationFragment extends Fragment {
                 i.putExtra("quotationAmount", quotationAmount);
                 i.putExtra("dateSubmitted", dateSubmitted);
                 i.putExtra("dateAccepted", dateAccepted);
-            //    i.putExtra("dateRejected", dateRejected);
+                //    i.putExtra("dateRejected", dateRejected);
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
-                i.putExtra("isFrom","accepted");
+                i.putExtra("isFrom", "accepted");
+                i.putExtra("job_time", job_time);
+                i.putExtra("job_date", jobdate);
+                i.putExtra("jobDescription", jobDescription);
+                i.putExtra("dateRequested", dateRequested);
+                i.putExtra("activeQuotations", activeQuotations);
+                i.putExtra("distance", distance);
 
-                i.putExtra("job_date",jobdate);
-                i.putExtra("jobDescription",jobDescription);
-                i.putExtra("dateRequested",dateRequested);
-                i.putExtra("activeQuotations",activeQuotations);
-                i.putExtra("distance",distance);
-
-                i.putExtra("job_code",job_code);
-                i.putExtra("quotation_code",quotation_code);
+                i.putExtra("job_code", job_code);
+                i.putExtra("quotation_code", quotation_code);
 
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -204,7 +204,7 @@ public class AcceptedQuotationFragment extends Fragment {
                 ApiClient.getClient().create(ApiInterface.class);
 
         String acess_token = AppController.getString(getContext(), "acess_token");
-        Call<PendingQutationResponse> call = service.AcceptedQutationList(GloablMethods.API_HEADER +acess_token,offset);
+        Call<PendingQutationResponse> call = service.AcceptedQutationList(GloablMethods.API_HEADER + acess_token, offset);
         call.enqueue(new Callback<PendingQutationResponse>() {
             @Override
             public void onResponse(Call<PendingQutationResponse> call, retrofit2.Response<PendingQutationResponse> response) {
@@ -262,7 +262,7 @@ public class AcceptedQuotationFragment extends Fragment {
     }
 
     private void updateEndlessRecyclerView() {
-        pendingQutationListAdapter = new PendingQutationListAdapter( itemsArrayList,R.layout.pending_qutation_item,getContext());
+        pendingQutationListAdapter = new PendingQutationListAdapter(itemsArrayList, R.layout.pending_qutation_item, getContext());
         recyclerViewPqutation.setAdapter(pendingQutationListAdapter);
         // progressDialog.dismiss();
     }

@@ -103,6 +103,7 @@ public class HomeActivity extends BaseActivity {
     private int limit = 30;
     private int offset = 1;
     private boolean hasReachedTop = false;
+    private boolean isSwipeRefreshed = false;
     // endless scroll hamdler
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
@@ -192,19 +193,6 @@ public class HomeActivity extends BaseActivity {
         TextView text_usersemail = (TextView) findViewById(R.id.id_text_usersemail);
         text_usersemail.setText((AppController.getString(getApplicationContext(), "customer_email")));
         user_imageView = (ImageView) findViewById(R.id.imageView6);
-       /* Context context = this;
-        if (profilepic.length() < 3) {
-            Log.d("profile", profilepic);
-        } else {
-            Picasso.with(context)
-                    .load(profilepic)
-                    .resize(70, 70)
-                    .centerCrop()
-                    .transform(new CircleTransformation())
-                    .into(user_imageView);
-
-        }*/
-
         Context context = this;
         Picasso.with(context)
                 .load(AppController.getString(getApplicationContext(), "provider_pic"))
@@ -376,10 +364,8 @@ public class HomeActivity extends BaseActivity {
                 i.putExtra("QuotationCount", QuotationCount);
                 i.putExtra("HasActiveQuotations", HasActiveQuotations);
                 i.putExtra("JobStatus", JobStatus);
-
                 i.putExtra("PrefferedLoadingDate",PrefferedLoadingDate);
                 i.putExtra("PrefferedLoadingTime",PrefferedLoadingTime);
-
                 startActivity(i);
 
             }
@@ -502,8 +488,6 @@ public class HomeActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
-
-            //moveTaskToBack(false);
 
             return true;
         }

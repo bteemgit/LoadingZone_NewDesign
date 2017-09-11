@@ -136,17 +136,14 @@ public class RejectedQuotationFragment extends Fragment {
                 String  quotationStatus=itemsArrayList.get(position).getQuotationStatus();
                 String quotationDescription=itemsArrayList.get(position).getQuotationDescription();
                 String quotationAmount = String.valueOf(itemsArrayList.get(position).getQuotationAmount());
-
                 String jobdate = itemsArrayList.get(position).getLoadingDate();
                 String jobDescription = itemsArrayList.get(position).getJobDetails().getMaterialDescription();
                 String dateRequested = (String) itemsArrayList.get(position).getJobDetails().getDateRequested();
                 String activeQuotations =  itemsArrayList.get(position).getJobDetails().getQuotationCount();
                 String distance = String.valueOf(itemsArrayList.get(position).getJobDetails().getOrigin_destination_distance());
-
                 String job_code = itemsArrayList.get(position).getJob_code();
                 String quotation_code = itemsArrayList.get(position).getQuotation_code();
-
-
+                String job_time = itemsArrayList.get(position).getLoading_time();
                 Intent i = new Intent(getActivity(), QutationDetailsActivity.class);
                 i.putExtra("qutation_id", qutation_id);
                 i.putExtra("job_title", job_title);
@@ -162,7 +159,7 @@ public class RejectedQuotationFragment extends Fragment {
                 i.putExtra("quotationStatus", quotationStatus);
                 i.putExtra("quotationDescription", quotationDescription);
                 i.putExtra("isFrom","rejected");
-
+                i.putExtra("job_time", job_time);
                 i.putExtra("quotationAmount", quotationAmount);
 
                 i.putExtra("job_date",jobdate);
