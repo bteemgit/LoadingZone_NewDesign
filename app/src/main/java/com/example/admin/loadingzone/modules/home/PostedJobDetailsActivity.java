@@ -284,7 +284,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 } else {
                     dark_bg.setVisibility(View.GONE);
                 }
-
             }
         });
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
@@ -326,7 +325,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             floatingActionMenu.setVisibility(View.GONE);
             textViewRequestedDate.setText(RequestedDate);
             textViewJobDate.setText(JobDate);
-
         }
         if (isFrom.equals("Pendingjob")) {
             linerUserstaus.setVisibility(View.GONE);
@@ -341,6 +339,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 linearAssignedVehicleItem.setVisibility(View.GONE);
                 linearJobstatusItem.setVisibility(View.GONE);
 
+
+                fabcall_driver.setVisibility(View.GONE);
+                fab_messageDriver.setVisibility(View.GONE);
             }
         }
         if (isFrom.equals("AssignedJob")) {
@@ -373,6 +374,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             linearJobstatusItem.setVisibility(View.VISIBLE);
             liner_JobStatus_heading.setVisibility(View.VISIBLE);
         }
+
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
         textViewCutomerMobile.setText(CutomerMobileNo);

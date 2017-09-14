@@ -145,7 +145,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     private List<Model> truckModelList = new ArrayList<>();
     private List<TruckType> truckTypeList = new ArrayList<>();
     private List<VehicleYear> truckYearList = new ArrayList<>();
-    String model_id, truck_typeId, model_year, isFrom, provider_vehicle_id,reg_no, chassis_no, License_no;
+    String model_id = null, truck_typeId, model_year, isFrom, provider_vehicle_id, reg_no, chassis_no, License_no;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
@@ -186,6 +186,8 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 //            editTextTrcukWeight.setFocusable(false);
 //            editTextTrcukLength.setFocusable(false);
 //        }
+
+        editTextViewTrcukInsurance.setFocusable(false);
     }
 
     // back button action
@@ -262,26 +264,78 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
         String avg_running_speed = editTextTrcukAvgSpeed.getText().toString().trim();
         String custom_name = editTextTrcukCutsomName.getText().toString().trim();
-
         String reg_no = editTextTruckRegistrationNo.getText().toString().trim();
         String chasisNo = editTextTruckChasisNo.getText().toString().trim();
         String LicNo = editTextTruckLicenceNo.getText().toString().trim();
-
         String insurance_exp_date = editTextViewTrcukInsurance.getText().toString().trim();
         String weight = editTextTrcukWeight.getText().toString().trim();
         String container_length = editTextTrcukLength.getText().toString().trim();
         String container_width = editTextTrcukWidth.getText().toString().trim();
         String container_height = editTextTrcukHeight.getText().toString().trim();
+        String truck_name = textViewTrckMaker.getText().toString();
+        String truck_model = textViewTrckModel.getText().toString();
+        String truck_type = textViewTrckType.getText().toString();
+        String truck_year = textViewTrckYear.getText().toString();
+
         if (isFrom.equals("NewTruck")) {
             if (isConnectingToInternet(getApplicationContext())) {
-                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                if ( !truck_name.equals("Trucks")) {
+                    if (!truck_model.equals("Model")) {
+                        if (!truck_type.equals("Type")) {
+                            if (!truck_year.equals("Year")) {
+                                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+
+                            } else {
+                                showSnakBar(rootView, "Please select Vehicle Year");
+                            }
+                        } else {
+                            showSnakBar(rootView, "Please select Vehicle Type");
+                        }
+
+                    } else {
+                        showSnakBar(rootView, "Please select Vehicle Model");
+                    }
+                } else {
+                    showSnakBar(rootView, "Please select Vehicle Name");
+                }
+
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
 
 
             }
         } else {
-            if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
+
+            if (isConnectingToInternet(getApplicationContext())) {
+                if ( !truck_name.equals("Trucks")) {
+                    if (!truck_model.equals("Model")) {
+                        if (!truck_type.equals("Type")) {
+                            if (!truck_year.equals("Year")) {
+                                //AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                                if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
+                                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                                }
+                            } else {
+                                showSnakBar(rootView, "Please select Vehicle Year");
+                            }
+                        } else {
+                            showSnakBar(rootView, "Please select Vehicle Type");
+                        }
+
+                    } else {
+                        showSnakBar(rootView, "Please select Vehicle Model");
+                    }
+                } else {
+                    showSnakBar(rootView, "Please select Vehicle Name");
+                }
+
+            } else {
+                showSnakBar(rootView, MessageConstants.INTERNET);
+            }
+        }
+    }
+
+    /* if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
                 if (isConnectingToInternet(getApplicationContext())) {
                     UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
                 } else {
@@ -289,7 +343,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                 }
             }
         }
-    }
+    }*/
 
     private void setupRevealBackground(Bundle savedInstanceState) {
         //vRevealBackground.setFillPaintColor(0xFF16121a);
@@ -335,17 +389,17 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                 getTruckModelList(trick_id);
                 {
                     textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
+
                 }
 
-                if (isFrom.equals(TRUCK_UPDATE))
-                {
+                if (isFrom.equals(TRUCK_UPDATE)) {
                     textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
                     textViewTrckModel.setText("");
                     textViewTrckType.setText("");
                     textViewTrckYear.setText("");
-                    model_id="";
-                    model_year="";
-                    truck_typeId="";
+                    model_id = "";
+                    model_year = "";
+                    truck_typeId = "";
                 }
                 mBottomSheetDialog.dismiss();
 
@@ -557,7 +611,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                     String vehicle_id = response.body().getProviderVehicleId();
                     Intent i = new Intent(TruckAddActivity.this, TruckDocumentAddActivity.class);
                     i.putExtra("vehicle_id", vehicle_id);
-                    i.putExtra("isFrom","NewDoc");
+                    i.putExtra("isFrom", "NewDoc");
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     showSnakBar(rootView, "Truck Added Successfully");
                     startActivity(i);
@@ -631,75 +685,73 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
 // getting the existing truck details
 
-private void getTruckDetails(String provider_vehicle_id) {
-    showProgressDialog(TruckAddActivity.this, "please wait...");
-    apiService =
-            ApiClient.getClient().create(ApiInterface.class);
-    String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-    Call<VehicleDetailsResponse> call = apiService.GetTruckDetails(GloablMethods.API_HEADER + acess_token, provider_vehicle_id);
-    call.enqueue(new Callback<VehicleDetailsResponse>() {
-        @Override
-        public void onResponse(Call<VehicleDetailsResponse> call, Response<VehicleDetailsResponse> response) {
-            hideProgressDialog();
-            if (response.isSuccessful()) {
-                textViewTrckMaker.setText(response.body().getVehicle().getManufacturer().getMakerName());
-                textViewTrckModel.setText(response.body().getVehicle().getModel().getModelName());
-                textViewTrckType.setText(response.body().getVehicle().getTruckType().getTruckTypeName());
-                textViewTrckYear.setText(response.body().getVehicle().getModelYear());
-                editTextTrcukCutsomName.setText(response.body().getCustomName());
-                editTextTrcukAvgSpeed.setText(response.body().getAvgRunningSpeed());
-                editTextViewTrcukInsurance.setText(response.body().getInsuranceExpDate());
-                editTextTruckRegistrationNo.setText(reg_no);
-                editTextTruckChasisNo.setText(chassis_no);
-                editTextTruckLicenceNo.setText(License_no);
-                editTextTrcukWeight.setText(response.body().getWeight() + "");
-                truck_typeId=response.body().getVehicle().getTruckType().getTruckTypeId();
-                model_year=response.body().getVehicle().getModelYear();
-                model_id=response.body().getVehicle().getModel().getModelId();
-                String dimensions=response.body().getVehicle().getDimension();
-                if (dimensions!=null ||!dimensions.equals(""))
-                {
-                    String[] separated = dimensions.split("x");
-                    String height_=separated[0];
-                    String[] height_coma = height_.split("'");
-                    String height=height_coma[0];
-                    String length_=separated[1];
-                    String[] length_coma = length_.split("'");
-                    String length=length_coma[0];
-                    String width_=separated[2];
-                    String[] width_coma = width_.split("'");
-                    String width=width_coma[0];
-                    editTextTrcukHeight.setText(height);
-                    editTextTrcukLength.setText(length);
-                    editTextTrcukWidth.setText(width);
+    private void getTruckDetails(String provider_vehicle_id) {
+        showProgressDialog(TruckAddActivity.this, "please wait...");
+        apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        Call<VehicleDetailsResponse> call = apiService.GetTruckDetails(GloablMethods.API_HEADER + acess_token, provider_vehicle_id);
+        call.enqueue(new Callback<VehicleDetailsResponse>() {
+            @Override
+            public void onResponse(Call<VehicleDetailsResponse> call, Response<VehicleDetailsResponse> response) {
+                hideProgressDialog();
+                if (response.isSuccessful()) {
+                    textViewTrckMaker.setText(response.body().getVehicle().getManufacturer().getMakerName());
+                    textViewTrckModel.setText(response.body().getVehicle().getModel().getModelName());
+                    textViewTrckType.setText(response.body().getVehicle().getTruckType().getTruckTypeName());
+                    textViewTrckYear.setText(response.body().getVehicle().getModelYear());
+                    editTextTrcukCutsomName.setText(response.body().getCustomName());
+                    editTextTrcukAvgSpeed.setText(response.body().getAvgRunningSpeed());
+                    editTextViewTrcukInsurance.setText(response.body().getInsuranceExpDate());
+                    editTextTruckRegistrationNo.setText(reg_no);
+                    editTextTruckChasisNo.setText(chassis_no);
+                    editTextTruckLicenceNo.setText(License_no);
+                    editTextTrcukWeight.setText(response.body().getWeight() + "");
+                    truck_typeId = response.body().getVehicle().getTruckType().getTruckTypeId();
+                    model_year = response.body().getVehicle().getModelYear();
+                    model_id = response.body().getVehicle().getModel().getModelId();
+                    String dimensions = response.body().getVehicle().getDimension();
+                    if (dimensions != null || !dimensions.equals("")) {
+                        String[] separated = dimensions.split("x");
+                        String height_ = separated[0];
+                        String[] height_coma = height_.split("'");
+                        String height = height_coma[0];
+                        String length_ = separated[1];
+                        String[] length_coma = length_.split("'");
+                        String length = length_coma[0];
+                        String width_ = separated[2];
+                        String[] width_coma = width_.split("'");
+                        String width = width_coma[0];
+                        editTextTrcukHeight.setText(height);
+                        editTextTrcukLength.setText(length);
+                        editTextTrcukWidth.setText(width);
+                    }
+
+
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(rootView, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
                 }
+            }
 
+            @Override
+            public void onFailure(Call<VehicleDetailsResponse> call, Throwable t) {
+                Snackbar snackbar = Snackbar
+                        .make(rootView, call.request().headers().get("meta"), Snackbar.LENGTH_LONG);
+                snackbar.show();
+                hideProgressDialog();
 
-
-            } else {
-                try {
-                    JSONObject jObjError = new JSONObject(response.errorBody().string());
-                    JSONObject meta = jObjError.getJSONObject("meta");
-                    Snackbar snackbar = Snackbar
-                            .make(rootView, meta.getString("message"), Snackbar.LENGTH_LONG);
-                    snackbar.show();
-
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                }
 
             }
-        }
-
-        @Override
-        public void onFailure(Call<VehicleDetailsResponse> call, Throwable t) {
-            Snackbar snackbar = Snackbar
-                    .make(rootView, call.request().headers().get("meta"), Snackbar.LENGTH_LONG);
-            snackbar.show();
-            hideProgressDialog();
-
-
-        }
-    });
-}
+        });
+    }
 }

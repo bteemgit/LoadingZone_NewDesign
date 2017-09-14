@@ -152,10 +152,8 @@ public class DriverViewActivity extends BaseActivity {
                 i.putExtra("driver_mobile", driver_mobile);
                 i.putExtra("driver_adress", driver_adress);
                 i.putExtra("profile_pic", profile_pic);
-
                 i.putExtra("driverJoinedDate",driverJoinedDate);
                 i.putExtra("currentlyAssignedTruck",currentlyAssignedTruck);
-
                 i.putExtra("isFrom", isFrom);
                 startActivity(i);
             }

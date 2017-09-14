@@ -392,9 +392,14 @@ public class HomeActivity extends BaseActivity {
 
 
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+     //   SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         //  String device_token = pref.getString("regId", null);
-        Call<Meta> call = apiService.Logout(GloablMethods.API_HEADER + acess_token, "1");
+
+        Call<Meta> call = apiService.Logout(GloablMethods.API_HEADER + acess_token, regId);
         call.enqueue(new Callback<Meta>() {
             @Override
             public void onResponse(Call<Meta> call, Response<Meta> response) {

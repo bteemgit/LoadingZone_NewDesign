@@ -131,14 +131,17 @@ public class TruckEditUpdateActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.img_ChangeDriver)
     ImageView imageViewChangeDriver;
-
+    @NonNull
+    @BindView(R.id.linearDriverDetails)
+    LinearLayout linearDriverDetails_Head;
     @NonNull
     @BindView(R.id.recyclerview_doc_list)
     EndlessRecyclerView endlessRecyclerViewTruckDocList;
     ApiInterface apiService;
     String provider_vehicle_id, truckId, reg_no, chassis_no, License_no;
     String driver = "driver";
-    List<DriverList> Listvechicle = new ArrayList<>();
+    List<DriverList> Listdrivers= new ArrayList<>();
+
     DriverListAdapter driverListAdapter;
     TruckDocumentListAdapter truckDocumentListAdapter;
     private List<VehicleDoc> vehicleDocArrayList = new ArrayList<>();
@@ -162,6 +165,15 @@ public class TruckEditUpdateActivity extends BaseActivity {
         reg_no = getIntent().getStringExtra("reg_no");
         chassis_no = getIntent().getStringExtra("chassis_no");
         License_no = getIntent().getStringExtra("License_no");
+        //calling the driver list api
+        Listdrivers=getDriverList();
+        String From = getIntent().getStringExtra("isFrom");
+        if(From.equals("PendingTruckView")){
+            linearDriverDetails_Head.setVisibility(View.GONE);
+            //assignDriverDetailsExists.setVisibility(View.GONE);
+            assignDriver_card.setVisibility(View.GONE);
+        }
+
         // recyclerview layout manager
         GridLayoutManager gridLayoutManager = new GridLayoutManager(TruckEditUpdateActivity.this, 2);
         endlessRecyclerViewTruckDocList.setLayoutManager(gridLayoutManager);
@@ -191,6 +203,9 @@ public class TruckEditUpdateActivity extends BaseActivity {
             textAddNewDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.VISIBLE);
         }
+
+
+
 
     }
 
@@ -233,6 +248,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
     }
 
 
+
+
     // delete truck
     @NonNull
     @OnClick(R.id.linearDeleteTruck)
@@ -259,8 +276,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
         endlessRecyclerViewTrcukModel.setNestedScrollingEnabled(true);
         // Driver List
         if (isConnectingToInternet(getApplicationContext())) {
-            List<DriverList> driverLists = getDriverList();
-            driverListAdapter = new DriverListAdapter(driverLists, R.layout.item_driver_list, getApplicationContext());
+            Listdrivers = getDriverList();
+            driverListAdapter = new DriverListAdapter(Listdrivers, R.layout.item_driver_list, getApplicationContext());
             endlessRecyclerViewTrcukModel.setAdapter(driverListAdapter);
             driverListAdapter.notifyDataSetChanged();
         } else {
@@ -276,7 +293,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
 
-                String driverId = String.valueOf(Listvechicle.get(position).getDriverId());
+                String driverId = String.valueOf(Listdrivers.get(position).getDriverId());
                 assignDriverToTruck(driverId, truckId);
                 mBottomSheetDialog.dismiss();
 
@@ -347,9 +364,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getDriverList().isEmpty()) {
-                        Listvechicle = response.body().getDriverList();
-
-
+                        Listdrivers = response.body().getDriverList();
                     } else {
                         showSnakBar(rootView, "You didnt Add any drivers,please Add drivers");
                     }
@@ -372,7 +387,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
             }
         });
-        return Listvechicle;
+        return Listdrivers;
     }
 
     // get truck details
@@ -452,7 +467,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
                     Snackbar snackbar = Snackbar
                             .make(rootView, "Deleted", Snackbar.LENGTH_LONG);
                     snackbar.show();
-                    Intent i = new Intent(TruckEditUpdateActivity.this, HomeActivity.class);
+                    Intent i = new Intent(TruckEditUpdateActivity.this, TruckViewActivity.class);
                     startActivity(i);
                 } else {
                     try {

@@ -262,6 +262,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text=" km"
+                            android:textSize="12sp"
                             android:textColor="#ffffff" />
 
                     </LinearLayout>

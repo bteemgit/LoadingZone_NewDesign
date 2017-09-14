@@ -82,13 +82,13 @@
     android:layout_marginRight="40dp"
     android:orientation="vertical">
     <EditText
-
         android:id="@+id/editDriverName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:drawablePadding="20dp"
+        android:focusable="true"
         android:drawableTint="@color/colorAccent"
         android:fontFamily="Open-Sans-condensed"
         android:hint="Driver Name"

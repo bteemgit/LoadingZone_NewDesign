@@ -140,7 +140,7 @@ public class PendingTruckViewActivity extends BaseActivity {
 
 
                 Intent i = new Intent(PendingTruckViewActivity.this, TruckEditUpdateActivity.class);
-                i.putExtra("isFrom", "TruckView");
+                i.putExtra("isFrom", "PendingTruckView");
                 i.putExtra("driver", driver);
                 i.putExtra("provider_vehicle_id", provider_vehicle_id);
                 i.putExtra("truckId", truckId);

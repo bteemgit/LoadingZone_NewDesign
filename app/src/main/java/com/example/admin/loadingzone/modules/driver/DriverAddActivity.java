@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -47,9 +48,12 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -146,6 +150,7 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
             }
         });
 
+        editTextDriverAdress.setFocusable(false);
 
     }
 
@@ -205,6 +210,9 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
         }
     }
 
+
+
+
     // Add new Driver
     @NonNull
     @OnClick(R.id.fabDriverAddDetails)
@@ -213,13 +221,52 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
         String driverName = editTextDriverName.getText().toString().trim();
         String driverAdress = editTextDriverAdress.getText().toString().trim();
         String driverMobile = editTextDriverMobile.getText().toString().trim();
-        if (isConnectingToInternet(DriverAddActivity.this)) {
-            AddDriver(driverName, driverMobile, driverEmail, driverAdress);
-        } else {
-            showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+
+        if (GloablMethods.validate(driverEmail, driverName, driverAdress,driverMobile)){
+            if (isValidEmaillId(driverEmail)) {
+
+                if(isValidMobile(driverMobile)){
+                    if (isConnectingToInternet(DriverAddActivity.this)) {
+                        AddDriver(driverName, driverMobile, driverEmail, driverAdress);
+                    } else {
+                        showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+                    }
+                }
+            }
+            else{
+                showSnakBar(relativeLayoutRoot, MessageConstants.INVALID_EMAIL);
+            }
+        }else{
+            showSnakBar(relativeLayoutRoot, MessageConstants.PROVIDE_BASIC_INFO);
         }
 
+
+
+
+
+
     }
+
+    //method for mobile no. validation
+    public boolean isValidMobile(String phone) {
+        boolean check=false;
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            if(phone.length() < 6 || phone.length() > 13) {
+                // if(phone.length() != 10) {
+                check = false;
+                //txtPhone.setError("Not Valid Number");
+               // Toast.makeText(this, "Not Valid Mobile Number", Toast.LENGTH_SHORT).show();
+                showSnakBar(relativeLayoutRoot, "Not a valid Mobile Number !!");
+            } else {
+                check = true;
+            }
+        } else {
+            check=false;
+        }
+        return check;
+    }
+
+
 
     @OnClick(R.id.btnEditProfilePic)
     public void changeProfilePic() {
@@ -249,14 +296,28 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
             public void onResponse(Call<TruckDriverAddResponse> call, Response<TruckDriverAddResponse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful())
-
                 {
                     showSnakBar(relativeLayoutRoot, "Driver Added Successfully");
                     Intent i = new Intent(DriverAddActivity.this, DriverViewActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 } else
-                    showSnakBar(relativeLayoutRoot, "Server Issue");
+
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(relativeLayoutRoot, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+
+
+               // showSnakBar(relativeLayoutRoot, response.body().getMeta().getMessage().toString());
             }
 
             @Override

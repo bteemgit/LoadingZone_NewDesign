@@ -147,6 +147,7 @@ public class StartJobActivity extends BaseActivity {
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
 
+    String isTruckBlocked = "NotBlocked";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,7 +159,27 @@ public class StartJobActivity extends BaseActivity {
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
 
+
+      //  selectTruckVisibility(startUnixTimeStamp,endUnixTimeStamp);
+
     }
+
+    private void selectTruckVisibility(long startUnixTimeStamp, long endUnixTimeStamp) {
+        if(startUnixTimeStamp<endUnixTimeStamp){
+                relativeSerachAvalibleTruck.setVisibility(View.VISIBLE);
+        }else{
+            showSnakBar(root, "End Date  Should be greater than Start Date");
+        }
+
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     @NonNull
     @OnClick(R.id.linearDatePicker)
@@ -244,6 +265,7 @@ public class StartJobActivity extends BaseActivity {
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
 
+
     }
 
     @NonNull
@@ -272,6 +294,9 @@ public class StartJobActivity extends BaseActivity {
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();
+
+        //isDateTimeSelected = "Selected";
+        //selectTruckVisibility(startUnixTimeStamp,endUnixTimeStamp);
     }
 
     // seraching avalible truck on the selected date and time
@@ -403,7 +428,10 @@ public class StartJobActivity extends BaseActivity {
                             .into(imageDriverPic);
                     String expected_start_date = String.valueOf(startUnixTimeStamp);
                     String expected_end_date = String.valueOf(endUnixTimeStamp);
+
                     BlockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
+
+
 
                 }
                 else
@@ -429,7 +457,10 @@ public class StartJobActivity extends BaseActivity {
                     .into(imageDriverPic);
             String expected_start_date = String.valueOf(startUnixTimeStamp);
             String expected_end_date = String.valueOf(endUnixTimeStamp);
+
             BlockTruckandDriver(JobId, provider_vehicle_id, driverId, expected_start_date, expected_end_date);
+
+
         }
     }
 
@@ -448,6 +479,7 @@ public class StartJobActivity extends BaseActivity {
                     // for layout handling
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     relativeStartJob.setVisibility(View.VISIBLE);
+                   // isTruckBlocked = "Blocked";
 
                 } else {
                     try {
@@ -473,6 +505,54 @@ public class StartJobActivity extends BaseActivity {
         });
 
     }
+
+
+
+    //API for change the blocked Truck
+
+    //api call for blocking the driver and truck for this job
+    public void ChangeBlockedTruckAndDriver(String job_id, String provider_vehicle_id, String job_driver_id, String expected_start_date, String expected_end_date) {
+
+        showProgressDialog(StartJobActivity.this, "loading");
+        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        Call<BlockTruckandDriverResponse> call = apiService.ChangeBlockTruckandDriverResponse(GloablMethods.API_HEADER + acess_token, job_id, provider_vehicle_id, job_driver_id, expected_start_date, expected_end_date);
+        call.enqueue(new Callback<BlockTruckandDriverResponse>() {
+            @Override
+            public void onResponse(Call<BlockTruckandDriverResponse> call, retrofit2.Response<BlockTruckandDriverResponse> response) {
+                hideProgressDialog();
+                if (response.isSuccessful()) {
+                    showSnakBar(root, response.body().getMeta().getMessage());
+                    // for layout handling
+                    relativeSerachAvalibleTruck.setVisibility(View.GONE);
+                    relativeStartJob.setVisibility(View.VISIBLE);
+                 //   isTruckBlocked = "Blocked";
+
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(root, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e)
+                    {
+                        Log.d("exception", e.getMessage());
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BlockTruckandDriverResponse> call, Throwable t) {
+                hideProgressDialog();
+            }
+        });
+
+    }
+
+
 
 //    //api call for sign up
 //    public void CreateJob(String job_id) {
