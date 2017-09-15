@@ -106,7 +106,6 @@ public class SelectActvieTruckActivity extends BaseActivity {
             getActiveTruckandDrivers();
         } else {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
-
         }
     }
 
