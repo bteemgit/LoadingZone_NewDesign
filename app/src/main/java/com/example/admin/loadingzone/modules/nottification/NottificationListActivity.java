@@ -59,6 +59,7 @@ public class NottificationListActivity extends BaseActivity {
     private List<NotificationList> nottificationList = new ArrayList<>();
     NotificationListAdapter notificationListAdapter;
     public static String isFrom="Nottification";
+    private boolean isSwipeRefreshed = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -109,6 +110,7 @@ public class NottificationListActivity extends BaseActivity {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getNottificationList();
             }
         });
@@ -153,6 +155,7 @@ public class NottificationListActivity extends BaseActivity {
             () {
 
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(NottificationListActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -164,9 +167,8 @@ public class NottificationListActivity extends BaseActivity {
         call.enqueue(new Callback<NottificationListResponse>() {
             @Override
             public void onResponse(Call<NottificationListResponse> call, retrofit2.Response<NottificationListResponse> response) {
-
-
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getNotificationList().isEmpty()) {

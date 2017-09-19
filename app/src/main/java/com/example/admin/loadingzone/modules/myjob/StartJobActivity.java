@@ -2,10 +2,12 @@ package com.example.admin.loadingzone.modules.myjob;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -133,6 +135,9 @@ public class StartJobActivity extends BaseActivity {
     @BindView(R.id.fabSearchTruck)
     FloatingActionButton fab_searchTruck;
 
+    @NonNull
+    @BindView(R.id.fabCompleteStartJob)
+    FloatingActionButton fab_CompleteStartJob;
 
 
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -148,6 +153,11 @@ public class StartJobActivity extends BaseActivity {
     public static String IsEditDriver = "EditDriver";
 
     String isTruckBlocked = "NotBlocked";
+
+    String start_date = null;
+
+    String driverId = null,expected_start_date = null,expected_end_date = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,16 +170,7 @@ public class StartJobActivity extends BaseActivity {
         JobId = getIntent().getStringExtra("JobId");
 
 
-      //  selectTruckVisibility(startUnixTimeStamp,endUnixTimeStamp);
-
-    }
-
-    private void selectTruckVisibility(long startUnixTimeStamp, long endUnixTimeStamp) {
-        if(startUnixTimeStamp<endUnixTimeStamp){
-                relativeSerachAvalibleTruck.setVisibility(View.VISIBLE);
-        }else{
-            showSnakBar(root, "End Date  Should be greater than Start Date");
-        }
+      //selectTruckVisibility(startUnixTimeStamp, endUnixTimeStamp);
 
     }
 
@@ -179,6 +180,8 @@ public class StartJobActivity extends BaseActivity {
         onBackPressed();
         return true;
     }
+
+
 
 
     @NonNull
@@ -199,6 +202,7 @@ public class StartJobActivity extends BaseActivity {
                         startMonth = monthOfYear + 1;
                         startDay = dayOfMonth;
                         textViewSelectedDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
 
                     }
                 }, mYear, mMonth, mDay);
@@ -245,7 +249,6 @@ public class StartJobActivity extends BaseActivity {
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
@@ -262,7 +265,10 @@ public class StartJobActivity extends BaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+        String start_date = textViewSelectedDate.getText().toString();
+        long selectedFirstDate = startDatetoLong(start_date);
+        datePickerDialog.getDatePicker().setMinDate(selectedFirstDate);
         datePickerDialog.show();
 
 
@@ -286,7 +292,6 @@ public class StartJobActivity extends BaseActivity {
                         endMinute = minute;
                         endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
                         textSelectedTimeEnd.setText(String.format("%02d:%02d", hourOfDay, minute));
-
 
 //for animatiting view for selction for avalaible truck action
                         animateSerachTruck(view);
@@ -317,7 +322,7 @@ public class StartJobActivity extends BaseActivity {
     // seraching avalible truck on the selected date and time to change the selected truck
     @NonNull
     @OnClick(R.id.fabSearchTruck)
-    public void fab_searchAvilableTruck(){
+    public void fab_searchAvilableTruck() {
         View v = new View(getApplicationContext());
         SlideAnimationUtil.slideInFromLeft(this, v);
         Intent i = new Intent(StartJobActivity.this, SelectActvieTruckActivity.class);
@@ -331,20 +336,32 @@ public class StartJobActivity extends BaseActivity {
 
 
 
+    // converting the start date in to long
+    private long startDatetoLong(String start_date) {
+        long cStartdate = 00000;
+
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d = f.parse(start_date);
+            cStartdate = d.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return cStartdate;
+    }
 
 
     // if drver is not added in the selected truck then we can assign driver or change driver (existing driver in truck)
     @NonNull
     @OnClick(R.id.textChangeDriver)
-    public void changeDriver()
-    {
+    public void changeDriver() {
         Intent i = new Intent(StartJobActivity.this, AvailableTruckOrDriverActivity.class);
         String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
         String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
         i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
         i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
         i.putExtra("jobStatus", IsEditDriver); // for identyfying teh job is new while editing the truck and driver
-        i.putExtra("isFrom","StartJob");
+        i.putExtra("isFrom", "StartJob");
         startActivityForResult(i, 4);
     }
 
@@ -395,7 +412,6 @@ public class StartJobActivity extends BaseActivity {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -429,14 +445,13 @@ public class StartJobActivity extends BaseActivity {
                     String expected_start_date = String.valueOf(startUnixTimeStamp);
                     String expected_end_date = String.valueOf(endUnixTimeStamp);
 
-                    BlockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
+
+                    fab_CompleteStartJob.setVisibility(View.VISIBLE);
+                    //BlockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
 
 
-
-                }
-                else
-                {
-                    showSnakBar(root,"Please select a Driver for complete the process");
+                } else {
+                    showSnakBar(root, "Please select a Driver for complete the process");
                     textChangeDriver.setText("Add Driver");
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
 
@@ -445,7 +460,7 @@ public class StartJobActivity extends BaseActivity {
         if (requestCode == 4) {
             String driver_name = data.getStringExtra("driver_name");
             String driver_pic = data.getStringExtra("driver_pic");
-            String driverId=data.getStringExtra("driver_id");
+             driverId = data.getStringExtra("driver_id");
             textViewDriverName.setText(driver_name);
             textChangeDriver.setText("Change Driver");
             Picasso.with(getApplicationContext())
@@ -458,10 +473,45 @@ public class StartJobActivity extends BaseActivity {
             String expected_start_date = String.valueOf(startUnixTimeStamp);
             String expected_end_date = String.valueOf(endUnixTimeStamp);
 
-            BlockTruckandDriver(JobId, provider_vehicle_id, driverId, expected_start_date, expected_end_date);
+            fab_CompleteStartJob.setVisibility(View.VISIBLE);
+            //BlockTruckandDriver(JobId, provider_vehicle_id, driverId, expected_start_date, expected_end_date);
 
 
         }
+    }
+
+
+    @OnClick(R.id.fabCompleteStartJob)
+    public void blockTruck(){
+
+
+       /* String a =JobId;
+        String b = provider_vehicle_id;
+        String c = driverId;
+        String d = expected_start_date;
+        String e = expected_end_date;*/
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        String expected_start_date = String.valueOf(startUnixTimeStamp);
+                        String expected_end_date = String.valueOf(endUnixTimeStamp);
+                        BlockTruckandDriver(JobId, provider_vehicle_id, driverId, expected_start_date, expected_end_date);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(StartJobActivity.this);
+        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+
+
     }
 
     //api call for blocking the driver and truck for this job
@@ -479,7 +529,7 @@ public class StartJobActivity extends BaseActivity {
                     // for layout handling
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     relativeStartJob.setVisibility(View.VISIBLE);
-                   // isTruckBlocked = "Blocked";
+                    // isTruckBlocked = "Blocked";
 
                 } else {
                     try {
@@ -489,8 +539,7 @@ public class StartJobActivity extends BaseActivity {
                                 .make(root, meta.getString("message"), Snackbar.LENGTH_LONG);
                         snackbar.show();
 
-                    } catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         Log.d("exception", e.getMessage());
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -507,8 +556,7 @@ public class StartJobActivity extends BaseActivity {
     }
 
 
-
-    //API for change the blocked Truck
+    /*//API for change the blocked Truck
 
     //api call for blocking the driver and truck for this job
     public void ChangeBlockedTruckAndDriver(String job_id, String provider_vehicle_id, String job_driver_id, String expected_start_date, String expected_end_date) {
@@ -525,7 +573,7 @@ public class StartJobActivity extends BaseActivity {
                     // for layout handling
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     relativeStartJob.setVisibility(View.VISIBLE);
-                 //   isTruckBlocked = "Blocked";
+                    //   isTruckBlocked = "Blocked";
 
                 } else {
                     try {
@@ -535,8 +583,7 @@ public class StartJobActivity extends BaseActivity {
                                 .make(root, meta.getString("message"), Snackbar.LENGTH_LONG);
                         snackbar.show();
 
-                    } catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         Log.d("exception", e.getMessage());
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -550,8 +597,7 @@ public class StartJobActivity extends BaseActivity {
             }
         });
 
-    }
-
+    }*/
 
 
 //    //api call for sign up

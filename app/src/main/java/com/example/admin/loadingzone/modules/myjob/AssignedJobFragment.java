@@ -64,6 +64,7 @@ public class AssignedJobFragment extends Fragment {
     private int offset = 1;
     private boolean hasReachedTop = false;
     private ApiInterface apiService;
+    private boolean isSwipeRefreshed = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -116,6 +117,7 @@ public class AssignedJobFragment extends Fragment {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getJobPosted();
             }
         });
@@ -140,7 +142,7 @@ public class AssignedJobFragment extends Fragment {
                 String Material_name = jobList.get(position).getMaterial().getMaterialName();
                 Integer Material_id = jobList.get(position).getMaterial().getMaterialId();
                 String MaterialDescription = jobList.get(position).getMaterialDescription();
-                String weight = String.valueOf(jobList.get(position).getWeight());
+                String weight = jobList.get(position).getMaterial_weight().getMaterialWeightText();
                 String DateOfLoading = jobList.get(position).getLoadingDate();
                 String PaymentType_name = jobList.get(position).getPaymentType().getPaymentTypeName();
                 Integer PaymentType_id = jobList.get(position).getPaymentType().getPaymentTypeId();
@@ -206,8 +208,11 @@ public class AssignedJobFragment extends Fragment {
     () {
 
         if (offset == 1) {
-            pDialog.setMessage("loading");
-            pDialog.show();
+            if (!isSwipeRefreshed){
+                pDialog.setMessage("loading");
+                pDialog.show();
+            }
+
         } else {
             progressBarFooter.setVisibility(View.VISIBLE);
         }
@@ -218,6 +223,7 @@ public class AssignedJobFragment extends Fragment {
             @Override
             public void onResponse(Call<PendingJobResponse> call, retrofit2.Response<PendingJobResponse> response) {
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 pDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getJobList().isEmpty()) {

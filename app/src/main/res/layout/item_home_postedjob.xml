@@ -140,7 +140,7 @@
                 android:layout_marginTop="1dp"
                 android:gravity="start"
                 android:textColor="@color/colorPrimary"
-                android:text="Quotations"
+                android:text="Distance"
                 android:textSize="12sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
                 android:textSize="12sp"
-                android:text=":Quotations" />
+                android:text=":Distance" />
 
         </LinearLayout>
 

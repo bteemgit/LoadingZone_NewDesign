@@ -3,6 +3,7 @@ package com.example.admin.loadingzone.modules.truck;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +12,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -18,9 +22,12 @@ import android.widget.RelativeLayout;
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
+import com.example.admin.loadingzone.global.BottomNavigationViewHelper;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
+import com.example.admin.loadingzone.modules.message.MessageListViewActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
@@ -46,6 +53,7 @@ import static com.example.admin.loadingzone.R.id.floating_action_menu;
 
 public class TruckViewActivity extends BaseActivity {
 
+    private BottomNavigationView mBottomNav;
     @BindView(R.id.recyclerViewTruck)
     EndlessRecyclerView endlessRecyclerViewTrck;
     @BindView(R.id.swipeRefresh)
@@ -54,21 +62,15 @@ public class TruckViewActivity extends BaseActivity {
     ProgressBar progressBar;
     @BindView(R.id.rootView)
     RelativeLayout relativeLayoutRoot;
-
     @NonNull
     @BindView(R.id.fabAddTruck)
-    com.github.clans.fab.FloatingActionButton fab_messageDriver;
-
-
+    com.github.clans.fab.FloatingActionButton fab_AddTruck;
     @NonNull
     @BindView(R.id.fabPendingTrucks)
     com.github.clans.fab.FloatingActionButton fab_pendingTrucks;
-
-
     @NonNull
     @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
-
     ApiInterface apiService;
     private int selectedItemPosition = -1;
     TrckListAdapter trckListAdapter;
@@ -77,6 +79,7 @@ public class TruckViewActivity extends BaseActivity {
     private boolean hasReachedTop = false;
     private List<VehicleList> vehicleListList = new ArrayList<>();
     private static String NEW_TRUCK_ADD = "NewTruck";
+    private boolean isSwipeRefreshed = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -95,6 +98,10 @@ public class TruckViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_view);
         ButterKnife.bind(this);
+
+        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNav);   // bottom navigation disabling the animations
+        mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         dark_bg = findViewById(R.id.background_dimmer);
         floatingActionMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
@@ -126,11 +133,49 @@ public class TruckViewActivity extends BaseActivity {
         }
     }
 
+
+
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+    // bottom navigation click listner
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.mHome:
+                    //getJobPosted();
+                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    return true;
+                case R.id.mDriver:
+                    Intent intent = new Intent(getApplicationContext(), DriverViewActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    return true;
+                case R.id.mTruck:
+                    /*Intent i = new Intent(HomeActivity.this, TruckViewActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);*/
+                    getTrckList();
+                    return true;
+                case R.id.mChat:
+                    Intent intent2 = new Intent(getApplicationContext(), MessageListViewActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent2);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     private void setUpListeners() {
 
@@ -142,6 +187,7 @@ public class TruckViewActivity extends BaseActivity {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getTrckList();
             }
         });
@@ -183,6 +229,7 @@ public class TruckViewActivity extends BaseActivity {
         startingLocation[0] += v.getWidth() / 2;
         TruckAddActivity.startTruckAddActvity(startingLocation, TruckViewActivity.this, NEW_TRUCK_ADD);
         overridePendingTransition(0, 0);
+
     }
 
 
@@ -194,10 +241,10 @@ public class TruckViewActivity extends BaseActivity {
     }
 
 
-    public void getTrckList
-            () {
+    public void getTrckList( ) {
 
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(TruckViewActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -209,9 +256,8 @@ public class TruckViewActivity extends BaseActivity {
         call.enqueue(new Callback<TruckResponse>() {
             @Override
             public void onResponse(Call<TruckResponse> call, retrofit2.Response<TruckResponse> response) {
-
-
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getVehicleList().isEmpty()) {
@@ -248,7 +294,6 @@ public class TruckViewActivity extends BaseActivity {
                         showSnakBar(relativeLayoutRoot, meta.getString("message"));
                     } catch (Exception e) {
                         Log.d("exception", e.getMessage());
-
                     }
                 }
                 progressBar.setVisibility(View.GONE);

@@ -141,6 +141,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     public static String SAVE_TRUCK = "Save Truck";
     public static String SAVE_DRIVER = "Save Driver";
 
+    String isFromAssignedJobs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +157,9 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         String end_time = getIntent().getStringExtra("end_time");
         String end_date = getIntent().getStringExtra("end_date");
         Job_id = getIntent().getStringExtra("JobId");
+
+
+
         textViewSelectedDate.setText(start_date);
         textViewSelectedTime.setText(start_time);
         textSelectedDateEnd.setText(end_date);

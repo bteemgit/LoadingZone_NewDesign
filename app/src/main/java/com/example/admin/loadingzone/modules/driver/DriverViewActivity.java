@@ -2,11 +2,13 @@ package com.example.admin.loadingzone.modules.driver;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -14,8 +16,12 @@ import android.widget.RelativeLayout;
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
+import com.example.admin.loadingzone.global.BottomNavigationViewHelper;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.home.HomeActivity;
+import com.example.admin.loadingzone.modules.message.MessageListViewActivity;
+import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -48,6 +54,7 @@ public class DriverViewActivity extends BaseActivity {
     private int offset = 1;
     private boolean hasReachedTop = false;
     ApiInterface apiService;
+    private boolean isSwipeRefreshed = false;
     private DriverListAdapter driverListAdapter;
     private List<DriverList> driverList = new ArrayList<>();
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
@@ -62,13 +69,16 @@ public class DriverViewActivity extends BaseActivity {
             hasReachedTop = true;
         }
     };
-
+    private BottomNavigationView mBottomNav;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_view);
         ButterKnife.bind(this);
+        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNav);   // bottom navigation disabling the animations
+        mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -89,6 +99,41 @@ public class DriverViewActivity extends BaseActivity {
 
         }
     }
+
+
+    // bottom navigation click listner
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.mHome:
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    getDriverList();
+                    return true;
+                case R.id.mDriver:
+                    /*Intent intent = new Intent(HomeActivity.this, DriverViewActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);*/
+                    return true;
+                case R.id.mTruck:
+                    Intent i = new Intent(getApplicationContext(), TruckViewActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    return true;
+                case R.id.mChat:
+                    Intent intent2 = new Intent(getApplicationContext(), MessageListViewActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent2);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     // back button action
     @Override
@@ -117,6 +162,7 @@ public class DriverViewActivity extends BaseActivity {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getDriverList();
             }
         });
@@ -165,6 +211,7 @@ public class DriverViewActivity extends BaseActivity {
             () {
 
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(DriverViewActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -176,12 +223,13 @@ public class DriverViewActivity extends BaseActivity {
         call.enqueue(new Callback<TruckDriverViewResponse>() {
             @Override
             public void onResponse(Call<TruckDriverViewResponse> call, retrofit2.Response<TruckDriverViewResponse> response) {
-
-
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 hideProgressDialog();
+
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getDriverList().isEmpty()) {
+
                         List<DriverList> Listvechicle = response.body().getDriverList();
                         if (offset == 1) {
                             driverList = Listvechicle;

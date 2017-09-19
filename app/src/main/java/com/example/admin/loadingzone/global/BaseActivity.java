@@ -75,6 +75,7 @@ public class BaseActivity extends AppCompatActivity {
         Snackbar snackbar = Snackbar
                 .make(v,message,Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(Color.RED);
+        snackbar.setDuration(2000);
         snackbar.show();
     }
 

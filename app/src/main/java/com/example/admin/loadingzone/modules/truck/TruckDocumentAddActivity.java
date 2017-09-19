@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -199,10 +200,14 @@ public class TruckDocumentAddActivity extends BaseActivity {
         else
         {
             Intent i = new Intent(TruckDocumentAddActivity.this, TruckViewActivity.class);
+            Toast.makeText(this, "Truck added waiting for Admin approval... ", Toast.LENGTH_LONG).show();
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            //finish();
         }
+
+
 
 
     }

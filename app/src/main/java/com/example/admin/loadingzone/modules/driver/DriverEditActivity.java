@@ -2,6 +2,7 @@ package com.example.admin.loadingzone.modules.driver;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +34,7 @@ import com.example.admin.loadingzone.modules.driver.DriverAddActivity;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.home.QuotationApply;
 import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
+import com.example.admin.loadingzone.modules.truck.TruckEditUpdateActivity;
 import com.example.admin.loadingzone.permission.PermissionsActivity;
 import com.example.admin.loadingzone.permission.PermissionsChecker;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -260,7 +263,30 @@ public class DriverEditActivity extends BaseActivity {
     @OnClick(R.id.linearDelete)
     public void deleteDriver() {
         if (driver_id != null)
-            DeleteDriver(driver_id);
+
+            if (isConnectingToInternet(getApplicationContext())) {
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                DeleteDriver(driver_id);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(DriverEditActivity.this);
+                builder.setMessage("Are you sure? want to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+
+
     }
 
 

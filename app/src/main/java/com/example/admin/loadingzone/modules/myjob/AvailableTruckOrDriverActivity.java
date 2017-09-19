@@ -59,6 +59,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
     private AvailbleDriverListAdapter availbleDriverListAdapter;
     String jobStatus;
     String isFrom="null";
+    private boolean isSwipeRefreshed = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -123,6 +124,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getActiveTruckandDrivers();
             }
         });
@@ -209,6 +211,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
             () {
 
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(AvailableTruckOrDriverActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -224,6 +227,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                 public void onResponse(Call<ActiveTrucklistResponse> call, retrofit2.Response<ActiveTrucklistResponse> response) {
                     refreshLayout.setRefreshing(false);
                     hideProgressDialog();
+                    isSwipeRefreshed=false;
                     if (response.isSuccessful() && response.body() != null) {
                         if (!response.body().getAvailableTrucks().isEmpty()) {
                             List<AvailableTruck> availableTruckList = response.body().getAvailableTrucks();

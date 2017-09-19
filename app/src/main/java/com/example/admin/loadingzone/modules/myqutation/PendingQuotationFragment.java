@@ -57,6 +57,7 @@ public class PendingQuotationFragment extends Fragment {
     private ApiInterface service;
     private int limit = 30;
     private int offset = 1;
+    private boolean isSwipeRefreshed = false;
     private boolean hasReachedTop = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
@@ -111,6 +112,7 @@ public class PendingQuotationFragment extends Fragment {
             @Override
             public void onRefresh() {
                 offset = 1;
+                isSwipeRefreshed=true;
                 getPendinQuoation();
             }
         });
@@ -196,8 +198,11 @@ public class PendingQuotationFragment extends Fragment {
             () {
 
         if (offset == 1) {
-            pDialog.setMessage("loading");
-            pDialog.show();
+            if (!isSwipeRefreshed){
+                pDialog.setMessage("loading");
+                pDialog.show();
+            }
+
         } else {
             progressBarFooter.setVisibility(View.VISIBLE);
         }
@@ -210,6 +215,7 @@ public class PendingQuotationFragment extends Fragment {
             public void onResponse(Call<PendingQutationResponse> call, retrofit2.Response<PendingQutationResponse> response) {
 
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 pDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getItems().isEmpty()) {

@@ -196,12 +196,6 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("job/change-job-vehicle")
-    Call<BlockTruckandDriverResponse> ChangeBlockTruckandDriverResponse(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("provider_vehicle_id") String provider_vehicle_id, @Field("job_driver_id") String job_driver_id, @Field("expected_start_date") String expected_start_date, @Field("expected_end_date") String expected_end_date);
-
-
-
-    @FormUrlEncoded
-    @POST("job/change-job-vehicle")
     Call<BlockTruckandDriverResponse> EditDriverOrTruck(@Header(GloablMethods.HEADER_AUTHORIZATION) String acces_token, @Field("job_id") String job_id, @Field("provider_vehicle_id") String provider_vehicle_id, @Field("job_driver_id") String job_driver_id);
 
     @FormUrlEncoded

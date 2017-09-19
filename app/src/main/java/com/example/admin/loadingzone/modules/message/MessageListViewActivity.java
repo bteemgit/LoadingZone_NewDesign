@@ -2,6 +2,7 @@ package com.example.admin.loadingzone.modules.message;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +21,13 @@ import android.widget.Toolbar;
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
+import com.example.admin.loadingzone.global.BottomNavigationViewHelper;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
+import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
+import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.recyclerview.SimpleDividerItemDecoration;
@@ -62,6 +67,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
     public static int RESULTOK = 50;
     private ActionMode actionMode;
     MessageListadapter messageListAdapter;
+    private boolean isSwipeRefreshed = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -73,6 +79,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             hasReachedTop = true;
         }
     };
+    private BottomNavigationView mBottomNav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +91,17 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNav);   // bottom navigation disabling the animations
+        mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         ButterKnife.bind(this);
         actionModeCallback = new ActionModeCallback();
         apiService = ApiClient.getClient().create(ApiInterface.class);
         refreshLayout.setRefreshing(false);
         setUpListeners();
         if (isConnectingToInternet(MessageListViewActivity.this)) {
+            if (!isSwipeRefreshed)
             getMessageList();
         } else {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
@@ -98,12 +110,48 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
     }
 
 
+
     // back button action
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+
+    // bottom navigation click listner
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.mHome:
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    return true;
+                case R.id.mDriver:
+                    intent = new Intent(getApplicationContext(), DriverViewActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    return true;
+                case R.id.mTruck:
+                    Intent i = new Intent(getApplicationContext(), TruckViewActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    return true;
+                case R.id.mChat:
+                    getMessageList();
+                    /*Intent intent2 = new Intent(HomeActivity.this, MessageListViewActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent2);*/
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     private void setUpListeners() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -114,6 +162,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             public void onRefresh() {
 //                refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getMessageList();
             }
         });
@@ -142,6 +191,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
 
     public void getMessageList() {
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(getApplicationContext(),"loading...");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -153,6 +203,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             @Override
             public void onResponse(Call<MessageListResponse> call, Response<MessageListResponse> response) {
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getMessageThreads().isEmpty()) {

@@ -13,6 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -119,6 +121,8 @@ public class HomeActivity extends BaseActivity {
         public void onReachedTop() {
             hasReachedTop = true;
         }
+
+
     };
 
     // bottom navigation click listner
@@ -154,7 +158,6 @@ public class HomeActivity extends BaseActivity {
     String profilepic = "01";
 
     ImageView user_imageView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,6 +203,8 @@ public class HomeActivity extends BaseActivity {
                 .centerCrop()
                 .transform(new CircleTransformation())
                 .into(user_imageView);
+
+
 
     }
 
@@ -283,6 +288,7 @@ public class HomeActivity extends BaseActivity {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getJobPosted();
             }
         });
@@ -427,6 +433,7 @@ public class HomeActivity extends BaseActivity {
     () {
 
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(HomeActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -438,6 +445,7 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onResponse(Call<PostedJobResponse> call, retrofit2.Response<PostedJobResponse> response) {
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     if (!response.body().getJobList().isEmpty()) {

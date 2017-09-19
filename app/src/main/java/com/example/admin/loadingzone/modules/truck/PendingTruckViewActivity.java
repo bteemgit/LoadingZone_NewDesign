@@ -3,6 +3,7 @@ package com.example.admin.loadingzone.modules.truck;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -61,6 +62,7 @@ public class PendingTruckViewActivity extends BaseActivity {
     @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
 
+    private BottomNavigationView mBottomNav;
     ApiInterface apiService;
     private int selectedItemPosition = -1;
     TrckListAdapter trckListAdapter;
@@ -69,6 +71,7 @@ public class PendingTruckViewActivity extends BaseActivity {
     private boolean hasReachedTop = false;
     private List<VehicleList> vehicleListList = new ArrayList<>();
     private  static String NEW_TRUCK_ADD="NewTruck";
+    private boolean isSwipeRefreshed = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -86,6 +89,8 @@ public class PendingTruckViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_view);
         ButterKnife.bind(this);
+        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mBottomNav.setVisibility(View.GONE);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -120,6 +125,7 @@ public class PendingTruckViewActivity extends BaseActivity {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getTrckList();
             }
         });
@@ -173,6 +179,7 @@ public class PendingTruckViewActivity extends BaseActivity {
             () {
 
         if (offset == 1) {
+            if (!isSwipeRefreshed)
             showProgressDialog(PendingTruckViewActivity.this, "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -184,9 +191,8 @@ public class PendingTruckViewActivity extends BaseActivity {
         call.enqueue(new Callback<TruckResponse>() {
             @Override
             public void onResponse(Call<TruckResponse> call, retrofit2.Response<TruckResponse> response) {
-
-
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getVehicleList().isEmpty()) {

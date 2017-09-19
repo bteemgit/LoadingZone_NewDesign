@@ -440,6 +440,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             intent.putExtra("start_time", start_time);
             intent.putExtra("end_time", end_time);
             intent.putExtra("end_date", end_date);
+
             startActivityForResult(intent, 2);
         }
     }
@@ -462,6 +463,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             intent.putExtra("end_time", end_time);
             intent.putExtra("end_date", end_date);
             intent.putExtra("isFrom", "Posted");
+
             startActivityForResult(intent, 2);
         }
 

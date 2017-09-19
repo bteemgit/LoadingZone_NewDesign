@@ -59,6 +59,7 @@ public class RejectedQuotationFragment extends Fragment {
     private ApiInterface service;
     private int limit = 30;
     private int offset = 1;
+    private boolean isSwipeRefreshed = false;
     private boolean hasReachedTop = false;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
@@ -114,6 +115,7 @@ public class RejectedQuotationFragment extends Fragment {
             public void onRefresh() {
 //                refreshLayout.setRefreshing(true);
                 offset = 1;
+                isSwipeRefreshed=true;
                 getRejectedQutation();
             }
         });
@@ -192,8 +194,10 @@ public class RejectedQuotationFragment extends Fragment {
             () {
 
         if (offset == 1) {
-            pDialog.setMessage("loading");
-            pDialog.show();
+            if (!isSwipeRefreshed){
+                pDialog.setMessage("loading");
+                pDialog.show();
+            }
         } else {
             progressBarFooter.setVisibility(View.VISIBLE);
         }
@@ -205,8 +209,8 @@ public class RejectedQuotationFragment extends Fragment {
         call.enqueue(new Callback<PendingQutationResponse>() {
             @Override
             public void onResponse(Call<PendingQutationResponse> call, retrofit2.Response<PendingQutationResponse> response) {
-
                 refreshLayout.setRefreshing(false);
+                isSwipeRefreshed=false;
                 pDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getItems().isEmpty()) {

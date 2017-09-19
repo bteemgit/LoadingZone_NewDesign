@@ -2,12 +2,14 @@ package com.example.admin.loadingzone.modules.truck;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -257,7 +259,28 @@ public class TruckEditUpdateActivity extends BaseActivity {
         if (provider_vehicle_id.length() > 0) {
 
             if (isConnectingToInternet(getApplicationContext())) {
-                DeleteTruck(provider_vehicle_id);
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                DeleteTruck(provider_vehicle_id);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(TruckEditUpdateActivity.this);
+                builder.setMessage("Are you sure? want to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+
+
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
 

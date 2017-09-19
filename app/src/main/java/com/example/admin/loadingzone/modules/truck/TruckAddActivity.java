@@ -3,12 +3,14 @@ package com.example.admin.loadingzone.modules.truck;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +34,7 @@ import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.myjob.StartJobActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -262,16 +266,16 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     @OnClick(R.id.fabTruckAdd)
     public void addTruck() {
 
-        String avg_running_speed = editTextTrcukAvgSpeed.getText().toString().trim();
-        String custom_name = editTextTrcukCutsomName.getText().toString().trim();
-        String reg_no = editTextTruckRegistrationNo.getText().toString().trim();
-        String chasisNo = editTextTruckChasisNo.getText().toString().trim();
-        String LicNo = editTextTruckLicenceNo.getText().toString().trim();
-        String insurance_exp_date = editTextViewTrcukInsurance.getText().toString().trim();
-        String weight = editTextTrcukWeight.getText().toString().trim();
-        String container_length = editTextTrcukLength.getText().toString().trim();
-        String container_width = editTextTrcukWidth.getText().toString().trim();
-        String container_height = editTextTrcukHeight.getText().toString().trim();
+        final String avg_running_speed = editTextTrcukAvgSpeed.getText().toString().trim();
+        final String custom_name = editTextTrcukCutsomName.getText().toString().trim();
+        final String reg_no = editTextTruckRegistrationNo.getText().toString().trim();
+        final String chasisNo = editTextTruckChasisNo.getText().toString().trim();
+        final String LicNo = editTextTruckLicenceNo.getText().toString().trim();
+        final String insurance_exp_date = editTextViewTrcukInsurance.getText().toString().trim();
+        final String weight = editTextTrcukWeight.getText().toString().trim();
+        final String container_length = editTextTrcukLength.getText().toString().trim();
+        final String container_width = editTextTrcukWidth.getText().toString().trim();
+        final String container_height = editTextTrcukHeight.getText().toString().trim();
         String truck_name = textViewTrckMaker.getText().toString();
         String truck_model = textViewTrckModel.getText().toString();
         String truck_type = textViewTrckType.getText().toString();
@@ -283,7 +287,58 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                     if (!truck_model.equals("Model")) {
                         if (!truck_type.equals("Type")) {
                             if (!truck_year.equals("Year")) {
-                                AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+
+                               if(custom_name.length() > 0){
+                                    if(avg_running_speed.length()>0){
+                                        if(weight.length()>0){
+                                            if(container_height.length()>0){
+                                                if(container_length.length()>0){
+                                                    if(container_width.length()>0){
+
+                                                        if(reg_no.length() == 0 || chasisNo.length() == 0 || LicNo.length() == 0 || insurance_exp_date.length() == 0){
+
+                                                            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    switch (which){
+                                                                        case DialogInterface.BUTTON_POSITIVE:
+                                                                            //Yes button clicked
+                                                                            AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                                                                            break;
+
+                                                                        case DialogInterface.BUTTON_NEGATIVE:
+                                                                            //No button clicked
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            };
+                                                            AlertDialog.Builder builder = new AlertDialog.Builder(TruckAddActivity.this);
+                                                            builder.setMessage("Are you sure? want to add truck by these details?").setPositiveButton("Yes", dialogClickListener)
+                                                                    .setNegativeButton("No", dialogClickListener).show();
+
+                                                        }else
+                                                            AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                                                    }else{
+                                                        showSnakBar(rootView, "Please select Width ");
+                                                    }
+                                                }else{
+                                                    showSnakBar(rootView, "Please select Length ");
+                                                }
+                                            }else{
+                                                showSnakBar(rootView, "Please select Height ");
+                                            }
+                                        }else{
+                                            showSnakBar(rootView, "Please select Weight ");
+                                        }
+                                    }else{
+                                        showSnakBar(rootView, "Please select Average Speed ");
+                                    }
+                               }else{
+                                   showSnakBar(rootView, "Please select Custom Name ");
+                               }
+
+
+
 
                             } else {
                                 showSnakBar(rootView, "Please select Vehicle Year");
@@ -615,6 +670,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     showSnakBar(rootView, "Truck Added Successfully");
                     startActivity(i);
+                    //finish();
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
