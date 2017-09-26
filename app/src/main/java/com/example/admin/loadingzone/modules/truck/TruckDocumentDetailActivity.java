@@ -47,5 +47,13 @@ public class TruckDocumentDetailActivity extends AppCompatActivity {
         textDocTitle.setText(doc_title);
 
     }
+
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
+
+}
 

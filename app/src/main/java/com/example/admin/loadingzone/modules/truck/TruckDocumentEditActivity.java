@@ -76,6 +76,15 @@ public class TruckDocumentEditActivity extends BaseActivity {
         }
     }
 
+
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
     // add new doc to the list
     @NonNull
     @OnClick(R.id.linearTruckDocAdd)

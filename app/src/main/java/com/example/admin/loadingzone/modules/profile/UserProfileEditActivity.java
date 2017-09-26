@@ -44,6 +44,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -141,6 +142,7 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
         }
 
         editTextPrividerLocation.setOnClickListener(this);
+        editTextPrividerLocation.setFocusable(false);
     }
 
 
@@ -179,11 +181,15 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
             //if profile is created
             if (!service_provider_id.equals("null")||service_provider_id!="null") {
                 if (GloablMethods.validate(providerName, location, mobile)) {
-                    if (isConnectingToInternet(UserProfileEditActivity.this)) {
-                        userProfileUpdate(service_provider_id,providerName, mobile, location, "54.9", "89.99");
-                    } else {
-                        showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+                    if(isValidMobile(mobile)){
+
+                        if (isConnectingToInternet(UserProfileEditActivity.this)) {
+                            userProfileUpdate(service_provider_id,providerName, mobile, location, "54.9", "89.99");
+                        } else {
+                            showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+                        }
                     }
+
                 } else {
                     showSnakBar(relativeLayoutRoot, MessageConstants.PLEASE_FILL_ALL);
                 }
@@ -221,6 +227,25 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
 
 
     }
+    //method for mobile no. validation
+    public boolean isValidMobile(String phone) {
+        boolean check=false;
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            if(phone.length() < 6 || phone.length() > 13) {
+                // if(phone.length() != 10) {
+                check = false;
+                //txtPhone.setError("Not Valid Number");
+                // Toast.makeText(this, "Not Valid Mobile Number", Toast.LENGTH_SHORT).show();
+                showSnakBar(relativeLayoutRoot, "Not a valid Mobile Number !!");
+            } else {
+                check = true;
+            }
+        } else {
+            check=false;
+        }
+        return check;
+    }
+
 
     @OnClick(R.id.btnEditProfilePic)
     public void changeProfilePic() {

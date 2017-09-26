@@ -1446,7 +1446,7 @@
                                     android:layout_weight="1"
                                     android:background="@android:color/transparent"
                                     android:gravity="start|center"
-                                    android:hint="Location"
+                                    android:hint="Nil"
                                     android:inputType="textCapSentences"
                                     android:paddingLeft="10dp"
                                     android:paddingRight="10dp"

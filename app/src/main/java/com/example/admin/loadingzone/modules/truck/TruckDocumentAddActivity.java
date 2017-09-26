@@ -132,6 +132,14 @@ public class TruckDocumentAddActivity extends BaseActivity {
         }
     }
 
+    // back button action
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
     private void selectImage() {
         final CharSequence[] items = {"Take Photo", "Choose from Library",
                 "Cancel"};
@@ -200,7 +208,7 @@ public class TruckDocumentAddActivity extends BaseActivity {
         else
         {
             Intent i = new Intent(TruckDocumentAddActivity.this, TruckViewActivity.class);
-            Toast.makeText(this, "Truck added waiting for Admin approval... ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Added to pending trucks and waiting for Admin approval... ", Toast.LENGTH_LONG).show();
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

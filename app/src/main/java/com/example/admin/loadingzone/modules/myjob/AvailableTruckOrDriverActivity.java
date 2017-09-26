@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -96,9 +97,9 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
         isFrom=getIntent().getStringExtra("isFrom");
         // toolbar title
         if (jobStatus.equals(IsEditVehicle)) {
-            getSupportActionBar().setTitle("Avalible Trucks");
+            getSupportActionBar().setTitle("Available Trucks");
         } else {
-            getSupportActionBar().setTitle("Avalible Drivers");
+            getSupportActionBar().setTitle("Available Drivers");
         }
         startUnixTimeStamp = getIntent().getStringExtra("startUnixTimeStamp");
         endUnixTimeStamp = getIntent().getStringExtra("endUnixTimeStamp");
@@ -191,6 +192,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                         String driver_mobile = listAvailableDriver.get(position).getDriverPhone();
                         String driver_id = String.valueOf(listAvailableDriver.get(position).getDriverId());
                         String driver_image = listAvailableDriver.get(position).getDriverPic() ;
+                        Toast.makeText(getApplicationContext(),driver_id,Toast.LENGTH_SHORT).show();
                         Intent i = new Intent();
                         i.putExtra("isEdit", "isDriverEdit");
                         i.putExtra("driver_id", driver_id);

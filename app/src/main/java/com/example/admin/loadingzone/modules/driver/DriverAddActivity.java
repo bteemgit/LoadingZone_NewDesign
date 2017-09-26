@@ -387,7 +387,7 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
                         .transform(new CircleTransformation())
                         .into(imageViewDriverProfileImage);
 
-                Snackbar.make(relativeLayoutRoot, R.string.string_reselect, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(relativeLayoutRoot, "Please tap upload button ", Snackbar.LENGTH_LONG).show();
                 cursor.close();
             } else {
                 Snackbar.make(relativeLayoutRoot, R.string.string_unable_to_load_image, Snackbar.LENGTH_LONG).show();

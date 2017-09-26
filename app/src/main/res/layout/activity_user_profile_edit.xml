@@ -51,7 +51,7 @@
             android:layout_height="24dp"
             android:layout_marginRight="77dp"
             android:background="@drawable/btn_profile_bg"
-            android:text="Edit ProfilePic"
+            android:text="Edit Profile Pic"
             android:textColor="#ffffff"
             android:textSize="12sp"
             android:layout_centerVertical="true"
@@ -141,7 +141,7 @@
             android:drawableTint="@color/colorAccent"
             android:fontFamily="Open-Sans-condensed"
             android:hint="Phone"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/secondaryTextColor"
             android:textSize="13sp" />
