@@ -1,33 +1,27 @@
 package com.example.admin.loadingzone.modules.message;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
-import com.example.admin.loadingzone.global.BaseActivity;
-import com.example.admin.loadingzone.global.BottomNavigationViewHelper;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
-import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
-import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
-import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.recyclerview.SimpleDividerItemDecoration;
@@ -47,8 +41,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MessageListViewActivity extends BaseActivity implements MessageListadapter.SelectedMessageList{
+/**
+ * Created by admin on 10/4/2017.
+ */
 
+public class MessageFragment extends Fragment implements MessageListadapter.SelectedMessageList{
+    public MessageFragment()
+    {
+
+    }
     @NonNull
     @BindView(R.id.recyclerview_messageList)
     EndlessRecyclerView recyclerViewMessageList;
@@ -68,10 +69,15 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
     private ActionMode actionMode;
     MessageListadapter messageListAdapter;
     private boolean isSwipeRefreshed = false;
+    private HomeActivity homeActivity;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
-            getMessageList();
+            if (homeActivity.isConnectingToInternet(getActivity())) {
+                getMessageList();
+            } else {
+                homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+            }
         }
 
         @Override
@@ -79,82 +85,36 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             hasReachedTop = true;
         }
     };
-    private BottomNavigationView mBottomNav;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_list_view);
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Messages");
-        //back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.disableShiftMode(mBottomNav);   // bottom navigation disabling the animations
-        mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        ButterKnife.bind(this);
+        homeActivity=(HomeActivity)getActivity();
         actionModeCallback = new ActionModeCallback();
-        apiService = ApiClient.getClient().create(ApiInterface.class);
+        setRetainInstance(true);
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
+        ButterKnife.bind(this, view);
         refreshLayout.setRefreshing(false);
         setUpListeners();
-        if (isConnectingToInternet(MessageListViewActivity.this)) {
-            if (!isSwipeRefreshed)
-            getMessageList();
-        } else {
-            showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
-        }
-
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        return view;
     }
-
-
-
-    // back button action
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-
-    // bottom navigation click listner
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.mHome:
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    return true;
-                case R.id.mDriver:
-                    intent = new Intent(getApplicationContext(), DriverViewActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    return true;
-                case R.id.mTruck:
-                    Intent i = new Intent(getApplicationContext(), TruckViewActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    return true;
-                case R.id.mChat:
-                    getMessageList();
-                    /*Intent intent2 = new Intent(HomeActivity.this, MessageListViewActivity.class);
-                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent2);*/
-                    return true;
-            }
-            return false;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (homeActivity.isConnectingToInternet(getActivity())) {
+            if (!isSwipeRefreshed)
+                getMessageList();
+        } else {
+            homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
 
-    };
-
+    }
     private void setUpListeners() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewMessageList.setLayoutManager(layoutManager);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -162,13 +122,13 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             public void onRefresh() {
 //                refreshLayout.setRefreshing(true);
                 offset = 1;
-                isSwipeRefreshed=true;
+                isSwipeRefreshed = true;
                 getMessageList();
             }
         });
-        recyclerViewMessageList.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+        recyclerViewMessageList.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         recyclerViewMessageList.addPaginationListener(paginationListener);
-        recyclerViewMessageList.addOnItemTouchListener(new RecyclerItemClickListener(MessageListViewActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewMessageList.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -176,7 +136,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
                 String meesge_user = messageThreadList.get(position).getRecipient().getName();
                 String meesge_subj = messageThreadList.get(position).getSubject();
                 String meesge_refer = messageThreadList.get(position).getReferenceName();
-                Intent i = new Intent(getApplicationContext(), MessageDetailListActivity.class);
+                Intent i = new Intent(getActivity(), MessageDetailListActivity.class);
                 i.putExtra("messge_thread_id", meesge_thread_id);
                 i.putExtra("messge_user", meesge_user);
                 i.putExtra("messge_subj", meesge_subj);
@@ -192,27 +152,27 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
     public void getMessageList() {
         if (offset == 1) {
             if (!isSwipeRefreshed)
-            showProgressDialog(getApplicationContext(),"loading...");
+                homeActivity.showProgressDialog(getContext(), "loading...");
         } else {
             progressBar.setVisibility(View.VISIBLE);
         }
         apiService = ApiClient.getClient().create(ApiInterface.class);
-        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        String acess_token = AppController.getString(getContext(), "acess_token");
         Call<MessageListResponse> call = apiService.MessageList(GloablMethods.API_HEADER + acess_token, offset);
         call.enqueue(new Callback<MessageListResponse>() {
             @Override
             public void onResponse(Call<MessageListResponse> call, Response<MessageListResponse> response) {
                 refreshLayout.setRefreshing(false);
-                isSwipeRefreshed=false;
-                hideProgressDialog();
+                isSwipeRefreshed = false;
+                homeActivity.hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getMessageThreads().isEmpty()) {
                         List<MessageThread> ThreadList = response.body().getMessageThreads();
-                        if (ThreadList.size()>0)
+                        if (ThreadList.size() > 0)
                             if (offset == 1) {
                                 messageThreadList = ThreadList;
                                 updateEndlessRecyclerView();
-                               hideProgressDialog();
+                                homeActivity.hideProgressDialog();
                             } else {
                                 progressBar.setVisibility(View.VISIBLE);
                                 for (MessageThread itemModel : ThreadList) {
@@ -231,7 +191,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
                     }
                 } else {
                     // GlobalMethods.showToast(ContestListActivity.this, getString(R.string.try_again), 1);
-                    finish();
+                    getActivity().finish();
                     recyclerViewMessageList.setHaveMoreItem(false);
                 }
                 if (!response.isSuccessful()) {
@@ -244,7 +204,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
                         snackbar.show();
 
                     } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -254,12 +214,13 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             @Override
             public void onFailure(Call<MessageListResponse> call, Throwable t) {
                 // Log error here since request failed
-               hideProgressDialog();
+                homeActivity.hideProgressDialog();
             }
         });
     }
+
     private void updateEndlessRecyclerView() {
-        messageListAdapter = new MessageListadapter(MessageListViewActivity.this, messageThreadList, MessageListViewActivity.this);
+        messageListAdapter = new MessageListadapter(getActivity(), messageThreadList,this);
         recyclerViewMessageList.setAdapter(messageListAdapter);
         // progressDialog.dismiss();
     }
@@ -270,7 +231,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
     }
     private void enableActionMode(int position) {
         if (actionMode == null) {
-            actionMode = startSupportActionMode(actionModeCallback);
+            actionMode = homeActivity.startSupportActionMode(actionModeCallback);
         }
         toggleSelection(position);
 
@@ -287,7 +248,6 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
             }
         }
     }
-
     private class ActionModeCallback implements ActionMode.Callback {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -309,11 +269,11 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
                 case R.id.action_tick:
                     // delete all the selected messages
                     // deleteMessages();
-                    if (messageListAdapter != null)  {
+                    if (messageListAdapter != null) {
                         ArrayList<String> selectedMessageThreadId = selectedMessageThreadId();
 
                         // call for deletig the selected list
-                        finish();
+                        homeActivity.finish();
                         mode.finish();
                         return true;
                     }
@@ -326,7 +286,7 @@ public class MessageListViewActivity extends BaseActivity implements MessageList
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            if (messageListAdapter != null ) {
+            if (messageListAdapter != null) {
                 messageListAdapter.clearSelections();
                 actionMode = null;
                 recyclerViewMessageList.post(new Runnable() {

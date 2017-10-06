@@ -4,20 +4,20 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="#ffffff" />
+                    <solid android:color="#d82028" />
                 </shape>
             </item>
 
             <item android:bottom="1dp" android:left="1dp" android:right="1dp" android:top="1dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/btn_send_normal" />
+                    <solid android:color="#d82028" />
                 </shape>
             </item>
         </layer-list>
     </item>
     <item android:state_pressed="true">
         <shape android:bottom="0dp" android:left="2dp" android:right="0dp" android:shape="rectangle" android:top="2dp">
-            <solid android:color="@color/btn_send_pressed" />
+            <solid android:color="#79080c" />
         </shape>
     </item>
 

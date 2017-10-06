@@ -1,27 +1,23 @@
 package com.example.admin.loadingzone.modules.driver;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
-import com.example.admin.loadingzone.global.BaseActivity;
-import com.example.admin.loadingzone.global.BottomNavigationViewHelper;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
-import com.example.admin.loadingzone.modules.message.MessageListViewActivity;
-import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -38,7 +34,14 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class DriverViewActivity extends BaseActivity {
+/**
+ * Created by admin on 10/4/2017.
+ */
+
+public class DriverFragment extends Fragment {
+    public DriverFragment() {
+    }
+
     @BindView(R.id.recyclerViewDriver)
     EndlessRecyclerView endlessRecyclerViewDriver;
     @BindView(R.id.swipeRefresh)
@@ -57,11 +60,16 @@ public class DriverViewActivity extends BaseActivity {
     private boolean isSwipeRefreshed = false;
     private DriverListAdapter driverListAdapter;
     private List<DriverList> driverList = new ArrayList<>();
+    private HomeActivity homeActivity;
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
+            if (homeActivity.isConnectingToInternet(getActivity())) {
+                getDriverList();
+            } else {
+                homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+            }
 
-            getDriverList();
         }
 
         @Override
@@ -69,92 +77,48 @@ public class DriverViewActivity extends BaseActivity {
             hasReachedTop = true;
         }
     };
-    private BottomNavigationView mBottomNav;
-    @Override
 
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_view);
-        ButterKnife.bind(this);
-        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.disableShiftMode(mBottomNav);   // bottom navigation disabling the animations
-        mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.driver);
-        apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
+        homeActivity = (HomeActivity) getActivity();
+        setRetainInstance(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_driver, container, false);
+        ButterKnife.bind(this, view);
         refreshLayout.setRefreshing(false);
         setUpListeners();
-
-
-        if (isConnectingToInternet(getApplicationContext()))
-        {
-            getDriverList();
-        }
-
-        else {
-            showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
-
-        }
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        return view;
     }
-
-
-    // bottom navigation click listner
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.mHome:
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    getDriverList();
-                    return true;
-                case R.id.mDriver:
-                    /*Intent intent = new Intent(HomeActivity.this, DriverViewActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);*/
-                    return true;
-                case R.id.mTruck:
-                    Intent i = new Intent(getApplicationContext(), TruckViewActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    return true;
-                case R.id.mChat:
-                    Intent intent2 = new Intent(getApplicationContext(), MessageListViewActivity.class);
-                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent2);
-                    return true;
-            }
-            return false;
-        }
-
-    };
-
-    // back button action
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (homeActivity.isConnectingToInternet(getActivity())) {
+            getDriverList();
+        } else {
+            homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
+        }
 
+    }
+    // adding a new driver
     @OnClick(R.id.fabDriverAdd)
     public void truckAdd() {
         int[] startingLocation = new int[2];
-        View v = new View(DriverViewActivity.this);
+        View v = new View(getContext());
         v.getLocationOnScreen(startingLocation);
         startingLocation[0] += v.getWidth() / 2;
-        DriverAddActivity.startdriverAddActvity(startingLocation, DriverViewActivity.this);
-        overridePendingTransition(0, 0);
+        DriverAddActivity.startdriverAddActvity(startingLocation, getActivity());
+        homeActivity.overridePendingTransition(0, 0);
     }
 
     private void setUpListeners() {
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         endlessRecyclerViewDriver.setLayoutManager(layoutManager);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -168,7 +132,7 @@ public class DriverViewActivity extends BaseActivity {
         });
 
         endlessRecyclerViewDriver.addPaginationListener(paginationListener);
-        endlessRecyclerViewDriver.addOnItemTouchListener(new RecyclerItemClickListener(DriverViewActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+        endlessRecyclerViewDriver.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -182,16 +146,12 @@ public class DriverViewActivity extends BaseActivity {
                 String driverJoinedDate = driverList.get(position).getCreatedDate();
                 String currentlyAssignedTruck;
                 if(driverList.get(position).getDriverTruck() == null ){
-                     currentlyAssignedTruck = "Nil";
+                    currentlyAssignedTruck = "Nil";
                 }else {
-                     currentlyAssignedTruck  = driverList.get(position).getDriverTruck().getCustomName();
+                    currentlyAssignedTruck  = driverList.get(position).getDriverTruck().getCustomName();
                 }
-
-
-
-
                 String isFrom = "driverView";
-                Intent i = new Intent(DriverViewActivity.this, DriverEditActivity.class);
+                Intent i = new Intent(getActivity(), DriverEditActivity.class);
                 i.putExtra("driver_name", driver_name);
                 i.putExtra("driver_id", driver_id);
                 i.putExtra("driver_email", driver_email);
@@ -207,25 +167,27 @@ public class DriverViewActivity extends BaseActivity {
 
     }
 
+    // getting driver list from the server
+
     public void getDriverList
             () {
 
         if (offset == 1) {
             if (!isSwipeRefreshed)
-            showProgressDialog(DriverViewActivity.this, "loading");
+                homeActivity.showProgressDialog(getActivity(), "loading");
         } else {
             progressBar.setVisibility(View.VISIBLE);
         }
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
-        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
+        String acess_token = AppController.getString(getContext(), "acess_token");
         Call<TruckDriverViewResponse> call = apiService.driverList(GloablMethods.API_HEADER + acess_token,offset);
         call.enqueue(new Callback<TruckDriverViewResponse>() {
             @Override
             public void onResponse(Call<TruckDriverViewResponse> call, retrofit2.Response<TruckDriverViewResponse> response) {
                 refreshLayout.setRefreshing(false);
                 isSwipeRefreshed=false;
-                hideProgressDialog();
+                homeActivity.hideProgressDialog();
 
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getDriverList().isEmpty()) {
@@ -234,7 +196,7 @@ public class DriverViewActivity extends BaseActivity {
                         if (offset == 1) {
                             driverList = Listvechicle;
                             updateEndlessRecyclerView();
-                            hideProgressDialog();
+                            homeActivity. hideProgressDialog();
                         } else {
                             progressBar.setVisibility(View.VISIBLE);
                             for (DriverList itemModel : Listvechicle) {
@@ -255,11 +217,11 @@ public class DriverViewActivity extends BaseActivity {
                     }
 
                 } else {
-                    finish();
+                    getActivity().finish();
                     endlessRecyclerViewDriver.setHaveMoreItem(false);
                 }
                 if (!response.isSuccessful()) {
-                    showSnakBar(relativeLayoutRoot, MessageConstants.SERVERERROR);
+                    homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.SERVERERROR);
                 }
                 progressBar.setVisibility(View.GONE);
             }
@@ -267,13 +229,13 @@ public class DriverViewActivity extends BaseActivity {
             @Override
             public void onFailure(Call<TruckDriverViewResponse> call, Throwable t) {
                 // Log error here since request failed
-                hideProgressDialog();
+                homeActivity.hideProgressDialog();
             }
         });
     }
 
     private void updateEndlessRecyclerView() {
-        driverListAdapter = new DriverListAdapter(driverList, R.layout.item_driver_list, getApplicationContext());
+        driverListAdapter = new DriverListAdapter(driverList, R.layout.item_driver_list, getContext());
         endlessRecyclerViewDriver.setAdapter(driverListAdapter);
         // progressDialog.dismiss();
     }

@@ -29,6 +29,7 @@ import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.permission.PermissionsActivity;
 import com.example.admin.loadingzone.permission.PermissionsChecker;
@@ -298,7 +299,8 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
                 if (response.isSuccessful())
                 {
                     showSnakBar(relativeLayoutRoot, "Driver Added Successfully");
-                    Intent i = new Intent(DriverAddActivity.this, DriverViewActivity.class);
+                    Intent i = new Intent(DriverAddActivity.this, HomeActivity.class);
+                    i.putExtra("isFrom","driver");
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 } else

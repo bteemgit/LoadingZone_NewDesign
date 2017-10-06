@@ -17,6 +17,7 @@ import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
@@ -46,7 +47,7 @@ public class TruckDocumentEditActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.relativeRoot)
     RelativeLayout rootView;
-    String provider_vehicle_id,vehicle_id;
+    String provider_vehicle_id, vehicle_id;
     @NonNull
     @BindView(R.id.linerTruckEditFinish)
     LinearLayout linerTruckEditFinish;
@@ -91,9 +92,8 @@ public class TruckDocumentEditActivity extends BaseActivity {
     public void AddnewDoc() {
         Intent i = new Intent(getApplicationContext(), TruckDocumentAddActivity.class);
         i.putExtra("vehicle_id", vehicle_id);
-        i.putExtra("isFrom","DocUpdate");
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra("provider_vehicle_id",provider_vehicle_id);
+        i.putExtra("isFrom", "DocUpdate");
         startActivity(i);
         finish();
     }
@@ -102,12 +102,14 @@ public class TruckDocumentEditActivity extends BaseActivity {
     // finish the update
     @OnClick(R.id.linerTruckEditFinish)
     public void finishEdit() {
-        Intent i = new Intent(getApplicationContext(), TruckViewActivity.class);
+        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+        i.putExtra("isFrom", "truck");
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
     }
+
     //getting the truck document list
     public void getTruckDocList
     (final String provider_vehicle_id) {
@@ -121,10 +123,10 @@ public class TruckDocumentEditActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getVehicleDocs().isEmpty()) {
                         vehicleDocArrayList = response.body().getVehicleDocs();
-                        truckDocumentDeleteListAdapter = new TruckDocumentDeleteListAdapter(vehicleDocArrayList,TruckDocumentEditActivity.this, new TruckDocumentDeleteListAdapter.ListAdapterListener() {
+                        truckDocumentDeleteListAdapter = new TruckDocumentDeleteListAdapter(vehicleDocArrayList, TruckDocumentEditActivity.this, new TruckDocumentDeleteListAdapter.ListAdapterListener() {
                             @Override
                             public void onClickAtOKButton(int position) {
-                                int doc_id=vehicleDocArrayList.get(position).getVehicleDocumentId();
+                                int doc_id = vehicleDocArrayList.get(position).getVehicleDocumentId();
                                 DeleteTruck(doc_id);
                             }
                         });
@@ -153,7 +155,7 @@ public class TruckDocumentEditActivity extends BaseActivity {
     // delete the document
 
     private void DeleteTruck(int doc_id) {
-showProgressDialog(TruckDocumentEditActivity.this,"deleting..");
+        showProgressDialog(TruckDocumentEditActivity.this, "deleting..");
         apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
@@ -161,17 +163,17 @@ showProgressDialog(TruckDocumentEditActivity.this,"deleting..");
         call.enqueue(new Callback<Meta>() {
             @Override
             public void onResponse(Call<Meta> call, Response<Meta> response) {
-          hideProgressDialog();
+                hideProgressDialog();
                 if (response.isSuccessful()) {
 
-                    showSnakBar(rootView,response.body().getMessage());
+                    showSnakBar(rootView, response.body().getMessage());
                     getTruckDocList(provider_vehicle_id);
 
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
-                       showSnakBar(rootView, meta.getString("message"));
+                        showSnakBar(rootView, meta.getString("message"));
 
 
                     } catch (Exception e) {

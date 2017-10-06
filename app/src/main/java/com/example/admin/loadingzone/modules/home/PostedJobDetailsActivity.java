@@ -338,8 +338,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 linearAssignedDriverItem.setVisibility(View.GONE);
                 linearAssignedVehicleItem.setVisibility(View.GONE);
                 linearJobstatusItem.setVisibility(View.GONE);
-
-
                 fabcall_driver.setVisibility(View.GONE);
                 fab_messageDriver.setVisibility(View.GONE);
             }

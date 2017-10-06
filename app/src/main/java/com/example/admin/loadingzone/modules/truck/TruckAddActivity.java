@@ -715,7 +715,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                     Intent i = new Intent(TruckAddActivity.this, TruckDocumentEditActivity.class);
                     i.putExtra("provider_vehicle_id", provider_vehicle_id);
                     i.putExtra("vehicle_id", vehicle_id);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     showSnakBar(rootView, "Truck Updated Successfully");
                     startActivity(i);
                 } else {

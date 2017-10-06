@@ -58,10 +58,9 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:layout_marginBottom="7dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="4dp">
+                    android:layout_marginBottom="1dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -1539,7 +1538,6 @@
         fab:menu_colorNormal="#000"
         fab:menu_colorPressed="@color/colorAccent"
         fab:menu_colorRipple="#99d4d4d4"
-
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_colorNormal="#000"
@@ -1568,39 +1566,39 @@
             android:id="@+id/fabmessage_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/btn_send_normal"
+            app:fab_colorNormal="#ffffff"
             app:fab_label="Message Driver "
-            app:srcCompat="@drawable/ic_envelop"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+          />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabmessage_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/btn_send_normal"
-
+            app:fab_colorNormal="#ffffff"
             app:fab_label="Message Customer"
-            app:srcCompat="@drawable/ic_envelop"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            />
 
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabcall_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/btn_send_normal"
+            app:fab_colorNormal="#ffffff"
             app:fab_label="Call Driver "
-            app:srcCompat="@drawable/ic_call"
-            fab:fab_size="mini" />
+
+            fab:fab_size="mini"
+            />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabcall_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/btn_send_normal"
+            app:fab_colorNormal="#ffffff"
             app:fab_label="Call Customer"
-            app:srcCompat="@drawable/ic_call"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+          />
 
     </com.github.clans.fab.FloatingActionMenu>
 

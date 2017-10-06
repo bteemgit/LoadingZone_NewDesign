@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.loadingzone.R;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -26,12 +28,14 @@ public class TruckDocumentDetailActivity extends AppCompatActivity {
 
     @NonNull
     @BindView(R.id.ivtruckDoc)
-    ImageView ivtruckDoc;
+    SimpleDraweeView ivtruckDoc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_document_detail);
         ButterKnife.bind(this);
+        Fresco.initialize(this);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -332,7 +332,7 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
     }
 
     private void updateEndlessRecyclerViewDriver() {
-        availbleDriverListAdapter = new AvailbleDriverListAdapter(listAvailableDriver, R.layout.item_avalible_driver, getApplicationContext());
+        availbleDriverListAdapter = new AvailbleDriverListAdapter(listAvailableDriver, R.layout.item_availvle_driver, getApplicationContext());
         endlessRecyclerViewItem.setAdapter(availbleDriverListAdapter);
 
     }

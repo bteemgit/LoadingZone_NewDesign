@@ -25,13 +25,9 @@ import java.util.List;
 public class ReasonAdapterList extends RecyclerView.Adapter<ReasonAdapterList.ViewHolder> {
     private List<VehicleMaker> truckNameList = new ArrayList<>();
     private Context context;
-
     public ReasonAdapterList(Context context, List<VehicleMaker> truckNameList) {
-
         this.context = context;
         this.truckNameList = truckNameList;
-
-
     }
 
     @Override
@@ -46,7 +42,6 @@ public class ReasonAdapterList extends RecyclerView.Adapter<ReasonAdapterList.Vi
     public void onBindViewHolder(final ReasonAdapterList.ViewHolder holder, final int position) {
         VehicleMaker data = truckNameList.get(position);
         holder.textTruckName.setText(data.getMakerName());
-
         // For setting the material Textdrawable
         ColorGenerator generator = ColorGenerator.MATERIAL;
         generator = ColorGenerator.MATERIAL;
@@ -73,8 +68,6 @@ public class ReasonAdapterList extends RecyclerView.Adapter<ReasonAdapterList.Vi
 
         return 0;
     }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textTruckName;

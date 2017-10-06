@@ -14,9 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,7 +44,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -63,14 +60,9 @@ public class LoginActivity extends BaseActivity {
     TextView textViewSignup;
     @BindView(R.id.rootView)
     RelativeLayout rootView;
-
     @BindView(R.id.linearEye)
     LinearLayout linearLayoutEye;
-
-
-
     private ApiInterface apiService;
-
     List<Error> errorArrayList = new ArrayList<>();
     private SessionManager session;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -79,8 +71,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_login_02);
+        setContentView(R.layout.activity_login);
         //buuterknife for injecting the views
         ButterKnife.bind(this);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
@@ -89,10 +80,11 @@ public class LoginActivity extends BaseActivity {
         if (session.isLoggedIn()) {
             Log.d("login Isuue", "sessionfalse");
             Intent intent1 = new Intent(LoginActivity.this, HomeActivity.class);
+            intent1.putExtra("isFrom","home");
             startActivity(intent1);
             finish();
         } else {
-            Log.d("login Isuue", "sessionfalse");
+          //  Log.d("login Isuue", "sessionfalse");
         }
 
 ///firebase
@@ -152,14 +144,8 @@ public class LoginActivity extends BaseActivity {
     private void displayFirebaseRegId() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         regId = pref.getString("regId", null);
+   //     Log.e("deviceid ", "Firebase reg id: " + regId);
 
-
-        Log.e("deviceid ", "Firebase reg id: " + regId);
-
-      /*  if (!TextUtils.isEmpty(regId))
-            txtRegId.setText("Firebase Reg Id: " + regId);
-        else
-            txtRegId.setText("Firebase Reg Id is not received yet!");*/
     }
 
     @Override
@@ -232,6 +218,7 @@ public class LoginActivity extends BaseActivity {
                     if (response.body().getMeta().getStatus().equals("true") || response.body().getMeta().getStatus().equals(true)) {
                         if (response.body().getData().getServiceProviderId() != null) {
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            intent.putExtra("isFrom","home");
                             session.setLogin(true);
                             AppController.setString(getApplicationContext(), "service_provider_id", String.valueOf(response.body().getData().getServiceProviderId()));
                             AppController.setString(getApplicationContext(), "customer_email", response.body().getData().getUsername());

@@ -5,7 +5,11 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -163,7 +167,6 @@ public class DriverEditActivity extends BaseActivity {
         driver_mobile = getIntent().getStringExtra("driver_mobile");
         driver_adress = getIntent().getStringExtra("driver_adress");
         profile_pic = getIntent().getStringExtra("profile_pic");
-
         driverJoinedDate = getIntent().getStringExtra("driverJoinedDate");
         currentlyAssignedTruck = getIntent().getStringExtra("currentlyAssignedTruck");
 
@@ -186,24 +189,6 @@ public class DriverEditActivity extends BaseActivity {
      // updating the edittext focusable
         driverEditTextFocus(isUpdate,isFrom);
 
-        editTextDriverAdress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent =
-                            new PlaceAutocomplete
-                                    .IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                                    .build(DriverEditActivity.this);
-                    startActivityForResult(intent, 1);
-                } catch (GooglePlayServicesRepairableException e) {
-                    // TODO: Handle the error.
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    System.out.println(e);
-                    // TODO: Handle the error.
-                }
-            }
-        });
-
     }
 
     // back button action
@@ -213,10 +198,7 @@ public class DriverEditActivity extends BaseActivity {
         return true;
     }
 
-
     public void showDetailsFromDriverViewActivity(String driver_name, String driver_email, String driver_mobile, String driver_adress, String driver_joinedDate, String currentlyAssignedTruck) {
-
-
         if (!driver_name.equals(null))
             editTextDriverName.setText(driver_name);
         if (!driver_email.equals(null))
@@ -231,7 +213,6 @@ public class DriverEditActivity extends BaseActivity {
         if (!driver_adress.equals(null))
             editTextAssignedTruck.setText(currentlyAssignedTruck);
     }
-
     // update the driver
     @OnClick(R.id.linerUpdate)
     public void editDriver() {
@@ -242,8 +223,6 @@ public class DriverEditActivity extends BaseActivity {
         driverEditTextFocus("Update",isFrom);
 
     }
-
-
     // Add new Driver
     @NonNull
     @OnClick(R.id.fabDriverAddDetails)
@@ -288,12 +267,7 @@ public class DriverEditActivity extends BaseActivity {
 
 
     }
-
-
-
     //Image Uploading
-
-
     @OnClick(R.id.btnEditProfilePic)
     public void changeProfilePic() {
         View v = new View(getApplicationContext());
@@ -309,9 +283,6 @@ public class DriverEditActivity extends BaseActivity {
             showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
         }
     }
-
-
-
     //:.....................profile pic upload
 
     /**
@@ -331,13 +302,6 @@ public class DriverEditActivity extends BaseActivity {
             startActivityForResult(chooserIntent, 1010);
         }
     }
-
-
-
-
-
-
-
 
     private void startPermissionsActivity(String[] permission) {
         PermissionsActivity.startActivityForResult(this, 0, permission);
@@ -411,7 +375,8 @@ public class DriverEditActivity extends BaseActivity {
 
                 {
                     showSnakBar(relativeLayoutRoot, "Driver Updated Successfully");
-                    Intent i = new Intent(DriverEditActivity.this, DriverViewActivity.class);
+                    Intent i = new Intent(DriverEditActivity.this, HomeActivity.class);
+                    i.putExtra("isFrom","driver");
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 } else {
@@ -579,6 +544,7 @@ public class DriverEditActivity extends BaseActivity {
             editTextJoinedDate.setFocusable(false);
             editTextAssignedTruck.setFocusable(false);
             editTextDriverAdress.setFocusable(false);
+
         }
         if (isFrom.equals("driverView")&&isUpdate.equals("Update")) {
             editTextDriverName.setFocusableInTouchMode(true);
@@ -593,6 +559,23 @@ public class DriverEditActivity extends BaseActivity {
             editTextJoinedDate.setFocusable(false);
             editTextAssignedTruck.setFocusableInTouchMode(false);
             editTextAssignedTruck.setFocusable(false);
+            editTextDriverAdress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Intent intent =
+                                new PlaceAutocomplete
+                                        .IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                                        .build(DriverEditActivity.this);
+                        startActivityForResult(intent, 1);
+                    } catch (GooglePlayServicesRepairableException e) {
+                        // TODO: Handle the error.
+                    } catch (GooglePlayServicesNotAvailableException e) {
+                        System.out.println(e);
+                        // TODO: Handle the error.
+                    }
+                }
+            });
         }
     }
 }

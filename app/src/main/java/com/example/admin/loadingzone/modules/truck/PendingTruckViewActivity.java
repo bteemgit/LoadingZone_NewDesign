@@ -52,17 +52,12 @@ public class PendingTruckViewActivity extends BaseActivity {
     ProgressBar progressBar;
     @BindView(R.id.rootView)
     RelativeLayout relativeLayoutRoot;
-
     @NonNull
     @BindView(R.id.fabAddTruck)
     com.github.clans.fab.FloatingActionButton fab_messageDriver;
-
-
     @NonNull
     @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
-
-    private BottomNavigationView mBottomNav;
     ApiInterface apiService;
     private int selectedItemPosition = -1;
     TrckListAdapter trckListAdapter;
@@ -89,8 +84,6 @@ public class PendingTruckViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_view);
         ButterKnife.bind(this);
-        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        mBottomNav.setVisibility(View.GONE);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

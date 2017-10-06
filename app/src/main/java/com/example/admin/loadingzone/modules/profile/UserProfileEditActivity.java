@@ -196,7 +196,6 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
             }
         }
         else {
-            Log.d("serviceid",service_provider_id);
             if (!service_provider_id.equals("null")||service_provider_id!="null")
             {
                 if (isConnectingToInternet(UserProfileEditActivity.this)) {
@@ -234,8 +233,6 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
             if(phone.length() < 6 || phone.length() > 13) {
                 // if(phone.length() != 10) {
                 check = false;
-                //txtPhone.setError("Not Valid Number");
-                // Toast.makeText(this, "Not Valid Mobile Number", Toast.LENGTH_SHORT).show();
                 showSnakBar(relativeLayoutRoot, "Not a valid Mobile Number !!");
             } else {
                 check = true;
@@ -280,6 +277,7 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                     AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
                     AppController.setString(UserProfileEditActivity.this, "service_provider_id", response.body().getServiceProviderId());
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    i.putExtra("isFrom","home");
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
@@ -294,8 +292,7 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
         });
     }
 
-
-    //    // api call method for user profile update
+    // api call method for user profile update
     private void userProfileUpdate(String service_provider_id,String provider_name, String phone_1, String location_name, String latitude, String longitude) {
         showProgressDialog(UserProfileEditActivity.this, "Uplaoding the Profile Data");
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
@@ -306,11 +303,10 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     AppController.setString(UserProfileEditActivity.this, "customer_name", response.body().getProviderName());
-
-
                     AppController.setString(getApplicationContext(), "provider_pic", response.body().getProfilePic());
 
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    i.putExtra("isFrom","home");
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
@@ -417,7 +413,6 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
         // MultipartBody.Part is used to send also the actual file name
          MultipartBody.Part body =
                 MultipartBody.Part.createFormData("profile_pic", file.getName(), requestFile);
-
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
         Call<UserProfileResponse> resultCall = apiService.UploadprofilePicProvider(GloablMethods.API_HEADER + acess_token, body);
         // finally, execute the request
@@ -440,8 +435,6 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                             .transform(new CircleTransformation())
                             .into(imageViewProfileImage);
                     Snackbar.make(relativeLayoutRoot, R.string.string_upload_success, Snackbar.LENGTH_LONG).show();
-
-
                 }else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
@@ -456,9 +449,6 @@ if (isConnectingToInternet(UserProfileEditActivity.this))
                     }
 
                 }
-                /**
-                 * Update Views
-                 */
                 imagePath = "";
 
             }

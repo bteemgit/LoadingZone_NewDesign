@@ -35,14 +35,9 @@ import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SlideAnimationUtil;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
-import com.example.admin.loadingzone.modules.login.LoginActivity;
-import com.example.admin.loadingzone.modules.truck.TruckAddActivity;
-import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.BlockTruckandDriverResponse;
-import com.example.admin.loadingzone.retrofit.model.LoginResponse;
-import com.example.admin.loadingzone.retrofit.model.Meta;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -514,8 +509,6 @@ public class StartJobActivity extends BaseActivity {
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     String truckSelected = "true";
                     fab_CompleteStartJobVisibility(truckSelected,driver_id);
-                   // fab_CompleteStartJob.setVisibility(View.VISIBLE);
-                    //BlockTruckandDriver(JobId, provider_vehicle_id, driver_id, expected_start_date, expected_end_date);
 
 
                 } else {
@@ -646,85 +639,4 @@ public class StartJobActivity extends BaseActivity {
 
     }
 
-
-    /*//API for change the blocked Truck
-
-    //api call for blocking the driver and truck for this job
-    public void ChangeBlockedTruckAndDriver(String job_id, String provider_vehicle_id, String job_driver_id, String expected_start_date, String expected_end_date) {
-
-        showProgressDialog(StartJobActivity.this, "loading");
-        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-        Call<BlockTruckandDriverResponse> call = apiService.ChangeBlockTruckandDriverResponse(GloablMethods.API_HEADER + acess_token, job_id, provider_vehicle_id, job_driver_id, expected_start_date, expected_end_date);
-        call.enqueue(new Callback<BlockTruckandDriverResponse>() {
-            @Override
-            public void onResponse(Call<BlockTruckandDriverResponse> call, retrofit2.Response<BlockTruckandDriverResponse> response) {
-                hideProgressDialog();
-                if (response.isSuccessful()) {
-                    showSnakBar(root, response.body().getMeta().getMessage());
-                    // for layout handling
-                    relativeSerachAvalibleTruck.setVisibility(View.GONE);
-                    relativeStartJob.setVisibility(View.VISIBLE);
-                    //   isTruckBlocked = "Blocked";
-
-                } else {
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        JSONObject meta = jObjError.getJSONObject("meta");
-                        Snackbar snackbar = Snackbar
-                                .make(root, meta.getString("message"), Snackbar.LENGTH_LONG);
-                        snackbar.show();
-
-                    } catch (Exception e) {
-                        Log.d("exception", e.getMessage());
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BlockTruckandDriverResponse> call, Throwable t) {
-                hideProgressDialog();
-            }
-        });
-
-    }*/
-
-
-//    //api call for sign up
-//    public void CreateJob(String job_id) {
-//
-//        showProgressDialog(StartJobActivity.this, "loading");
-//        String acess_token = AppController.getString(getApplicationContext(), "acess_token");
-//        Call<Meta> call = apiService.CreateJob(GloablMethods.API_HEADER + acess_token, job_id);
-//        call.enqueue(new Callback<Meta>() {
-//            @Override
-//            public void onResponse(Call<Meta> call, retrofit2.Response<Meta> response) {
-//                hideProgressDialog();
-//                if (response.isSuccessful()) {
-//                   showSnakBar(root,"Success");
-//
-//                } else {
-//                    try {
-//                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-//                        JSONObject meta = jObjError.getJSONObject("meta");
-//                        Snackbar snackbar = Snackbar
-//                                .make(root, meta.getString("message"), Snackbar.LENGTH_LONG);
-//                        snackbar.show();
-//
-//                    } catch (Exception e) {
-//                        Log.d("exception", e.getMessage());
-//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Meta> call, Throwable t) {
-//                hideProgressDialog();
-//            }
-//        });
-//
-//    }
 }

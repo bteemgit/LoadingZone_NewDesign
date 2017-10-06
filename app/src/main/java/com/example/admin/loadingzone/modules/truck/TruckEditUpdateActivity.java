@@ -142,12 +142,12 @@ public class TruckEditUpdateActivity extends BaseActivity {
     ApiInterface apiService;
     String provider_vehicle_id, truckId, reg_no, chassis_no, License_no;
     String driver = "driver";
-    List<DriverList> Listdrivers= new ArrayList<>();
+    List<DriverList> Listdrivers = new ArrayList<>();
 
     DriverListAdapter driverListAdapter;
     TruckDocumentListAdapter truckDocumentListAdapter;
     private List<VehicleDoc> vehicleDocArrayList = new ArrayList<>();
-    private  static String TRUCK_UPDATE="UpdateTruck";
+    private static String TRUCK_UPDATE = "UpdateTruck";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,16 +168,15 @@ public class TruckEditUpdateActivity extends BaseActivity {
         chassis_no = getIntent().getStringExtra("chassis_no");
         License_no = getIntent().getStringExtra("License_no");
         //calling the driver list api
-        Listdrivers=getDriverList();
+        Listdrivers = getDriverList();
         String From = getIntent().getStringExtra("isFrom");
-        if(From.equals("PendingTruckView")){
+        if (From.equals("PendingTruckView")) {
             linearDriverDetails_Head.setVisibility(View.GONE);
             //assignDriverDetailsExists.setVisibility(View.GONE);
             assignDriver_card.setVisibility(View.GONE);
         }
-
         // recyclerview layout manager
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(TruckEditUpdateActivity.this, 2);
+        LinearLayoutManager gridLayoutManager = new LinearLayoutManager(TruckEditUpdateActivity.this);
         endlessRecyclerViewTruckDocList.setLayoutManager(gridLayoutManager);
 
         if (isConnectingToInternet(getApplicationContext()))
@@ -205,12 +204,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
             textAddNewDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.VISIBLE);
         }
-
-
-
-
     }
-
 
     // back button action
     @Override
@@ -226,10 +220,9 @@ public class TruckEditUpdateActivity extends BaseActivity {
         Intent i = new Intent(TruckEditUpdateActivity.this, TruckAddActivity.class);
         i.putExtra("isFrom", TRUCK_UPDATE);
         i.putExtra("provider_vehicle_id", provider_vehicle_id);
-        i.putExtra("reg_no",reg_no);
-        i.putExtra("chassis_no",chassis_no);
-        i.putExtra("License_no",License_no);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra("reg_no", reg_no);
+        i.putExtra("chassis_no", chassis_no);
+        i.putExtra("License_no", License_no);
         startActivity(i);
     }
 
@@ -249,9 +242,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
 
     }
 
-
-
-
     // delete truck
     @NonNull
     @OnClick(R.id.linearDeleteTruck)
@@ -263,7 +253,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
+                        switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked
                                 DeleteTruck(provider_vehicle_id);
@@ -278,7 +268,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(TruckEditUpdateActivity.this);
                 builder.setMessage("Are you sure? want to delete?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
-
 
 
             } else {
@@ -490,7 +479,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
                     Snackbar snackbar = Snackbar
                             .make(rootView, "Deleted", Snackbar.LENGTH_LONG);
                     snackbar.show();
-                    Intent i = new Intent(TruckEditUpdateActivity.this, TruckViewActivity.class);
+                    Intent i = new Intent(TruckEditUpdateActivity.this, HomeActivity.class);
+                    i.putExtra("isFrom", "truck");
                     startActivity(i);
                 } else {
                     try {
@@ -530,7 +520,8 @@ public class TruckEditUpdateActivity extends BaseActivity {
             public void onResponse(Call<AdddriverResponnse> call, Response<AdddriverResponnse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    Intent intent = new Intent(getApplicationContext(), TruckViewActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.putExtra("isfrom", "truck");
                     startActivity(intent);
                 } else {
                     try {
@@ -557,8 +548,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
         });
     }
 
-    public void SetDriverField(String drivername, String driverEmail, String driverMobile, String driverPic)
-    {
+    public void SetDriverField(String drivername, String driverEmail, String driverMobile, String driverPic) {
         if (drivername != null)
             textDriverName.setText(drivername);
         if (driverEmail != null)

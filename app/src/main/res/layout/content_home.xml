@@ -9,55 +9,12 @@
     android:orientation="vertical"
     tools:context=".modules.home.HomeActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/progressBarFooter"
-        android:layout_below="@id/app_bar"
-        android:layout_marginBottom="55dp"
-        android:background="@color/dividercolor">
-
-        <com.example.admin.loadingzone.recyclerview.EndlessRecyclerView
-            android:id="@+id/recyclerViewHomePostedJob"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center">
-        <ProgressBar
-            android:id="@+id/progressBarFooter"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="29dp"
-            />
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -71,6 +28,7 @@
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@drawable/bottom_selector"
         app:itemTextColor="@drawable/bottom_selector"
+        android:state_enabled="true"
         app:menu="@menu/bottom_nav_items" />
 
 

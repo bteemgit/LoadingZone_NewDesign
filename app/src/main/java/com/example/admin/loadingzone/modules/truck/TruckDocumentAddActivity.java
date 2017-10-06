@@ -33,6 +33,7 @@ import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.Utility;
+import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.profile.UserProfileEditActivity;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -68,7 +69,7 @@ public class TruckDocumentAddActivity extends BaseActivity {
     ApiInterface apiService;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
-    String imagePath, vehicle_id,isFrom;
+    String imagePath, vehicle_id,provider_vehicle_id,isFrom;
     @NonNull
     @BindView(R.id.btnSelectPhoto)
     Button btnSelectPhoto;
@@ -104,6 +105,8 @@ public class TruckDocumentAddActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.truck_documents);
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         vehicle_id = getIntent().getStringExtra("vehicle_id");
+        provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
+        Log.d("vehicle_id.....",vehicle_id);
         isFrom=getIntent().getStringExtra("isFrom");
     }
 
@@ -187,7 +190,15 @@ public class TruckDocumentAddActivity extends BaseActivity {
 
         if (isConnectingToInternet(TruckDocumentAddActivity.this)) {
             String description = editTextDescription.getText().toString();
-            uploadImage(description, vehicle_id);
+            if (!description.equals(null)||description!=null)
+            {
+                uploadImage(description, vehicle_id);
+            }
+            else
+            {
+                showSnakBar(rootView,"Please add Description");
+            }
+
         } else {
             showSnakBar(rootView, MessageConstants.INTERNET);
         }
@@ -201,18 +212,19 @@ public class TruckDocumentAddActivity extends BaseActivity {
         {
             Intent i = new Intent(TruckDocumentAddActivity.this, TruckDocumentEditActivity.class);
             i.putExtra("vehicle_id",vehicle_id);
+            i.putExtra("provider_vehicle_id",provider_vehicle_id);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
         else
         {
-            Intent i = new Intent(TruckDocumentAddActivity.this, TruckViewActivity.class);
+            Intent i = new Intent(TruckDocumentAddActivity.this, HomeActivity.class);
             Toast.makeText(this, "Added to pending trucks and waiting for Admin approval... ", Toast.LENGTH_LONG).show();
+            i.putExtra("isFrom","truck");
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
-            //finish();
         }
 
 
@@ -283,7 +295,7 @@ public class TruckDocumentAddActivity extends BaseActivity {
                     .centerCrop()
                     .into(ivImagePreview);
 
-            Snackbar.make(rootView, R.string.string_reselect, Snackbar.LENGTH_LONG).show();
+          //  Snackbar.make(rootView, R.string.string_reselect, Snackbar.LENGTH_LONG).show();
             cursor.close();
         } else {
             Snackbar.make(rootView, R.string.string_unable_to_load_image, Snackbar.LENGTH_LONG).show();

@@ -10,25 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
-import com.example.admin.loadingzone.modules.driver.DriverEditActivity;
-import com.example.admin.loadingzone.modules.driver.DriverListAdapter;
-import com.example.admin.loadingzone.modules.driver.DriverViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.ActiveTrucklistResponse;
 import com.example.admin.loadingzone.retrofit.model.AvailableTruck;
-import com.example.admin.loadingzone.retrofit.model.DriverList;
-import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +86,6 @@ public class SelectActvieTruckActivity extends BaseActivity {
         service = ApiClient.getClient().create(ApiInterface.class);
         startUnixTimeStamp = getIntent().getStringExtra("startUnixTimeStamp");
         endUnixTimeStamp = getIntent().getStringExtra("endUnixTimeStamp");
-        Log.d("startUnixTimeStamp", startUnixTimeStamp);
-        Log.d("endUnixTimeStamp", endUnixTimeStamp);
-
-
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         refreshLayout.setRefreshing(false);
         setUpListeners();
@@ -145,7 +133,6 @@ public class SelectActvieTruckActivity extends BaseActivity {
                 String truck_type = listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
                 String truck_dimension = listTrckAvailble.get(position).getVehicle().getDimension();
                 Intent i = new Intent();
-                Log.d("provider_vehicle_id", truck_id);
                 i.putExtra("driver_id", driver_id);
                 i.putExtra("truck_id", truck_id);
                 i.putExtra("truck_name", truck_name);
@@ -228,6 +215,5 @@ public class SelectActvieTruckActivity extends BaseActivity {
     private void updateEndlessRecyclerView() {
         activeTruckListAdapter = new ActiveTruckListAdapter(listTrckAvailble, R.layout.item_active_truck, getApplicationContext());
         endlessRecyclerViewTrucks.setAdapter(activeTruckListAdapter);
-        // progressDialog.dismiss();
     }
 }

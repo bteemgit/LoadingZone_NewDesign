@@ -20,9 +20,6 @@ import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.modules.myjob.MyJobtabViewActivity;
 import com.example.admin.loadingzone.modules.myqutation.QutationDetailsActivity;
-import com.example.admin.loadingzone.modules.truck.TrckListAdapter;
-import com.example.admin.loadingzone.modules.truck.TruckEditUpdateActivity;
-import com.example.admin.loadingzone.modules.truck.TruckViewActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -242,6 +239,6 @@ public class NottificationListActivity extends BaseActivity {
     private void updateEndlessRecyclerView() {
         notificationListAdapter = new NotificationListAdapter(nottificationList, R.layout.item_nottification_list, getApplicationContext());
         endlessRecyclerViewNottificationList.setAdapter(notificationListAdapter);
-        // progressDialog.dismiss();
+
     }
 }
