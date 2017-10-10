@@ -159,7 +159,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Truck Details");
-
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
         truckId = getIntent().getStringExtra("truckId");
@@ -167,12 +166,13 @@ public class TruckEditUpdateActivity extends BaseActivity {
         reg_no = getIntent().getStringExtra("reg_no");
         chassis_no = getIntent().getStringExtra("chassis_no");
         License_no = getIntent().getStringExtra("License_no");
-        //calling the driver list api
-        Listdrivers = getDriverList();
         String From = getIntent().getStringExtra("isFrom");
+        //calling the driver list api if the class is not coming from pending truck
+        if (!From.equals("PendingTruckView")) {
+            Listdrivers = getDriverList();
+        }
         if (From.equals("PendingTruckView")) {
             linearDriverDetails_Head.setVisibility(View.GONE);
-            //assignDriverDetailsExists.setVisibility(View.GONE);
             assignDriver_card.setVisibility(View.GONE);
         }
         // recyclerview layout manager
@@ -521,7 +521,7 @@ public class TruckEditUpdateActivity extends BaseActivity {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    intent.putExtra("isfrom", "truck");
+                    intent.putExtra("isFrom", "truck");
                     startActivity(intent);
                 } else {
                     try {

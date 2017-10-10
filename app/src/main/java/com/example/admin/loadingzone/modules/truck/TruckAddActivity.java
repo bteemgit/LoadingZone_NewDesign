@@ -161,7 +161,7 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.truck_add_title);
+
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         getTruckMakerList();
         getTruckTypeList();
@@ -170,16 +170,14 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         provider_vehicle_id = getIntent().getStringExtra("provider_vehicle_id");
         if (isFrom.equals(NEW_TRUCK_ADD)) {
             setupRevealBackground(savedInstanceState);
+            getSupportActionBar().setTitle(R.string.truck_add_title);
         }
         if (isFrom.equals(TRUCK_UPDATE)) {
             reg_no = getIntent().getStringExtra("reg_no");
             chassis_no = getIntent().getStringExtra("chassis_no");
             License_no = getIntent().getStringExtra("License_no");
-//            truck_typeId=getIntent().getStringExtra("truck_typeId");
-//            model_id=getIntent().getStringExtra("model_id");
-//            model_year=getIntent().getStringExtra("model_year");
-
             getTruckDetails(provider_vehicle_id);
+            getSupportActionBar().setTitle(R.string.truck_update_title);
         }
 //        if (isFrom.equals("TruckView")) {
 //            getSupportActionBar().setTitle("Truck Details");
@@ -224,17 +222,12 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-
-                        // txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
                         editTextViewTrcukInsurance.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 
                     }
@@ -337,9 +330,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                                    showSnakBar(rootView, "Please select Custom Name ");
                                }
 
-
-
-
                             } else {
                                 showSnakBar(rootView, "Please select Vehicle Year");
                             }
@@ -360,16 +350,63 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
             }
         } else {
-
             if (isConnectingToInternet(getApplicationContext())) {
                 if ( !truck_name.equals("Trucks")) {
                     if (!truck_model.equals("Model")) {
                         if (!truck_type.equals("Type")) {
                             if (!truck_year.equals("Year")) {
-                                //AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
-                                if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
-                                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+
+                                if(custom_name.length() > 0){
+                                    if(avg_running_speed.length()>0){
+                                        if(weight.length()>0){
+                                            if(container_height.length()>0){
+                                                if(container_length.length()>0){
+                                                    if(container_width.length()>0){
+
+                                                        if(reg_no.length() == 0 || chasisNo.length() == 0 || LicNo.length() == 0 || insurance_exp_date.length() == 0){
+
+                                                            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    switch (which){
+                                                                        case DialogInterface.BUTTON_POSITIVE:
+                                                                            //Yes button clicked
+                                                                            if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
+                                                                                UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                                                                            }
+                                                                            break;
+
+                                                                        case DialogInterface.BUTTON_NEGATIVE:
+                                                                            //No button clicked
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            };
+                                                            AlertDialog.Builder builder = new AlertDialog.Builder(TruckAddActivity.this);
+                                                            builder.setMessage("Are you sure? want to add truck by these details?").setPositiveButton("Yes", dialogClickListener)
+                                                                    .setNegativeButton("No", dialogClickListener).show();
+
+                                                        }else
+                                                            AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+                                                    }else{
+                                                        showSnakBar(rootView, "Please select Width ");
+                                                    }
+                                                }else{
+                                                    showSnakBar(rootView, "Please select Length ");
+                                                }
+                                            }else{
+                                                showSnakBar(rootView, "Please select Height ");
+                                            }
+                                        }else{
+                                            showSnakBar(rootView, "Please select Weight ");
+                                        }
+                                    }else{
+                                        showSnakBar(rootView, "Please select Average Speed ");
+                                    }
+                                }else{
+                                    showSnakBar(rootView, "Please select Custom Name ");
                                 }
+
                             } else {
                                 showSnakBar(rootView, "Please select Vehicle Year");
                             }
@@ -386,19 +423,11 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
+
+
             }
         }
     }
-
-    /* if (!provider_vehicle_id.equals(null) && provider_vehicle_id.length() > 0) {
-                if (isConnectingToInternet(getApplicationContext())) {
-                    UpdateTruck(provider_vehicle_id, avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
-                } else {
-                    showSnakBar(rootView, MessageConstants.INTERNET);
-                }
-            }
-        }
-    }*/
 
     private void setupRevealBackground(Bundle savedInstanceState) {
         //vRevealBackground.setFillPaintColor(0xFF16121a);
@@ -444,14 +473,20 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                 getTruckModelList(trick_id);
                 {
                     textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
+                    textViewTrckModel.setText("Model");
+                    textViewTrckType.setText("Type");
+                    textViewTrckYear.setText("Year");
+                    model_id = "";
+                    model_year = "";
+                    truck_typeId = "";
 
                 }
 
                 if (isFrom.equals(TRUCK_UPDATE)) {
                     textViewTrckMaker.setText(truckNameList.get(position).getMakerName());
-                    textViewTrckModel.setText("");
-                    textViewTrckType.setText("");
-                    textViewTrckYear.setText("");
+                    textViewTrckModel.setText("Model");
+                    textViewTrckType.setText("Type");
+                    textViewTrckYear.setText("Year");
                     model_id = "";
                     model_year = "";
                     truck_typeId = "";

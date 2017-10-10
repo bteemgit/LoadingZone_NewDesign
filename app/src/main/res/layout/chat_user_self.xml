@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/ic_single_tick"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:background="@drawable/triangle"
+            app:srcCompat="@drawable/triangle"
             />
     </LinearLayout>
 

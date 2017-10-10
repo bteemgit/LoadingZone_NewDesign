@@ -34,18 +34,9 @@ public class JobDetails {
     @Expose
     private String loadingTime;
 
-    public Double getOrigin_destination_distance() {
-        return origin_destination_distance;
-    }
-
-    public void setOrigin_destination_distance(Double origin_destination_distance) {
-        this.origin_destination_distance = origin_destination_distance;
-    }
-
     @SerializedName("origin_destination_distance")
     @Expose
     private Double origin_destination_distance;
-
 
     @SerializedName("location_distance")
     @Expose
@@ -66,6 +57,35 @@ public class JobDetails {
     @Expose
     private Object runningStatusName;
 
+    public String getPreferred_loading_time() {
+        return preferred_loading_time;
+    }
+
+    public void setPreferred_loading_time(String preferred_loading_time) {
+        this.preferred_loading_time = preferred_loading_time;
+    }
+
+    public String getPreferred_loading_date() {
+        return preferred_loading_date;
+    }
+
+    public void setPreferred_loading_date(String preferred_loading_date) {
+        this.preferred_loading_date = preferred_loading_date;
+    }
+
+    @SerializedName("preferred_loading_date")
+    @Expose
+    private String preferred_loading_time;
+    @SerializedName("preferred_loading_time")
+    @Expose
+    private String preferred_loading_date;
+    public Double getOrigin_destination_distance() {
+        return origin_destination_distance;
+    }
+
+    public void setOrigin_destination_distance(Double origin_destination_distance) {
+        this.origin_destination_distance = origin_destination_distance;
+    }
     public Integer getJobId() {
         return jobId;
     }

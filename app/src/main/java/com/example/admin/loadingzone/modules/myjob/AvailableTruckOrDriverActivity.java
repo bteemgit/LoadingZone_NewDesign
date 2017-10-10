@@ -276,8 +276,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
             call.enqueue(new Callback<AvailbaleDriverResponse>() {
                 @Override
                 public void onResponse(Call<AvailbaleDriverResponse> call, retrofit2.Response<AvailbaleDriverResponse> response) {
-
-
                     refreshLayout.setRefreshing(false);
                     hideProgressDialog();
                     if (response.isSuccessful() && response.body() != null) {
@@ -292,8 +290,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                                 for (AvailableDriver itemModel : availableDriverList) {
                                     listAvailableDriver.add(itemModel);
                                 }
-
-//                                adapter.addToList(contestItemsList);
                             }
                             if (listAvailableDriver.size() < limit) {
                                 endlessRecyclerViewItem.setHaveMoreItem(false);
@@ -305,7 +301,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                         } else {
                             endlessRecyclerViewItem.setHaveMoreItem(false);
                         }
-
                     } else {
                         finish();
                         endlessRecyclerViewItem.setHaveMoreItem(false);
@@ -315,7 +310,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                     }
                     progressBar.setVisibility(View.GONE);
                 }
-
                 @Override
                 public void onFailure(Call<AvailbaleDriverResponse> call, Throwable t) {
                     hideProgressDialog();
@@ -326,15 +320,13 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
     }
 
     private void updateEndlessRecyclerViewTruck() {
-        avalibleTruckListAdapter = new AvalibleTruckListAdapter(listTrckAvailble, R.layout.item_avalible_truck, getApplicationContext());
+        avalibleTruckListAdapter = new AvalibleTruckListAdapter(listTrckAvailble, R.layout.item_truck_avalible, getApplicationContext());
         endlessRecyclerViewItem.setAdapter(avalibleTruckListAdapter);
-
     }
 
     private void updateEndlessRecyclerViewDriver() {
         availbleDriverListAdapter = new AvailbleDriverListAdapter(listAvailableDriver, R.layout.item_availvle_driver, getApplicationContext());
         endlessRecyclerViewItem.setAdapter(availbleDriverListAdapter);
-
     }
 
     @Override

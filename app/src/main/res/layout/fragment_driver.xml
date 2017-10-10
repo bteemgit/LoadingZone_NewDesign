@@ -43,7 +43,7 @@
         android:layout_marginRight="10dp"
         android:padding="10dp"
         app:layout_anchorGravity="bottom"
-        app:srcCompat="@drawable/ic_truck_add"
+        app:srcCompat="@drawable/fab_add"
         tools:ignore="VectorDrawableCompat" />
 
 </RelativeLayout>

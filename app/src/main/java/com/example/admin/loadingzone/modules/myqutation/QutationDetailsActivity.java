@@ -1,10 +1,12 @@
 package com.example.admin.loadingzone.modules.myqutation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +24,7 @@ import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
+import com.example.admin.loadingzone.modules.driver.DriverEditActivity;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.modules.home.QuotationApply;
 import com.example.admin.loadingzone.modules.login.LoginActivity;
@@ -115,7 +118,7 @@ public class QutationDetailsActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.relativeSendMessage)
     RelativeLayout relativeSendMessage;
-    String qutation_id, quotationAmount, job_date,job_time,quotationDescription, job_id;
+    String qutation_id, quotationAmount, job_date, job_time, quotationDescription, job_id, customer_pref_date, customer_pref_time;
     private ApiInterface apiService;
     String isFrom;
 
@@ -142,14 +145,14 @@ public class QutationDetailsActivity extends BaseActivity {
         String cus_phone = getIntent().getStringExtra("cus_phone");
         String cus_profile = getIntent().getStringExtra("cus_profile");
         String quotationCurrency = getIntent().getStringExtra("quotationCurrency");
-
+        customer_pref_date = getIntent().getStringExtra("customer_pref_date");
+        customer_pref_time = getIntent().getStringExtra("customer_pref_time");
         quotationAmount = getIntent().getStringExtra("quotationAmount");
         String dateSubmitted = getIntent().getStringExtra("dateSubmitted");
         String dateAccepted = getIntent().getStringExtra("dateAccepted");
         String dateRejected = getIntent().getStringExtra("dateRejected");
         String quotationStatus = getIntent().getStringExtra("quotationStatus");
         quotationDescription = getIntent().getStringExtra("quotationDescription");
-
         String jobDate = getIntent().getStringExtra("job_date");
         String jobDescription = getIntent().getStringExtra("jobDescription");
         String dateRequested = getIntent().getStringExtra("dateRequested");
@@ -157,9 +160,7 @@ public class QutationDetailsActivity extends BaseActivity {
         String distance = getIntent().getStringExtra("distance");
         String fromLocation = getIntent().getStringExtra("fromLocation");
         String ToLocation = getIntent().getStringExtra("toLocation");
-
         String QuotationCode = getIntent().getStringExtra("quotation_code");
-
         isFrom = getIntent().getStringExtra("isFrom");
         if (!isFrom.equals(null))
             if (isFrom.equals("pending")) {
@@ -184,35 +185,27 @@ public class QutationDetailsActivity extends BaseActivity {
             textDate.setText("Rejected Date");
             textQutationDate.setText(dateRejected);
         }
-        if (isFrom.equals("Nottification"))
-        {
+        if (isFrom.equals("Nottification")) {
             getQuoatationDetails(qutation_id);
         }
 
 
         textViewRequestedDate.setText(dateRequested);
         textViewJobDate.setText(jobDate);
-       // textQutationDescription.setText(jobDescription);
+        // textQutationDescription.setText(jobDescription);
         textViewQutoation.setText(activeQuotations);
         textViewJobTotalDist.setText(distance);
         textViewCutomerMobile.setText(cus_phone);
-
         textViewJob_From.setText(fromLocation);
         textViewJob_To.setText(ToLocation);
-
         textViewCutomerName.setText(cus_name);
         textViewCutomerEmail.setText(cus_email);
         textViewCutomerMobile.setText(cus_phone);
-
         textQutationStatus.setText(quotationStatus);
-
         textQutationAmount.setText(quotationAmount);
         textQutationCurrency.setText(quotationCurrency);
-
         textQutationDescription.setText(quotationDescription);
-
         textViewQuotationCode.setText(QuotationCode);
-
         Picasso.with(QutationDetailsActivity.this)
                 .load(cus_profile)
                 .placeholder(R.drawable.img_circle_placeholder)
@@ -235,12 +228,34 @@ public class QutationDetailsActivity extends BaseActivity {
 
     @OnClick(R.id.linearDelete)
     public void deleteQutation() {
+
         if (qutation_id != null && job_id != null)
-            if (isConnectingToInternet(getApplicationContext())) {
-                deleteQutation(qutation_id);
-            } else {
-                showSnakBar(rootView, MessageConstants.INTERNET);
-            }
+        if (isConnectingToInternet(getApplicationContext())) {
+
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            //Yes button clicked
+                            deleteQutation(qutation_id);;
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(QutationDetailsActivity.this);
+            builder.setMessage("Are you sure? want to delete?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
+        else {
+            showSnakBar(rootView, MessageConstants.INTERNET);
+        }
+
+
     }
 
     // send message to customer only after qutation id accepted
@@ -256,7 +271,6 @@ public class QutationDetailsActivity extends BaseActivity {
                     if (message.length() > 0 && subject.length() > 0) {
                         if (isConnectingToInternet(QutationDetailsActivity.this)) {
                             sendMessage(subject, message);
-
 
                         } else {
                             showSnakBar(rootView, MessageConstants.INTERNET);
@@ -279,13 +293,12 @@ public class QutationDetailsActivity extends BaseActivity {
         i.putExtra("job_time", job_time);
         i.putExtra("job_date", job_date);
         i.putExtra("JobId", job_id);
+        i.putExtra("customer_pref_date", customer_pref_date);
+        i.putExtra("customer_pref_time", customer_pref_time);
         startActivity(i);
-
-
     }
 
     private void sendMessage(String subject, String message) {
-
         showProgressDialog(QutationDetailsActivity.this, "sending...");
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         String acess_token = AppController.getString(getApplicationContext(), "acess_token");
@@ -298,7 +311,7 @@ public class QutationDetailsActivity extends BaseActivity {
                 if (response.isSuccessful())
 
                 {
-//                    if (response.body().getMeta().getStatus().equals("true")) {
+//               if (response.body().getMeta().getStatus().equals("true")) {
                     et_message.setText("");
                     et_subject.setText("");
                     showSnakBar(rootView, "Message sent");
@@ -391,24 +404,22 @@ public class QutationDetailsActivity extends BaseActivity {
             public void onResponse(Call<QuotationDetailsResponse> call, retrofit2.Response<QuotationDetailsResponse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    if (response.body().getMeta().getStatus().equals(true)||response.body().getMeta().getStatus().equals("true")) {
+                    if (response.body().getMeta().getStatus().equals(true) || response.body().getMeta().getStatus().equals("true")) {
 
 
                         textViewRequestedDate.setText(response.body().getJobDetails().getDateRequested());
-                       // textViewJobDate.setText(response.body().getJobDetails().getLoadingDate());
+                        // textViewJobDate.setText(response.body().getJobDetails().getLoadingDate());
                         textQutationDescription.setText(response.body().getQuotationDescription());
                         textViewQutoation.setText(response.body().getJobDetails().getQuotationCount());
-                        textViewJobTotalDist.setText(response.body().getJobDetails().getLocationDistance()+"");
+                        textViewJobTotalDist.setText(response.body().getJobDetails().getLocationDistance() + "");
                         textQutationDate.setText(response.body().getDateAccepted());
                         textViewJob_From.setText(response.body().getJobDetails().getFromLocationName());
                         textViewJob_To.setText(response.body().getJobDetails().getToLocationName());
-
                         textViewCutomerName.setText(response.body().getJobDetails().getCustomer().getName());
                         textViewCutomerEmail.setText(response.body().getJobDetails().getCustomer().getEmail());
                         textViewCutomerMobile.setText(response.body().getJobDetails().getCustomer().getPhone1());
-
                         textQutationStatus.setText(response.body().getQuotationStatus());
-                        textQutationAmount.setText(response.body().getQuotationAmount()+"");
+                        textQutationAmount.setText(response.body().getQuotationAmount() + "");
                         textQutationCurrency.setText(response.body().getQuotationCurrency());
                         textQutationDescription.setText(response.body().getQuotationDescription());
                         Picasso.with(QutationDetailsActivity.this)

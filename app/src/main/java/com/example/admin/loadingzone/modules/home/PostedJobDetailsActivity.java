@@ -257,12 +257,12 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     String CutomerMobile = null;
     View dark_bg;
     private static int REQUEST_CODE = 41;
-    String JobId, isFrom, job_status_code, job_time, job_date,PrefferedLoadingDate,PrefferedLoadingTime;
+    String JobId, isFrom, job_status_code, job_time, job_date, PrefferedLoadingDate, PrefferedLoadingTime;
     private ApiInterface apiService;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
 
-    String Exp_StartDateForAssignedJob,Exp_EndDateForAssignedJob;
+    String Exp_StartDateForAssignedJob, Exp_EndDateForAssignedJob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -311,7 +311,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
         PrefferedLoadingDate = getIntent().getStringExtra("PrefferedLoadingDate");
         PrefferedLoadingTime = getIntent().getStringExtra("PrefferedLoadingTime");
-
         String TruckSize = getIntent().getStringExtra("TruckSize_dimension");
         String TruckType = getIntent().getStringExtra("TruckType_name");
         String PaymentMode = getIntent().getStringExtra("PaymentType_name");
@@ -351,18 +350,15 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             //setting invisibile of preffered truckdetails
             linearPrefferedTruckDetails.setVisibility(View.GONE);
             linearTruckLabel.setVisibility(View.GONE);
-
             //setting visibility of Start/End date and time
             linearLayout_id_Start_EndDateime.setVisibility(View.VISIBLE);
             LinearLayout_id_Start_EndDateime_Label.setVisibility(View.VISIBLE);
-
             //the job can only cancel after the drver and vehicle is assignd and before the drvier loading the materials
             if (job_status_code.equals("job-started") || job_status_code.equals("vehicle-blocked")) {
                 buttonCanceljob.setVisibility(View.VISIBLE);
             } else {
                 buttonCanceljob.setVisibility(View.GONE);
             }
-
             // getting the loading details from the curesponding job
             getLoadingJobDeatails(JobId);
             linearAssignedVehicleHeading.setVisibility(View.VISIBLE);
@@ -373,6 +369,16 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             liner_JobStatus_heading.setVisibility(View.VISIBLE);
         }
 
+       if( job_status_code.equals("vehicle-blocked"))
+        {
+            imageViewEditAssignedVehicle.setVisibility(View.VISIBLE);
+            imageViewEditAssignedDriver.setVisibility(View.VISIBLE);
+        }
+        else
+       {
+           imageViewEditAssignedVehicle.setVisibility(View.GONE);
+           imageViewEditAssignedDriver.setVisibility(View.GONE);
+       }
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
         textViewCutomerMobile.setText(CutomerMobileNo);
@@ -382,7 +388,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         textViewQutoation.setText(Qutoation);
         textViewLoadingMaterial.setText(LoadingMaterial);
         textLoadingMat_Weight.setText(LoadingMat_Weight);
-        textMaterialDescription.setText(LoadingMaterial+" \n"+materialDescription);
+        textMaterialDescription.setText(LoadingMaterial + " \n" + materialDescription);
         textViewTotalDistance.setText(TotalDistance);
         textViewJobFrom.setText(JobFrom);
         textViewJobTo.setText(JobTo);
@@ -438,7 +444,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             intent.putExtra("start_time", start_time);
             intent.putExtra("end_time", end_time);
             intent.putExtra("end_date", end_date);
-
             startActivityForResult(intent, 2);
         }
     }
@@ -461,7 +466,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             intent.putExtra("end_time", end_time);
             intent.putExtra("end_date", end_date);
             intent.putExtra("isFrom", "Posted");
-
             startActivityForResult(intent, 2);
         }
 
@@ -636,9 +640,9 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                         textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
 
 
-                        Exp_StartDateForAssignedJob = response.body().getAssignedVehicle().getExpectedStartDate()+" "+response.body().getAssignedVehicle().getExpectedStartTime();
+                        Exp_StartDateForAssignedJob = response.body().getAssignedVehicle().getExpectedStartDate() + " " + response.body().getAssignedVehicle().getExpectedStartTime();
 
-                        Exp_EndDateForAssignedJob = response.body().getAssignedVehicle().getExpectedEndDate()+" "+response.body().getAssignedVehicle().getExpectedEndTime();
+                        Exp_EndDateForAssignedJob = response.body().getAssignedVehicle().getExpectedEndDate() + " " + response.body().getAssignedVehicle().getExpectedEndTime();
 
                         textViewRequestedDate.setText(Exp_StartDateForAssignedJob);
                         textViewJobDate.setText(Exp_EndDateForAssignedJob);
@@ -652,7 +656,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                         textDriverName.setText(response.body().getAssignedDriver().getDriverName());
                         textDriverEmail.setText(response.body().getAssignedDriver().getDriverEmail());
                         textDriverMobile.setText(response.body().getAssignedDriver().getDriverPhone());
-                      //  textVehicleRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusName());
+                        //  textVehicleRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusName());
                         textVehicleLocation.setText(response.body().getLoadStatus().getLocationName());
                         textLastUpdatedDate.setText(response.body().getLoadStatus().getStatusDate());
                         textLastUpdatedTime.setText(response.body().getLoadStatus().getStatusTime());

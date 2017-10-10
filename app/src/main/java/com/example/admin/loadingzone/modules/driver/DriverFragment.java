@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -24,6 +27,8 @@ import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.DriverList;
 import com.example.admin.loadingzone.retrofit.model.TruckDriverViewResponse;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,7 +226,17 @@ public class DriverFragment extends Fragment {
                     endlessRecyclerViewDriver.setHaveMoreItem(false);
                 }
                 if (!response.isSuccessful()) {
-                    homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.SERVERERROR);
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            JSONObject meta = jObjError.getJSONObject("meta");
+                            Snackbar snackbar = Snackbar
+                                    .make(relativeLayoutRoot, meta.getString("message"), Snackbar.LENGTH_LONG);
+                            snackbar.show();
+
+                        } catch (Exception e) {
+//                            Log.d("exception", e.getMessage());
+//                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
                 }
                 progressBar.setVisibility(View.GONE);
             }

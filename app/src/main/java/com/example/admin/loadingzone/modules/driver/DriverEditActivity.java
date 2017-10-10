@@ -416,6 +416,8 @@ public class DriverEditActivity extends BaseActivity {
                             .make(relativeLayoutRoot, "Deleted", Snackbar.LENGTH_LONG);
                     snackbar.show();
                     Intent i = new Intent(DriverEditActivity.this, HomeActivity.class);
+                    i.putExtra("isFrom","driver");
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 } else {
                     try {

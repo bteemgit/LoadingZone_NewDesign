@@ -40,4 +40,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="truck_documents">Truck Documents</string>
     <string name="transition_string">TruckTranstion</string>
+    <string name="truck_update_title">Truck Update</string>
 </resources>

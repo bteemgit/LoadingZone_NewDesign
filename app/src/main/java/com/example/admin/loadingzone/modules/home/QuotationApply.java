@@ -47,7 +47,7 @@ import retrofit2.Callback;
 public class QuotationApply extends BaseActivity {
     private ApiInterface apiService;
     @BindView(R.id.rootView)
-    LinearLayout rootView;
+    RelativeLayout rootView;
     @NonNull
     @BindView(R.id.edit_quotAmount)
     EditText editTextQuotAmount;
@@ -92,7 +92,7 @@ public class QuotationApply extends BaseActivity {
     TextView textViewProviderPrefferedJobTime;
     SimpleDateFormat sdf;
     String JobId;
-    String qutation_id, quotationAmount, quotationDescription;
+    String qutation_id, quotationAmount, quotationDescription, customer_pref_date, customer_pref_time;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private int startYear, startMonth, startDay, startHour, startMinute;
     // the variable for checking the provider change the job date or time
@@ -103,7 +103,7 @@ private boolean isPickerActive=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quotation_apply_02);
+        setContentView(R.layout.activity_quotation_apply);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Apply Quotation");
@@ -124,11 +124,17 @@ private boolean isPickerActive=false;
             quotationAmount = getIntent().getStringExtra("quotationAmount");
             String job_date = getIntent().getStringExtra("job_date");
             String job_time = getIntent().getStringExtra("job_time");
+            customer_pref_date = getIntent().getStringExtra("customer_pref_date");
+            customer_pref_time = getIntent().getStringExtra("customer_pref_time");
             quotationDescription = getIntent().getStringExtra("quotationDescription");
             editTextQuotAmount.setText(quotationAmount);
             editTextQuotDescrption.setText(quotationDescription);
-            textCustomerJobTime.setText(job_time);
-            textCustomerJobDate.setText(job_date);
+            textCustomerJobTime.setText(customer_pref_date);
+            textCustomerJobDate.setText(customer_pref_time);
+            textViewProviderPrefferedJobDate.setText(job_date);
+            textViewProviderPrefferedJobTime.setText(job_time);
+            linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
+            linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
         }
     }
     // back button action
@@ -193,13 +199,8 @@ private boolean isPickerActive=false;
     }
     @Override
     public void onBackPressed() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (isPickerActive)
-            {
-                textViewProviderPrefferedJobTime.setText("");
-                textViewProviderPrefferedJobDate.setText("");
-            }
-        }
+
+        super.onBackPressed();
 
     }
     @OnClick(R.id.relative_submit)

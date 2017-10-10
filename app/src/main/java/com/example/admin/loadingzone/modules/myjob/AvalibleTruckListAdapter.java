@@ -32,11 +32,8 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
     private int rowLayout;
     private Context context;
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @NonNull
-        @BindView(R.id.relativeDriverHead)
-        RelativeLayout relativeDriverHead;
+
         @NonNull
         @BindView(R.id.textTruckName)
         TextView textTruckName;
@@ -49,6 +46,15 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
         @NonNull
         @BindView(R.id.textTruckDimension)
         TextView textTruckDimension;
+        @NonNull
+        @BindView(R.id.imageDriverPic)
+        ImageView ivDriverPic;
+        @NonNull
+        @BindView(R.id.textDrivername)
+        TextView textDrivername;
+        @NonNull
+        @BindView(R.id.textDriverEmail)
+        TextView textDriverEmail;
 
         public ViewHolder(View v) {
             super(v);
@@ -64,31 +70,36 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
 
     @Override
     public AvalibleTruckListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                int viewType) {
+                                                                  int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
         return new AvalibleTruckListAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(AvalibleTruckListAdapter.ViewHolder holder, int position) {
-
-
-
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            String truckname=listTrckAvailble.get(position).getCustomName();
-        if (truckname!=null)
-        {
-            int color = generator.getColor(truckname);
-            //holder.relativeDriverHead.setBackgroundColor(color);
-        }
-
-
         holder.textTruckModel.setText(listTrckAvailble.get(position).getVehicle().getManufacturer().getMakerName());
         holder.textTruckName.setText(listTrckAvailble.get(position).getCustomName());
         holder.textTruckType.setText(listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName());
         holder.textTruckDimension.setText(listTrckAvailble.get(position).getVehicle().getDimension());
 
+        String isDriverExist=listTrckAvailble.get(position).getDriver_exists();
+        if (!isDriverExist.equals("false"))
+        {
+            holder.textDrivername.setText(listTrckAvailble.get(position).getDriver().getDriverName());
+            Picasso.with(context)
+                    .load(listTrckAvailble.get(position).getDriver().getDriverPic())
+                    .placeholder(R.drawable.img_circle_placeholder)
+                    .resize(70, 70)
+                    .centerCrop()
+                    .transform(new CircleTransformation())
+                    .into(holder.ivDriverPic);
+            holder.textDriverEmail.setText(listTrckAvailble.get(position).getDriver().getDriverPhone());
 
+        }
+        else {
+            holder.textDrivername.setText("No Driver ");
+            holder.textDriverEmail.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -99,9 +110,9 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
 
         return 0;
     }
+
     @Override
-    public int getItemViewType(int position)
-    {
+    public int getItemViewType(int position) {
         return position;
     }
 }

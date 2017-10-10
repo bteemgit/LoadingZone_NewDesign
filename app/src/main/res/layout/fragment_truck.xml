@@ -5,8 +5,7 @@
     xmlns:fab="http://schemas.android.com/tools"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modules.truck.TruckViewActivity">
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
@@ -56,7 +55,6 @@
         fab:menu_colorNormal="#000"
         fab:menu_colorPressed="@color/colorAccent"
         fab:menu_colorRipple="#99d4d4d4"
-
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_colorNormal="#000"

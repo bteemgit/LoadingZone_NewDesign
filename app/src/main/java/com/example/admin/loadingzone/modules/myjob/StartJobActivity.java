@@ -479,7 +479,6 @@ public class StartJobActivity extends BaseActivity {
             if (requestCode == 2) {
                 cardViewTrckHead.setVisibility(View.VISIBLE);
                 driver_id = data.getStringExtra("driver_id");
-                Toast.makeText(this, driver_id, Toast.LENGTH_SHORT).show();
                 provider_vehicle_id = data.getStringExtra("truck_id");
                 String truck_name = data.getStringExtra("truck_name");
                 String truck_maker = data.getStringExtra("truck_maker");
@@ -489,7 +488,7 @@ public class StartJobActivity extends BaseActivity {
                 textTruckModel.setText(truck_maker);
                 textTruckType.setText(truck_type);
                 textTruckDimension.setText(truck_dimension);
-                Log.d("provider_vehicle_id", provider_vehicle_id);
+               // Log.d("provider_vehicle_id", provider_vehicle_id);
                 if (!driver_id.equals("driver_isnot_assigned")) {
                     String driver_name = data.getStringExtra("driver_name");
                     String driver_pic = data.getStringExtra("driver_pic");
@@ -502,10 +501,6 @@ public class StartJobActivity extends BaseActivity {
                             .centerCrop()
                             .transform(new CircleTransformation())
                             .into(imageDriverPic);
-                    String expected_start_date = String.valueOf(startUnixTimeStamp);
-                    String expected_end_date = String.valueOf(endUnixTimeStamp);
-
-
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     String truckSelected = "true";
                     fab_CompleteStartJobVisibility(truckSelected,driver_id);
@@ -532,13 +527,8 @@ public class StartJobActivity extends BaseActivity {
                     .centerCrop()
                     .transform(new CircleTransformation())
                     .into(imageDriverPic);
-            String expected_start_date = String.valueOf(startUnixTimeStamp);
-            String expected_end_date = String.valueOf(endUnixTimeStamp);
-
             String truckSelected = "true";
             fab_CompleteStartJobVisibility(truckSelected,driver_id);
-           // fab_CompleteStartJob.setVisibility(View.VISIBLE);
-            //BlockTruckandDriver(JobId, provider_vehicle_id, driverId, expected_start_date, expected_end_date);
 
         }
     }
@@ -554,11 +544,6 @@ public class StartJobActivity extends BaseActivity {
     @OnClick(R.id.fabCompleteStartJob)
     public void blockTruck(){
 
-            /* String a =JobId;
-        String b = provider_vehicle_id;
-        String c = driverId;
-        String d = expected_start_date;
-        String e = expected_end_date;*/
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -608,13 +593,10 @@ public class StartJobActivity extends BaseActivity {
                     // for layout handling
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     relativeStartJob.setVisibility(View.VISIBLE);
-
-                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent i = new Intent(getApplicationContext(), MyJobtabViewActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
-                    // isTruckBlocked = "Blocked";
-
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
@@ -624,8 +606,8 @@ public class StartJobActivity extends BaseActivity {
                         snackbar.show();
 
                     } catch (Exception e) {
-                        Log.d("exception", e.getMessage());
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                        Log.d("exception", e.getMessage());
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
                 }

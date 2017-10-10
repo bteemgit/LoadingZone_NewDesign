@@ -99,7 +99,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/imageEye"
                         android:layout_gravity="top"
-                        app:srcCompat="@drawable/ic_eye"/>
+                        app:srcCompat="@drawable/ic_eye"
+                        tools:ignore="VectorDrawableCompat" />
                 </LinearLayout>
         </LinearLayout>
 

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.admin.loadingzone.modules.profile.UserProfileEditActivity">
+
     <com.example.admin.loadingzone.view.RevealBackgroundView
         android:id="@+id/vRevealBackground"
         android:layout_width="match_parent"
@@ -34,9 +35,9 @@
         android:layout_height="150dp"
         android:layout_below="@+id/app_bar"
         android:background="@color/colorPrimary"
+        android:elevation="12dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="12dp">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivDriverProfilePhoto"
@@ -45,165 +46,201 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true" />
+
         <Button
             android:id="@+id/btnEditProfilePic"
             android:layout_width="100dp"
             android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="77dp"
             android:layout_marginRight="77dp"
             android:background="@drawable/btn_profile_bg"
             android:text=" Edit Profile Pic "
             android:textColor="#ffffff"
-            android:textSize="10sp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="77dp" />
+            android:textSize="10sp" />
+
         <Button
             android:id="@+id/btnEditProfilePicUpload"
             android:layout_width="100dp"
             android:layout_height="24dp"
-            android:background="@drawable/btn_profile_bg"
-            android:text="Upload Image"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
+            android:background="@drawable/btn_profile_bg"
             android:gravity="center"
+            android:text="Upload Image"
             android:textColor="#ffffff"
             android:textSize="12sp"
-            android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:visibility="gone" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:paddingLeft="40dp"
         android:layout_marginRight="40dp"
-        android:orientation="vertical">
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <EditText
+        android:layout_marginTop="250dp"
+        android:orientation="vertical"
+        android:paddingLeft="40dp">
 
-            android:id="@+id/editDriverName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/colorAccent"
-            android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Name"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/secondaryTextColor"
-            android:textSize="13sp" />
-</android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/editDriverEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/colorAccent"
-            android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/secondaryTextColor"
-            android:textSize="13sp" />
-</android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/editDriverLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/colorAccent"
-            android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Location"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/secondaryTextColor"
-            android:textSize="13sp" />
-</android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/editDriverMobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/colorAccent"
-            android:fontFamily="Open-Sans-condensed"
-            android:hint="Driver Phone"
-            android:maxLength="10"
-            android:inputType="number"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/secondaryTextColor"
-            android:textSize="13sp" />
+
+            <EditText
+
+                android:id="@+id/editDriverName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="20dp"
+                android:drawableTint="@color/colorAccent"
+                android:fontFamily="Open-Sans-condensed"
+                android:hint="Driver Name"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/secondaryTextColor"
+                android:textSize="13sp" />
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editDriverEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="20dp"
+                android:drawableTint="@color/colorAccent"
+                android:fontFamily="Open-Sans-condensed"
+                android:hint="Driver Email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/secondaryTextColor"
+                android:textSize="13sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editDriverLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="20dp"
+                android:drawableTint="@color/colorAccent"
+                android:fontFamily="Open-Sans-condensed"
+                android:hint="Driver Location"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/secondaryTextColor"
+                android:textSize="13sp" />
+        </android.support.design.widget.TextInputLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/relative_submit"
-            android:gravity="bottom"
-            android:layout_marginTop="25dp"
-            android:visibility="gone"
-            android:layout_alignParentBottom="true">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+254" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#808080">
+
+                </View>
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editDriverMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="20dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:fontFamily="Open-Sans-condensed"
+                    android:hint="Phone"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/secondaryTextColor"
+                    android:textSize="13sp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/relative_submit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="25dp"
+            android:gravity="bottom"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/linearDelete"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:id="@+id/linearDelete"
                 android:background="@drawable/login_bg_curvedshape_black">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="Delete"
                     android:textColor="@color/white"
-                    android:gravity="center"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
 
-
             <LinearLayout
+                android:id="@+id/linerUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:id="@+id/linerUpdate"
-                android:gravity="right"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="30dp">
+                android:layout_marginLeft="30dp"
+                android:gravity="right">
+
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="40dp"
                     android:background="@drawable/login_bg_curvedshape"
+                    android:gravity="center"
                     android:text="Update"
                     android:textColor="@color/white"
-                    android:gravity="center"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>
@@ -234,7 +271,6 @@
     <!--app:layout_anchorGravity="bottom"-->
     <!--app:srcCompat="@drawable/ic_edit"-->
     <!--tools:ignore="VectorDrawableCompat" />-->
-
 
 
 </RelativeLayout>
