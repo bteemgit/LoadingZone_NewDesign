@@ -66,6 +66,7 @@ public class JobPendingFragment extends Fragment {
     private boolean isSwipeRefreshed = false;
     private boolean hasReachedTop = false;
     private ApiInterface apiService;
+
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
@@ -131,7 +132,6 @@ public class JobPendingFragment extends Fragment {
                 Intent i = new Intent(getActivity(), PostedJobDetailsActivity.class);
                 String JobId = jobList.get(position).getJobId();
                 String job_code = jobList.get(position).getJob_code();
-
                 String name = jobList.get(position).getCustomer().getName();
                 String email = jobList.get(position).getCustomer().getEmail();
                 String phone1 = jobList.get(position).getCustomer().getPhone1();
@@ -165,7 +165,6 @@ public class JobPendingFragment extends Fragment {
                 i.putExtra("isFrom", "Pendingjob");
                 i.putExtra("JobId", JobId);
                 i.putExtra("job_code", job_code);
-
                 i.putExtra("name", name);
                 i.putExtra("email", email);
                 i.putExtra("phone1", phone1);

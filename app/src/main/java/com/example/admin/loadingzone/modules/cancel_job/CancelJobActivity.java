@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
@@ -34,7 +35,7 @@ public class CancelJobActivity extends BaseActivity {
     Toolbar toolbar;
     @NonNull
     @BindView(R.id.editSelectedReason)
-    EditText editSelectedReason;
+    TextView editSelectedReason;
     @NonNull
     @BindView(R.id.editCancelComment)
     EditText editCancelComment;

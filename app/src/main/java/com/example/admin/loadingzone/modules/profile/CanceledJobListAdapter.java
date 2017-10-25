@@ -80,7 +80,7 @@ public class CanceledJobListAdapter extends RecyclerView.Adapter<CanceledJobList
         holder.textViewLocationTo.setText(joblistCanceled.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(joblistCanceled.get(position).getFromLocation().getName());
         holder.textLoadingMaterial.setText(joblistCanceled.get(position).getMaterial().getMaterialName());
-        holder.textCancelReason.setText(joblistCanceled.get(position).getCancelReason().getCancelReasonId().getQuotationCancelReason());
+        holder.textCancelReason.setText(joblistCanceled.get(position).getCancelReason().getReason().getQuotation_cancel_reason());
         holder.textViewTruckDate.setText(joblistCanceled.get(position).getLoadingDate());
         Picasso.with(context)
                 .load(joblistCanceled.get(position).getCustomer().getProfilePic())

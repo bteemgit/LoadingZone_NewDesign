@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
@@ -50,6 +51,8 @@ public class TruckFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @BindView(R.id.emptyMessage)
+    TextView textViewEmptyMessage;
     @BindView(R.id.recyclerViewTruck)
     EndlessRecyclerView endlessRecyclerViewTrck;
     @BindView(R.id.swipeRefresh)
@@ -68,7 +71,7 @@ public class TruckFragment extends Fragment {
     @BindView(floating_action_menu)
     FloatingActionMenu floatingActionMenu;
     ApiInterface apiService;
-    TrckListAdapter trckListAdapter;
+    TruckListAdapter truckListAdapter;
     private int limit = 30;
     private int offset = 1;
     private boolean hasReachedTop = false;
@@ -93,12 +96,14 @@ public class TruckFragment extends Fragment {
         }
     };
     View dark_bg;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        homeActivity=(HomeActivity)getActivity();
+        homeActivity = (HomeActivity) getActivity();
         setRetainInstance(true);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -144,7 +149,7 @@ public class TruckFragment extends Fragment {
             public void onRefresh() {
 // refreshLayout.setRefreshing(true);
                 offset = 1;
-                isSwipeRefreshed=true;
+                isSwipeRefreshed = true;
                 getTrckList();
             }
         });
@@ -157,7 +162,6 @@ public class TruckFragment extends Fragment {
                 String provider_vehicle_id = String.valueOf(vehicleListList.get(position).getProviderVehicleId());
                 String driver = vehicleListList.get(position).getDriver();
                 String truckId = String.valueOf(vehicleListList.get(position).getProviderVehicleId());
-
                 String reg_no = vehicleListList.get(position).getRegistration_number();
                 String chassis_no = vehicleListList.get(position).getChassis_number();
                 String License_no = vehicleListList.get(position).getLicence_number();
@@ -185,7 +189,7 @@ public class TruckFragment extends Fragment {
         v.getLocationOnScreen(startingLocation);
         startingLocation[0] += v.getWidth() / 2;
         TruckAddActivity.startTruckAddActvity(startingLocation, getActivity(), NEW_TRUCK_ADD);
-       // overridePendingTransition(0, 0);
+        // overridePendingTransition(0, 0);
 
     }
 
@@ -198,7 +202,7 @@ public class TruckFragment extends Fragment {
     }
 
 
-    public void getTrckList( ) {
+    public void getTrckList() {
 
         if (offset == 1) {
             if (!isSwipeRefreshed)
@@ -214,7 +218,7 @@ public class TruckFragment extends Fragment {
             @Override
             public void onResponse(Call<TruckResponse> call, retrofit2.Response<TruckResponse> response) {
                 refreshLayout.setRefreshing(false);
-                isSwipeRefreshed=false;
+                isSwipeRefreshed = false;
                 homeActivity.hideProgressDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     if (!response.body().getVehicleList().isEmpty()) {
@@ -234,10 +238,11 @@ public class TruckFragment extends Fragment {
                         } else {
                             endlessRecyclerViewTrck.setHaveMoreItem(true);
                         }
-                        trckListAdapter.notifyDataSetChanged();
+                        truckListAdapter.notifyDataSetChanged();
                         offset = offset + 1;
                     } else {
                         endlessRecyclerViewTrck.setHaveMoreItem(false);
+                        textViewEmptyMessage.setVisibility(View.VISIBLE);
                     }
 
                 } else {
@@ -266,8 +271,8 @@ public class TruckFragment extends Fragment {
 
 
     private void updateEndlessRecyclerView() {
-        trckListAdapter = new TrckListAdapter(vehicleListList, R.layout.item_trck, getContext());
-        endlessRecyclerViewTrck.setAdapter(trckListAdapter);
+        truckListAdapter = new TruckListAdapter(vehicleListList, R.layout.item_trck, getContext());
+        endlessRecyclerViewTrck.setAdapter(truckListAdapter);
     }
 
 }

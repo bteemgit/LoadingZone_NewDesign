@@ -48,10 +48,10 @@
             android:id="@+id/linear_startDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textviewTitle"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_below="@+id/textviewTitle">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -65,9 +65,9 @@
                     android:id="@+id/linearDatePicker"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:gravity="center"
                     android:layout_below="@+id/textviewTitle"
-                    android:background="@drawable/rounded_corner"
+                    android:background="@drawable/curved_squre"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
@@ -76,77 +76,70 @@
                         android:layout_gravity="center"
                         android:text="Start Date"
                         android:textAlignment="center"
-                        android:textColor="#ffffff"  />
-
+                        android:textColor="#ca2727" />
 
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textSelectedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/linearDatePicker"
                     android:layout_marginLeft="0dp"
-                    android:text="0000-00-00"/>
+                    android:textColor="#202020" />
             </LinearLayout>
 
-
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginRight="25dp"
-            android:orientation="vertical"
-            android:weightSum="2">
             <LinearLayout
-                android:id="@+id/linearTimePicker"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/textviewTitle"
-                android:layout_toEndOf="@+id/linearDatePicker"
-                android:layout_toRightOf="@+id/linearDatePicker"
-                android:background="@drawable/rounded_corner"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/linearTimePicker"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/textviewTitle"
+                    android:layout_toEndOf="@+id/linearDatePicker"
+                    android:layout_toRightOf="@+id/linearDatePicker"
+                    android:background="@drawable/curved_squre"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Start Time"
+                        android:textAlignment="center"
+                        android:textColor="#ca2727" />
+                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/textSelectedTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Start Time"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
+                    android:layout_alignLeft="@+id/linearTimePicker"
+                    android:layout_alignStart="@+id/linearTimePicker"
+                    android:layout_below="@+id/linearTimePicker"
+                    android:textColor="#202020" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textSelectedTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/linearTimePicker"
-                android:layout_alignStart="@+id/linearTimePicker"
-                android:layout_below="@+id/linearTimePicker"
-                android:text="00:00"/>
         </LinearLayout>
-
-        </LinearLayout>
-
-
-
-
-
-
 
         <LinearLayout
             android:id="@+id/linear_endDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_startDateTime"
+            android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_below="@+id/linear_startDateTime">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -162,9 +155,9 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/textviewTitle"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/rounded_corner"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:background="@drawable/curved_squre"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -173,10 +166,9 @@
                         android:padding="10dp"
                         android:text="End Date"
                         android:textAlignment="center"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ca2727" />
 
                 </LinearLayout>
-
 
 
                 <TextView
@@ -186,19 +178,17 @@
                     android:layout_alignLeft="@+id/textSelectedDate"
                     android:layout_alignStart="@+id/textSelectedDate"
                     android:layout_below="@+id/linearLayout"
-                    android:text="0000-00-00"
-                    />
+                    android:textColor="#202020" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginRight="25dp"
                 android:orientation="vertical"
                 android:weightSum="2">
-
 
 
                 <LinearLayout
@@ -209,10 +199,9 @@
                     android:layout_marginTop="5dp"
                     android:layout_toEndOf="@+id/linearDatePicker"
                     android:layout_toRightOf="@+id/linearDatePicker"
-                    android:background="@drawable/rounded_corner"
-                    android:orientation="horizontal"
+                    android:background="@drawable/curved_squre"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -220,8 +209,9 @@
                         android:layout_gravity="center"
                         android:text="End Time"
                         android:textAlignment="center"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ca2727" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textSelectedTimeEnd"
                     android:layout_width="wrap_content"
@@ -230,200 +220,110 @@
                     android:layout_alignBottom="@+id/textSelectedDateEnd"
                     android:layout_alignLeft="@+id/textSelectedTime"
                     android:layout_alignStart="@+id/textSelectedTime"
-                    android:text="00:00"
-                    />
+                    android:textColor="#202020" />
             </LinearLayout>
 
         </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_driver"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
             android:layout_below="@+id/linear_endDateTime"
-            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="15dp"
+            android:elevation="6dp"
+            android:orientation="vertical"
             android:visibility="gone"
             app:cardCornerRadius="10dp">
 
             <RelativeLayout
-                android:id="@+id/relativeDriverHead"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:id="@+id/linear_ImageView"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/imageDriverPic"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginStart="15dp" />
-
-
-
-                    <TextView
-                        android:id="@+id/textViewDriverNme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:layout_marginBottom="6dp"
-                        android:layout_alignLeft="@+id/linear_ImageView"
-                        android:layout_alignStart="@+id/linear_ImageView"
-                        android:layout_below="@+id/linear_ImageView"
-                        android:gravity="center"
-                        android:text="Driver"
-                        android:textColor="#ffffff"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textChangeDriver"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textViewDriverName"
-                        android:layout_marginLeft="0dp"
-                        android:text="Change"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="62dp"
-                android:layout_marginStart="62dp">
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageDriverPic"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="40dp"
+
+                    />
 
                 <TextView
-                    android:id="@+id/textSelctedItem"
+                    android:id="@+id/textViewDriverNme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="90dp"
-                    android:layout_marginStart="90dp"
-                    android:text="Selcted Driver Info"
-                    android:textStyle="normal"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
+                    android:layout_height="18dp"
+                    android:layout_alignEnd="@+id/textSelctedDriverMobile"
+                    android:layout_alignTop="@+id/imageDriverPic"
+                    android:gravity="center"
+                    android:text="Swaroop LAl"
+                    android:textColor="#202020"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textSelctedDriverEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_below="@+id/textSelctedItem"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="62dp"
-                    android:layout_marginStart="62dp"
-                    android:textSize="15sp"
+                    android:layout_below="@+id/textViewDriverNme"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@+id/imageDriverPic"
+                    android:text="swarooplal@gmail.com"
                     android:textColor="@color/colorPrimary"
-                    android:text="Email" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textSelctedDriverMobile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_below="@+id/textSelctedItem"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginLeft="62dp"
-                    android:layout_marginStart="62dp"
-                    android:textSize="15sp"
+                    android:layout_alignStart="@+id/textSelctedDriverEmail"
+                    android:layout_below="@+id/textSelctedDriverEmail"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="9dp"
+                    android:text="9895875554"
                     android:textColor="@color/colorPrimary"
-                    android:text="9895875554" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textChangeDriver"
+                    android:layout_width="130dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/curved_squre"
+                    android:paddingLeft="20dp"
+                    android:text="Change Driver"
+                    android:textColor="#202020"
+                    android:textSize="14sp"
+                    android:layout_marginStart="21dp"
+                    android:layout_below="@+id/textSelctedDriverMobile"
+                    android:layout_toEndOf="@+id/imageDriverPic"
+                    android:layout_marginTop="7dp" />
 
             </RelativeLayout>
+
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
             android:id="@+id/card_vehicle"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
             android:layout_below="@+id/card_driver"
             android:layout_centerHorizontal="true"
-            app:cardCornerRadius="10dp"
-            android:visibility="gone">
-
-            <RelativeLayout
-                android:id="@+id/relativeDriverHead"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:id="@+id/linear_ImageView"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/imageDriverPic"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginStart="15dp" />
-
-
-
-                    <TextView
-                        android:id="@+id/textViewDriverName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/linear_ImageView"
-                        android:layout_alignStart="@+id/linear_ImageView"
-                        android:layout_below="@+id/linear_ImageView"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/driver"
-                        android:textColor="#ffffff"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textChangeDriver"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textViewDriverName"
-                        android:layout_marginLeft="0dp"
-                        android:text="Change"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="62dp"
-                android:layout_marginStart="62dp">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp">
 
                 <TextView
                     android:id="@+id/textSelctedItemTruckHeading"
@@ -437,7 +337,8 @@
                     android:layout_marginStart="90dp"
                     android:text="Selcted Vehicle Info"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textSelctedTruckName"
@@ -445,24 +346,25 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedItemTruckHeading"
-                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="62dp"
                     android:layout_marginStart="62dp"
-                    android:textSize="15sp"
+                    android:layout_marginTop="30dp"
+                    android:text="Swarooplal"
                     android:textColor="@color/colorPrimary"
-                    android:text="Swarooplal" />
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/textSelctedTruckType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedTruckName"
-                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="62dp"
                     android:layout_marginStart="62dp"
-                    android:textSize="15sp"
+                    android:layout_marginTop="50dp"
+                    android:text="Type"
                     android:textColor="@color/colorPrimary"
-                    android:text="Type" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textSelctedTruckSize"
@@ -470,68 +372,77 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_below="@+id/textSelctedTruckType"
-                    android:layout_marginTop="70dp"
                     android:layout_marginLeft="62dp"
                     android:layout_marginStart="62dp"
+                    android:layout_marginTop="70dp"
+                    android:text="12812"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
-                    android:text="12812" />
+                    android:textSize="15sp" />
 
+                <TextView
+                    android:id="@+id/textChangeTruck"
+                    android:layout_width="130dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/textSelctedTruckSize"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/curved_squre"
+                    android:paddingLeft="20dp"
+                    android:text="Change Truck"
+                    android:textColor="#202020"
+                    android:textSize="14sp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:visibility="gone"
-        android:id="@+id/fabSearchTruck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="70dp"
-        android:layout_marginRight="36dp"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        app:rippleColor="#ffffff"
-        app:srcCompat="@drawable/ic_edit" />
-
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fabSearchTruck"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginBottom="70dp"-->
+        <!--android:layout_marginRight="36dp"-->
+        <!--android:visibility="gone"-->
+        <!--app:borderWidth="0dp"-->
+        <!--app:fabSize="normal"-->
+        <!--app:rippleColor="#ffffff"-->
+        <!--app:srcCompat="@drawable/ic_edit" />-->
 
     <RelativeLayout
         android:id="@+id/relative_SerachAvalibleTruck"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:layout_alignParentBottom="true"
         android:animateLayoutChanges="true"
-        android:background="@color/colorPrimary"
+        android:background="#ffffff"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center">
+
             <TextView
+                android:id="@+id/textSelection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:id="@+id/textSelection"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="#202020"
                 android:textSize="18sp" />
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
                 app:srcCompat="@drawable/ic_truck_rigtaroow" />
         </LinearLayout>
-
-
-
-
-
     </RelativeLayout>
 </RelativeLayout>

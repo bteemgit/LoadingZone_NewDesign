@@ -32,7 +32,14 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-
+    <TextView
+        android:id="@+id/emptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:text="No Trucks"/>
     <View
         android:id="@+id/background_dimmer"
         android:layout_width="match_parent"
@@ -84,9 +91,8 @@
             android:id="@+id/fabAddTruck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/fab_add"
-
-            app:fab_colorNormal="@color/btn_send_normal"
+            android:src="@drawable/truckred"
+            app:fab_colorNormal="#ffffff"
             app:fab_label="Add Truck"
             fab:fab_size="mini"/>
 
@@ -94,8 +100,8 @@
             android:id="@+id/fabPendingTrucks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_delivery_truck_"
-            app:fab_colorNormal="@color/btn_send_normal"
+            android:src="@drawable/truckblack"
+            app:fab_colorNormal="#ffffff"
             app:fab_label="Pending Trucks"
             fab:fab_size="mini" />
 

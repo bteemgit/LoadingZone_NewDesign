@@ -6,6 +6,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class CancelReason {
 
+
+    @SerializedName("cancel_reason_details")
+    @Expose
+    private Reason reason;
+
+    @SerializedName("quotation_cancel_reason")
+    @Expose
+    private String quotation_cancel_reason;
     @SerializedName("quotation_cancel_id")
     @Expose
     private Integer quotationCancelId;
@@ -17,11 +25,17 @@ public class CancelReason {
     private CancelReasonId cancelReasonId;
     @SerializedName("cancel_comment")
     @Expose
-    private Object cancelComment;
+    private String cancelComment;
     @SerializedName("date_time")
     @Expose
     private String dateTime;
+    public Reason getReason() {
+        return reason;
+    }
 
+    public void setReason(Reason reason) {
+        this.reason = reason;
+    }
     public Integer getQuotationCancelId() {
         return quotationCancelId;
     }
@@ -45,12 +59,18 @@ public class CancelReason {
     public void setCancelReasonId(CancelReasonId cancelReasonId) {
         this.cancelReasonId = cancelReasonId;
     }
+    public String getQuotation_cancel_reason() {
+        return quotation_cancel_reason;
+    }
 
-    public Object getCancelComment() {
+    public void setQuotation_cancel_reason(String  quotation_cancel_reason) {
+        this.quotation_cancel_reason = quotation_cancel_reason;
+    }
+    public String getCancelComment() {
         return cancelComment;
     }
 
-    public void setCancelComment(Object cancelComment) {
+    public void setCancelComment(String cancelComment) {
         this.cancelComment = cancelComment;
     }
 

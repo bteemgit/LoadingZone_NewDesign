@@ -553,11 +553,13 @@ public class DriverEditActivity extends BaseActivity {
             editTextDriverName.setFocusable(true);
             editTextDriverEmail.setFocusableInTouchMode(false);
             editTextDriverEmail.setFocusable(false);
+            editTextDriverEmail.setTextColor(Color.GRAY);
             editTextDriverMobile.setFocusableInTouchMode(true);
             editTextDriverMobile.setFocusable(true);
             editTextDriverAdress.setFocusableInTouchMode(true);
             editTextDriverAdress.setFocusable(true);
             editTextJoinedDate.setFocusableInTouchMode(false);
+            editTextJoinedDate.setTextColor(Color.GRAY);
             editTextJoinedDate.setFocusable(false);
             editTextAssignedTruck.setFocusableInTouchMode(false);
             editTextAssignedTruck.setFocusable(false);

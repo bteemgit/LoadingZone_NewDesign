@@ -94,7 +94,6 @@ public class MyJobtabViewActivity extends BaseActivity {
         MyJobtabViewActivity.ViewPagerAdapter adapter = new MyJobtabViewActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(pendingJobFragment, "Pending");
         adapter.addFrag(assignedJobFragment,"Assinged");
-//        adapter.addFrag(compltedJobFragment, "Completed");
         viewPager.setAdapter(adapter);
     }
 }

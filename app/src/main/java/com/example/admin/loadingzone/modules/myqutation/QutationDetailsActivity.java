@@ -164,10 +164,12 @@ public class QutationDetailsActivity extends BaseActivity {
         isFrom = getIntent().getStringExtra("isFrom");
         if (!isFrom.equals(null))
             if (isFrom.equals("pending")) {
+                textQutationCurrency.setVisibility(View.GONE);
                 textDate.setVisibility(View.GONE);
                 textQutationDate.setVisibility(View.GONE);
             }
         if (isFrom.equals("accepted")) {
+            textQutationCurrency.setVisibility(View.GONE);
             linearLayoutDelete.setVisibility(View.GONE);
             linearLayoutUpdate.setVisibility(View.GONE);
             textDate.setVisibility(View.VISIBLE);
@@ -178,6 +180,7 @@ public class QutationDetailsActivity extends BaseActivity {
 
         }
         if (isFrom.equals("rejected")) {
+            textQutationCurrency.setVisibility(View.GONE);
             linearLayoutDelete.setVisibility(View.GONE);
             linearLayoutUpdate.setVisibility(View.GONE);
             textDate.setVisibility(View.VISIBLE);
@@ -202,7 +205,7 @@ public class QutationDetailsActivity extends BaseActivity {
         textViewCutomerEmail.setText(cus_email);
         textViewCutomerMobile.setText(cus_phone);
         textQutationStatus.setText(quotationStatus);
-        textQutationAmount.setText(quotationAmount);
+        textQutationAmount.setText(quotationAmount + " KES");
         textQutationCurrency.setText(quotationCurrency);
         textQutationDescription.setText(quotationDescription);
         textViewQuotationCode.setText(QuotationCode);

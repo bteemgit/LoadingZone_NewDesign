@@ -75,15 +75,15 @@ public class QuotationApply extends BaseActivity {
     @NonNull
     @BindView(R.id.textTimeRequsting)
     TextView textTimeRequsting;
-    @NonNull
-    @BindView(R.id.linearDateTime)
-    LinearLayout linearLayoutDateTime;
-    @NonNull
-    @BindView(R.id.layout_ProviderPrefferedJobDate)
-    LinearLayout linearLayoutProviderPrefferedJobDate;
-    @NonNull
-    @BindView(R.id.layout_ProviderPrefferedJobTime)
-    LinearLayout linearLayoutProviderPrefferedJobTime;
+//    @NonNull
+//    @BindView(R.id.linearDateTime)
+//    LinearLayout linearLayoutDateTime;
+//    @NonNull
+//    @BindView(R.id.layout_ProviderPrefferedJobDate)
+//    LinearLayout linearLayoutProviderPrefferedJobDate;
+//    @NonNull
+//    @BindView(R.id.layout_ProviderPrefferedJobTime)
+//    LinearLayout linearLayoutProviderPrefferedJobTime;
     @NonNull
     @BindView(R.id.textProviderPrefferedJobDate)
     TextView textViewProviderPrefferedJobDate;
@@ -133,8 +133,6 @@ private boolean isPickerActive=false;
             textCustomerJobDate.setText(customer_pref_time);
             textViewProviderPrefferedJobDate.setText(job_date);
             textViewProviderPrefferedJobTime.setText(job_time);
-            linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
-            linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
         }
     }
     // back button action
@@ -163,8 +161,8 @@ private boolean isPickerActive=false;
                         startDay = dayOfMonth;
                         textViewProviderPrefferedJobDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                         isChangeDate = true;
-                        linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
-                        linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
+//                        linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
+//                        linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -191,8 +189,8 @@ private boolean isPickerActive=false;
                         startMinute = minute;
                         textViewProviderPrefferedJobTime.setText(String.format("%02d:%02d", hourOfDay, minute));
                         isChangeTime = true;
-                        linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
-                        linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
+//                        linearLayoutProviderPrefferedJobTime.setVisibility(View.VISIBLE);
+//                        linearLayoutProviderPrefferedJobDate.setVisibility(View.VISIBLE);
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();

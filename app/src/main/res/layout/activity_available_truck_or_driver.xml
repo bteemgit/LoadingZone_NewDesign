@@ -5,7 +5,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.truck.TruckViewActivity">
+   >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -44,6 +44,15 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
+    <TextView
+        android:id="@+id/TextEmptyList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Data"
+        android:visibility="gone"
+        android:textSize="17sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
 
 </RelativeLayout>

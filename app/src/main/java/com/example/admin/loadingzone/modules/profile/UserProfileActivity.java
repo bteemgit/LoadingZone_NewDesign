@@ -49,9 +49,6 @@ public class UserProfileActivity extends BaseActivity implements RevealBackgroun
 
     @BindView(R.id.vRevealBackground)
     RevealBackgroundView vRevealBackground;
-//    @BindView(R.id.rvUserProfile)
-//    RecyclerView rvUserProfile;
-
     @BindView(R.id.tlUserProfileTabs)
     TabLayout tlUserProfileTabs;
     @BindView(R.id.viewpager)
@@ -90,13 +87,7 @@ public class UserProfileActivity extends BaseActivity implements RevealBackgroun
     private ApiInterface apiService;
     private int avatarSize;
     private String profilePhoto;
-//    private int[] tabIcons = {
-//            R.drawable.ic_truck_tab,
-//          //  R.drawable.ic_tab_pending,
-//            R.drawable.ic_tab_complted
-//
-//    };
-String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLocation;
+    String userName, userEmail, userMobile,completedJob,pendingJob,countTruck, userLocation;
 
     public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
@@ -137,30 +128,31 @@ String userName,userEmail,userMobile,completedJob,pendingJob,countTruck,userLoca
         setupViewPager(viewPager);
         tlUserProfileTabs.setupWithViewPager(viewPager);
         TextView newTab0 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
-     //   newTab0.setCompoundDrawablesWithIntrinsicBounds(tabIcons[0], 0, 0, 0);
-        TextView title=(TextView)LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs,null);
+        //   newTab0.setCompoundDrawablesWithIntrinsicBounds(tabIcons[0], 0, 0, 0);
+        TextView title = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
         title.setText("Completed");
 
         tlUserProfileTabs.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
         TextView newTab1 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
         //newTab1.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
-        TextView title1=(TextView)LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs,null);
+        TextView title1 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_jobs, null);
         title1.setText("Cancled");
 
     }
+
     @OnClick(R.id.btnEditProfile)
-public void navigateToEditProfile()
-    {
-        Intent intent=new Intent(UserProfileActivity.this,UserProfileEditActivity.class);
-        intent.putExtra("isFrom","Profile");
+    public void navigateToEditProfile() {
+        Intent intent = new Intent(UserProfileActivity.this, UserProfileEditActivity.class);
+        intent.putExtra("isFrom", "Profile");
         intent.putExtra("userName", userName);
         intent.putExtra("userMobile", userMobile);
         intent.putExtra("userLocation", userLocation);
-        intent.putExtra("userImage",profilePhoto);
+        intent.putExtra("userImage", profilePhoto);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
     private void setupRevealBackground(Bundle savedInstanceState) {
         vRevealBackground.setFillPaintColor(0xFF16121a);
         vRevealBackground.setOnStateChangeListener(this);
@@ -262,14 +254,14 @@ public void navigateToEditProfile()
             public void onResponse(Call<UserProfileResponse> call, retrofit2.Response<UserProfileResponse> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    userName=response.body().getProviderName();
-                    userEmail=response.body().getEmail();
-                    userMobile=response.body().getPhone1();
-                    completedJob= String.valueOf(response.body().getStatistics().getCompletedJobs());
-                    pendingJob= String.valueOf(response.body().getStatistics().getPendingJobs());
-                    countTruck=response.body().getStatistics().getVehicles();
-                    userLocation=response.body().getLocationName();
-                    profilePhoto=response.body().getProfilePic();
+                    userName = response.body().getProviderName();
+                    userEmail = response.body().getEmail();
+                    userMobile = response.body().getPhone1();
+                    completedJob = String.valueOf(response.body().getStatistics().getCompletedJobs());
+                    pendingJob = String.valueOf(response.body().getStatistics().getPendingJobs());
+                    countTruck = response.body().getStatistics().getVehicles();
+                    userLocation = response.body().getLocationName();
+                    profilePhoto = response.body().getProfilePic();
                     textViewUserName.setText(userName);
                     textViewUserEmail.setText(userEmail);
                     textViewUserMobile.setText(userMobile);

@@ -9,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.loadingzone.R;
-import com.example.admin.loadingzone.modules.truck.TrckListAdapter;
 import com.example.admin.loadingzone.retrofit.model.DriverList;
-import com.example.admin.loadingzone.retrofit.model.VehicleList;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -77,17 +75,12 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
         holder.textViewDriverName.setText(driverLists.get(position).getDriverName());
         holder.textViewDriverEmail.setText(driverLists.get(position).getDriverEmail());
         holder.textViewDriverMobile.setText(driverLists.get(position).getDriverPhone());
-
         holder.textViewJoinedDate.setText(driverLists.get(position).getCreatedDate());
-
         if(driverLists.get(position).getDriverTruck() == null){
             holder.textViewCurrentlyAssignedTruck.setText("Nil");
         }else {
             holder.textViewCurrentlyAssignedTruck.setText(driverLists.get(position).getDriverTruck().getCustomName());
         }
-
-
-
         Picasso.with(context)
                 .load(driverLists.get(position).getDriverPic())
                 .placeholder(R.drawable.img_circle_placeholder)
@@ -95,7 +88,6 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
                 .centerCrop()
                 .transform(new CircleTransformation())
                 .into(holder.imageDriverPic);
-
     }
 
     @Override
@@ -103,7 +95,6 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Vi
         if (driverLists != null) {
             return driverLists.size();
         }
-
         return 0;
     }
 }

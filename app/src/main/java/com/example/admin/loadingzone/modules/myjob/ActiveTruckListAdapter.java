@@ -24,24 +24,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Optional;
-
-/**
- * Created by admin on 7/3/2017.
- */
-
 public class ActiveTruckListAdapter extends RecyclerView.Adapter<ActiveTruckListAdapter.ViewHolder> {
 
     private List<AvailableTruck> listTrckAvailble = new ArrayList<>();
     private int rowLayout;
     private Context context;
-
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @NonNull
-        @BindView(R.id.relativeDriverHead)
-        RelativeLayout relativeDriverHead;
+        @BindView(R.id.textDriverPhone)
+        TextView textDriverPhone;
         @NonNull
-        @BindView(R.id.textViewDriverName)
+        @BindView(R.id.textDrivername)
         TextView textViewDriverName;
         @NonNull
         @BindView(R.id.textTruckName)
@@ -84,9 +77,6 @@ public class ActiveTruckListAdapter extends RecyclerView.Adapter<ActiveTruckList
         String driver_exist = listTrckAvailble.get(position).getDriver_exists();
         if (driver_exist.equals("false")) {
             holder.textViewDriverName.setText("No Driver");
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            int color = generator.getColor("No Driver");
-            //holder.relativeDriverHead.setBackgroundColor(color);
         }
       else  {
             holder.textViewDriverName.setText(listTrckAvailble.get(position).getDriver().getDriverName());
@@ -97,13 +87,8 @@ public class ActiveTruckListAdapter extends RecyclerView.Adapter<ActiveTruckList
                     .centerCrop()
                     .transform(new CircleTransformation())
                     .into(holder.imageDriverPic);
-
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            String drivername=listTrckAvailble.get(position).getDriver().getDriverName();
-            int color = generator.getColor(drivername);
-            //holder.relativeDriverHead.setBackgroundColor(color);
+            holder.textDriverPhone.setText(listTrckAvailble.get(position).getDriver().getDriverPhone());
         }
-
         holder.textTruckModel.setText(listTrckAvailble.get(position).getVehicle().getManufacturer().getMakerName());
         holder.textTruckName.setText(listTrckAvailble.get(position).getCustomName());
         holder.textTruckType.setText(listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName());

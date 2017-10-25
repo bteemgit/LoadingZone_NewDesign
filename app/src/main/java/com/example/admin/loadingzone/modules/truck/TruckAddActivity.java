@@ -258,7 +258,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
     // Add new Truck
     @OnClick(R.id.fabTruckAdd)
     public void addTruck() {
-
         final String avg_running_speed = editTextTrcukAvgSpeed.getText().toString().trim();
         final String custom_name = editTextTrcukCutsomName.getText().toString().trim();
         final String reg_no = editTextTruckRegistrationNo.getText().toString().trim();
@@ -273,14 +272,12 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
         String truck_model = textViewTrckModel.getText().toString();
         String truck_type = textViewTrckType.getText().toString();
         String truck_year = textViewTrckYear.getText().toString();
-
         if (isFrom.equals("NewTruck")) {
             if (isConnectingToInternet(getApplicationContext())) {
                 if ( !truck_name.equals("Trucks")) {
                     if (!truck_model.equals("Model")) {
                         if (!truck_type.equals("Type")) {
                             if (!truck_year.equals("Year")) {
-
                                if(custom_name.length() > 0){
                                     if(avg_running_speed.length()>0){
                                         if(weight.length()>0){
@@ -298,7 +295,6 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                                                                             //Yes button clicked
                                                                             AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
                                                                             break;
-
                                                                         case DialogInterface.BUTTON_NEGATIVE:
                                                                             //No button clicked
                                                                             break;
@@ -346,25 +342,20 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
 
             } else {
                 showSnakBar(rootView, MessageConstants.INTERNET);
-
-
             }
-        } else {
+        } if (isFrom.equals("UpdateTruck")) {
             if (isConnectingToInternet(getApplicationContext())) {
                 if ( !truck_name.equals("Trucks")) {
                     if (!truck_model.equals("Model")) {
                         if (!truck_type.equals("Type")) {
                             if (!truck_year.equals("Year")) {
-
                                 if(custom_name.length() > 0){
                                     if(avg_running_speed.length()>0){
                                         if(weight.length()>0){
                                             if(container_height.length()>0){
                                                 if(container_length.length()>0){
                                                     if(container_width.length()>0){
-
-                                                        if(reg_no.length() == 0 || chasisNo.length() == 0 || LicNo.length() == 0 || insurance_exp_date.length() == 0){
-
+                                                      //  if(reg_no.length() == 0 || chasisNo.length() == 0 || LicNo.length() == 0 || insurance_exp_date.length() == 0){
                                                             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                                                                 @Override
                                                                 public void onClick(DialogInterface dialog, int which) {
@@ -383,11 +374,11 @@ public class TruckAddActivity extends BaseActivity implements RevealBackgroundVi
                                                                 }
                                                             };
                                                             AlertDialog.Builder builder = new AlertDialog.Builder(TruckAddActivity.this);
-                                                            builder.setMessage("Are you sure? want to add truck by these details?").setPositiveButton("Yes", dialogClickListener)
+                                                            builder.setMessage("Are you sure? want to Update truck by these details?").setPositiveButton("Yes", dialogClickListener)
                                                                     .setNegativeButton("No", dialogClickListener).show();
 
-                                                        }else
-                                                            AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
+//                                                        }else
+//                                                            AddTruck(avg_running_speed, custom_name, insurance_exp_date, weight, container_length, container_width, container_height, model_id, truck_typeId, model_year, reg_no, chasisNo, LicNo);
                                                     }else{
                                                         showSnakBar(rootView, "Please select Width ");
                                                     }

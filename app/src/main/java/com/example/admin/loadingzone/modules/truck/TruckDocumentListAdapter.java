@@ -52,6 +52,9 @@ public class TruckDocumentListAdapter extends RecyclerView.Adapter<TruckDocument
         final VehicleDoc vehicleDoc = vehicleDocArrayList.get(position);
         Uri imageUri = Uri.parse(vehicleDoc.getDocumentFile());
         holder.draweeView.setImageURI(imageUri);
+        Picasso.with(context)
+                .load(vehicleDoc.getDocumentFile())
+                .into(holder.draweeView);
         holder.textViewDocTitle.setText(vehicleDoc.getDocumentTitle());
 
     }
@@ -60,13 +63,13 @@ public class TruckDocumentListAdapter extends RecyclerView.Adapter<TruckDocument
 
        // private ImageView imageViewTruckDoc;
         TextView textViewDocTitle;
-        SimpleDraweeView draweeView;
+        ImageView draweeView;
         public ImageViewHolder(View itemView) {
             super(itemView);
 
             //imageViewTruckDoc = (ImageView) itemView.findViewById(R.id.iv_truck_doc);
             textViewDocTitle=(TextView)itemView.findViewById(R.id.text_truckDoc_title);
-            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.sdvImage);
+            draweeView = (ImageView) itemView.findViewById(R.id.sdvImage);
 
         }
     }

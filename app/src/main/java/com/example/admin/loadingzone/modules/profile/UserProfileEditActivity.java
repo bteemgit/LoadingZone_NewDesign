@@ -3,6 +3,7 @@ package com.example.admin.loadingzone.modules.profile;
 import android.Manifest;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -119,6 +120,7 @@ public class UserProfileEditActivity extends BaseActivity implements View.OnClic
         userEmail = AppController.getString(getApplicationContext(), "customer_email");
         if (userEmail != null || userEmail.length() > 0) {
             editTextUserEmail.setText(userEmail);
+            editTextUserEmail.setTextColor(Color.GRAY);
             editTextUserEmail.setKeyListener(null);
         }
         // :-fetching the details from userprofile activity

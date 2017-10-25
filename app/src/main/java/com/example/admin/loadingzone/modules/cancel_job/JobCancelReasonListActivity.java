@@ -18,6 +18,7 @@ import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
+import com.example.admin.loadingzone.recyclerview.SimpleDividerItemDecoration;
 import com.example.admin.loadingzone.retrofit.ApiClient;
 import com.example.admin.loadingzone.retrofit.ApiInterface;
 import com.example.admin.loadingzone.retrofit.model.CancelJobReasonResponse;
@@ -100,6 +101,7 @@ public class JobCancelReasonListActivity extends BaseActivity {
         });
 
         recyclerViewJobCancelReasonList.addPaginationListener(paginationListener);
+        recyclerViewJobCancelReasonList.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
         recyclerViewJobCancelReasonList.addOnItemTouchListener(new RecyclerItemClickListener(JobCancelReasonListActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

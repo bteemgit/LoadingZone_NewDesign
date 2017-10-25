@@ -46,9 +46,9 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         @NonNull
         @BindView(R.id.textTruckType)
         TextView textViewTruckType;
-        @NonNull
-        @BindView(R.id.textTruckDimension)
-        TextView textViewTruckDimension;
+//        @NonNull
+//        @BindView(R.id.textTruckDimension)
+//        TextView textViewTruckDimension;
         @NonNull
         @BindView(R.id.textTruckDate)
         TextView textViewTruckDate;
@@ -89,11 +89,7 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
     public void onBindViewHolder(MyJobListAdapter.ViewHolder holder, int position) {
 
 
-       /* holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
-        holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
-        holder.textViewTruckType.
-        holder.textViewTruckDimension.
-        holder.textViewTruckDate.*/
+
 
         holder.textViewCustomerName.setText(jobList.get(position).getCustomer().getName());
 
@@ -102,7 +98,7 @@ public class MyJobListAdapter extends RecyclerView.Adapter<MyJobListAdapter.View
         holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
         holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());
-        holder.textViewTruckDimension.setText(jobList.get(position).getQuotationCount());
+     //   holder.textViewTruckDimension.setText(jobList.get(position).getQuotationCount());
         holder.textViewTruckDate.setText(jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time());
         holder.textViewJobCode.setText(jobList.get(position).getJob_code());
 

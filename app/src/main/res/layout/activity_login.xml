@@ -57,7 +57,7 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:textSize="13sp"
+                android:textSize="17sp"
                 android:singleLine="true"
                 android:textCursorDrawable="@null" />
 
@@ -84,7 +84,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:textSize="13sp"
+                    android:textSize="17sp"
                     android:singleLine="true"
                     android:textCursorDrawable="@null" />
 

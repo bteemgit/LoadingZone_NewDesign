@@ -313,8 +313,8 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
                         snackbar.show();
 
                     } catch (Exception e) {
-                        Log.d("exception", e.getMessage());
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                        Log.d("exception", e.getMessage());
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
 
@@ -453,7 +453,17 @@ public class DriverAddActivity extends BaseActivity implements RevealBackgroundV
 
 
                 } else {
-                    Snackbar.make(relativeLayoutRoot, R.string.string_upload_fail, Snackbar.LENGTH_LONG).show();
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        JSONObject meta = jObjError.getJSONObject("meta");
+                        Snackbar snackbar = Snackbar
+                                .make(relativeLayoutRoot, meta.getString("message"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+
+                    } catch (Exception e) {
+//                        Log.d("exception", e.getMessage());
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 /**

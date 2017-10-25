@@ -71,15 +71,12 @@
                         android:textColor="#ffffff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
-                        android:baselineAligned="false"
                         android:gravity="start"
-                        android:paddingLeft="15dp">
+                        android:paddingLeft="4dp">
 
                         <LinearLayout
                             android:layout_width="130dp"
@@ -104,7 +101,7 @@
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
-                                android:id="@+id/customTextView34"
+                                android:id="@+id/customTextView04"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
@@ -148,7 +145,7 @@
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
-                                android:visibility="visible" />
+                                android:visibility="gone" />
 
                             <View
                                 android:layout_width="match_parent"
@@ -191,13 +188,12 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="130dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="20dp"
                             android:gravity="left"
                             android:orientation="vertical">
-
-
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
@@ -220,10 +216,8 @@
 
 
                             <View
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -243,10 +237,8 @@
                                 android:textSize="13sp" />
 
                             <View
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -266,10 +258,8 @@
                                 android:textSize="13sp" />
 
                             <View
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
 
@@ -280,6 +270,7 @@
                                 android:layout_marginTop="10dp"
                                 android:background="@android:color/transparent"
                                 android:ellipsize="end"
+                                android:visibility="visible"
                                 android:gravity="start|center"
                                 android:hint="Budget"
                                 android:maxLength="50"
@@ -290,10 +281,8 @@
                                 android:textSize="13sp" />
 
                             <View
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -313,10 +302,8 @@
                                 android:textSize="13sp" />
 
                             <View
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -328,23 +315,17 @@
                                 android:gravity="center_vertical"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
-                                android:hint="Nil"
+                                android:hint=""
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
-
                             <View
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
-
-
                         </LinearLayout>
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
 

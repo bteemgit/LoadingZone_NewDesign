@@ -8,7 +8,7 @@ public class CancelledJob {
 
     @SerializedName("job_id")
     @Expose
-    private Integer jobId;
+    private String jobId;
     @SerializedName("job_title")
     @Expose
     private String jobTitle;
@@ -24,6 +24,7 @@ public class CancelledJob {
     @SerializedName("material_description")
     @Expose
     private String materialDescription;
+
     @SerializedName("material_weight")
     @Expose
     private MaterialWeight materialWeight;
@@ -75,12 +76,34 @@ public class CancelledJob {
     @SerializedName("customer")
     @Expose
     private Customer customer;
+    @SerializedName("origin_destination_distance")
+    @Expose
+    private Double origin_destination_distance;
+    @SerializedName("job_code")
+    @Expose
+    private String job_code;
 
-    public Integer getJobId() {
+    public String getJob_code() {
+        return job_code;
+    }
+
+    public void setJob_code(String job_code) {
+        this.job_code = job_code;
+    }
+
+    public Double getOrigin_destination_distance() {
+        return origin_destination_distance;
+    }
+
+    public void setOrigin_destination_distance(Double origin_destination_distance) {
+        this.origin_destination_distance = origin_destination_distance;
+    }
+
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Integer jobId) {
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 

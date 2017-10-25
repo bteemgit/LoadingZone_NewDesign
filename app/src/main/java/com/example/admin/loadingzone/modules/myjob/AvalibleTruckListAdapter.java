@@ -31,7 +31,6 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
     private List<AvailableTruck> listTrckAvailble = new ArrayList<>();
     private int rowLayout;
     private Context context;
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @NonNull
@@ -82,9 +81,8 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
         holder.textTruckType.setText(listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName());
         holder.textTruckDimension.setText(listTrckAvailble.get(position).getVehicle().getDimension());
 
-        String isDriverExist=listTrckAvailble.get(position).getDriver_exists();
-        if (!isDriverExist.equals("false"))
-        {
+        String isDriverExist = listTrckAvailble.get(position).getDriver_exists();
+        if (!isDriverExist.equals("false")) {
             holder.textDrivername.setText(listTrckAvailble.get(position).getDriver().getDriverName());
             Picasso.with(context)
                     .load(listTrckAvailble.get(position).getDriver().getDriverPic())
@@ -95,8 +93,7 @@ public class AvalibleTruckListAdapter extends RecyclerView.Adapter<AvalibleTruck
                     .into(holder.ivDriverPic);
             holder.textDriverEmail.setText(listTrckAvailble.get(position).getDriver().getDriverPhone());
 
-        }
-        else {
+        } else {
             holder.textDrivername.setText("No Driver ");
             holder.textDriverEmail.setVisibility(View.GONE);
         }

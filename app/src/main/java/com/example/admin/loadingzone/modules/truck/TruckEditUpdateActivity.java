@@ -197,7 +197,6 @@ public class TruckEditUpdateActivity extends BaseActivity {
             textAddNewDriver.setVisibility(View.VISIBLE);
             imageViewChangeDriver.setVisibility(View.GONE);
             ivTruckEdit.setVisibility(View.GONE);
-
         } else {
             assignDriver_card.setVisibility(View.GONE);
             reltive_existingDriver.setVisibility(View.VISIBLE);

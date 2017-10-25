@@ -4,35 +4,29 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
 import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
-import com.example.admin.loadingzone.global.MessageConstants;
 import com.example.admin.loadingzone.global.SlideAnimationUtil;
 import com.example.admin.loadingzone.modules.home.HomeActivity;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -43,17 +37,14 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -137,10 +128,8 @@ public class StartJobActivity extends BaseActivity {
     @BindView(R.id.fabCompleteStartJob)
     FloatingActionButton fab_CompleteStartJob;
 
-
     private int mYear, mMonth, mDay, mHour, mMinute;
-    String JobId, jobStatus;
-
+    String JobId;
     private int startYear = 0, startMonth = 0 , startDay = 0, startHour = 0, startMinute = 0;
     private int endYear = 0, endMonth = 0, endDay = 0, endHour = 0, endMinute = 0;
     private long startUnixTimeStamp, endUnixTimeStamp;
@@ -149,28 +138,19 @@ public class StartJobActivity extends BaseActivity {
     ApiInterface apiService;
     public static String IsEditVehicle = "EditVehicle";
     public static String IsEditDriver = "EditDriver";
-    String isTruckBlocked = "NotBlocked";
-    String start_date = null;
-    String driverId = null,expected_start_date = null,expected_end_date = null;
-
-
-
+//    String isTruckBlocked = "NotBlocked";
+//    String start_date = null;
+//    String driverId = null,expected_start_date = null,expected_end_date = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_job_02);
+        setContentView(R.layout.activity_start_job);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Start Your Job");
+        getSupportActionBar().setTitle("Assign Your Job");
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         JobId = getIntent().getStringExtra("JobId");
-
-
-      //selectTruckVisibility(startUnixTimeStamp, endUnixTimeStamp);
-
-
-
         String truckSelected = null;
         fab_CompleteStartJobVisibility(truckSelected,driver_id);
 
@@ -183,13 +163,9 @@ public class StartJobActivity extends BaseActivity {
         return true;
     }
 
-
-
-
     @NonNull
     @OnClick(R.id.linearDatePicker)
     public void StartdatePicker() {
-
         if(cardViewTrckHead.getVisibility() == View.VISIBLE){
             cardViewTrckHead.setVisibility(View.GONE);
             relativeSerachAvalibleTruck.setVisibility(View.VISIBLE);
@@ -206,13 +182,11 @@ public class StartJobActivity extends BaseActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-
                         startYear = year;
                         startMonth = monthOfYear + 1;
                         startDay = dayOfMonth;
+                        startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
                         textViewSelectedDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-
-
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -223,8 +197,6 @@ public class StartJobActivity extends BaseActivity {
     @NonNull
     @OnClick(R.id.linearTimePicker)
     public void StartTimePicker() {
-
-
         String isSelectdate = textViewSelectedDate.getText().toString();
         if (!isSelectdate.equals("0000-00-00")) {
             final Calendar c = Calendar.getInstance();
@@ -240,13 +212,9 @@ public class StartJobActivity extends BaseActivity {
                                               int minute) {
                             startHour = hourOfDay;
                             startMinute = minute;
-
                             startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
-
                             textViewSelectedTime.setText(String.format("%02d:%02d", hourOfDay, minute));
                             animateEndDate(view);
-
-
                             if(cardViewTrckHead.getVisibility() == View.VISIBLE){
                                 cardViewTrckHead.setVisibility(View.GONE);
                                 animateSerachTruck(view);
@@ -282,8 +250,10 @@ public class StartJobActivity extends BaseActivity {
                         endYear = year;
                         endMonth = monthOfYear + 1;
                         endDay = dayOfMonth;
+
                         textSelectedDateEnd.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                         //for animatiting view for select end date
+                        endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
                         animateEndTime(view);
 
                     }
@@ -293,8 +263,6 @@ public class StartJobActivity extends BaseActivity {
         long selectedFirstDate = startDatetoLong(start_date);
         datePickerDialog.getDatePicker().setMinDate(selectedFirstDate);
         datePickerDialog.show();
-
-
     }
 
     @NonNull
@@ -333,8 +301,6 @@ public class StartJobActivity extends BaseActivity {
                 }, mHour, mMinute, false);
         timePickerDialog.show();
 
-        //isDateTimeSelected = "Selected";
-        //selectTruckVisibility(startUnixTimeStamp,endUnixTimeStamp);
     }
 
     // seraching avalible truck on the selected date and time
@@ -344,7 +310,6 @@ public class StartJobActivity extends BaseActivity {
         startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
         endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
         Long tsLong = System.currentTimeMillis()/1000;
-        String ts = tsLong.toString();
        if(startUnixTimeStamp>=tsLong){
           if(endUnixTimeStamp>=tsLong){
 
@@ -368,19 +333,15 @@ public class StartJobActivity extends BaseActivity {
             showSnakBar(root, "Start Time should be greater than Current Time  ");
         }
 
-
-
     }
 
     // seraching avalible truck on the selected date and time to change the selected truck
     @NonNull
-    @OnClick(R.id.fabSearchTruck)
-    public void fab_searchAvilableTruck() {
+    @OnClick(R.id.textChangeTruck)
+    public void changeTruck() {
         driver_id = null;
-        textViewDriverName.setText("Drivers");
+       // textViewDriverName.setText("Drivers");
         //textChangeDriver.setText("");
-
-        
         View v = new View(getApplicationContext());
         SlideAnimationUtil.slideInFromLeft(this, v);
         Intent i = new Intent(StartJobActivity.this, SelectActvieTruckActivity.class);
@@ -390,9 +351,6 @@ public class StartJobActivity extends BaseActivity {
         i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
         startActivityForResult(i, 2);
     }
-
-
-
 
     // converting the start date in to long
     private long startDatetoLong(String start_date) {
@@ -407,8 +365,6 @@ public class StartJobActivity extends BaseActivity {
         }
         return cStartdate;
     }
-
-
     // if drver is not added in the selected truck then we can assign driver or change driver (existing driver in truck)
     @NonNull
     @OnClick(R.id.textChangeDriver)
@@ -434,8 +390,6 @@ public class StartJobActivity extends BaseActivity {
         startActivity(i);
 
     }
-
-
     public void animateEndDate(View view) {
 
         linearDatePickerEnd.setVisibility(LinearLayout.VISIBLE);
@@ -446,7 +400,6 @@ public class StartJobActivity extends BaseActivity {
         linearDatePickerEnd.animate();
         animation.start();
     }
-
     public void animateEndTime(View view) {
 
         linearTimePickerEnd.setVisibility(LinearLayout.VISIBLE);
@@ -457,10 +410,7 @@ public class StartJobActivity extends BaseActivity {
         linearTimePickerEnd.animate();
         animation.start();
     }
-
-
     public void animateSerachTruck(View view) {
-
         relativeSerachAvalibleTruck.setVisibility(LinearLayout.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.popup_show);
         animation.setDuration(500);
@@ -468,8 +418,6 @@ public class StartJobActivity extends BaseActivity {
         relativeSerachAvalibleTruck.animate();
         animation.start();
     }
-
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -488,7 +436,6 @@ public class StartJobActivity extends BaseActivity {
                 textTruckModel.setText(truck_maker);
                 textTruckType.setText(truck_type);
                 textTruckDimension.setText(truck_dimension);
-               // Log.d("provider_vehicle_id", provider_vehicle_id);
                 if (!driver_id.equals("driver_isnot_assigned")) {
                     String driver_name = data.getStringExtra("driver_name");
                     String driver_pic = data.getStringExtra("driver_pic");
@@ -504,19 +451,15 @@ public class StartJobActivity extends BaseActivity {
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     String truckSelected = "true";
                     fab_CompleteStartJobVisibility(truckSelected,driver_id);
-
-
                 } else {
                     relativeSerachAvalibleTruck.setVisibility(View.GONE);
                     showSnakBar(root, "Please select a Driver for complete the process");
                     textChangeDriver.setText("Add Driver");
-
-
                 }
             }
         if (requestCode == 4) {
             String driver_name = data.getStringExtra("driver_name");
-            String driver_pic = data.getStringExtra("driver_pic");
+            String driver_pic = data.getStringExtra("driver_image");
              driver_id = data.getStringExtra("driver_id");
             textViewDriverName.setText(driver_name);
             textChangeDriver.setText("Change Driver");
@@ -532,10 +475,8 @@ public class StartJobActivity extends BaseActivity {
 
         }
     }
-
     private void fab_CompleteStartJobVisibility(String truckSelected, String driver_id) {
         if(truckSelected != null && driver_id != null){
-
             fab_CompleteStartJob.setVisibility(View.VISIBLE);
         }
     }

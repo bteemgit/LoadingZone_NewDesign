@@ -11,6 +11,7 @@
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="55dp"
         android:layout_above="@+id/progressBarFooter"
         android:layout_below="@id/toolbar1"
         android:background="@color/dividercolor">
@@ -19,7 +20,7 @@
             android:id="@+id/recyclerViewDriver"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp" />
+          />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
@@ -32,7 +33,14 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone" />
-
+    <TextView
+        android:id="@+id/emptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:text="No Drivers"/>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabDriverAdd"
         android:layout_width="wrap_content"

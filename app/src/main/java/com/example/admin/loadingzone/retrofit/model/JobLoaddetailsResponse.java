@@ -18,7 +18,17 @@ public class JobLoaddetailsResponse {
     @SerializedName("load_status")
     @Expose
     private LoadStatus loadStatus;
+    @SerializedName("scheduled_status")
+    @Expose
+    private ScheduledStatus scheduled_status;
 
+    public ScheduledStatus getScheduled_status() {
+        return scheduled_status;
+    }
+
+    public void setScheduled_status(ScheduledStatus scheduled_status) {
+        this.scheduled_status = scheduled_status;
+    }
     public Meta getMeta() {
         return meta;
     }

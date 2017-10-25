@@ -85,9 +85,9 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textSelctedDriverEmail)
     TextView textSelctedDriverEmail;
-/*    @NonNull
-    @BindView(R.id.textSelctedDriverName)
-    TextView textSelctedDriverName;*/
+    /*    @NonNull
+        @BindView(R.id.textSelctedDriverName)
+        TextView textSelctedDriverName;*/
     @NonNull
     @BindView(R.id.textSelctedDriverMobile)
     TextView textSelctedDriverMobile;
@@ -119,13 +119,13 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     @NonNull
     @BindView(R.id.textViewDriverNme)
     TextView textViewDriver;
-
+    @NonNull
+    @BindView(R.id.textChangeTruck)
+    TextView textChangeTruck;
 
     @NonNull
-    @BindView(R.id.fabSearchTruck)
-    android.support.design.widget.FloatingActionButton fabtruckAddOrEdit;
-
-
+    @BindView(R.id.textChangeDriver)
+    TextView textChangeDriver;
 
 
     ApiInterface apiService;
@@ -157,13 +157,39 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         String end_time = getIntent().getStringExtra("end_time");
         String end_date = getIntent().getStringExtra("end_date");
         Job_id = getIntent().getStringExtra("JobId");
-
-
-
         textViewSelectedDate.setText(start_date);
         textViewSelectedTime.setText(start_time);
         textSelectedDateEnd.setText(end_date);
         textSelectedTimeEnd.setText(end_time);
+        // seperating the strt date and end time from reciving the get int and assigned in to particular start year,month,time etc
+        // for generating the unixtimestamp corectly
+        if (!start_date.equals(null))
+        {
+            String[] separated_start_date = start_date.split("-");
+            startYear= Integer.parseInt(separated_start_date[0].trim());
+            startMonth= Integer.parseInt(separated_start_date[1].trim());
+            startDay= Integer.parseInt(separated_start_date[2].trim());
+        }
+        if (!start_time.equals(null))
+        {
+            String[] separated_start_time = start_time.split(":");
+            startHour= Integer.parseInt(separated_start_time[0].trim());
+            startMinute= Integer.parseInt(separated_start_time[1].trim());
+        }
+
+        if (!end_date.equals(null))
+        {
+            String[] separated_end_date = end_date.split("-");
+            endYear= Integer.parseInt(separated_end_date[0].trim());
+            endMonth= Integer.parseInt(separated_end_date[1].trim());
+            endDay= Integer.parseInt(separated_end_date[2].trim());
+        }
+        if (!end_time.equals(null))
+        {
+            String[] separated_start_time = end_time.split(":");
+            endHour= Integer.parseInt(separated_start_time[0].trim());
+            endMinute= Integer.parseInt(separated_start_time[1].trim());
+        }
         //setting the toolbar according to jobStatus
         if (jobStatus.equals(IsEditDriver)) {
             getSupportActionBar().setTitle("Edit Driver");
@@ -173,8 +199,6 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
             getSupportActionBar().setTitle("Edit Truck");
             textSelection.setText(SEARCH_AVAILaBLE_TRUCK);
         }
-        //
-
     }
 
     @NonNull
@@ -195,6 +219,7 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                         startMonth = monthOfYear + 1;
                         startDay = dayOfMonth;
                         textViewSelectedDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
 
                     }
                 }, mYear, mMonth, mDay);
@@ -221,8 +246,8 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                                               int minute) {
                             startHour = hourOfDay;
                             startMinute = minute;
-                            startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
                             textViewSelectedTime.setText(hourOfDay + ":" + minute);
+                            startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
 
                         }
                     }, mHour, mMinute, false);
@@ -239,26 +264,21 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-
                         endYear = year;
                         endMonth = monthOfYear + 1;
                         endDay = dayOfMonth;
                         textSelectedDateEnd.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-
-
+                        endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
-
     }
 
     @NonNull
@@ -267,7 +287,6 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
         final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
-
         // Launch Time Picker Dialog
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -277,8 +296,8 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                                           int minute) {
                         endHour = hourOfDay;
                         endMinute = minute;
-                        endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
                         textSelectedTimeEnd.setText(hourOfDay + ":" + minute);
+                        endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
 
                     }
                 }, mHour, mMinute, false);
@@ -286,22 +305,22 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
     }
 
 
-
-
     // seraching avalible truck on the selected date and time or driver
     @NonNull
     @OnClick(R.id.relative_SerachAvalibleTruck)
-    public void serachTruck() {
+    public void searchTruck() {
         if (textSelection.getText().equals(SEARCH_AVAILaBLE_TRUCK) || textSelection.getText().equals(SEARCH_AVAIlABLE_DRIVER)) {
             View v = new View(getApplicationContext());
             SlideAnimationUtil.slideInFromLeft(this, v);
             Intent i = new Intent(EditAvailbleDriverOrTruckActivity.this, AvailableTruckOrDriverActivity.class);
+            endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
+            startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
             String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
             String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
             i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
             i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
             i.putExtra("jobStatus", jobStatus);
-            i.putExtra("isFrom","Posted");
+            i.putExtra("isFrom", "Posted");
             startActivityForResult(i, 2);
         }
         if (textSelection.getText().equals(SAVE_DRIVER)) {
@@ -315,22 +334,42 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
 
     }
 
-    //edit truck
+    //edit driver
 
     @NonNull
-    @OnClick(R.id.fabSearchTruck)
-    public void serachTruck_() {
+    @OnClick(R.id.textChangeDriver)
+    public void editDriver() {
+        View v = new View(getApplicationContext());
+        SlideAnimationUtil.slideInFromLeft(this, v);
+        Intent i = new Intent(EditAvailbleDriverOrTruckActivity.this, AvailableTruckOrDriverActivity.class);
+        endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
+        startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
+        String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
+        String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
+        i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
+        i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
+        i.putExtra("jobStatus", jobStatus);
+        i.putExtra("isFrom", "Posted");
+        startActivityForResult(i, 2);
 
-            View v = new View(getApplicationContext());
-            SlideAnimationUtil.slideInFromLeft(this, v);
-            Intent i = new Intent(EditAvailbleDriverOrTruckActivity.this, AvailableTruckOrDriverActivity.class);
-            String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
-            String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
-            i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
-            i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
-            i.putExtra("jobStatus", jobStatus);
-            i.putExtra("isFrom","Posted");
-            startActivityForResult(i, 2);
+    }
+    //edit driver
+
+    @NonNull
+    @OnClick(R.id.textChangeTruck)
+    public void editTruck() {
+        View v = new View(getApplicationContext());
+        SlideAnimationUtil.slideInFromLeft(this, v);
+        Intent i = new Intent(EditAvailbleDriverOrTruckActivity.this, AvailableTruckOrDriverActivity.class);
+        endUnixTimeStamp = UnixTimeStampConvertion(endYear, endMonth, endDay, endHour, endMinute);
+        startUnixTimeStamp = UnixTimeStampConvertion(startYear, startMonth, startDay, startHour, startMinute);
+        String sUnixTimeStamp = String.valueOf(startUnixTimeStamp);
+        String eUnixTimeStamp = String.valueOf(endUnixTimeStamp);
+        i.putExtra("startUnixTimeStamp", sUnixTimeStamp);
+        i.putExtra("endUnixTimeStamp", eUnixTimeStamp);
+        i.putExtra("jobStatus", jobStatus);
+        i.putExtra("isFrom", "Posted");
+        startActivityForResult(i, 2);
 
     }
 
@@ -345,9 +384,8 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
 
                 String isEdit = data.getStringExtra("isEdit");
                 if (isEdit.equals("isDriverEdit")) {
-                   // cardViewDriver.setVisibility(View.VISIBLE);
+                    // cardViewDriver.setVisibility(View.VISIBLE);
                     cardViewVehicle.setVisibility(View.GONE);
-
                     String driver_name = data.getStringExtra("driver_name");
                     String driver_email = data.getStringExtra("driver_email");
                     String driver_mobile = data.getStringExtra("driver_mobile");
@@ -355,10 +393,8 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                     driver_id = data.getStringExtra("driver_id");
                     textSelctedDriverEmail.setText(driver_email);
                     textSelctedDriverMobile.setText(driver_mobile);
-                   // textSelctedDriverName.setText(driver_name);
-
+                    // textSelctedDriverName.setText(driver_name);
                     textViewDriver.setText(driver_name);
-
                     Context context = this;
                     Picasso.with(context)
                             .load(driver_photo)
@@ -368,16 +404,15 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                             .into(imageViewDriverPic);
 
 
-                    if(driver_name.length() > 0){
+                    if (driver_name.length() > 0) {
                         cardViewDriver.setVisibility(View.VISIBLE);
                         textSelection.setText(SAVE_DRIVER);
                         textSelection.setVisibility(View.VISIBLE);
                     }
-                    fabtruckAddOrEdit.setVisibility(View.VISIBLE);
+
                 } else {
 
                     cardViewDriver.setVisibility(View.GONE);
-
                     String truck_name = data.getStringExtra("truck_name");
                     String truck_type = data.getStringExtra("truck_type");
                     String truck_size = data.getStringExtra("truck_size");
@@ -386,12 +421,12 @@ public class EditAvailbleDriverOrTruckActivity extends BaseActivity {
                     textSelctedTruckType.setText(truck_type);
                     textSelctedTruckSize.setText(truck_size);
 
-                    if(truck_name.length() > 0){
+                    if (truck_name.length() > 0) {
                         cardViewVehicle.setVisibility(View.VISIBLE);
                         textSelection.setText(SAVE_TRUCK);
                         textSelection.setVisibility(View.VISIBLE);
                     }
-                    fabtruckAddOrEdit.setVisibility(View.VISIBLE);
+
                 }
 
             }

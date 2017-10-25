@@ -44,9 +44,6 @@ public class SelectActvieTruckActivity extends BaseActivity {
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.progressBarFooter)
     ProgressBar progressBar;
-
-
-
     private ApiInterface service;
     private int limit = 10;
     private int offset = 1;
@@ -57,15 +54,11 @@ public class SelectActvieTruckActivity extends BaseActivity {
     private String startUnixTimeStamp, endUnixTimeStamp;
     public static int RESULT_OK = 51;
     private boolean isSwipeRefreshed = false;
-
-
     private EndlessRecyclerView.PaginationListener paginationListener = new EndlessRecyclerView.PaginationListener() {
         @Override
         public void onReachedBottom() {
-
             getActiveTruckandDrivers();
         }
-
         @Override
         public void onReachedTop() {
             hasReachedTop = true;
@@ -93,8 +86,6 @@ public class SelectActvieTruckActivity extends BaseActivity {
         apiService = ApiClient.getClient().create(ApiInterface.class);//retrofit
         refreshLayout.setRefreshing(false);
         setUpListeners();
-
-
         if (isConnectingToInternet(getApplicationContext())) {
             getActiveTruckandDrivers();
         } else {
@@ -103,14 +94,12 @@ public class SelectActvieTruckActivity extends BaseActivity {
     }
 
     private void setUpListeners() {
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         endlessRecyclerViewTrucks.setLayoutManager(layoutManager);
-
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-// refreshLayout.setRefreshing(true);
+
                 offset = 1;
                 isSwipeRefreshed=true;
                 getActiveTruckandDrivers();
@@ -225,7 +214,6 @@ public class SelectActvieTruckActivity extends BaseActivity {
             }
         });
     }
-
     private void updateEndlessRecyclerView() {
         activeTruckListAdapter = new ActiveTruckListAdapter(listTrckAvailble, R.layout.item_active_truck, getApplicationContext());
         endlessRecyclerViewTrucks.setAdapter(activeTruckListAdapter);

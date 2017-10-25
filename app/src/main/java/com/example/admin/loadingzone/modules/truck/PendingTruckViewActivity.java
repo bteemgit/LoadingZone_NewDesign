@@ -1,13 +1,8 @@
 package com.example.admin.loadingzone.modules.truck;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -20,8 +15,6 @@ import com.example.admin.loadingzone.global.AppController;
 import com.example.admin.loadingzone.global.BaseActivity;
 import com.example.admin.loadingzone.global.GloablMethods;
 import com.example.admin.loadingzone.global.MessageConstants;
-import com.example.admin.loadingzone.modules.home.HomeActivity;
-import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
 import com.example.admin.loadingzone.recyclerview.EndlessRecyclerView;
 import com.example.admin.loadingzone.recyclerview.RecyclerItemClickListener;
 import com.example.admin.loadingzone.retrofit.ApiClient;
@@ -60,7 +53,7 @@ public class PendingTruckViewActivity extends BaseActivity {
     FloatingActionMenu floatingActionMenu;
     ApiInterface apiService;
     private int selectedItemPosition = -1;
-    TrckListAdapter trckListAdapter;
+    TruckListAdapter truckListAdapter;
     private int limit = 30;
     private int offset = 1;
     private boolean hasReachedTop = false;
@@ -135,9 +128,6 @@ public class PendingTruckViewActivity extends BaseActivity {
                 String reg_no=vehicleListList.get(position).getRegistration_number();
                 String chassis_no=vehicleListList.get(position).getChassis_number();
                 String License_no=vehicleListList.get(position).getLicence_number();
-
-
-
                 Intent i = new Intent(PendingTruckViewActivity.this, TruckEditUpdateActivity.class);
                 i.putExtra("isFrom", "PendingTruckView");
                 i.putExtra("driver", driver);
@@ -205,7 +195,7 @@ public class PendingTruckViewActivity extends BaseActivity {
                         } else {
                             endlessRecyclerViewTrck.setHaveMoreItem(true);
                         }
-                        trckListAdapter.notifyDataSetChanged();
+                        truckListAdapter.notifyDataSetChanged();
                         offset = offset + 1;
                     } else {
                         endlessRecyclerViewTrck.setHaveMoreItem(false);
@@ -231,8 +221,8 @@ public class PendingTruckViewActivity extends BaseActivity {
 
 
     private void updateEndlessRecyclerView() {
-        trckListAdapter = new TrckListAdapter(vehicleListList, R.layout.item_trck, getApplicationContext());
-        endlessRecyclerViewTrck.setAdapter(trckListAdapter);
+        truckListAdapter = new TruckListAdapter(vehicleListList, R.layout.item_trck, getApplicationContext());
+        endlessRecyclerViewTrck.setAdapter(truckListAdapter);
     }
 
 }

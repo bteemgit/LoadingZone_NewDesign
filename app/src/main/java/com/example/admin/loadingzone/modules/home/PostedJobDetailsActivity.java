@@ -252,9 +252,21 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
     @BindView(R.id.textJobStatus)
     TextView textViewJobStatus;
     @NonNull
+    @BindView(R.id.texJobCancel)
+    TextView texJobCancel;
+    @NonNull
+    @BindView(R.id.textCancel)
+    TextView textCancel;
+    @NonNull
+    @BindView(R.id.customTextView_tSize)
+    TextView customTextView_tSize;
+    @NonNull
+    @BindView(R.id.customTextView_tType)
+    TextView customTextView_tType;
+    @NonNull
     @BindView(R.id.TextRunningStatus)
     TextView textViewRunningStatus;
-    String CutomerMobile = null;
+    String CustomerMobile = null;
     View dark_bg;
     private static int REQUEST_CODE = 41;
     String JobId, isFrom, job_status_code, job_time, job_date, PrefferedLoadingDate, PrefferedLoadingTime;
@@ -270,7 +282,7 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         setContentView(R.layout.activity_posted_job_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Job Detail");
+        getSupportActionBar().setTitle("Job Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
@@ -294,7 +306,8 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         String profilepic = getIntent().getStringExtra("profilepic");
         String CutomerName = getIntent().getStringExtra("name");
         String CutomerEmail = getIntent().getStringExtra("email");
-        String CutomerMobileNo = getIntent().getStringExtra("phone1");
+        String CustomerMobileNo = getIntent().getStringExtra("phone1");
+        CustomerMobile = CustomerMobileNo;
         String Job_From = getIntent().getStringExtra("FromLoc_name");
         String Job_To = getIntent().getStringExtra("ToLoc_name");
         String JobTotalDist = getIntent().getStringExtra("LocationDistance");
@@ -308,7 +321,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         String JobFrom = getIntent().getStringExtra("FromLoc_name");
         String JobTo = getIntent().getStringExtra("ToLoc_name");
         String LoadingDate = getIntent().getStringExtra("DateOfLoading");
-
         PrefferedLoadingDate = getIntent().getStringExtra("PrefferedLoadingDate");
         PrefferedLoadingTime = getIntent().getStringExtra("PrefferedLoadingTime");
         String TruckSize = getIntent().getStringExtra("TruckSize_dimension");
@@ -342,7 +354,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         }
         if (isFrom.equals("AssignedJob")) {
-
             //setting visibility of Exp.Start/End Date in headerview
             linerExpStartEndJob_assignedJobs.setVisibility(View.VISIBLE);
             //setting invisibile of ActiveQuotation.etc in headerview
@@ -368,20 +379,54 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             linearJobstatusItem.setVisibility(View.VISIBLE);
             liner_JobStatus_heading.setVisibility(View.VISIBLE);
         }
-
-       if( job_status_code.equals("vehicle-blocked"))
-        {
+        if (isFrom.equals("CompletedJob")) {
+            linerExpStartEndJob_assignedJobs.setVisibility(View.VISIBLE);
+            //setting invisibile of ActiveQuotation.etc in headerview
+            linerUserstaus.setVisibility(View.GONE);
+            //setting invisibile of preffered truckdetails
+            linearPrefferedTruckDetails.setVisibility(View.GONE);
+            linearTruckLabel.setVisibility(View.GONE);
+            //setting visibility of Start/End date and time
+            linearLayout_id_Start_EndDateime.setVisibility(View.VISIBLE);
+            LinearLayout_id_Start_EndDateime_Label.setVisibility(View.VISIBLE);
+            buttonCanceljob.setVisibility(View.GONE);
+            getLoadingJobDeatails(JobId);
+            linearAssignedVehicleHeading.setVisibility(View.VISIBLE);
+            linear_assignedDriver_heading.setVisibility(View.VISIBLE);
+            linearAssignedDriverItem.setVisibility(View.VISIBLE);
+            linearAssignedVehicleItem.setVisibility(View.VISIBLE);
+            linearJobstatusItem.setVisibility(View.VISIBLE);
+            liner_JobStatus_heading.setVisibility(View.VISIBLE);
+        }
+        if (isFrom.equals("CanceledJob")) {
+            textViewTruckType.setVisibility(View.GONE);
+            customTextView_tType.setVisibility(View.GONE);
+            customTextView_tSize.setVisibility(View.GONE);
+            textViewCustomTruckSize_inPrefferedTruckDetails.setVisibility(View.GONE);
+            texJobCancel.setVisibility(View.VISIBLE);
+            textCancel.setVisibility(View.VISIBLE);
+            String cancel_reason = getIntent().getStringExtra("cancel_reason");
+            texJobCancel.setText(cancel_reason);
+            textViewJobDate.setText(job_date);
+            textViewRequestedDate.setText(RequestedDate);
+            linearAssignedVehicleHeading.setVisibility(View.GONE);
+            linear_assignedDriver_heading.setVisibility(View.GONE);
+            linearAssignedDriverItem.setVisibility(View.GONE);
+            linearAssignedVehicleItem.setVisibility(View.GONE);
+            linearJobstatusItem.setVisibility(View.GONE);
+            liner_JobStatus_heading.setVisibility(View.GONE);
+            linearPrefferedTruckDetails.setVisibility(View.GONE);
+        }
+        if (job_status_code.equals("vehicle-blocked")) {
             imageViewEditAssignedVehicle.setVisibility(View.VISIBLE);
             imageViewEditAssignedDriver.setVisibility(View.VISIBLE);
+        } else {
+            imageViewEditAssignedVehicle.setVisibility(View.GONE);
+            imageViewEditAssignedDriver.setVisibility(View.GONE);
         }
-        else
-       {
-           imageViewEditAssignedVehicle.setVisibility(View.GONE);
-           imageViewEditAssignedDriver.setVisibility(View.GONE);
-       }
         textViewCutomerName.setText(CutomerName);
         textViewCutomerEmail.setText(CutomerEmail);
-        textViewCutomerMobile.setText(CutomerMobileNo);
+        textViewCutomerMobile.setText(CustomerMobileNo);
         textViewJob_From.setText(Job_From);
         textViewJob_To.setText(Job_To);
         textViewJobTotalDist.setText(JobTotalDist);
@@ -512,8 +557,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 if (message.length() > 0 && subject.length() > 0) {
                     if (isConnectingToInternet(PostedJobDetailsActivity.this)) {
                         sendMessage(subject, message, message_type_id);
-
-
                     } else {
                         showSnakBar(rootView, MessageConstants.INTERNET);
                     }
@@ -524,13 +567,31 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         });
     }
 
-
     //call driver
+    @NonNull
+    @OnClick(R.id.fabcall_driver)
+    public void callDriver() {
+        if (isPermissionGranted()) {
+            String driver_mobile = textDriverMobile.getText().toString().trim();
+            if (driver_mobile != null) {
+                call_action(driver_mobile);
+            } else {
+                showSnakBar(rootView, "Driver mobile no is not provided");
+            }
+
+        }
+    }
+
+    //call customer
     @NonNull
     @OnClick(R.id.fabcall_customer)
     public void callcustomer() {
         if (isPermissionGranted()) {
-            call_action();
+            if (CustomerMobile != null) {
+                call_action(CustomerMobile);
+            } else {
+                showSnakBar(rootView, "Customer mobile no is not provided");
+            }
         }
     }
 
@@ -543,18 +604,18 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         startActivity(i);
     }
 
-    public void call_action() {
+    public void call_action(String mobile) {
 
         try {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + CutomerMobile));
+            callIntent.setData(Uri.parse("tel:" + mobile));
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 return;
             }
             startActivity(callIntent);
         } catch (ActivityNotFoundException activityException) {
-            Log.e("Calling a Phone Number", "Call failed", activityException);
+            // Log.e("Calling a Phone Number", "Call failed", activityException);
         }
 
     }
@@ -563,32 +624,29 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.CALL_PHONE)
                     == PackageManager.PERMISSION_GRANTED) {
-                Log.v("TAG", "Permission is granted");
+                //   Log.v("TAG", "Permission is granted");
                 return true;
             } else {
 
-                Log.v("TAG", "Permission is revoked");
+                //  Log.v("TAG", "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
                 return false;
             }
         } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("TAG", "Permission is granted");
+            //  Log.v("TAG", "Permission is granted");
             return true;
         }
     }
 
-
     @NonNull
     @OnClick(R.id.btnStartjob)
     public void startJob() {
-
         Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
         intent.putExtra("JobId", JobId);
         intent.putExtra("jobStatus", "StartNewJob"); // for identyfying teh job is new while editing the truck and driver
         startActivity(intent);
 
     }
-
 
     @Override
     public void onFabAnimationEnd() {
@@ -615,7 +673,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                     getLoadingJobDeatails(JobId);
                 } else return;
         }
-
     }
 
     // getting the loading details and assigned driver details
@@ -633,33 +690,26 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
                         textCustomVechicleName.setText(response.body().getAssignedVehicle().getVehicleDetails().getCustomName());
                         textAssignedTruckType.setText(response.body().getAssignedVehicle().getVehicleDetails().getVehicle().getTruckType().getTruckTypeName());
-
                         textStartDate.setText(response.body().getAssignedVehicle().getExpectedStartDate());
                         textEndDate.setText(response.body().getAssignedVehicle().getExpectedEndDate());
                         textEndTime.setText(response.body().getAssignedVehicle().getExpectedEndTime());
                         textStartTime.setText(response.body().getAssignedVehicle().getExpectedStartTime());
-
-
                         Exp_StartDateForAssignedJob = response.body().getAssignedVehicle().getExpectedStartDate() + " " + response.body().getAssignedVehicle().getExpectedStartTime();
-
                         Exp_EndDateForAssignedJob = response.body().getAssignedVehicle().getExpectedEndDate() + " " + response.body().getAssignedVehicle().getExpectedEndTime();
-
                         textViewRequestedDate.setText(Exp_StartDateForAssignedJob);
                         textViewJobDate.setText(Exp_EndDateForAssignedJob);
-
-                        textViewRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusText());
-
-
+                        String driver_mob = response.body().getAssignedDriver().getDriverPhone();
+                        String status_date = response.body().getLoadStatus().getStatusDate();
+                        String status_time = response.body().getLoadStatus().getStatusTime();
                         textViewExpStartDate.setText(response.body().getAssignedVehicle().getExpectedStartDate());
                         textViewExpEndDate.setText(response.body().getAssignedVehicle().getExpectedEndDate());
-
                         textDriverName.setText(response.body().getAssignedDriver().getDriverName());
                         textDriverEmail.setText(response.body().getAssignedDriver().getDriverEmail());
-                        textDriverMobile.setText(response.body().getAssignedDriver().getDriverPhone());
-                        //  textVehicleRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusName());
+                        textDriverMobile.setText(driver_mob);
                         textVehicleLocation.setText(response.body().getLoadStatus().getLocationName());
-                        textLastUpdatedDate.setText(response.body().getLoadStatus().getStatusDate());
-                        textLastUpdatedTime.setText(response.body().getLoadStatus().getStatusTime());
+                        textLastUpdatedDate.setText("" + status_date + "");
+                        textLastUpdatedTime.setText("" + status_time + "");
+                        textViewRunningStatus.setText(response.body().getLoadStatus().getRunningStatus().getRunningStatusText());
 
                     } else {
                         showSnakBar(rootView, response.body().getMeta().getMessage());
@@ -690,7 +740,6 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
 
     }
 
-
     // for sending new message to customer or drvier
     private void sendMessage(String subject, String message, String message_type_id) {
 
@@ -705,26 +754,20 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
                 if (response.isSuccessful())
 
                 {
-//                    if (response.body().getMeta().getStatus().equals("true")) {
                     et_message.setText("");
                     et_subject.setText("");
                     showSnakBar(rootView, "Message sent");
                     finish();
-//                    }
+
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         JSONObject meta = jObjError.getJSONObject("meta");
                         showSnakBar(rootView, meta.getString("message"));
-
-
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-
                 }
-
-
             }
 
             @Override
@@ -733,6 +776,4 @@ public class PostedJobDetailsActivity extends BaseActivity implements SheetLayou
             }
         });
     }
-
-
 }

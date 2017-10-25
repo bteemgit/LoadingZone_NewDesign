@@ -49,10 +49,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <include layout="@layout/headerview_posted_details" />
-
-
                 </LinearLayout>
 
                 <android.support.v7.widget.CardView
@@ -79,6 +76,7 @@
                                 android:layout_marginTop="20dp"
                                 android:ems="4"
                                 android:text="From"
+                                android:textStyle="bold"
                                 android:textColor="#414040"
                                 android:textSize="13sp" />
                             <TextView
@@ -87,6 +85,7 @@
                                 android:layout_marginLeft="30dp"
                                 android:layout_marginTop="20dp"
                                 android:textSize="13sp"
+                                android:textStyle="bold"
                                 android:text=": "/>
 
                             <TextView
@@ -114,6 +113,7 @@
                                 android:layout_marginTop="20dp"
                                 android:ems="4"
                                 android:text="To"
+                                android:textStyle="bold"
                                 android:textColor="#414040"
                                 android:textSize="13sp" />
 
@@ -123,6 +123,7 @@
                                 android:layout_marginLeft="30dp"
                                 android:layout_marginTop="20dp"
                                 android:textSize="13sp"
+                                android:textStyle="bold"
                                 android:text=": "/>
                             <TextView
                                 android:id="@+id/texJobTo"
@@ -149,6 +150,7 @@
                                 android:layout_marginLeft="30dp"
                                 android:layout_marginTop="20dp"
                                 android:ems="4"
+                                android:textStyle="bold"
                                 android:text="Material"
                                 android:textColor="#414040"
                                 android:textSize="13sp" />
@@ -158,6 +160,7 @@
                                 android:layout_marginLeft="30dp"
                                 android:layout_marginTop="20dp"
                                 android:textSize="13sp"
+                                android:textStyle="bold"
                                 android:text=": "/>
 
                             <TextView
@@ -196,7 +199,6 @@
                         android:textColor="#ffffff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -296,6 +298,22 @@
                                 android:layout_height="1px"
                                 android:background="@color/upper_divider_purple" />
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="start|center"
+                                android:id="@+id/textCancel"
+                                android:text="Cancel  Reason"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
                             <LinearLayout
                                 android:id="@+id/id_LinearStart_EndDateime_Label"
                                 android:layout_width="wrap_content"
@@ -374,19 +392,17 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="130dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="60dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_weight="1"
                             android:gravity="left"
                             android:orientation="vertical">
 
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -399,7 +415,6 @@
                                 android:gravity="start|center"
                                 android:hint="Loading Material"
                                 android:maxLength="50"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
@@ -407,10 +422,8 @@
 
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -423,17 +436,14 @@
                                 android:gravity="start|center"
                                 android:hint="Material Weight"
                                 android:maxLength="50"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
 
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -447,17 +457,14 @@
                                 android:hint="Total Distance"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:visibility="gone" />
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -470,17 +477,14 @@
                                 android:hint="Loading date"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
 
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -493,13 +497,32 @@
                                 android:hint="Job Code"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
-                            />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
 
 
+                            <TextView
+                                android:id="@+id/texJobCancel"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:inputType="textCapSentences"
+                                android:maxLength="50"
+                                android:visibility="gone"
+                                android:paddingRight="10dp"
+                                android:textColor="@color/primaryTextColor"
+                                android:textSize="13sp" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/upper_divider_purple" />
                             <LinearLayout
                                 android:id="@+id/id_LinearStart_EndDateime"
                                 android:layout_width="wrap_content"
@@ -510,8 +533,6 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1px"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
                                     android:background="@color/upper_divider_purple" />
 
                                 <LinearLayout
@@ -530,7 +551,6 @@
                                         android:gravity="start|center"
                                         android:hint="Start Date"
                                         android:inputType="textCapSentences"
-                                        android:paddingLeft="10dp"
                                         android:paddingRight="10dp"
                                         android:textColor="@color/primaryTextColor"
                                         android:textSize="13sp"
@@ -540,8 +560,6 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1px"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
                                     android:background="@color/upper_divider_purple" />
 
                                 <LinearLayout
@@ -560,7 +578,6 @@
                                         android:gravity="start|center"
                                         android:hint="Start Time"
                                         android:inputType="textCapSentences"
-                                        android:paddingLeft="10dp"
                                         android:paddingRight="10dp"
                                         android:textColor="@color/primaryTextColor"
                                         android:textSize="13sp"
@@ -570,8 +587,6 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1px"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
                                     android:background="@color/upper_divider_purple" />
 
                                 <LinearLayout
@@ -590,7 +605,7 @@
                                         android:gravity="start|center"
                                         android:hint="End Date"
                                         android:inputType="textCapSentences"
-                                        android:paddingLeft="10dp"
+
                                         android:paddingRight="10dp"
                                         android:textColor="@color/primaryTextColor"
                                         android:textSize="13sp"
@@ -600,8 +615,6 @@
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1px"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
                                     android:background="@color/upper_divider_purple" />
 
                                 <LinearLayout
@@ -620,7 +633,6 @@
                                         android:gravity="start|center"
                                         android:hint="End Time"
                                         android:inputType="textCapSentences"
-                                        android:paddingLeft="10dp"
                                         android:paddingRight="10dp"
                                         android:textColor="@color/primaryTextColor"
                                         android:textSize="13sp"
@@ -679,7 +691,7 @@
 
 
                             <TextView
-                                android:id="@+id/customTextView11"
+                                android:id="@+id/customTextView_tSize"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
@@ -696,7 +708,7 @@
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
-                                android:id="@+id/customTextView10"
+                                android:id="@+id/customTextView_tType"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
@@ -710,9 +722,9 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="60dp"
+                            android:layout_marginLeft="40dp"
                             android:layout_weight="1"
                             android:gravity="left"
                             android:orientation="vertical">
@@ -735,10 +747,8 @@
 
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <TextView
@@ -751,16 +761,13 @@
                                 android:hint="Type"
                                 android:inputType="textCapSentences"
                                 android:maxLength="50"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp" />
 
                             <View
-                                android:layout_width="130dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
                         </LinearLayout>
                     </LinearLayout>
@@ -989,9 +996,9 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="60dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_weight="1"
                             android:gravity="left"
                             android:orientation="vertical">
@@ -1003,8 +1010,6 @@
                                 android:background="@android:color/transparent"
                                 android:ellipsize="end"
                                 android:gravity="start|center"
-                                android:hint="Vehicle Name"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
@@ -1014,8 +1019,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
 
@@ -1033,9 +1036,7 @@
                                     android:layout_weight="1"
                                     android:background="@android:color/transparent"
                                     android:gravity="start|center"
-                                    android:hint="Truck Type"
                                     android:inputType="textCapSentences"
-                                    android:paddingLeft="10dp"
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
@@ -1045,8 +1046,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
 
@@ -1058,9 +1057,7 @@
                                 android:layout_weight="1"
                                 android:background="@android:color/transparent"
                                 android:gravity="start|center"
-                                android:hint="Truck Size"
                                 android:inputType="textCapSentences"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
@@ -1123,7 +1120,6 @@
                                 android:id="@+id/customTextView33"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
-
                                 android:gravity="start|center"
                                 android:text="Driver Name"
                                 android:textColor="@color/primaryTextColor"
@@ -1170,9 +1166,9 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="60dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_weight="1"
                             android:gravity="left"
                             android:orientation="vertical">
@@ -1181,12 +1177,10 @@
                                 android:id="@+id/textDriverName"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
-
                                 android:background="@android:color/transparent"
                                 android:ellipsize="end"
                                 android:gravity="start|center"
                                 android:hint="Driver Name"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
@@ -1196,8 +1190,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <LinearLayout
@@ -1216,7 +1208,6 @@
                                     android:gravity="start|center"
                                     android:hint="Email"
                                     android:inputType="textCapSentences"
-                                    android:paddingLeft="10dp"
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
@@ -1226,8 +1217,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <LinearLayout
@@ -1241,16 +1230,17 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
                                     android:layout_marginTop="10dp"
-                                    android:layout_weight="1"
                                     android:background="@android:color/transparent"
                                     android:gravity="start|center"
-                                    android:hint="Mobile"
                                     android:inputType="textCapSentences"
-                                    android:paddingLeft="10dp"
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
                                     android:visibility="visible" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:background="@color/upper_divider_purple" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -1284,22 +1274,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
-                        android:baselineAligned="false"
-                        android:gravity="right"
-                        android:paddingLeft="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left"
                         android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="130dp"
                             android:layout_height="match_parent"
                             android:gravity="right"
-                            android:minWidth="80dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
-
                                 android:gravity="start|center"
                                 android:text="Job Status"
                                 android:textColor="@color/primaryTextColor"
@@ -1317,6 +1304,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
                                 android:gravity="start|center"
+                                android:text="Running Status"
                                 android:textColor="@color/primaryTextColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
@@ -1377,11 +1365,10 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="60dp"
-                            android:layout_weight="1"
-                            android:gravity="left"
+                            android:gravity="right"
+                            android:layout_marginLeft="20dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -1392,7 +1379,6 @@
                                 android:ellipsize="end"
                                 android:gravity="start|center"
                                 android:hint="Job Status"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
@@ -1402,8 +1388,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
 
@@ -1416,7 +1400,6 @@
                                 android:ellipsize="end"
                                 android:gravity="start|center"
                                 android:hint="Running Status"
-                                android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:singleLine="true"
                                 android:textColor="@color/primaryTextColor"
@@ -1426,8 +1409,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <LinearLayout
@@ -1441,12 +1422,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
                                     android:layout_marginTop="10dp"
-                                    android:layout_weight="1"
                                     android:background="@android:color/transparent"
                                     android:gravity="start|center"
                                     android:hint="Nil"
                                     android:inputType="textCapSentences"
-                                    android:paddingLeft="10dp"
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
@@ -1456,8 +1435,6 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1px"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@color/upper_divider_purple" />
 
                             <LinearLayout
@@ -1471,16 +1448,17 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
                                     android:layout_marginTop="10dp"
-                                    android:layout_weight="1"
-                                    android:background="@android:color/transparent"
                                     android:gravity="start|center"
                                     android:hint="Updated Date"
                                     android:inputType="textCapSentences"
-                                    android:paddingLeft="10dp"
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
-                                    android:visibility="visible" />
+                                     />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:background="@color/upper_divider_purple" />
 
                             </LinearLayout>
 
@@ -1495,16 +1473,18 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
                                     android:layout_marginTop="10dp"
-                                    android:layout_weight="1"
                                     android:background="@android:color/transparent"
                                     android:gravity="start|center"
                                     android:hint="UpdatedTime"
                                     android:inputType="textCapSentences"
-                                    android:paddingLeft="10dp"
                                     android:paddingRight="10dp"
                                     android:textColor="@color/primaryTextColor"
                                     android:textSize="13sp"
                                     android:visibility="visible" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:background="@color/upper_divider_purple" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -1521,7 +1501,6 @@
         android:layout_height="match_parent"
         android:background="#85000000"
         android:visibility="gone" />
-
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/floating_action_menu"
         android:layout_width="wrap_content"
@@ -1566,6 +1545,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="#ffffff"
+           android:src="@drawable/messageblack"
             app:fab_label="Message Driver "
             fab:fab_size="mini"
           />
@@ -1576,6 +1556,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="#ffffff"
             app:fab_label="Message Customer"
+            android:src="@drawable/messsagered"
             fab:fab_size="mini"
             />
 
@@ -1586,7 +1567,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="#ffffff"
             app:fab_label="Call Driver "
-
+            android:src="@drawable/callblack"
             fab:fab_size="mini"
             />
 
@@ -1596,11 +1577,10 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="#ffffff"
             app:fab_label="Call Customer"
+            android:src="@drawable/callred"
             fab:fab_size="mini"
           />
-
     </com.github.clans.fab.FloatingActionMenu>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabQuotation"
         android:layout_width="wrap_content"
@@ -1619,13 +1599,12 @@
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fabQuotation"
         android:layout_gravity="bottom"
-        android:layout_toEndOf="@+id/background_dimmer"
         android:elevation="2dp"
         app:ft_color="@color/colorPrimary"
-        app:ft_container_gravity="center" />
-
+        app:ft_container_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
     <RelativeLayout
         android:id="@+id/layoutButtons"
         android:layout_width="match_parent"
@@ -1633,15 +1612,11 @@
         android:background="@color/light_primaryColor"
         android:gravity="center"
         android:visibility="gone">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-
         </LinearLayout>
     </RelativeLayout>
-
-
 </RelativeLayout>

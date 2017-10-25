@@ -31,10 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageDriverPic"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:text="Driver : Swaroop"
+                android:text="Swaroop"
                 android:textColor="#ffffff"
                 android:textSize="17sp" />
 
@@ -43,12 +43,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textDrivername"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
                 android:layout_marginTop="5dp"
                 android:text="Email"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <TextView

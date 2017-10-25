@@ -6,15 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.loadingzone.R;
-import com.example.admin.loadingzone.modules.profile.UserProfileActivity;
-import com.example.admin.loadingzone.modules.truck.TrckListAdapter;
 import com.example.admin.loadingzone.retrofit.model.JobList;
-import com.example.admin.loadingzone.retrofit.model.VehicleList;
 import com.example.admin.loadingzone.view.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -50,8 +46,8 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         @BindView(R.id.textTruckType)
         TextView textViewTruckType;
         @NonNull
-        @BindView(R.id.textTruckDimension)
-        TextView textViewTruckDimension;
+        @BindView(R.id.textTruckDistane)
+        TextView textTruckDistane;
         @NonNull
         @BindView(R.id.textTruckDate)
         TextView textViewTruckDate;
@@ -109,9 +105,8 @@ public class PostedJobListAdapter extends RecyclerView.Adapter<PostedJobListAdap
         holder.textViewLocationTo.setText(jobList.get(position).getToLocation().getName());
         holder.textViewLocationFrom.setText(jobList.get(position).getFromLocation().getName());
         holder.textViewTruckType.setText(jobList.get(position).getMaterial().getMaterialName());
-        holder.textViewTruckDimension.setText(jobList.get(position).getOrigin_destination_distance().toString());
+        holder.textTruckDistane.setText(jobList.get(position).getOrigin_destination_distance().toString()+ " km");
         holder.textViewTruckDate.setText(jobList.get(position).getPreferred_loading_date()+" "+jobList.get(position).getPreferred_loading_time());
-       // holder.textViewTruckBudget.setText(jobList.get(position).getBudget());
         holder.textViewJobCode.setText(jobList.get(position).getJob_code());
 
         holder.daterequestedrelative.setText(jobList.get(position).getDateRequestedRelative());

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
@@ -46,7 +47,8 @@ import retrofit2.Callback;
 public class DriverFragment extends Fragment {
     public DriverFragment() {
     }
-
+    @BindView(R.id.emptyMessage)
+    TextView textViewEmptyMessage;
     @BindView(R.id.recyclerViewDriver)
     EndlessRecyclerView endlessRecyclerViewDriver;
     @BindView(R.id.swipeRefresh)
@@ -74,7 +76,6 @@ public class DriverFragment extends Fragment {
             } else {
                 homeActivity.showSnakBar(relativeLayoutRoot, MessageConstants.INTERNET);
             }
-
         }
 
         @Override
@@ -125,29 +126,24 @@ public class DriverFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         endlessRecyclerViewDriver.setLayoutManager(layoutManager);
-
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-// refreshLayout.setRefreshing(true);
                 offset = 1;
                 isSwipeRefreshed=true;
                 getDriverList();
             }
         });
-
         endlessRecyclerViewDriver.addPaginationListener(paginationListener);
         endlessRecyclerViewDriver.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 String driver_name = driverList.get(position).getDriverName();
                 String driver_id = String.valueOf(driverList.get(position).getDriverId());
                 String driver_email = driverList.get(position).getDriverEmail();
                 String driver_mobile = driverList.get(position).getDriverPhone();
                 String driver_adress = driverList.get(position).getDriverAddress();
                 String profile_pic = driverList.get(position).getDriverPic();
-
                 String driverJoinedDate = driverList.get(position).getCreatedDate();
                 String currentlyAssignedTruck;
                 if(driverList.get(position).getDriverTruck() == null ){
@@ -176,7 +172,6 @@ public class DriverFragment extends Fragment {
 
     public void getDriverList
             () {
-
         if (offset == 1) {
             if (!isSwipeRefreshed)
                 homeActivity.showProgressDialog(getActivity(), "loading");
@@ -219,6 +214,7 @@ public class DriverFragment extends Fragment {
                         offset = offset + 1;
                     } else {
                         endlessRecyclerViewDriver.setHaveMoreItem(false);
+                        textViewEmptyMessage.setVisibility(View.VISIBLE);
                     }
 
                 } else {

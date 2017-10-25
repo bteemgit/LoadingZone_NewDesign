@@ -1,373 +1,376 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootView"
     android:background="@color/dividercolor">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/liner_head"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>
-        M<android.support.v4.widget.NestedScrollView
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        </LinearLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_customer_prferd"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:elevation="10dp"
+                app:cardCornerRadius="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="Customer Preffered Date and Time"
+                    android:textColor="#202020"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="98dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Date"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="2.5dp"
+                            app:srcCompat="@drawable/ic_weekly_calendar" />
+
+                        <TextView
+                            android:id="@+id/textCustomerJobDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginTop="60dp"
+                            android:text="date"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="2.5dp"
+                            app:srcCompat="@drawable/ic_alarm_clock" />
+
+                        <TextView
+                            android:id="@+id/textCustomerJobTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginRight="22dp"
+                            android:layout_marginTop="60dp"
+                            android:text="time"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="245dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Time"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_provide_prefered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_customer_prferd"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:elevation="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="Provider Preffered Date and Time"
+                    android:textColor="#202020"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="2.5dp"
+                            app:srcCompat="@drawable/ic_weekly_calendar" />
+
+                        <TextView
+                            android:id="@+id/textProviderPrefferedJobDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginTop="60dp"
+                            android:text="date"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="2.5dp"
+                            app:srcCompat="@drawable/ic_alarm_clock" />
+
+                        <TextView
+                            android:id="@+id/textProviderPrefferedJobTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginRight="22dp"
+                            android:layout_marginTop="60dp"
+                            android:text="time"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="90dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/linearDatePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/curved_squre">
+
+                        <TextView
+                            android:id="@+id/textDateRequsting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dp"
+                            android:padding="6dp"
+                            android:text="Change Date"
+                            android:textAlignment="center"
+                            android:textColor="#202020" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearTimePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/curved_squre"
+                        android:orientation="horizontal"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/textTimeRequsting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dp"
+                            android:padding="6dp"
+                            android:text="Change Time"
+                            android:textAlignment="center"
+                            android:textColor="#202020" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/id_amt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_provide_prefered"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit_quotAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/squareview"
+                    android:ems="10"
+                    android:hint="Quotation Amount"
+                    android:inputType="number"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal">
+
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/id_amt"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp">
+
+                <EditText
+                    android:id="@+id/edit_quotDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/squareview"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="Quotation Description"
+                    android:inputType="textMultiLine"
+                    android:maxLength="2000"
+                    android:minHeight="120dp"
+                    android:minLines="5"
+                    android:padding="10dp"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/primaryTextColor"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:elevation="10dp"
-            app:cardCornerRadius="0dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="Customer Preffered Date and Time"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="98dp"
-                android:layout_marginTop="40dp"
-                android:text="Date"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="2.5dp"
-                        app:srcCompat="@drawable/ic_weekly_calendar" />
-
-                    <TextView
-                        android:id="@+id/textCustomerJobDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2.5dp"
-                        android:layout_marginTop="60dp"
-                        android:text="date"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginRight="2.5dp"
-                        app:srcCompat="@drawable/ic_alarm_clock" />
-
-                    <TextView
-                        android:id="@+id/textCustomerJobTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2.5dp"
-                        android:layout_marginRight="22dp"
-                        android:layout_marginTop="60dp"
-                        android:text="time"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="245dp"
-                android:layout_marginTop="40dp"
-                android:text="Time"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:visibility="gone" />
-
-        </android.support.v7.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:id="@+id/id_amt"
-            android:orientation="horizontal"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp">
-
-            <EditText
-                android:id="@+id/edit_quotAmount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/squareview"
-                android:ems="10"
-                android:hint="Quotation Amount"
-                android:textStyle="normal"
-                android:inputType="number"
-                android:layout_margin="10dp"
-                android:maxLength="50"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="16sp">
-            </EditText>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp">
-            <EditText
-                android:id="@+id/edit_quotDes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/squareview"
-                android:ems="10"
-                android:gravity="top"
-                android:hint="Quotation Description"
-                android:inputType="textMultiLine"
-                android:maxLength="2000"
-                android:minHeight="120dp"
-                android:minLines="5"
-                android:padding="10dp"
-                android:textColor="#000000"
-                android:textColorHint="@color/primaryTextColor"
-                android:textSize="16dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_change_requset"
-        android:gravity="center"
-        android:layout_marginTop="19dp"
-        android:orientation="vertical"
-        android:layout_below="@+id/liner_head">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="Provider Preffered Date and Time"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp" />
-        <LinearLayout
-            android:id="@+id/linearDateTime"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:id="@+id/layout_ProviderPrefferedJobDate"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:visibility="visible">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="2.5dp"
-                    app:srcCompat="@drawable/ic_weekly_calendar" />
-
-                <TextView
-                    android:id="@+id/textProviderPrefferedJobDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="2.5dp"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/layout_ProviderPrefferedJobTime"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:gravity="end|center"
-                android:orientation="horizontal"
-                android:visibility="visible">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="2.5dp"
-                    app:srcCompat="@drawable/ic_alarm_clock" />
-
-                <TextView
-                    android:id="@+id/textProviderPrefferedJobTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2.5dp"
-                    android:layout_marginRight="0dp"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:id="@+id/linearDatePicker"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"
-        android:orientation="horizontal"
-        android:layout_marginStart="38dp"
-        android:layout_below="@+id/text_change_requset"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:id="@+id/textDateRequsting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:text="Change Date"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearTimePicker"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_corner"
-        android:orientation="horizontal"
-        android:layout_marginRight="56dp"
-        android:layout_marginEnd="56dp"
-        android:layout_alignTop="@+id/linearDatePicker"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:id="@+id/textTimeRequsting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:text="Change Time"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF" />
-
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/relative_submit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Submit"
-            android:layout_marginTop="5dp"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:elevation="30dp"
             android:gravity="center"
-            android:layout_centerInParent="true"
-            android:background="@color/colorPrimary"
-            android:textColor="#FFFFFF"
+            android:text="Submit"
+            android:textColor="#202020"
             android:textSize="22sp"
             android:textStyle="bold" />
-
-</LinearLayout>
-
+    </LinearLayout>
 </RelativeLayout>

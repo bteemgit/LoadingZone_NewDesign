@@ -91,7 +91,6 @@ public class HomeActivity extends BaseActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int id = item.getItemId();
-
             if (id == R.id.mHome) {
                 Fragment homeFragment = new HomeFragment();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -110,7 +109,6 @@ public class HomeActivity extends BaseActivity {
                 fragmentTransaction.replace(R.id.fragment_container, truckFragment).commit();
                 fragmentTransaction.addToBackStack(null);
                 return true;
-
             } else if (id == R.id.mChat) {
                 Fragment messageFragment = new MessageFragment();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -157,13 +155,13 @@ public class HomeActivity extends BaseActivity {
                 .centerCrop()
                 .transform(new CircleTransformation())
                 .into(user_imageView);
-
         isFrom = getIntent().getStringExtra("isFrom");
         // fragment handling
         if (isFrom.equals("home")) {
             Fragment homeFragment = new HomeFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+            mBottomNav.setSelectedItemId(R.id.mHome);
         } else if (isFrom.equals("truck")) {
             Fragment truckFragment = new TruckFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -173,7 +171,7 @@ public class HomeActivity extends BaseActivity {
             Fragment driverFragment = new DriverFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container, driverFragment).commit();
-            mBottomNav.setSelectedItemId(R.id.mTruck);
+            mBottomNav.setSelectedItemId(R.id.mDriver);
         }
     }
 

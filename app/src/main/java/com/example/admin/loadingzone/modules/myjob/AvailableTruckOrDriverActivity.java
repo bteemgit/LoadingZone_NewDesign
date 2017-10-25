@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
@@ -45,6 +46,8 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.progressBarFooter)
     ProgressBar progressBar;
+    @BindView(R.id.TextEmptyList)
+    TextView textEmpty;
     private ApiInterface service;
     private int limit = 30;
     private int offset = 1;
@@ -164,7 +167,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                         i.putExtra("driver_email", driver_email);
                         i.putExtra("driver_mobile", driver_mobile);
                         i.putExtra("driver_name", driver_name);
-
                         i.putExtra("driver_image", driver_image);
                         setResult(4, i);
                         finish();
@@ -173,7 +175,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                 if (isFrom.equals("Posted")) {
 // return the the selected values on the on actvity result of EditAvailbleDriverOrTruckActivity based on the job status
                     if (jobStatus.equals(IsEditVehicle)) {
-
                         String truck_name = listTrckAvailble.get(position).getCustomName();
                         String truck_type = listTrckAvailble.get(position).getVehicle().getTruckType().getTruckTypeName();
                         String truck_size = listTrckAvailble.get(position).getVehicle().getDimension();
@@ -242,7 +243,6 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                                 for (AvailableTruck itemModel : availableTruckList) {
                                     listTrckAvailble.add(itemModel);
                                 }
-
                             }
                             if (listTrckAvailble.size() < limit) {
                                 endlessRecyclerViewItem.setHaveMoreItem(false);
@@ -253,6 +253,8 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                             offset = offset + 1;
                         } else {
                             endlessRecyclerViewItem.setHaveMoreItem(false);
+                            textEmpty.setVisibility(View.VISIBLE);
+                            textEmpty.setText("No Trucks Availble");
                         }
 
                     } else {
@@ -300,6 +302,8 @@ public class AvailableTruckOrDriverActivity extends BaseActivity {
                             offset = offset + 1;
                         } else {
                             endlessRecyclerViewItem.setHaveMoreItem(false);
+                            textEmpty.setVisibility(View.VISIBLE);
+                            textEmpty.setText("No Drivers Availble");
                         }
                     } else {
                         finish();

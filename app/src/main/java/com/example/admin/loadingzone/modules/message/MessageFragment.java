@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.loadingzone.R;
@@ -31,6 +32,7 @@ import com.example.admin.loadingzone.retrofit.model.MessageListResponse;
 import com.example.admin.loadingzone.retrofit.model.MessageThread;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,8 @@ public class MessageFragment extends Fragment implements MessageListadapter.Sele
     ProgressBar progressBar;
     @BindView(R.id.parent)
     RelativeLayout relativeLayoutRoot;
+    @BindView(R.id.emptyMessage)
+    TextView textViewEmptyMessage;
     ApiInterface apiService;
     List<MessageThread> messageThreadList = new ArrayList<>();
     private int limit = 30;
@@ -188,6 +192,7 @@ public class MessageFragment extends Fragment implements MessageListadapter.Sele
                         offset = offset + 1;
                     } else {
                         recyclerViewMessageList.setHaveMoreItem(false);
+                        textViewEmptyMessage.setVisibility(View.VISIBLE);
                     }
                 } else {
                     // GlobalMethods.showToast(ContestListActivity.this, getString(R.string.try_again), 1);
