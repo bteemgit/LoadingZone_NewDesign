@@ -11,7 +11,8 @@
         android:text="Title"
         android:layout_marginTop="5dp"
         android:textSize="15sp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center_horizontal"
         />

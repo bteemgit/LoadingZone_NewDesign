@@ -23,14 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 /**
  * Created by admin on 7/13/2017.
  */
 
 public class MessageListadapter extends RecyclerView.Adapter<MessageListadapter.MyViewHolder> {
     private Context mContext;
-    List<MessageThread> messageThreadList=new ArrayList<>();
+    List<MessageThread> messageThreadList = new ArrayList<>();
     private SelectedMessageList listener;
     private SparseBooleanArray selectedItems;
 
@@ -40,27 +39,27 @@ public class MessageListadapter extends RecyclerView.Adapter<MessageListadapter.
     private static int currentSelectedIndex = -1;
 
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
-        public TextView from, subject, message, iconText, timestamp;
+        public TextView from, subject, messageDate, iconText, timestamp;
         public ImageView iconImp, imgProfile;
         public LinearLayout messageContainer;
         public RelativeLayout iconContainer, iconBack, iconFront;
 
 
         LinearLayout messageLayout;
-        TextView textViewMessageSub,textViewMessageRef,textViewMessageDays,textName;
+        TextView textViewMessageSub, textViewMessageRef, textViewMessageDays, textName, textUser;
         private ImageView spCircleImageView;
 
         public MyViewHolder(View view) {
             super(view);
             from = (TextView) view.findViewById(R.id.from);
             subject = (TextView) view.findViewById(R.id.txt_primary);
-            message = (TextView) view.findViewById(R.id.txt_secondary);
+            messageDate = (TextView) view.findViewById(R.id.txt_secondary);
             iconText = (TextView) view.findViewById(R.id.icon_text);
             timestamp = (TextView) view.findViewById(R.id.timestamp);
             iconBack = (RelativeLayout) view.findViewById(R.id.icon_back);
             iconFront = (RelativeLayout) view.findViewById(R.id.icon_front);
+            textUser = (TextView) view.findViewById(R.id.textUser);
             iconImp = (ImageView) view.findViewById(R.id.icon_star);
             imgProfile = (ImageView) view.findViewById(R.id.icon_profile);
             messageContainer = (LinearLayout) view.findViewById(R.id.message_container);
@@ -77,7 +76,7 @@ public class MessageListadapter extends RecyclerView.Adapter<MessageListadapter.
     }
 
 
-    public MessageListadapter(Context mContext, List<MessageThread> messageThreadList, SelectedMessageList listener)  {
+    public MessageListadapter(Context mContext, List<MessageThread> messageThreadList, SelectedMessageList listener) {
         this.mContext = mContext;
         this.messageThreadList = messageThreadList;
         this.listener = listener;
@@ -101,13 +100,10 @@ public class MessageListadapter extends RecyclerView.Adapter<MessageListadapter.
         holder.from.setText(data.getRecipient().getName());
         holder.subject.setText(data.getSubject());
 
-        holder.message.setText(data.getCreatedDateRelative());
-        String imageUrl=messageThreadList.get(position).getRecipient().getProfilePic();
+        holder.messageDate.setText(data.getCreatedDateRelative());
+        String imageUrl = messageThreadList.get(position).getRecipient().getProfilePic();
 
-       /* Picasso.with(mContext).load(imageUrl)
-                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                .into(holder.imgProfile);*/
-
+        holder.textUser.setText(data.getRecipient().getUserType());
 
         Picasso.with(mContext).load(imageUrl)
                 .placeholder(R.drawable.img_circle_placeholder)

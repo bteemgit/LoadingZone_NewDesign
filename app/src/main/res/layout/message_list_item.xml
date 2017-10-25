@@ -43,23 +43,11 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
-
             android:lines="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/txt_secondary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="sans-serif"
-            android:gravity="end"
-            android:textAppearance="?android:attr/textAppearanceSmall"
 
-            android:textColor="@color/colorPrimary"
-            android:textSize="13sp" />
 
     </LinearLayout>
 
@@ -118,8 +106,19 @@
                 android:textSize="@dimen/icon_text" />
         </RelativeLayout>
 
-    </RelativeLayout>
 
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#878787"
+        android:layout_marginTop="1dp"
+        android:id="@+id/textUser"
+        android:text="Sample"
+        android:textSize="10sp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/icon_container"
+       />
     <TextView
         android:id="@+id/timestamp"
         android:layout_width="wrap_content"
@@ -127,8 +126,22 @@
         android:layout_alignParentRight="true"
         android:textColor="#4285f4"
         android:textSize="@dimen/timestamp"
-        android:textStyle="bold" />
-
+        android:textStyle="bold"
+        android:layout_alignParentTop="true" />
+    <TextView
+        android:id="@+id/txt_secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sample"
+        android:layout_marginRight="10dp"
+        android:fontFamily="sans-serif"
+        android:gravity="end"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:layout_alignBottom="@+id/timestamp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp" />
     <ImageView
         android:id="@+id/icon_star"
         android:layout_width="@dimen/icon_star"
